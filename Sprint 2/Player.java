@@ -2,14 +2,14 @@
 public class Player {
 
     private String name;
-    private Token token;
+    private TokenColour tokenColour;
     private int tokensOnBoard;
     private int tokensInHand;
     private boolean canFly;
 
-    public Player(String name, Token token) {
+    public Player(String name, TokenColour tokenColour) {
         this.name = name;
-        this.token = token;
+        this.tokenColour = tokenColour;
         this.tokensInHand = Game.MAX_TOKENS_PLAYER;
         this.tokensOnBoard = Game.MAX_TOKENS_PLAYER-getTokensInHand();
         this.canFly = false;
@@ -22,8 +22,8 @@ public class Player {
         return tokensOnBoard;
     }
 
-    public Token getToken() {
-        return token;
+    public TokenColour getTokenColour() {
+        return tokenColour;
     }
 
     public int getTokensInHand() {

@@ -45,7 +45,7 @@ public class Player {
 
 
     // This function is used when a player's token is removed by another player
-    public int losePieceOnBoard() {
+    public int loseTokenOnBoard() {
         if (tokensOnBoard > 0) {
             tokensOnBoard--;
             if (tokensOnBoard == 3 && getTokensInHand()==0) {

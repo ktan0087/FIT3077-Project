@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
+// Create a horizontal line
 public class HorizontalLine extends JLabel {
     public void paintComponent(Graphics g){
         //set the width of line

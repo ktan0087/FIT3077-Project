@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
+// Create a vertical line
 public class VerticalLine extends JLabel {
     public void paintComponent(Graphics g){
         //set the width of line

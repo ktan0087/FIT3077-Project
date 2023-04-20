@@ -1,3 +1,5 @@
+package Backend;
+
 public abstract class GameMode {
     public abstract void startGame();
     public abstract void endGame();

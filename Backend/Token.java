@@ -1,3 +1,5 @@
+package Backend;
+
 public class Token {
 
     private TokenColour tokenColour;

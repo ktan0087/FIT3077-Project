@@ -6,14 +6,31 @@ import java.awt.event.MouseListener;
 
 // Customized White Token
 public class WhiteToken extends JLabel {
-    Boolean clicked = false;
-    public WhiteToken(){
+    private int coordinateX;
+    private int coordinateY;
+    private int times = 0;
+    protected Boolean selected = false;
+    protected WhiteToken selectedWhiteToken = null;
+
+    public WhiteToken(int coordinateX, int coordinateY){
         this.addMouseListener(mouseListener);
+        this.coordinateX = coordinateX;
+        this.coordinateY = coordinateY;
+    }
+
+    public int getCoordinateX() {
+        return coordinateX;
+    }
+
+    public int getCoordinateY() {
+        return coordinateY;
     }
 
     // When the token is selected, a red circle will be drawn around the token
-    protected void paintBorder(Graphics g){
-        if (this.clicked){
+    protected void paintBorder(Graphics g) {
+        if (this.selected) {
+            // && InitialBoard.canDraw
+
             int x = 500/(13*2); // 500 is the width of the panel, 13 is the number of columns/rows, 2 is to get the middle point
             int y = 500/(13*2); // this is to get the middle point of each grid
 
@@ -27,33 +44,45 @@ public class WhiteToken extends JLabel {
             int radiusInner = 15;
             int diameterInner = radiusInner * 2;
             g.fillOval(x - radiusInner, y - radiusInner, diameterInner, diameterInner);
+
         }
     }
 
     protected void paintComponent(Graphics g) {
-        // to cover the intersection point
-        repaint();
-        revalidate();
+        if (!this.selected) {
+            // to cover the intersection point
+            repaint();
+            revalidate();
 
-        // paint the white token
-        g.setColor(new Color(0xF5F5DC));
+            // paint the white token
+            g.setColor(new Color(0xF5F5DC));
 
-        int x = 500/(13*2); // 500 is the width of the panel, 13 is the number of columns/rows, 2 is to get the middle point
-        int y = 500/(13*2); // this is to get the middle point of each grid
-        int radius = 15;
-        int diameter = radius * 2;
+            int x = 500 / (13 * 2); // 500 is the width of the panel, 13 is the number of columns/rows, 2 is to get the middle point
+            int y = 500 / (13 * 2); // this is to get the middle point of each grid
+            int radius = 15;
+            int diameter = radius * 2;
 
-        //shift x and y by the radius of the circle in order to correctly center it
-        g.fillOval(x - radius, y - radius, diameter, diameter);
+            //shift x and y by the radius of the circle in order to correctly center it
+            g.fillOval(x - radius, y - radius, diameter, diameter);
 
+            // reset the selected white token
+            this.selectedWhiteToken = null;
+        }
     }
 
     protected MouseListener mouseListener = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
-            clicked = true;
             repaint();
             revalidate();
+
+            if (times%2 == 0) {
+                selected = true; // click the white token to select it
+            }
+            else {
+                selected = false; // click again the selected white token to deselect it
+            }
+            times++;
         }
     };
 

@@ -6,60 +6,59 @@ import java.util.List;
 // Used to display the board
 public class Board extends JPanel {
     // Create 24 intersections
-    Intersection a7 = new Intersection();
-    Intersection d7 = new Intersection();
-    Intersection g7 = new Intersection();
-    Intersection b6 = new Intersection();
-    Intersection d6 = new Intersection();
-    Intersection f6 = new Intersection();
-    Intersection c5 = new Intersection();
-    Intersection d5 = new Intersection();
-    Intersection e5 = new Intersection();
-    Intersection a4 = new Intersection();
-    Intersection b4 = new Intersection();
-    Intersection c4 = new Intersection();
-    Intersection e4 = new Intersection();
-    Intersection f4 = new Intersection();
-    Intersection g4 = new Intersection();
-    Intersection c3 = new Intersection();
-    Intersection d3 = new Intersection();
-    Intersection e3 = new Intersection();
-    Intersection b2 = new Intersection();
-    Intersection d2 = new Intersection();
-    Intersection f2 = new Intersection();
-    Intersection a1 = new Intersection();
-    Intersection d1 = new Intersection();
-    Intersection g1 = new Intersection();
+    Intersection intersection_11 = new Intersection(1, 1);
+    Intersection intersection_12 = new Intersection(1, 2);
+    Intersection intersection_13 = new Intersection(1, 3);
+    Intersection intersection_21 = new Intersection(2, 1);
+    Intersection intersection_22 = new Intersection(2, 2);
+    Intersection intersection_23 = new Intersection(2,3);
+    Intersection intersection_31 = new Intersection(3,1);
+    Intersection intersection_32 = new Intersection(3,2);
+    Intersection intersection_33 = new Intersection(3,3);
+    Intersection intersection_18 = new Intersection(1,8);
+    Intersection intersection_28 = new Intersection(2,8);
+    Intersection intersection_38 = new Intersection(3,8);
+    Intersection intersection_34 = new Intersection(3,4);
+    Intersection intersection_24 = new Intersection(2,4);
+    Intersection intersection_14 = new Intersection(1,4);
+    Intersection intersection_37 = new Intersection(3,7);
+    Intersection intersection_36 = new Intersection(3,6);
+    Intersection intersection_35 = new Intersection(3,5);
+    Intersection intersection_27 = new Intersection(2,7);
+    Intersection intersection_26 = new Intersection(2,6);
+    Intersection intersection_25 = new Intersection(2,5);
+    Intersection intersection_17 = new Intersection(1,7);
+    Intersection intersection_16 = new Intersection(1,6);
+    Intersection intersection_15 = new Intersection(1,5);
 
-    ArrayList<WhiteToken> whiteList=new ArrayList<>(); // create a list to store white tokens
     ArrayList<Intersection> intersectionList=new ArrayList<>(); // create a list to store intersections
 
     public List<Intersection> getIntersectionList() {
         // Add all intersections to the list
-        intersectionList.add(a7);
-        intersectionList.add(d7);
-        intersectionList.add(g7);
-        intersectionList.add(b6);
-        intersectionList.add(d6);
-        intersectionList.add(f6);
-        intersectionList.add(c5);
-        intersectionList.add(d5);
-        intersectionList.add(e5);
-        intersectionList.add(a4);
-        intersectionList.add(b4);
-        intersectionList.add(c4);
-        intersectionList.add(e4);
-        intersectionList.add(f4);
-        intersectionList.add(g4);
-        intersectionList.add(c3);
-        intersectionList.add(d3);
-        intersectionList.add(e3);
-        intersectionList.add(b2);
-        intersectionList.add(d2);
-        intersectionList.add(f2);
-        intersectionList.add(a1);
-        intersectionList.add(d1);
-        intersectionList.add(g1);
+        intersectionList.add(intersection_11);
+        intersectionList.add(intersection_12);
+        intersectionList.add(intersection_13);
+        intersectionList.add(intersection_21);
+        intersectionList.add(intersection_22);
+        intersectionList.add(intersection_23);
+        intersectionList.add(intersection_31);
+        intersectionList.add(intersection_32);
+        intersectionList.add(intersection_33);
+        intersectionList.add(intersection_18);
+        intersectionList.add(intersection_28);
+        intersectionList.add(intersection_38);
+        intersectionList.add(intersection_34);
+        intersectionList.add(intersection_24);
+        intersectionList.add(intersection_14);
+        intersectionList.add(intersection_37);
+        intersectionList.add(intersection_36);
+        intersectionList.add(intersection_35);
+        intersectionList.add(intersection_27);
+        intersectionList.add(intersection_26);
+        intersectionList.add(intersection_25);
+        intersectionList.add(intersection_17);
+        intersectionList.add(intersection_16);
+        intersectionList.add(intersection_15);
 
         return this.intersectionList;
     }
@@ -72,22 +71,22 @@ public class Board extends JPanel {
         this.setLayout(new GridLayout(13, 13, -1, -1)); // -1 is to remove the space between intersections and lines
 
         // Add all intersections and lines to the board
-        a7.choosePosition(Intersection.Position.TOP_LEFT);
-        this.add(a7);
+        intersection_11.choosePosition(Intersection.Position.TOP_LEFT);
+        this.add(intersection_11);
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
-        d7.choosePosition(Intersection.Position.TOP_MIDDLE);
-        this.add(d7);
+        intersection_12.choosePosition(Intersection.Position.TOP_MIDDLE);
+        this.add(intersection_12);
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
-        g7.choosePosition(Intersection.Position.TOP_RIGHT);
-        this.add(g7);
+        intersection_13.choosePosition(Intersection.Position.TOP_RIGHT);
+        this.add(intersection_13);
 
         this.add(new VerticalLine());
         this.add(new JLabel());
@@ -105,114 +104,18 @@ public class Board extends JPanel {
 
         this.add(new VerticalLine());
         this.add(new JLabel());
-        b6.choosePosition(Intersection.Position.TOP_LEFT);
-        this.add(b6);
+        intersection_21.choosePosition(Intersection.Position.TOP_LEFT);
+        this.add(intersection_21);
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
-        d6.choosePosition(Intersection.Position.MIDDLE);
-        this.add(d6);
+        intersection_22.choosePosition(Intersection.Position.MIDDLE);
+        this.add(intersection_22);
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
-        f6.choosePosition(Intersection.Position.TOP_RIGHT);
-        this.add(f6);
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new JLabel());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new JLabel());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        c5.choosePosition(Intersection.Position.TOP_LEFT);
-        this.add(c5);
-        this.add(new HorizontalLine());
-        d5.choosePosition(Intersection.Position.BOTTOM_MIDDLE);
-        this.add(d5);
-        this.add(new HorizontalLine());
-        e5.choosePosition(Intersection.Position.TOP_RIGHT);
-        this.add(e5);
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new JLabel());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-
-        a4.choosePosition(Intersection.Position.MIDDLE_LEFT);
-        this.add(a4);
-        this.add(new HorizontalLine());
-        b4.choosePosition(Intersection.Position.MIDDLE);
-        this.add(b4);
-        this.add(new HorizontalLine());
-        c4.choosePosition(Intersection.Position.MIDDLE_RIGHT);
-        this.add(c4);
-        this.add(new JLabel());
-        this.add(new JLabel());
-        this.add(new JLabel());
-        e4.choosePosition(Intersection.Position.MIDDLE_LEFT);
-        this.add(e4);
-        this.add(new HorizontalLine());
-        f4.choosePosition(Intersection.Position.MIDDLE);
-        this.add(f4);
-        this.add(new HorizontalLine());
-        g4.choosePosition(Intersection.Position.MIDDLE_RIGHT);
-        this.add(g4);
-
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new JLabel());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        this.add(new VerticalLine());
-        this.add(new JLabel());
-        c3.choosePosition(Intersection.Position.BOTTOM_LEFT);
-        this.add(c3);
-        this.add(new HorizontalLine());
-        d3.choosePosition(Intersection.Position.TOP_MIDDLE);
-        this.add(d3);
-        this.add(new HorizontalLine());
-        e3.choosePosition(Intersection.Position.BOTTOM_RIGHT);
-        this.add(e3);
-        this.add(new JLabel());
-        this.add(new VerticalLine());
+        intersection_23.choosePosition(Intersection.Position.TOP_RIGHT);
+        this.add(intersection_23);
         this.add(new JLabel());
         this.add(new VerticalLine());
 
@@ -232,18 +135,114 @@ public class Board extends JPanel {
 
         this.add(new VerticalLine());
         this.add(new JLabel());
-        b2.choosePosition(Intersection.Position.BOTTOM_LEFT);
-        this.add(b2);
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        intersection_31.choosePosition(Intersection.Position.TOP_LEFT);
+        this.add(intersection_31);
+        this.add(new HorizontalLine());
+        intersection_32.choosePosition(Intersection.Position.BOTTOM_MIDDLE);
+        this.add(intersection_32);
+        this.add(new HorizontalLine());
+        intersection_33.choosePosition(Intersection.Position.TOP_RIGHT);
+        this.add(intersection_33);
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new JLabel());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+
+        intersection_18.choosePosition(Intersection.Position.MIDDLE_LEFT);
+        this.add(intersection_18);
+        this.add(new HorizontalLine());
+        intersection_28.choosePosition(Intersection.Position.MIDDLE);
+        this.add(intersection_28);
+        this.add(new HorizontalLine());
+        intersection_38.choosePosition(Intersection.Position.MIDDLE_RIGHT);
+        this.add(intersection_38);
+        this.add(new JLabel());
+        this.add(new JLabel());
+        this.add(new JLabel());
+        intersection_34.choosePosition(Intersection.Position.MIDDLE_LEFT);
+        this.add(intersection_34);
+        this.add(new HorizontalLine());
+        intersection_24.choosePosition(Intersection.Position.MIDDLE);
+        this.add(intersection_24);
+        this.add(new HorizontalLine());
+        intersection_14.choosePosition(Intersection.Position.MIDDLE_RIGHT);
+        this.add(intersection_14);
+
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new JLabel());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        intersection_37.choosePosition(Intersection.Position.BOTTOM_LEFT);
+        this.add(intersection_37);
+        this.add(new HorizontalLine());
+        intersection_36.choosePosition(Intersection.Position.TOP_MIDDLE);
+        this.add(intersection_36);
+        this.add(new HorizontalLine());
+        intersection_35.choosePosition(Intersection.Position.BOTTOM_RIGHT);
+        this.add(intersection_35);
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new JLabel());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new JLabel());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        this.add(new VerticalLine());
+
+        this.add(new VerticalLine());
+        this.add(new JLabel());
+        intersection_27.choosePosition(Intersection.Position.BOTTOM_LEFT);
+        this.add(intersection_27);
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
-        d2.choosePosition(Intersection.Position.MIDDLE);
-        this.add(d2);
+        intersection_26.choosePosition(Intersection.Position.MIDDLE);
+        this.add(intersection_26);
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
-        f2.choosePosition(Intersection.Position.BOTTOM_RIGHT);
-        this.add(f2);
+        intersection_25.choosePosition(Intersection.Position.BOTTOM_RIGHT);
+        this.add(intersection_25);
         this.add(new JLabel());
         this.add(new VerticalLine());
 
@@ -261,21 +260,28 @@ public class Board extends JPanel {
         this.add(new JLabel());
         this.add(new VerticalLine());
 
-        a1.choosePosition(Intersection.Position.BOTTOM_LEFT);
-        this.add(a1);
+        intersection_17.choosePosition(Intersection.Position.BOTTOM_LEFT);
+        this.add(intersection_17);
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
-        d1.choosePosition(Intersection.Position.BOTTOM_MIDDLE);
-        this.add(d1);
+        intersection_16.choosePosition(Intersection.Position.BOTTOM_MIDDLE);
+        this.add(intersection_16);
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
         this.add(new HorizontalLine());
-        g1.choosePosition(Intersection.Position.BOTTOM_RIGHT);
-        this.add(g1);
+        intersection_15.choosePosition(Intersection.Position.BOTTOM_RIGHT);
+        this.add(intersection_15);
+
     }
+
+    // get the index of intersection in the panel (from 0 to 168)
+    public int getIntersectionPanelIndex(Intersection intersection) {
+        return intersection.getAccessibleContext().getAccessibleIndexInParent();
+    }
+
 }

@@ -3,6 +3,8 @@ import java.awt.*;
 
 // Customized all intersections
 public class Intersection extends JLabel {
+    private int coordinateX;
+    private int coordinateY;
     // the enum is used to determine the position of intersection
     public enum Position{
         TOP_LEFT,
@@ -17,8 +19,18 @@ public class Intersection extends JLabel {
     }
     protected Boolean isWhite = false;
     IntersectionPoint inter = new IntersectionPoint(); // create a circle button for intersection
-    public Intersection(){
+    public Intersection(int coordinateX, int coordinateY){
         this.setLayout(new GridLayout(3, 3, -1, -1)); // -1 is to prevent showing grid border
+        this.coordinateX = coordinateX;
+        this.coordinateY = coordinateY;
+    }
+
+    public int getCoordinateX() {
+        return coordinateX;
+    }
+
+    public int getCoordinateY() {
+        return coordinateY;
     }
 
     // This method is used to choose the type of intersection by selecting the position of it

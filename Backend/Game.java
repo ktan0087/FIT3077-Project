@@ -12,7 +12,7 @@ public class Game {
 
     private Player player2;
 
-    private ArrayList<Player> players = new ArrayList<Player>();
+    private Player currentPlayer;
 
     private Board board;
 
@@ -23,17 +23,27 @@ public class Game {
     public Game() {
         player1 = new Player("Player 1", TokenColour.PLAYER_1_WHITE);
         player2 = new Player("Player 2", TokenColour.PLAYER_2_BLACK);
-        players.add(player1);
-        players.add(player2);
+        currentPlayer = player1;
         board = new Board();
         isGameOver = false;
     }
 
+    public void swapPlayers() {
+        if (currentPlayer == player1) {
+            currentPlayer = player2;
+        } else {
+            currentPlayer = player1;
+        }
+    }
+
+
+    public Player getCurrentPlayer() {
+            return currentPlayer;
+        }
+
     private boolean isGameOver() {
-        for (Player player : players){
-            if (player.getTokensOnBoard() <= MIN_TOKENS_PLAYER) {
-                isGameOver = true;
-            }
+        if (player1.getTokensOnBoard() <= MIN_TOKENS_PLAYER || player2.getTokensOnBoard() <= MIN_TOKENS_PLAYER) {
+            isGameOver = true;
         }
         return isGameOver;
     }

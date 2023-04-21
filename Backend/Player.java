@@ -1,5 +1,7 @@
 package Backend;
 
+import java.util.List;
+
 public class Player {
 
     private String name;
@@ -7,6 +9,8 @@ public class Player {
     private int tokensOnBoard;
     private int tokensInHand;
     private boolean canFly;
+
+    private ActionList allowableActions = new ActionList();
 
     public Player(String name, TokenColour tokenColour) {
         this.name = name;
@@ -55,4 +59,21 @@ public class Player {
         }
         return tokensOnBoard;
     }
+
+    public boolean isActionAllowed(AllActions actions){
+        return allowableActions.allowedActions(actions);
+    }
+
+    public void addAllowableAction(AllActions action) {
+        allowableActions.addAction(action);
+    }
+
+    public void removeAllowableAction(AllActions action) {
+        allowableActions.removeAction(action);
+    }
+
+    public List<AllActions> getAllowableActions() {
+        return allowableActions.actionList();
+    }
+
 }

@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.util.ArrayList;
 
 // This is the InitialBoard that players can see when they start the game
 public class InitialBoard extends JPanel {
+    ArrayList<WhiteToken> whiteList = new ArrayList<>(); // create a list to store white tokens
     Buttons buttons = new Buttons();
     Board board = new Board();
     PlaceToken placeToken = new PlaceToken();
@@ -35,12 +36,6 @@ public class InitialBoard extends JPanel {
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.CENTER;
         this.add(placeToken, gbc);
-
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.weightx = 1;
-        gbc.weighty = 0;
-        gbc.anchor = GridBagConstraints.CENTER;
         this.add(board, gbc);
 
         gbc.gridx = 1;
@@ -71,31 +66,37 @@ public class InitialBoard extends JPanel {
             intersection.inter.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    WhiteToken whiteToken = new WhiteToken(); // create a white token
+                    WhiteToken whiteToken = new WhiteToken(intersection.getCoordinateX(), intersection.getCoordinateY()); // create a white token
                     int index = intersection.getAccessibleContext().getAccessibleIndexInParent(); // get the index of the intersection from the list
-//                    board.remove(index); // remove the intersection from the board (by selecting the index in list)
-//                    board.add(whiteToken, index); // add white token at the same index
-//                    board.repaint(); // repaint the board
-//                    board.revalidate(); // revalidate the board
-
-//                    intersection.isWhite = true;
-//                    board.whiteList.add(index, whiteToken);
-
-                    placeToken.remove(index);
+                    placeToken.remove(index); // remove the placeholder at the same index
                     placeToken.add(whiteToken, index); // add white token at the same index
                     placeToken.repaint();
                     placeToken.revalidate();
-
+                    whiteList.add(whiteToken); // add white token to the list
+                    if (!checkSelected()) {
+                        whiteToken.addMouseListener(whiteToken.whiteTokenSelected);
+                        System.out.println("Selected here");
+                    }
                 }
             });
 
         }
 
-//        // Select token on board
-//        int whiteListLength = board.whiteList.size();
-//        for (int i = 0; i < whiteListLength; i++){
-//
-//        }
-
     }
+
+    // check if any white token is selected
+    protected boolean checkSelected(){
+        for (WhiteToken whiteToken : whiteList) {
+            whiteToken.removeMouseListener(whiteToken.whiteTokenSelected);
+            if (whiteToken.selected){
+                whiteToken.addMouseListener(whiteToken.whiteTokenSelected);
+                System.out.println("selected");
+                return true;
+            }
+        }
+        System.out.println("not selected");
+        return false;
+    }
+
+
 }

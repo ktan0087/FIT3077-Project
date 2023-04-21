@@ -6,16 +6,16 @@ import java.awt.event.MouseListener;
 
 // Customized White Token
 public class WhiteToken extends JLabel {
-    private int coordinateX;
-    private int coordinateY;
-    private int times = 0;
+    protected int coordinateX;
+    protected int coordinateY;
+    protected int times;
     protected Boolean selected = false;
-    protected WhiteToken selectedWhiteToken = null;
 
     public WhiteToken(int coordinateX, int coordinateY){
-        this.addMouseListener(mouseListener);
+//        this.addMouseListener(mouseListener);
         this.coordinateX = coordinateX;
         this.coordinateY = coordinateY;
+        this.times = 0;
     }
 
     public int getCoordinateX() {
@@ -29,7 +29,9 @@ public class WhiteToken extends JLabel {
     // When the token is selected, a red circle will be drawn around the token
     protected void paintBorder(Graphics g) {
         if (this.selected) {
-            // && InitialBoard.canDraw
+            // to cover the intersection point
+            repaint();
+            revalidate();
 
             int x = 500/(13*2); // 500 is the width of the panel, 13 is the number of columns/rows, 2 is to get the middle point
             int y = 500/(13*2); // this is to get the middle point of each grid
@@ -44,7 +46,6 @@ public class WhiteToken extends JLabel {
             int radiusInner = 15;
             int diameterInner = radiusInner * 2;
             g.fillOval(x - radiusInner, y - radiusInner, diameterInner, diameterInner);
-
         }
     }
 
@@ -64,18 +65,12 @@ public class WhiteToken extends JLabel {
 
             //shift x and y by the radius of the circle in order to correctly center it
             g.fillOval(x - radius, y - radius, diameter, diameter);
-
-            // reset the selected white token
-            this.selectedWhiteToken = null;
         }
     }
 
-    protected MouseListener mouseListener = new MouseAdapter() {
+    protected MouseListener whiteTokenSelected = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
-            repaint();
-            revalidate();
-
             if (times%2 == 0) {
                 selected = true; // click the white token to select it
             }
@@ -85,5 +80,6 @@ public class WhiteToken extends JLabel {
             times++;
         }
     };
+
 
 }

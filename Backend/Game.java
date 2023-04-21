@@ -36,7 +36,6 @@ public class Game {
         }
     }
 
-
     public Player getCurrentPlayer() {
             return currentPlayer;
         }

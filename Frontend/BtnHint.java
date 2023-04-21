@@ -7,7 +7,7 @@ import java.awt.*;
 public class BtnHint extends JButton {
     public BtnHint(){
         this.setFocusable(false); // get rid of the annoying box in button
-        ImageIcon iconHint = new ImageIcon("Icons/hint.png");
+        ImageIcon iconHint = new ImageIcon("Frontend/Icons/hint.png");
         this.setIcon(iconHint);
         this.setBackground(new Color(0xE6B380));
         this.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));

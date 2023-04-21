@@ -5,7 +5,7 @@ import java.awt.*;
 
 // Customized label for Player Turn
 public class PlayerTurn extends JLabel {
-    ImageIcon whiteToken = new ImageIcon("Icons/white-token.png");
+    ImageIcon whiteToken = new ImageIcon("Frontend/Icons/white-token.png");
 
     public PlayerTurn(){
         this.setText("TURN");

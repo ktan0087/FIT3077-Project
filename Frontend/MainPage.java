@@ -8,7 +8,7 @@ public class MainPage extends JLayeredPane{
     JLabel gameName = new JLabel();
     BtnPlay btnPlay = new BtnPlay();
     BtnTutorial btnTut = new BtnTutorial();
-    JLabel background=new JLabel(new ImageIcon("Icons/background.png"));
+    JLabel background=new JLabel(new ImageIcon("Frontend/Icons/background.png"));
     public MainPage(){
         this.setBackground(new Color(0xE0A060));
         this.setOpaque(true);

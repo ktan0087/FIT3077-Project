@@ -60,6 +60,10 @@ public class Player {
         return tokensOnBoard;
     }
 
+    public boolean isActionAllowed(AllActions actions){
+        return allowableActions.allowedActions(actions);
+    }
+
     public void addAllowableAction(AllActions action) {
         allowableActions.addAction(action);
     }

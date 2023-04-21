@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5f9c7453-4616-463d-ae35-df53754e53bb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Frontend/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/.idea/Sprint 2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/BlackTokenRemain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/Board.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/BtnClose.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/BtnHint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/BtnPlay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/BtnRestart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/BtnTutorial.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/Buttons.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/CircleButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/CreateRoundButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/HorizontalLine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/Icons/arrow-left.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/Icons/arrow-right.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/Icons/background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/Icons/black-token.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/Icons/click.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/Icons/close.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/Icons/disabled.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/Icons/hint.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/Icons/next.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/Icons/pvp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/Icons/restart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/Icons/white-token.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/InitialBoard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/Intersection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/MainFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/PlayerTurn.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/VerticalLine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/WhiteToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/WhiteTokenRemain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Kennedy" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2NfQmCB3gws5c6aF88sNsePych6" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Sprint 2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\Sprint 2" />
+      <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\Sprint 1" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project" />
+      <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\Backend" />
+      <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\Sprint 2\Icons" />
+      <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\Sprint 2" />
+      <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5f9c7453-4616-463d-ae35-df53754e53bb" name="Changes" comment="" />
+      <created>1680052812940</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1680052812940</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Adding Domain Model version 1">
+      <created>1680193149128</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1680193149128</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Finalise Domain Model">
+      <created>1680451215679</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1680451215679</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Create Domain Model file">
+      <created>1680451497379</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1680451497379</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Adding WBS final version">
+      <created>1680459006459</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1680459006459</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Finalise Sprint 1">
+      <created>1680459400345</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1680459400345</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Finalise Sprint 1 - final">
+      <created>1680460569096</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1680460569097</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Finalise Sprint 1 - final: Adding UI pdf in document">
+      <created>1680461907656</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1680461907656</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Create a new branch from main">
+      <created>1681405097619</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1681405097619</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Create Board class with all the intersections.">
+      <created>1681436941226</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1681436941226</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Create Intersection class, with an isAdjacent method">
+      <created>1681437283237</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1681437283237</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Create Layout and MainPage class for user to interact">
+      <created>1681960264169</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1681960264169</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Change file locations">
+      <created>1681960360478</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1681960360478</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Change Intersection file location">
+      <created>1681960426935</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1681960426935</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Move Intersection class to Backend folder">
+      <created>1681960480858</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1681960480858</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Adding Domain Model version 1" />
+    <MESSAGE value="Finalise Domain Model" />
+    <MESSAGE value="Create Domain Model file" />
+    <MESSAGE value="Adding WBS final version" />
+    <MESSAGE value="Finalise Sprint 1" />
+    <MESSAGE value="Finalise Sprint 1 - final" />
+    <MESSAGE value="Finalise Sprint 1 - final: Adding UI pdf in document" />
+    <MESSAGE value="Create a new branch from main" />
+    <MESSAGE value="Create Board class with all the intersections." />
+    <MESSAGE value="Create Intersection class, with an isAdjacent method" />
+    <MESSAGE value="Create Layout and MainPage class for user to interact" />
+    <MESSAGE value="Change file locations" />
+    <MESSAGE value="Change Intersection file location" />
+    <MESSAGE value="Move Intersection class to Backend folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="Move Intersection class to Backend folder" />
+  </component>
+</project>

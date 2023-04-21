@@ -1,3 +1,6 @@
+package Frontend;
+import Backend.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -72,11 +75,16 @@ public class InitialBoard extends JPanel {
                     placeToken.add(whiteToken, index); // add white token at the same index
                     placeToken.repaint();
                     placeToken.revalidate();
+                    whiteToken.index = index; // set the index of the white token
                     whiteList.add(whiteToken); // add white token to the list
                     if (!checkSelected()) {
-                        whiteToken.addMouseListener(whiteToken.whiteTokenSelected);
+                        whiteToken.addMouseListener(whiteToken.tokenSelected);
                         System.out.println("Selected here");
                     }
+
+                    // **Test Backend code**
+                    DoNothingAction doNothingAction = new DoNothingAction();
+                    System.out.println(doNothingAction.execute(new Player("Player 1", TokenColour.PLAYER_1_WHITE)));
                 }
             });
 
@@ -87,9 +95,9 @@ public class InitialBoard extends JPanel {
     // check if any white token is selected
     protected boolean checkSelected(){
         for (WhiteToken whiteToken : whiteList) {
-            whiteToken.removeMouseListener(whiteToken.whiteTokenSelected);
+            whiteToken.removeMouseListener(whiteToken.tokenSelected);
             if (whiteToken.selected){
-                whiteToken.addMouseListener(whiteToken.whiteTokenSelected);
+                whiteToken.addMouseListener(whiteToken.tokenSelected);
                 System.out.println("selected");
                 return true;
             }
@@ -98,5 +106,30 @@ public class InitialBoard extends JPanel {
         return false;
     }
 
+    // Place token on board
+    protected void placeToken(WhiteToken whiteToken) {
+        placeToken.remove(whiteToken.index);
+        placeToken.add(whiteToken, whiteToken.index);
+        placeToken.repaint();
+        placeToken.revalidate();
+        whiteList.add(whiteToken);
+    }
+
+    // Remove token from board
+    protected void removeToken(WhiteToken whiteToken) {
+        placeToken.remove(whiteToken.index);
+        placeToken.repaint();
+        placeToken.revalidate();
+        whiteList.remove(whiteToken);
+    }
+
+    // Move token on board
+    protected void moveToken(WhiteToken whiteToken, Intersection intersection) {
+        placeToken.remove(whiteToken.index);
+        int intersectionIndex = intersection.getAccessibleContext().getAccessibleIndexInParent();
+        placeToken.add(whiteToken, intersectionIndex);
+        placeToken.repaint();
+        placeToken.revalidate();
+    }
 
 }

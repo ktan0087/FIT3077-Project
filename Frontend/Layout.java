@@ -63,7 +63,7 @@ public class Layout{
             public void actionPerformed(ActionEvent e) {
                 String message = "Do you want to exit?";
                 String title = "NINE MEN'S MORRIS";
-                int result = JOptionPane.showConfirmDialog(iniBoard.buttons.btnRestart, message, title, JOptionPane.YES_NO_OPTION);
+                int result = JOptionPane.showConfirmDialog(iniBoard.buttons.btnClose, message, title, JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION){
                     panelCont.remove(getIniBoard());
                     InitialBoard newIniBoard = new InitialBoard();

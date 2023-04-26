@@ -36,6 +36,10 @@ public class Game {
         }
     }
 
+    public Board getBoard() {
+        return board;
+    }
+
     public Player getCurrentPlayer() {
             return currentPlayer;
         }

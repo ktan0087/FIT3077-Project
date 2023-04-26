@@ -13,7 +13,7 @@ public class PlaceTokenAction extends Action{
     }
 
     @Override
-    public boolean execute(Player player, Board board) {
+    public boolean execute() {
         boolean flag = false;
         if (player.isActionAllowed(AllActions.PLACE_TOKEN)){
             board.placeToken(player, placeIntersection);

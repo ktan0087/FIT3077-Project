@@ -17,7 +17,18 @@ public class InitialBoard extends JPanel {
     WhiteTokenRemain whiteTokenRemain = new WhiteTokenRemain();
     BlackTokenRemain blackTokenRemain = new BlackTokenRemain();
     WhiteToken selectedWhite;
+
+    Game g1;
+
     Boolean alwaysTrue = true;
+
+    public void setGame(Game g1) {
+        this.g1 = g1;
+    }
+
+    public Game getGame() {
+        return g1;
+    }
 
     public InitialBoard() {
         // set the background color of the board
@@ -96,20 +107,25 @@ public class InitialBoard extends JPanel {
 
                     System.out.println("hello");
                     // place token on board
-                    placeToken.remove(index); // remove the placeholder at the same index
-                    placeToken.add(whiteToken, index); // add white token at the same index
-                    placeToken.repaint();
-                    placeToken.revalidate();
-                    whiteToken.index = index; // set the index of the white token
-                    whiteList.add(whiteToken); // add white token to the list
-                    if (!checkSelected()) { // if no white token is selected
-                        whiteToken.addMouseListener(whiteToken.tokenSelected);
-                        System.out.println("Selected here");
-                    }
+                    PlaceTokenAction newPlaceAction = new PlaceTokenAction(getGame().getCurrentPlayer(),getGame().getBoard().getIntersection(intersection.getCoordinateX(),intersection.getCoordinateY()), getGame().getBoard());
+                    if(newPlaceAction.execute()){
+                        placeToken.remove(index); // remove the placeholder at the same index
+                        placeToken.add(whiteToken, index); // add white token at the same index
+                        placeToken.repaint();
+                        placeToken.revalidate();
+                        whiteToken.index = index; // set the index of the white token
+                        whiteList.add(whiteToken); // add white token to the list
+                        System.out.println("placed");
+                        if (!checkSelected()) { // if no white token is selected
+                            whiteToken.addMouseListener(whiteToken.tokenSelected);
+                            System.out.println("Selected here");;
+                        }
 
-                    // **Test Backend code**
-                    DoNothingAction doNothingAction = new DoNothingAction();
-                    System.out.println(doNothingAction.execute(new Player("Player 1", TokenColour.PLAYER_1_WHITE), BackendBoard));
+                    }
+//
+//                    // **Test Backend code**
+//                    DoNothingAction doNothingAction = new DoNothingAction();
+//                    System.out.println(doNothingAction.execute());
                 }
             });
 

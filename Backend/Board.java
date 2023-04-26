@@ -60,7 +60,7 @@ public class Board {
         Player p2 = new Player("ZW", TokenColour.PLAYER_2_BLACK);
         Board b = new Board();
         PlaceTokenAction action1 = new PlaceTokenAction(p1, b.intersection[1][1], b);
-        System.out.println(action1.execute(p1, b));
+        System.out.println(action1.execute());
 
         //b.placeToken(p1, b.intersection[1][1]);
         System.out.println(b.intersection[1][1].isEmpty());

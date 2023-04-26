@@ -52,9 +52,10 @@ public class Player {
             tokensInHand--;
             tokensOnBoard++;
         }
-        else{
-            this.addAllowableAction(AllActions.MOVE_TOKEN);
-        }
+//        else{
+//            this.removeAllowableAction(AllActions.PLACE_TOKEN);
+//            this.addAllowableAction(AllActions.MOVE_TOKEN);
+//        }
     }
 
     // This function is used when a player's token is removed by another player

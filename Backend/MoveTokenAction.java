@@ -14,7 +14,7 @@ public class MoveTokenAction extends Action{
     }
 
     @Override
-    public boolean execute(Player player, Board board) {
+    public boolean execute() {
         boolean flag = false;
         if (player.isActionAllowed(AllActions.MOVE_TOKEN)){
             board.moveToken(player, currentIntersection, newIntersection);

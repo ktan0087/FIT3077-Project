@@ -100,32 +100,29 @@ public class InitialBoard extends JPanel {
                             selectedWhite.selected = false; // remove the red selected border
                             placeToken.repaint();
                             placeToken.revalidate();
-                            System.out.println("moved");
+//                            intersection.hasToken = true; // set the intersection to have token
+                            playerTurn.changeIcon(); // change the player turn icon
                             return;
                         }
                     }
 
-                    System.out.println("hello");
                     // place token on board
                     PlaceTokenAction newPlaceAction = new PlaceTokenAction(getGame().getCurrentPlayer(),getGame().getBoard().getIntersection(intersection.getCoordinateX(),intersection.getCoordinateY()), getGame().getBoard());
-                    if(newPlaceAction.execute()){
+                    if(newPlaceAction.execute()){ // can only place token at empty intersection
                         placeToken.remove(index); // remove the placeholder at the same index
                         placeToken.add(whiteToken, index); // add white token at the same index
                         placeToken.repaint();
                         placeToken.revalidate();
+//                        intersection.hasToken = true; // set the intersection to have token
                         whiteToken.index = index; // set the index of the white token
                         whiteList.add(whiteToken); // add white token to the list
+                        playerTurn.changeIcon(); // change the player turn icon
                         System.out.println("placed");
                         if (!checkSelected()) { // if no white token is selected
                             whiteToken.addMouseListener(whiteToken.tokenSelected);
                             System.out.println("Selected here");;
                         }
-
                     }
-//
-//                    // **Test Backend code**
-//                    DoNothingAction doNothingAction = new DoNothingAction();
-//                    System.out.println(doNothingAction.execute());
                 }
             });
 

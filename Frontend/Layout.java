@@ -54,46 +54,49 @@ public class Layout{
 
         });
 
-        // Click RESTART button in InitialBoard and restart the game
-        iniBoard.buttons.btnRestart.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String message = "Do you want to restart the game?";
-                String title = "NINE MEN'S MORRIS";
-                int result = JOptionPane.showConfirmDialog(iniBoard.buttons.btnRestart, message, title, JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION){
-                    panelCont.remove(getIniBoard()); // remove old initial board
-                    InitialBoard newIniBoard = new InitialBoard(); // create new initial board
-                    setIniBoard(newIniBoard); // set new initial board
-                    panelCont.add(getIniBoard(), "2"); // add new initial board to panel container
-                    iniBoard.buttons.btnRestart.addActionListener(this); // add action listener to RESTART button, otherwise the button won't work after restart
-                    iniBoard.buttons.btnClose.addActionListener(this); // add action listener to CLOSE button
-                    cLayout.show(panelCont, "2"); // show initial board
-                }
-            }
-        });
-
-        // Click CLOSE icon button in InitialBoard and bring the user to main page (MainPage)
-        iniBoard.buttons.btnClose.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String message = "Do you want to exit?";
-                String title = "NINE MEN'S MORRIS";
-                int result = JOptionPane.showConfirmDialog(iniBoard.buttons.btnClose, message, title, JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION){
-                    panelCont.remove(getIniBoard());
-                    InitialBoard newIniBoard = new InitialBoard();
-                    setIniBoard(newIniBoard);
-                    panelCont.add(getIniBoard(), "2");
-                    iniBoard.buttons.btnClose.addActionListener(this);
-                    iniBoard.buttons.btnRestart.addActionListener(this);
-                    cLayout.show(panelCont, "1"); // show main page
-                }
-            }
-        });
+        iniBoard.buttons.btnRestart.addActionListener(restart);
+        iniBoard.buttons.btnClose.addActionListener(close);
 
         mainFrame.add(panelCont); // add panel container to main frame
     }
+
+    // Click RESTART button in InitialBoard and restart the game
+    protected ActionListener restart = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String message = "Do you want to restart the game?";
+            String title = "NINE MEN'S MORRIS";
+            int result = JOptionPane.showConfirmDialog(iniBoard.buttons.btnRestart, message, title, JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION){
+                panelCont.remove(getIniBoard()); // remove old initial board
+                InitialBoard newIniBoard = new InitialBoard(); // create new initial board
+                setIniBoard(newIniBoard); // set new initial board
+                panelCont.add(getIniBoard(), "2"); // add new initial board to panel container
+                iniBoard.buttons.btnRestart.addActionListener(restart); // add action listener to RESTART button, otherwise the button won't work after restart
+                iniBoard.buttons.btnClose.addActionListener(close); // add action listener to CLOSE button
+                cLayout.show(panelCont, "2"); // show initial board
+            }
+        }
+    };
+
+    // Click CLOSE icon button in InitialBoard and bring the user to main page (MainPage)
+    protected ActionListener close = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String message = "Do you want to exit?";
+            String title = "NINE MEN'S MORRIS";
+            int result = JOptionPane.showConfirmDialog(iniBoard.buttons.btnClose, message, title, JOptionPane.YES_NO_OPTION);
+            if (result == JOptionPane.YES_OPTION){
+                panelCont.remove(getIniBoard());
+                InitialBoard newIniBoard = new InitialBoard();
+                setIniBoard(newIniBoard);
+                panelCont.add(getIniBoard(), "2");
+                iniBoard.buttons.btnClose.addActionListener(close);
+                iniBoard.buttons.btnRestart.addActionListener(restart);
+                cLayout.show(panelCont, "1"); // show main page
+            }
+        }
+    };
 
 //    public static void main(String[] args) {
 //        SwingUtilities.invokeLater(new Runnable() {

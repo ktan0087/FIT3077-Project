@@ -28,6 +28,13 @@ public class Game {
         isGameOver = false;
     }
 
+    public void endTurn(){
+        isGameOver();
+        swapPlayers();
+        player1.playTurn();
+        player2.playTurn();
+    }
+
     public void swapPlayers() {
         if (currentPlayer == player1) {
             currentPlayer = player2;

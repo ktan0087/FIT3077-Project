@@ -2,6 +2,8 @@ package Frontend;
 
 // REFERENCE: https://www.youtube.com/watch?v=sAReaaTxNGU
 
+import Backend.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,9 +16,14 @@ public class Layout{
     MainPage mainPage = new MainPage();
     InitialBoard iniBoard = new InitialBoard();
     CardLayout cLayout = new CardLayout(); // create card layout
+    Game g1;
 
     public void setIniBoard(InitialBoard iniBoard) {
         this.iniBoard = iniBoard;
+    }
+
+    public void setGame(Game newGame){
+        this.g1 = newGame;
     }
 
     public InitialBoard getIniBoard() {
@@ -35,7 +42,9 @@ public class Layout{
             @Override
             public void actionPerformed(ActionEvent e) {
                 cLayout.show(panelCont, "2");
+                setGame(new Game());
             }
+
         });
 
         // Click RESTART button in InitialBoard and restart the game

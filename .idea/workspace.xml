@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="5f9c7453-4616-463d-ae35-df53754e53bb" name="Changes" comment="Finalize all actions for Sprint 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/AllActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/AllActions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/Layout.java" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/Layout.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,6 +50,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Sprint 2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -222,7 +227,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682491058094</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Finalize all actions for Sprint 2">
+      <created>1682495417318</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1682495417318</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -265,5 +277,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

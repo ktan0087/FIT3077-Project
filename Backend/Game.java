@@ -47,6 +47,4 @@ public class Game {
         return isGameOver;
     }
 
-
-
 }

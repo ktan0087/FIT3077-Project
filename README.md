@@ -1,11 +1,13 @@
 # FIT3077_project
 
-Team Members: 
-        Fong Zhiwei zfon0005@student.monash.edu<br />
-        Kennedy Tan ktan0087@student.monash.edu<br />
-        Soh Meng Jienq msoh0007@student.monash.edu 
+Team Members: <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fong Zhiwei zfon0005@student.monash.edu<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kennedy Tan ktan0087@student.monash.edu<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Soh Meng Jienq msoh0007@student.monash.edu 
 
 Work Breakdown Structure -- https://docs.google.com/spreadsheets/d/10B28lCSSwzXOpijzydfFUe32XY_a1BlKvHQG8Hlq6rk/edit?usp=sharing
+
+Sprint Contribution Log -- https://git.infotech.monash.edu/fit3077-s1-2023/MA_Thursday4pm_Team5/project/-/wikis/Sprint-Contribution-Log
 
 Low-Fidelity Prototype Drawings -- https://www.figma.com/file/bFVr5a2RvkB7s3ONMxI7Fv/UI-design?node-id=0%3A1&t=aLRQKU3xO6h7clQW-1 
 

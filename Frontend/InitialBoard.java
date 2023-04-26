@@ -10,11 +10,14 @@ import java.util.ArrayList;
 public class InitialBoard extends JPanel {
     ArrayList<WhiteToken> whiteList = new ArrayList<>(); // create a list to store white tokens
     Buttons buttons = new Buttons();
-    Board board = new Board();
+    Frontend.Board board = new Board();
+    Backend.Board BackendBoard = new Backend.Board();
     PlaceToken placeToken = new PlaceToken();
     PlayerTurn playerTurn = new PlayerTurn();
     WhiteTokenRemain whiteTokenRemain = new WhiteTokenRemain();
     BlackTokenRemain blackTokenRemain = new BlackTokenRemain();
+    WhiteToken selectedWhite;
+    Boolean alwaysTrue = true;
 
     public InitialBoard() {
         // set the background color of the board
@@ -62,8 +65,11 @@ public class InitialBoard extends JPanel {
         gbc.anchor = GridBagConstraints.EAST;
         this.add(blackTokenRemain, gbc);
 
-        // Place token on board
         int btnListLength = board.getIntersectionList().size(); // get the length of the intersection list
+
+        // Move token on board
+
+        // Place token on board
         for (int i = 0; i < btnListLength; i++) {
             Intersection intersection = board.getIntersectionList().get(i); // get each intersection from list
             intersection.inter.addActionListener(new ActionListener() {
@@ -71,20 +77,39 @@ public class InitialBoard extends JPanel {
                 public void actionPerformed(ActionEvent e) {
                     WhiteToken whiteToken = new WhiteToken(intersection.getCoordinateX(), intersection.getCoordinateY()); // create a white token
                     int index = intersection.getAccessibleContext().getAccessibleIndexInParent(); // get the index of the intersection from the list
+
+                    if (checkSelected()){
+                        if (true) {
+                            // remove token from board
+                            placeToken.remove(selectedWhite.index); // remove the selected white token from the previous intersection
+                            placeToken.add(new JLabel(), selectedWhite.index); // add the placeholder to the previous intersection at place token layer
+                            placeToken.remove(index); // remove the previous placeholder
+                            placeToken.add(selectedWhite, index); // add the selected white token to the intersection that the player wants to move
+                            selectedWhite.index = index; // update the index of the selected white token
+                            selectedWhite.selected = false; // remove the red selected border
+                            placeToken.repaint();
+                            placeToken.revalidate();
+                            System.out.println("moved");
+                            return;
+                        }
+                    }
+
+                    System.out.println("hello");
+                    // place token on board
                     placeToken.remove(index); // remove the placeholder at the same index
                     placeToken.add(whiteToken, index); // add white token at the same index
                     placeToken.repaint();
                     placeToken.revalidate();
                     whiteToken.index = index; // set the index of the white token
                     whiteList.add(whiteToken); // add white token to the list
-                    if (!checkSelected()) {
+                    if (!checkSelected()) { // if no white token is selected
                         whiteToken.addMouseListener(whiteToken.tokenSelected);
                         System.out.println("Selected here");
                     }
 
                     // **Test Backend code**
                     DoNothingAction doNothingAction = new DoNothingAction();
-                    System.out.println(doNothingAction.execute(new Player("Player 1", TokenColour.PLAYER_1_WHITE)));
+                    System.out.println(doNothingAction.execute(new Player("Player 1", TokenColour.PLAYER_1_WHITE), BackendBoard));
                 }
             });
 
@@ -98,7 +123,9 @@ public class InitialBoard extends JPanel {
             whiteToken.removeMouseListener(whiteToken.tokenSelected);
             if (whiteToken.selected){
                 whiteToken.addMouseListener(whiteToken.tokenSelected);
+                selectedWhite = whiteToken; // set selected white token
                 System.out.println("selected");
+                System.out.println(selectedWhite);
                 return true;
             }
         }

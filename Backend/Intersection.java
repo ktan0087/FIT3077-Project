@@ -33,6 +33,23 @@ public class Intersection {
         return position;
     }
 
+    //setter method
+    public void addToken(Token token){
+        this.token = token;
+    }
+
+    public void removeToken(){
+        this.token = null;
+    }
+
+    /**
+     * Getter function to get the token on that intersection
+     * @return
+     */
+    public Token getToken() {
+        return token;
+    }
+
     /**
      * Function to check if the two intersection is next to each other
      * @param other = Intersection used to compared to current intersection

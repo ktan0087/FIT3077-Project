@@ -43,6 +43,18 @@ public class Game {
         }
     }
 
+    public Board getBoard() {
+        return board;
+    }
+
+    public void endTurn(){
+        isGameOver();
+        swapPlayers();
+        player1.playTurn();
+        player2.playTurn();
+    }
+
+
     public Player getCurrentPlayer() {
             return currentPlayer;
         }

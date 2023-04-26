@@ -6,7 +6,7 @@ public class DoNothingAction extends Action{
     }
 
     @Override
-    public boolean execute(Player player, Board board) {
+    public boolean execute() {
         return true;
     }
 

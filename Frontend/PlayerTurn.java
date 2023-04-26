@@ -19,4 +19,7 @@ public class PlayerTurn extends JLabel {
         this.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
     }
 
+    public void changeIcon(){
+
+    }
 }

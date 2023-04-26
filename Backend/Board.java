@@ -56,16 +56,16 @@ public class Board {
     }
 
     public static void main(String[] args) {
-        Player p1 = new Player("KT", TokenColour.PLAYER_1_WHITE);
-        Player p2 = new Player("ZW", TokenColour.PLAYER_2_BLACK);
-        Board b = new Board();
-        PlaceTokenAction action1 = new PlaceTokenAction(p1, b.intersection[1][1], b);
-        System.out.println(action1.execute());
-
-        //b.placeToken(p1, b.intersection[1][1]);
-        System.out.println(b.intersection[1][1].isEmpty());
-        System.out.println((b.intersection[1][1].getToken().getTokenColour()));
-        //System.out.println((b.intersection[1][2].getToken().getTokenColour()));
+//        Player p1 = new Player("KT", TokenColour.PLAYER_1_WHITE);
+//        Player p2 = new Player("ZW", TokenColour.PLAYER_2_BLACK);
+//        Board b = new Board();
+//        PlaceTokenAction action1 = new PlaceTokenAction(p1, b.intersection[1][1], b);
+//        System.out.println(action1.execute());
+//
+//        //b.placeToken(p1, b.intersection[1][1]);
+//        System.out.println(b.intersection[1][1].isEmpty());
+//        System.out.println((b.intersection[1][1].getToken().getTokenColour()));
+//        //System.out.println((b.intersection[1][2].getToken().getTokenColour()));
     }
 
     public static void resetBoard(){}

@@ -4,19 +4,19 @@ public class PlaceTokenAction extends Action{
 
     private Player player;
     private Intersection placeIntersection;
-    private Board board;
+    private Game game;
 
-    public PlaceTokenAction(Player player,Intersection placeIntersection, Board board) {
+    public PlaceTokenAction(Player player,Intersection placeIntersection, Game game) {
         this.player = player;
         this.placeIntersection = placeIntersection;
-        this.board = board;
+        this.game = game;
     }
 
     @Override
     public boolean execute() {
         boolean flag = false;
         if (player.isActionAllowed(AllActions.PLACE_TOKEN)){
-            board.placeToken(player, placeIntersection);
+            game.getBoard().placeToken(player, placeIntersection);
             flag = true;
         }
         return flag;

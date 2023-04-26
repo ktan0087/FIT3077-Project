@@ -3,7 +3,8 @@ package Backend;
 public enum AllActions {
     DO_NOTHING,
     PLACE_TOKEN,
-    MOVE_TOKEN;
+    MOVE_TOKEN,
+    CAN_FLY;
 
 //    private final Action action;
 //

@@ -2,11 +2,8 @@ package Frontend;
 
 // REFERENCE: https://www.youtube.com/watch?v=sAReaaTxNGU
 
-<<<<<<<<< Temporary merge branch 1
-import Backend.*;
-=========
+
 import Backend.Game;
->>>>>>>>> Temporary merge branch 2
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +17,6 @@ public class Layout{
     MainPage mainPage = new MainPage();
     InitialBoard iniBoard = new InitialBoard();
     CardLayout cLayout = new CardLayout(); // create card layout
-    Game g1;
-
     Game g1;
 
     public void setGame(Game g1) {

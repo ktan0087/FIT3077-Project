@@ -35,18 +35,22 @@ public class Board {
         return new Intersection(layer, position);
     }
 
-    public void placeToken(Player player, Intersection intersection){
+    public boolean placeToken(Player player, Intersection intersection){
         if (intersection.isEmpty()){
             player.placeTokenOnBoard();
             intersection.addToken(new Token(player.getTokenColour()));
+            return true;
         }
+        return false;
     }
 
-    public void moveToken(Player player, Intersection intersection, Intersection otherIntersection){
+    public boolean moveToken(Player player, Intersection intersection, Intersection otherIntersection){
         if (otherIntersection.isEmpty() && intersection.isAdjacent(otherIntersection)){
             player.loseTokenOnBoard();
             intersection.removeToken();
+            return true;
         }
+        return false;
     }
 
     public static void main(String[] args) {

@@ -35,6 +35,7 @@ public class Game {
         player2.playTurn();
     }
 
+
     public void swapPlayers() {
         if (currentPlayer == player1) {
             currentPlayer = player2;

@@ -12,12 +12,14 @@ public class PlaceTokenAction extends Action{
         this.game = game;
     }
 
+
     @Override
     public boolean execute() {
         boolean flag = false;
-        if (player.isActionAllowed(AllActions.PLACE_TOKEN)){
-            game.getBoard().placeToken(player, placeIntersection);
-            flag = true;
+        if (player.isActionAllowed(AllActions.PLACE_TOKEN)) {
+            if (game.getBoard().placeToken(player, placeIntersection)) {
+                flag = true;
+            }
         }
         return flag;
     }

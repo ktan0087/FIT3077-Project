@@ -14,11 +14,14 @@ public abstract class Token extends JLabel {
     protected int index;
     protected Color tokenColor;
 
-    public Token(int coordinateX, int coordinateY){
+    protected InitialBoard iniBoard;
+
+    public Token(int coordinateX, int coordinateY, InitialBoard iniBoard){
         this.coordinateX = coordinateX;
         this.coordinateY = coordinateY;
         this.times = 0;
         this.index = -1; // index in board panel
+        this.iniBoard = iniBoard;
     }
 
     public int getCoordinateX() {
@@ -82,8 +85,13 @@ public abstract class Token extends JLabel {
     protected MouseListener tokenSelected = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
-            if (times%2 == 0) {
+            if (times%2 == 0 && !iniBoard.isSelected) {
                 selected = true; // click the white token to select it
+                iniBoard.isSelected = true;
+            }
+            else if (iniBoard.isSelected && selected == true){
+                selected = false;
+                iniBoard.isSelected = false;
             }
             else {
                 selected = false; // click again the selected white token to deselect it

@@ -121,13 +121,11 @@ public class InitialBoard extends JPanel {
                             placeToken.revalidate();
                             System.out.println("moved");
                             getGame().endTurn();
+                            playerTurn.changeIcon();
                             return;
                         }
                     }
                     if (!checkSelected()) { // if no white token is selected
-
-//                        System.out.println("Selected here");
-
                         PlaceTokenAction newPlaceAction = new PlaceTokenAction(getGame().getCurrentPlayer(),getGame().getBoard().getIntersection(intersection.getCoordinateX(),intersection.getCoordinateY()), getGame());
                         if(newPlaceAction.execute()){
                             placeToken.remove(index); // remove the placeholder at the same index
@@ -138,16 +136,10 @@ public class InitialBoard extends JPanel {
                             whiteList.add(token); // add white token to the list
                             System.out.println("placed");
                             getGame().endTurn();
+                            playerTurn.changeIcon();
                         }
 
                     }
-//                    for (Token allToken : whiteList) {
-//                        allToken.addMouseListener(token.tokenSelected);
-//                    }
-//
-//                    // **Test Backend code**
-//                    DoNothingAction doNothingAction = new DoNothingAction();
-//                    System.out.println(doNothingAction.execute());
                 }
             });
 

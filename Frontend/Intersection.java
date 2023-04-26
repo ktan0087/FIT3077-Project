@@ -19,7 +19,7 @@ public class Intersection extends JLabel {
         BOTTOM_MIDDLE,
         BOTTOM_RIGHT
     }
-    protected Boolean isWhite = false;
+    protected Boolean hasToken = false;
     IntersectionPoint inter = new IntersectionPoint(); // create a circle button for intersection
     public Intersection(int coordinateX, int coordinateY){
         this.setLayout(new GridLayout(3, 3, -1, -1)); // -1 is to prevent showing grid border

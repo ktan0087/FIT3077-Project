@@ -2,6 +2,7 @@ package Frontend;
 
 // REFERENCE: https://www.youtube.com/watch?v=sAReaaTxNGU
 
+
 import Backend.Game;
 
 import javax.swing.*;
@@ -16,7 +17,6 @@ public class Layout{
     MainPage mainPage = new MainPage();
     InitialBoard iniBoard = new InitialBoard();
     CardLayout cLayout = new CardLayout(); // create card layout
-
     Game g1;
 
     public void setGame(Game g1) {

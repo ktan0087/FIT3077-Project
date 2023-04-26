@@ -35,37 +35,35 @@ public class Board {
         return new Intersection(layer, position);
     }
 
-    public void placeToken(Player player, Intersection intersection){
+    public boolean placeToken(Player player, Intersection intersection){
         if (intersection.isEmpty()){
             player.placeTokenOnBoard();
             intersection.addToken(new Token(player.getTokenColour()));
+            return true;
         }
-        else {
-            throw new IllegalArgumentException();
-        }
+        return false;
     }
 
-    public void moveToken(Player player, Intersection intersection, Intersection otherIntersection){
+    public boolean moveToken(Player player, Intersection intersection, Intersection otherIntersection){
         if (otherIntersection.isEmpty() && intersection.isAdjacent(otherIntersection)){
             player.loseTokenOnBoard();
             intersection.removeToken();
+            return true;
         }
-        else{
-            throw new IllegalArgumentException();
-        }
+        return false;
     }
 
     public static void main(String[] args) {
-        Player p1 = new Player("KT", TokenColour.PLAYER_1_WHITE);
-        Player p2 = new Player("ZW", TokenColour.PLAYER_2_BLACK);
-        Board b = new Board();
-        PlaceTokenAction action1 = new PlaceTokenAction(p1, b.intersection[1][1], b);
-        System.out.println(action1.execute());
-
-        //b.placeToken(p1, b.intersection[1][1]);
-        System.out.println(b.intersection[1][1].isEmpty());
-        System.out.println((b.intersection[1][1].getToken().getTokenColour()));
-        //System.out.println((b.intersection[1][2].getToken().getTokenColour()));
+//        Player p1 = new Player("KT", TokenColour.PLAYER_1_WHITE);
+//        Player p2 = new Player("ZW", TokenColour.PLAYER_2_BLACK);
+//        Board b = new Board();
+//        PlaceTokenAction action1 = new PlaceTokenAction(p1, b.intersection[1][1], b);
+//        System.out.println(action1.execute());
+//
+//        //b.placeToken(p1, b.intersection[1][1]);
+//        System.out.println(b.intersection[1][1].isEmpty());
+//        System.out.println((b.intersection[1][1].getToken().getTokenColour()));
+//        //System.out.println((b.intersection[1][2].getToken().getTokenColour()));
     }
 
     public static void resetBoard(){}

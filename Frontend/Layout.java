@@ -79,13 +79,13 @@ public class Layout{
         mainFrame.add(panelCont); // add panel container to main frame
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Layout();
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                new Layout();
+//            }
+//        });
+//    }
 
 }

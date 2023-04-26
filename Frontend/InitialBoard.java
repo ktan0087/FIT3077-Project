@@ -10,7 +10,8 @@ import java.util.ArrayList;
 public class InitialBoard extends JPanel {
     ArrayList<WhiteToken> whiteList = new ArrayList<>(); // create a list to store white tokens
     Buttons buttons = new Buttons();
-    Board board = new Board();
+    Frontend.Board board = new Board();
+    Backend.Board BackendBoard = new Backend.Board();
     PlaceToken placeToken = new PlaceToken();
     PlayerTurn playerTurn = new PlayerTurn();
     WhiteTokenRemain whiteTokenRemain = new WhiteTokenRemain();
@@ -84,7 +85,7 @@ public class InitialBoard extends JPanel {
 
                     // **Test Backend code**
                     DoNothingAction doNothingAction = new DoNothingAction();
-                    System.out.println(doNothingAction.execute(new Player("Player 1", TokenColour.PLAYER_1_WHITE)));
+                    System.out.println(doNothingAction.execute(new Player("Player 1", TokenColour.PLAYER_1_WHITE), BackendBoard));
                 }
             });
 

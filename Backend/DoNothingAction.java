@@ -6,8 +6,8 @@ public class DoNothingAction extends Action{
     }
 
     @Override
-    public String execute(Player player) {
-        return "You do nothing.";
+    public boolean execute(Player player, Board board) {
+        return true;
     }
 
     @Override

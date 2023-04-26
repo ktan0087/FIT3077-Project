@@ -17,8 +17,15 @@ public class Player {
         this.tokenColour = tokenColour;
         this.tokensInHand = Game.MAX_TOKENS_PLAYER;
         this.tokensOnBoard = Game.MAX_TOKENS_PLAYER-getTokensInHand();
+        this.addAllowableAction(AllActions.PLACE_TOKEN);
         this.canFly = false;
     }
+
+//    public Action playTurn(ActionList actions, Action lastAction, Board board){
+//        // Handle multi-noOfTurns Actions (given)
+//
+//    }
+
     public String getName() {
         return name;
     }
@@ -39,25 +46,25 @@ public class Player {
         return canFly;
     }
 
-    // This function is used when a player's token is placed on the board.
-    public int placeTokenOnBoard() {
+    //This function is used when a player's token is placed on the board.
+    public void placeTokenOnBoard() {
         if (tokensInHand > 0) {
             tokensInHand--;
             tokensOnBoard++;
         }
-        return tokensInHand;
+        else{
+            this.addAllowableAction(AllActions.MOVE_TOKEN);
+        }
     }
 
-
     // This function is used when a player's token is removed by another player
-    public int loseTokenOnBoard() {
+    public void loseTokenOnBoard() {
         if (tokensOnBoard > 0) {
             tokensOnBoard--;
             if (tokensOnBoard == 3 && getTokensInHand()==0) {
                 canFly = true;
             }
         }
-        return tokensOnBoard;
     }
 
     public boolean isActionAllowed(AllActions actions){

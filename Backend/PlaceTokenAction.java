@@ -3,29 +3,27 @@ package Backend;
 public class PlaceTokenAction extends Action{
 
     private Player player;
-    private int coordinateX;
-
-    private int coordinateY;
-
+    private Intersection placeIntersection;
     private Board board;
 
-    public PlaceTokenAction(Player player, int coordinateX, int coordinateY, Board board) {
+    public PlaceTokenAction(Player player,Intersection placeIntersection, Board board) {
         this.player = player;
-        this.coordinateX = coordinateX;
-        this.coordinateY = coordinateY;
+        this.placeIntersection = placeIntersection;
         this.board = board;
     }
 
-
-
     @Override
-    public String execute(Player player) {
-
-        return "";
+    public boolean execute(Player player, Board board) {
+        boolean flag = false;
+        if (player.isActionAllowed(AllActions.PLACE_TOKEN)){
+            board.placeToken(player, placeIntersection);
+            flag = true;
+        }
+        return flag;
     }
 
     @Override
     public String menuDescription(Player player) {
-        return "Place a token";
+        return player + "Place a token";
     }
 }

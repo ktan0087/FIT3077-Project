@@ -36,7 +36,6 @@ public class Game {
         }
     }
 
-
     public Player getCurrentPlayer() {
             return currentPlayer;
         }
@@ -47,7 +46,5 @@ public class Game {
         }
         return isGameOver;
     }
-
-
 
 }

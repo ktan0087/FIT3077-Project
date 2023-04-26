@@ -21,10 +21,16 @@ public class Player {
         this.canFly = false;
     }
 
-//    public Action playTurn(ActionList actions, Action lastAction, Board board){
-//        // Handle multi-noOfTurns Actions (given)
-//
-//    }
+    public void playTurn(){
+        // Handle player allowable actions in every turn
+        if (getTokensInHand() <= 0){
+            this.removeAllowableAction(AllActions.PLACE_TOKEN);
+            this.addAllowableAction(AllActions.MOVE_TOKEN);
+        }
+        if (canPlayerFly()){
+            this.addAllowableAction(AllActions.CAN_FLY);
+        }
+    }
 
     public String getName() {
         return name;

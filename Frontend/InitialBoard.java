@@ -81,17 +81,20 @@ public class InitialBoard extends JPanel {
                     if (checkSelected()){
                         if (true) {
                             // remove token from board
-                            int selectedWhiteIndex = selectedWhite.index; // get the index of the selected white token
+                            placeToken.remove(selectedWhite.index); // remove the selected white token from the previous intersection
+                            placeToken.add(new JLabel(), selectedWhite.index); // add the placeholder to the previous intersection at place token layer
+                            placeToken.remove(index); // remove the previous placeholder
                             placeToken.add(selectedWhite, index); // add the selected white token to the intersection that the player wants to move
-                            placeToken.remove(selectedWhiteIndex); // remove the selected white token from the previous intersection
-                            placeToken.add(new JLabel(), selectedWhiteIndex); // add the placeholder to the previous intersection at place token layer
+                            selectedWhite.index = index; // update the index of the selected white token
                             selectedWhite.selected = false; // remove the red selected border
                             placeToken.repaint();
                             placeToken.revalidate();
+                            System.out.println("moved");
                             return;
                         }
                     }
 
+                    System.out.println("hello");
                     // place token on board
                     placeToken.remove(index); // remove the placeholder at the same index
                     placeToken.add(whiteToken, index); // add white token at the same index
@@ -122,6 +125,7 @@ public class InitialBoard extends JPanel {
                 whiteToken.addMouseListener(whiteToken.tokenSelected);
                 selectedWhite = whiteToken; // set selected white token
                 System.out.println("selected");
+                System.out.println(selectedWhite);
                 return true;
             }
         }

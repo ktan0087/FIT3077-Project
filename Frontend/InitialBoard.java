@@ -11,7 +11,6 @@ public class InitialBoard extends JPanel {
     ArrayList<Token> whiteList = new ArrayList<>(); // create a list to store white tokens
     Buttons buttons = new Buttons();
     Frontend.Board board = new Board();
-    Backend.Board BackendBoard = new Backend.Board();
     PlaceToken placeToken = new PlaceToken();
     PlayerTurn playerTurn = new PlayerTurn();
     WhiteTokenRemain whiteTokenRemain = new WhiteTokenRemain();
@@ -129,7 +128,7 @@ public class InitialBoard extends JPanel {
                         token.index = index; // set the index of the white token
                         whiteList.add(token); // add white token to the list
                         System.out.println("placed");
-                            if (!checkSelected()) { // if no white token is selected
+                        if (!checkSelected()) { // if no white token is selected
                             token.addMouseListener(token.tokenSelected);
                             getGame().endTurn();
                             System.out.println("Selected here");;

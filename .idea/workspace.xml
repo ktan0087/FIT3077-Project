@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5f9c7453-4616-463d-ae35-df53754e53bb" name="Changes" comment="Finalize all actions for Sprint 2">
+    <list default="true" id="5f9c7453-4616-463d-ae35-df53754e53bb" name="Changes" comment="add endTurn() function and playTurn() function to keep track of every turns">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/AllActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/AllActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/InitialBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/InitialBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/Layout.java" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/Layout.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -234,7 +235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682495417318</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="add endTurn() function and playTurn() function to keep track of every turns">
+      <created>1682504436415</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1682504436415</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -266,7 +274,8 @@
     <MESSAGE value="Change Intersection file location" />
     <MESSAGE value="Move Intersection class to Backend folder" />
     <MESSAGE value="Finalize all actions for Sprint 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finalize all actions for Sprint 2" />
+    <MESSAGE value="add endTurn() function and playTurn() function to keep track of every turns" />
+    <option name="LAST_COMMIT_MESSAGE" value="add endTurn() function and playTurn() function to keep track of every turns" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -275,6 +284,15 @@
           <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
           <option name="timeStamp" value="2" />
         </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
+          <option name="timeStamp" value="6" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Frontend/InitialBoard.java</url>
+          <line>152</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

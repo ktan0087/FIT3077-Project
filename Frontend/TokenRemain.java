@@ -5,11 +5,10 @@ import java.awt.*;
 
 public abstract class TokenRemain extends JLabel {
     ImageIcon tokenIcon;
-    int amountToken;
+    int amountToken = 9;
 
     public TokenRemain(){
-        this.amountToken = 9;
-        this.setText(Integer.valueOf(amountToken).toString());
+        this.setText("9");
         this.setBackground(new Color(0xE6B380));
         this.setFont(new Font("Inter", Font.PLAIN, 42));
         this.setForeground(new Color(0x000000));

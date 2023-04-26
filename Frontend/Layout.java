@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import Backend.*;
 
 // Use CardLayout to switch between different panels (MainPage and InitialBoard)
 public class Layout{
@@ -14,7 +15,6 @@ public class Layout{
     MainPage mainPage = new MainPage();
     InitialBoard iniBoard = new InitialBoard();
     CardLayout cLayout = new CardLayout(); // create card layout
-
     Game g1;
 
     public void setGame(Game g1) {
@@ -46,6 +46,8 @@ public class Layout{
             @Override
             public void actionPerformed(ActionEvent e) {
                 cLayout.show(panelCont, "2");
+                setGame(new Game());
+                iniBoard.setGame(getGame());
             }
 
         });

@@ -88,14 +88,4 @@ public class Player {
         return allowableActions.actionList();
     }
 
-    public void playTurn() {
-        // Handle player allowable actions in every turn
-        if (getTokensInHand() <= 0) {
-            this.removeAllowableAction(AllActions.PLACE_TOKEN);
-            this.addAllowableAction(AllActions.MOVE_TOKEN);
-        }
-        if (canPlayerFly()) {
-            this.addAllowableAction(AllActions.CAN_FLY);
-        }
-    }
 }

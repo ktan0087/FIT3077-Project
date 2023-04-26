@@ -40,18 +40,12 @@ public class Board {
             player.placeTokenOnBoard();
             intersection.addToken(new Token(player.getTokenColour()));
         }
-        else {
-            throw new IllegalArgumentException();
-        }
     }
 
     public void moveToken(Player player, Intersection intersection, Intersection otherIntersection){
         if (otherIntersection.isEmpty() && intersection.isAdjacent(otherIntersection)){
             player.loseTokenOnBoard();
             intersection.removeToken();
-        }
-        else{
-            throw new IllegalArgumentException();
         }
     }
 

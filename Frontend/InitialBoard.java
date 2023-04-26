@@ -135,6 +135,7 @@ public class InitialBoard extends JPanel {
                             token.index = index; // set the index of the white token
                             whiteList.add(token); // add white token to the list
                             System.out.println("placed");
+                            decreaseTokenRemainder(); // decrease the token remainder after placing a token
                             getGame().endTurn();
                             playerTurn.changeIcon();
                         }
@@ -161,6 +162,16 @@ public class InitialBoard extends JPanel {
         }
         System.out.println("not selected");
         return false;
+    }
+
+    // Decrease token remainder
+    protected void decreaseTokenRemainder(){
+        if (getGame().getCurrentPlayer().getTokenColour() == TokenColour.PLAYER_1_WHITE){
+            whiteTokenRemain.decreaseAmountToken();
+        }
+        else {
+            blackTokenRemain.decreaseAmountToken();
+        }
     }
 
     // Place token on board

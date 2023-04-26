@@ -29,6 +29,14 @@ public abstract class Token extends JLabel {
         return coordinateY;
     }
 
+    public void setCoordinateX(int coordinateX) {
+        this.coordinateX = coordinateX;
+    }
+
+    public void setCoordinateY(int coordinateY) {
+        this.coordinateY = coordinateY;
+    }
+
     // When the token is selected, a red circle will be drawn around the token
     protected void paintBorder(Graphics g) {
         if (this.selected) {

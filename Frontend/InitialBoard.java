@@ -90,12 +90,15 @@ public class InitialBoard extends JPanel {
                     int index = intersection.getAccessibleContext().getAccessibleIndexInParent(); // get the index of the intersection from the list
 
                     if (checkSelected()){
-                        if (true) {
+                        MoveTokenAction newMoveAction = new MoveTokenAction(getGame().getCurrentPlayer(),getGame().getBoard().getIntersection(selectedWhite.getCoordinateX(),selectedWhite.getCoordinateY()), getGame().getBoard().getIntersection(intersection.getCoordinateX(),intersection.getCoordinateY()), getGame().getBoard());
+                        if (newMoveAction.execute()) {
                             // remove token from board
                             placeToken.remove(selectedWhite.index); // remove the selected white token from the previous intersection
                             placeToken.add(new JLabel(), selectedWhite.index); // add the placeholder to the previous intersection at place token layer
                             placeToken.remove(index); // remove the previous placeholder
                             placeToken.add(selectedWhite, index); // add the selected white token to the intersection that the player wants to move
+                            selectedWhite.setCoordinateX(intersection.getCoordinateX()); // update the coordinate of the selected white token
+                            selectedWhite.setCoordinateY(intersection.getCoordinateY());
                             selectedWhite.index = index; // update the index of the selected white token
                             selectedWhite.selected = false; // remove the red selected border
                             placeToken.repaint();
@@ -116,7 +119,7 @@ public class InitialBoard extends JPanel {
                         whiteToken.index = index; // set the index of the white token
                         whiteList.add(whiteToken); // add white token to the list
                         System.out.println("placed");
-                        if (!checkSelected()) { // if no white token is selected
+                            if (!checkSelected()) { // if no white token is selected
                             whiteToken.addMouseListener(whiteToken.tokenSelected);
                             System.out.println("Selected here");;
                         }

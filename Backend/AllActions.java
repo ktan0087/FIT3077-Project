@@ -1,19 +1,14 @@
 package Backend;
 
+/**
+ * An enum class to represent the actions that can be performed by a player
+ *
+ * @see ActionList
+ */
 public enum AllActions {
-    DO_NOTHING,
-    CAN_FLY,
-    PLACE_TOKEN,
-    MOVE_TOKEN,
-
-//    private final Action action;
-//
-//    AllActions(Action action) {
-//        this.action = action;
-//    }
-//
-//    public Action getAction() {
-//        return action;
-//    }
+    DO_NOTHING, // Do nothing action
+    CAN_FLY,    // Fly action
+    PLACE_TOKEN, // Place token action
+    MOVE_TOKEN,  // Move token action
 
 }

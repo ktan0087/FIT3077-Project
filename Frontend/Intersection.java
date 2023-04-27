@@ -3,11 +3,16 @@ package Frontend;
 import javax.swing.*;
 import java.awt.*;
 
-// Customized all intersections
 public class Intersection extends JLabel {
+    /**
+     * Customized intersection
+     */
     private int coordinateX;
     private int coordinateY;
-    // the enum is used to determine the position of intersection
+
+    /**
+     * This enum is used to determine the position of intersection
+     */
     public enum Position{
         TOP_LEFT,
         TOP_MIDDLE,
@@ -19,23 +24,36 @@ public class Intersection extends JLabel {
         BOTTOM_MIDDLE,
         BOTTOM_RIGHT
     }
-    protected Boolean isWhite = false;
+
     IntersectionPoint inter = new IntersectionPoint(); // create a circle button for intersection
+
+    // Constructor
     public Intersection(int coordinateX, int coordinateY){
         this.setLayout(new GridLayout(3, 3, -1, -1)); // -1 is to prevent showing grid border
         this.coordinateX = coordinateX;
         this.coordinateY = coordinateY;
     }
 
+    /**
+     * Get the x coordinate (layer) of intersection
+     * @return x coordinate (layer)
+     */
     public int getCoordinateX() {
         return coordinateX;
     }
 
+    /**
+     * Get the y coordinate (position) of intersection
+     * @return y coordinate (position)
+     */
     public int getCoordinateY() {
         return coordinateY;
     }
 
-    // This method is used to choose the type of intersection by selecting the position of it
+    /**
+     * This method is used to choose the type of intersection by selecting the position of it
+     * @param position the position of intersection, e.g. the top leftmost intersection (1, 1) has the position of TOP_LEFT
+     */
     public void choosePosition(Position position){
         switch (position){
             case TOP_LEFT:

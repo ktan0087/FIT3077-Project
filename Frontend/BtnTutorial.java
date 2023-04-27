@@ -5,8 +5,12 @@ import javax.swing.BorderFactory;
 import java.awt.Font;
 import java.awt.Color;
 
-// Customized button for TUTORIAL
 public class BtnTutorial extends JButton {
+    /**
+     * Customized button for TUTORIAL
+     */
+
+    // Constructor
     public BtnTutorial(){
         this.setText("TUTORIAL");
         this.setFocusable(false); // get rid of the annoying box in button

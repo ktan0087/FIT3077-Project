@@ -5,8 +5,12 @@ import javax.swing.BorderFactory;
 import java.awt.Font;
 import java.awt.Color;
 
-// Customized button for PLAY that starts the game
 public class BtnPlay extends JButton {
+    /**
+     * Customized button for PLAY that starts the game
+     */
+
+    // Constructor
     public BtnPlay(){
         this.setText("PLAY"); // set the text of button
         this.setFocusable(false); // get rid of the annoying box in button

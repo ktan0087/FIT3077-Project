@@ -18,14 +18,14 @@ public class Layout{
     private MainPage mainPage = new MainPage();
     private InitialBoard iniBoard = new InitialBoard();
     private CardLayout cLayout = new CardLayout(); // create card layout
-    private Game g1;
+    private Game game;
 
     /**
      * This method is used to set the game that is played
-     * @param g1 is the game that is played
+     * @param game is the game that is played
      */
-    public void setGame(Game g1) {
-        this.g1 = g1;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     /**
@@ -33,7 +33,7 @@ public class Layout{
      * @return the current game that is played
      */
     public Game getGame() {
-        return g1;
+        return game;
     }
 
     /**

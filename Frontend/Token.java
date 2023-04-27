@@ -7,6 +7,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public abstract class Token extends JLabel {
+    /**
+     * This class is used to create the token
+     */
     protected int coordinateX;
     protected int coordinateY;
     protected int times;
@@ -16,6 +19,7 @@ public abstract class Token extends JLabel {
 
     protected InitialBoard iniBoard;
 
+    // Constructor
     public Token(int coordinateX, int coordinateY, InitialBoard iniBoard){
         this.coordinateX = coordinateX;
         this.coordinateY = coordinateY;
@@ -24,23 +28,42 @@ public abstract class Token extends JLabel {
         this.iniBoard = iniBoard;
     }
 
+    /**
+     * This method is used to get the x coordinate of the token
+     * @return x coordinate (layer) of the token
+     */
     public int getCoordinateX() {
         return coordinateX;
     }
 
+    /**
+     * This method is used to get the y coordinate of the token
+     * @return y coordinate (position) of the token
+     */
     public int getCoordinateY() {
         return coordinateY;
     }
 
+    /**
+     * This method is used to set the layer of the token in PlaceToken panel
+     * @param coordinateX is the layer of the token (e.g. TOP_LEFT has the layer of 1)
+     */
     public void setCoordinateX(int coordinateX) {
         this.coordinateX = coordinateX;
     }
 
+    /**
+     * This method is used to set the position of the token in PlaceToken panel
+     * @param coordinateY is the position of the token (e.g. TOP_LEFT has the position of 1)
+     */
     public void setCoordinateY(int coordinateY) {
         this.coordinateY = coordinateY;
     }
 
-    // When the token is selected, a red circle will be drawn around the token
+    /**
+     * When the token is selected, a red border will be drawn around the token
+     * @param g  is the graphics object
+     */
     protected void paintBorder(Graphics g) {
         if (this.selected) {
             // to cover the intersection point
@@ -63,6 +86,10 @@ public abstract class Token extends JLabel {
         }
     }
 
+    /**
+     * When the token is not selected, token will be drawn by its token color
+     * @param g is the graphics object
+     */
     protected void paintComponent(Graphics g) {
         if (!this.selected) {
             // to cover the intersection point
@@ -82,6 +109,9 @@ public abstract class Token extends JLabel {
         }
     }
 
+    /**
+     * This method is to select the token that player wants to move
+     */
     protected MouseListener tokenSelected = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {

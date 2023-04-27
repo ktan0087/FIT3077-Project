@@ -1,10 +1,9 @@
+// Lazic B. (10 Mar 2013). Java swing GUI tutorial #18: CardLayout.
+// Retrieved from https://www.youtube.com/watch?v=sAReaaTxNGU
+
 package Frontend;
 
-// REFERENCE: https://www.youtube.com/watch?v=sAReaaTxNGU
-
-
 import Backend.Game;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

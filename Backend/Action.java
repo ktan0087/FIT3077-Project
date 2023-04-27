@@ -8,6 +8,24 @@ package Backend;
 public abstract class Action {
 
     /**
+     * The player performing the action
+     */
+    protected Player player;
+
+    /**
+     * The game the action is being performed in
+     */
+    protected Game game;
+
+    /**
+     * Constructor for the action class
+     */
+    public Action(Player player, Game game){
+        this.player = player;
+        this.game = game;
+    }
+
+    /**
      * An abstract function to perform the action.
      *
      * @return a boolean value whether the action was successful or not

@@ -1,12 +1,12 @@
 package Backend;
 
 public class MoveTokenAction extends Action{
-    private Player player;
+
     private Intersection currentIntersection;
     private Intersection newIntersection;
-    private Game game;
 
     public MoveTokenAction(Player player,Intersection currentIntersection, Intersection newIntersection,Game game){
+        super(player,game);
         this.player = player;
         this.currentIntersection = currentIntersection;
         this.newIntersection = newIntersection;

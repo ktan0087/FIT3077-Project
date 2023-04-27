@@ -2,11 +2,10 @@ package Backend;
 
 public class PlaceTokenAction extends Action{
 
-    private Player player;
     private Intersection placeIntersection;
-    private Game game;
 
     public PlaceTokenAction(Player player,Intersection placeIntersection, Game game) {
+        super(player, game);
         this.player = player;
         this.placeIntersection = placeIntersection;
         this.game = game;

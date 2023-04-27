@@ -60,25 +60,31 @@ public class Layout{
         panelCont.add(iniBoard, "2"); // add initial board to panel container
         cLayout.show(panelCont, "1"); // show main page first
 
-        // Click PLAY button and bring the user to start the game (InitialBoard)
-        mainPage.btnPlay.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cLayout.show(panelCont, "2");
-                setGame(new Game());
-                iniBoard.setGame(getGame());
-            }
-
-        });
-
+        mainPage.btnPlay.addActionListener(play); // make PLAY button work
         iniBoard.buttons.btnRestart.addActionListener(restart); // make RESTART button work
         iniBoard.buttons.btnClose.addActionListener(close); // make CLOSE button work
 
         mainFrame.add(panelCont); // add panel container to main frame
     }
 
-    // Click RESTART button in InitialBoard and restart the game
+    protected ActionListener play = new ActionListener() {
+        /**
+         * This method is used to bring the user to start the game (InitialBoard)
+         * @param e the event to be processed
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            cLayout.show(panelCont, "2"); // show initial board
+            setGame(new Game()); // create new game
+            iniBoard.setGame(getGame());
+        }
+    };
+
     protected ActionListener restart = new ActionListener() {
+        /**
+         * This method is used to restart the game
+         * @param e the event to be processed
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             String message = "Do you want to restart the game?";
@@ -96,8 +102,11 @@ public class Layout{
         }
     };
 
-    // Click CLOSE icon button in InitialBoard and bring the user to main page (MainPage)
     protected ActionListener close = new ActionListener() {
+        /**
+         * This method is used to exit the game (bring the user to main page (MainPage))
+         * @param e the event to be processed
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             String message = "Do you want to exit?";

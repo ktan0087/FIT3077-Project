@@ -1,5 +1,6 @@
 package Backend;
 
+// This class is not yet implemented in the current sprint.
 public abstract class GameMode {
     public abstract void startGame();
     public abstract void endGame();

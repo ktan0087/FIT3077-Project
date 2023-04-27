@@ -1,15 +1,35 @@
 package Backend;
 
+/**
+ * A class to represent the action of doing nothing.
+ *
+ * @see Action
+ */
 public class DoNothingAction extends Action{
 
-    public DoNothingAction() {
+    /**
+     * Constructor.
+     */
+    public DoNothingAction(Player player, Game game) {
+        super(player, game);
     }
 
+    /**
+     * Perform the Do Nothing Action.
+     *
+     * @return true
+     */
     @Override
-    public String execute(Player player) {
-        return "You do nothing.";
+    public boolean execute() {
+        return true;
     }
 
+    /**
+     * A string describing what the action does.
+     *
+     * @param player The player performing the action.
+     * @return a description of the action.
+     */
     @Override
     public String menuDescription(Player player) {
         return "Do nothing";

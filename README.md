@@ -1,5 +1,16 @@
 # FIT3077_project
 
+User Guide: <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. Download the project folder. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Open the project folder in any integrated development environment (IDE) that supports Java. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. Run the Application Class under Backend folder. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. Press "PLAY" button to start the game. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5. You can play Nine Men's Morris now. <br />
+
+<i> Note: Some features are not fully implemented yet. </i> <br/>
+
+__________________________________________________________________________________________________________________________________________
+
 Team Members: <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fong Zhiwei zfon0005@student.monash.edu<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kennedy Tan ktan0087@student.monash.edu<br />

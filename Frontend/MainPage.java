@@ -3,12 +3,16 @@ package Frontend;
 import javax.swing.*;
 import java.awt.*;
 
-// Customized the main page and this page is the first page that user will see
 public class MainPage extends JLayeredPane{
-    JLabel gameName = new JLabel();
-    BtnPlay btnPlay = new BtnPlay();
-    BtnTutorial btnTut = new BtnTutorial();
-    JLabel background=new JLabel(new ImageIcon("Frontend/Icons/background.png"));
+    /**
+     * Customized the main page and this page is the first page that user will see
+     */
+    private JLabel gameName = new JLabel();
+    protected BtnPlay btnPlay = new BtnPlay();
+    private BtnTutorial btnTut = new BtnTutorial();
+    private JLabel background=new JLabel(new ImageIcon("Frontend/Icons/background.png"));
+
+    // Constructor
     public MainPage(){
         this.setBackground(new Color(0xE0A060));
         this.setOpaque(true);

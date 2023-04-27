@@ -6,16 +6,38 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-// This is the InitialBoard that players can see when they start the game
 public class InitialBoard extends JPanel {
-    ArrayList<WhiteToken> whiteList = new ArrayList<>(); // create a list to store white tokens
-    Buttons buttons = new Buttons();
-    Board board = new Board();
-    PlaceToken placeToken = new PlaceToken();
-    PlayerTurn playerTurn = new PlayerTurn();
-    WhiteTokenRemain whiteTokenRemain = new WhiteTokenRemain();
-    BlackTokenRemain blackTokenRemain = new BlackTokenRemain();
+    /**
+     * The initial board that players can see when they start the game
+     */
+    private ArrayList<Token> tokenList = new ArrayList<>(); // create a list to store tokens
+    protected Buttons buttons = new Buttons(); // buttons that illustrate hint, restart, close
+    private Frontend.Board board = new Board(); // create a board
+    private PlaceToken placeToken = new PlaceToken(); // create a layer to place tokens
+    private PlayerTurn playerTurn = new PlayerTurn(); // show which player's turn
+    private WhiteTokenRemain whiteTokenRemain = new WhiteTokenRemain(); // show the remaining number of white tokens
+    private BlackTokenRemain blackTokenRemain = new BlackTokenRemain(); // show the remaining number of black tokens
+    private Token selectedToken; // the token that is selected by the player
+    protected boolean isSelected; // whether the player has selected a token
+    private Game game; // the game that is played
 
+    /**
+     * This method is used to set the game that is played
+     * @param game is the game that is played
+     */
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    /**
+     * This method is used to get the game that is played
+     * @return the current game that is played
+     */
+    public Game getGame() {
+        return game;
+    }
+
+    // Constructor
     public InitialBoard() {
         // set the background color of the board
         this.setBackground(new Color(0xE0A060));
@@ -26,6 +48,7 @@ public class InitialBoard extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5); // add gaps between the components
 
+        // add buttons to top right of the panel
         gbc.gridx = 2; // set the x position of the component
         gbc.gridy = 0; // set the y position of the component
         gbc.weightx = 0; // horizontal spacing (use values from 0.0 to 1.0)
@@ -33,6 +56,7 @@ public class InitialBoard extends JPanel {
         gbc.anchor = GridBagConstraints.NORTHEAST; // set the position of the component
         this.add(buttons, gbc); // add the component to this panel
 
+        // add the board to the center of the panel
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.weightx = 1;
@@ -41,6 +65,7 @@ public class InitialBoard extends JPanel {
         this.add(placeToken, gbc);
         this.add(board, gbc);
 
+        // add the player turn to the bottom of the panel
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.weightx = 1;
@@ -48,6 +73,7 @@ public class InitialBoard extends JPanel {
         gbc.anchor = GridBagConstraints.SOUTH;
         this.add(playerTurn, gbc);
 
+        // add the remaining number of white tokens to the left of the panel
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 1;
@@ -55,6 +81,7 @@ public class InitialBoard extends JPanel {
         gbc.anchor = GridBagConstraints.WEST;
         this.add(whiteTokenRemain, gbc);
 
+        // add the remaining number of black tokens to the right of the panel
         gbc.gridx = 2;
         gbc.gridy = 1;
         gbc.weightx = 1;
@@ -62,29 +89,70 @@ public class InitialBoard extends JPanel {
         gbc.anchor = GridBagConstraints.EAST;
         this.add(blackTokenRemain, gbc);
 
-        // Place token on board
         int btnListLength = board.getIntersectionList().size(); // get the length of the intersection list
         for (int i = 0; i < btnListLength; i++) {
             Intersection intersection = board.getIntersectionList().get(i); // get each intersection from list
+
+            InitialBoard iniBoard = this;
             intersection.inter.addActionListener(new ActionListener() {
+                /**
+                 * Invoked when an intersection point is clicked.
+                 * @param e the event to be processed
+                 */
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    WhiteToken whiteToken = new WhiteToken(intersection.getCoordinateX(), intersection.getCoordinateY()); // create a white token
-                    int index = intersection.getAccessibleContext().getAccessibleIndexInParent(); // get the index of the intersection from the list
-                    placeToken.remove(index); // remove the placeholder at the same index
-                    placeToken.add(whiteToken, index); // add white token at the same index
-                    placeToken.repaint();
-                    placeToken.revalidate();
-                    whiteToken.index = index; // set the index of the white token
-                    whiteList.add(whiteToken); // add white token to the list
-                    if (!checkSelected()) {
-                        whiteToken.addMouseListener(whiteToken.tokenSelected);
-                        System.out.println("Selected here");
+
+                    WhiteToken whiteToken = new WhiteToken(intersection.getCoordinateX(), intersection.getCoordinateY(), iniBoard); // create a white token
+                    BlackToken blackToken = new BlackToken(intersection.getCoordinateX(), intersection.getCoordinateY(), iniBoard); // create a black token
+
+                    Token token = whiteToken; // set the token to white token by default
+
+                    // set the token to black token if the current player is player 2
+                    if (getGame().getCurrentPlayer().getTokenColour() == TokenColour.PLAYER_2_BLACK) {
+                        token = blackToken;
                     }
 
-                    // **Test Backend code**
-                    DoNothingAction doNothingAction = new DoNothingAction();
-                    System.out.println(doNothingAction.execute(new Player("Player 1", TokenColour.PLAYER_1_WHITE)));
+                    // make the token can be selected after clicking it
+                    // (If the token is selected, a red border will appear around the token)
+                    token.addMouseListener(token.tokenSelected);
+
+                    int index = intersection.getAccessibleContext().getAccessibleIndexInParent(); // get the index of the intersection from the list
+
+                    if (checkSelected()){
+                        MoveTokenAction newMoveAction = new MoveTokenAction(getGame().getCurrentPlayer(),getGame().getBoard().getIntersection(selectedToken.getCoordinateX(), selectedToken.getCoordinateY()), getGame().getBoard().getIntersection(intersection.getCoordinateX(),intersection.getCoordinateY()), getGame());
+                        if (newMoveAction.execute()) {
+                            // move token on board (placeToken panel)
+                            placeToken.remove(selectedToken.index); // remove the selected white token from the previous intersection
+                            placeToken.add(new JLabel(), selectedToken.index); // add the placeholder to the previous intersection at place token layer
+                            placeToken.remove(index); // remove the previous placeholder
+                            placeToken.add(selectedToken, index); // add the selected white token to the intersection that the player wants to move
+                            selectedToken.setCoordinateX(intersection.getCoordinateX()); // update the coordinate of the selected token
+                            selectedToken.setCoordinateY(intersection.getCoordinateY());
+                            selectedToken.setIndex(index); // update the index of the selected white token
+                            selectedToken.selected = false; // remove the red selected border
+                            iniBoard.isSelected = false; // no token is selected
+                            placeToken.repaint();
+                            placeToken.revalidate();
+                            getGame().endTurn(); // end the turn
+                            playerTurn.changeIcon(); // change the player turn icon between black and white token
+                            return;
+                        }
+                    }
+                    if (!checkSelected()) { // if no white token is selected
+                        PlaceTokenAction newPlaceAction = new PlaceTokenAction(getGame().getCurrentPlayer(),getGame().getBoard().getIntersection(intersection.getCoordinateX(),intersection.getCoordinateY()), getGame());
+                        if(newPlaceAction.execute()){
+                            placeToken.remove(index); // remove the placeholder at the same index
+                            placeToken.add(token, index); // add white token at the same index
+                            placeToken.repaint();
+                            placeToken.revalidate();
+                            token.index = index; // set the index of the white token
+                            tokenList.add(token); // add white token to the list
+                            decreaseTokenRemainder(); // decrease the token remainder after placing a token
+                            getGame().endTurn();
+                            playerTurn.changeIcon();
+                        }
+
+                    }
                 }
             });
 
@@ -92,44 +160,30 @@ public class InitialBoard extends JPanel {
 
     }
 
-    // check if any white token is selected
-    protected boolean checkSelected(){
-        for (WhiteToken whiteToken : whiteList) {
-            whiteToken.removeMouseListener(whiteToken.tokenSelected);
-            if (whiteToken.selected){
-                whiteToken.addMouseListener(whiteToken.tokenSelected);
-                System.out.println("selected");
+    /**
+     * This method is used to check if any token is selected
+     * @return true if a token is selected, false otherwise
+     */
+    public boolean checkSelected(){
+        for (Token token : tokenList) {
+            if (token.selected){
+                selectedToken = token; // set selected white token
                 return true;
             }
         }
-        System.out.println("not selected");
         return false;
     }
 
-    // Place token on board
-    protected void placeToken(WhiteToken whiteToken) {
-        placeToken.remove(whiteToken.index);
-        placeToken.add(whiteToken, whiteToken.index);
-        placeToken.repaint();
-        placeToken.revalidate();
-        whiteList.add(whiteToken);
-    }
-
-    // Remove token from board
-    protected void removeToken(WhiteToken whiteToken) {
-        placeToken.remove(whiteToken.index);
-        placeToken.repaint();
-        placeToken.revalidate();
-        whiteList.remove(whiteToken);
-    }
-
-    // Move token on board
-    protected void moveToken(WhiteToken whiteToken, Intersection intersection) {
-        placeToken.remove(whiteToken.index);
-        int intersectionIndex = intersection.getAccessibleContext().getAccessibleIndexInParent();
-        placeToken.add(whiteToken, intersectionIndex);
-        placeToken.repaint();
-        placeToken.revalidate();
+    /**
+     * This method is used to decrease the token remainder after placing a token
+     */
+    public void decreaseTokenRemainder(){
+        if (getGame().getCurrentPlayer().getTokenColour() == TokenColour.PLAYER_1_WHITE){
+            whiteTokenRemain.decreaseAmountToken(); // decrease the white token remainder
+        }
+        else {
+            blackTokenRemain.decreaseAmountToken(); // decrease the black token remainder
+        }
     }
 
 }

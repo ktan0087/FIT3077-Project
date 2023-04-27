@@ -19,14 +19,14 @@ public class InitialBoard extends JPanel {
     private BlackTokenRemain blackTokenRemain = new BlackTokenRemain(); // show the remaining number of black tokens
     private Token selectedToken; // the token that is selected by the player
     protected boolean isSelected; // whether the player has selected a token
-    private Game g1; // the game that is played
+    private Game game; // the game that is played
 
     /**
      * This method is used to set the game that is played
-     * @param g1 is the game that is played
+     * @param game is the game that is played
      */
-    public void setGame(Game g1) {
-        this.g1 = g1;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     /**
@@ -34,7 +34,7 @@ public class InitialBoard extends JPanel {
      * @return the current game that is played
      */
     public Game getGame() {
-        return g1;
+        return game;
     }
 
     // Constructor
@@ -164,7 +164,7 @@ public class InitialBoard extends JPanel {
      * This method is used to check if any token is selected
      * @return true if a token is selected, false otherwise
      */
-    protected boolean checkSelected(){
+    public boolean checkSelected(){
         for (Token token : tokenList) {
             if (token.selected){
                 selectedToken = token; // set selected white token
@@ -177,7 +177,7 @@ public class InitialBoard extends JPanel {
     /**
      * This method is used to decrease the token remainder after placing a token
      */
-    protected void decreaseTokenRemainder(){
+    public void decreaseTokenRemainder(){
         if (getGame().getCurrentPlayer().getTokenColour() == TokenColour.PLAYER_1_WHITE){
             whiteTokenRemain.decreaseAmountToken(); // decrease the white token remainder
         }

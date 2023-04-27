@@ -10,7 +10,8 @@ public class DoNothingAction extends Action{
     /**
      * Constructor.
      */
-    public DoNothingAction() {
+    public DoNothingAction(Player player, Game game) {
+        super(player, game);
     }
 
     /**

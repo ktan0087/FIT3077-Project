@@ -29,6 +29,14 @@ public abstract class Token extends JLabel {
     }
 
     /**
+     * This method is used to set the index of the token in Board
+     * @param index is the index of the token in Board (from 0 to 168, as it is a 13x13 board)
+     */
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    /**
      * This method is used to get the x coordinate of the token
      * @return x coordinate (layer) of the token
      */

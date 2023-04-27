@@ -7,7 +7,7 @@ public class MainFrame extends JFrame {
     /**
      * Customized main frame
      */
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // get the screen size
+    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // get the screen size
 
     // Constructor
     public MainFrame(){

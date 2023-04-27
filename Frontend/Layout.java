@@ -13,12 +13,12 @@ public class Layout{
     /**
      * This class is used to switch between different panels (MainPage and InitialBoard)
      */
-    JFrame mainFrame = new MainFrame();
-    JPanel panelCont = new JPanel(); // create Panel Container to add all panels inside
-    MainPage mainPage = new MainPage();
-    InitialBoard iniBoard = new InitialBoard();
-    CardLayout cLayout = new CardLayout(); // create card layout
-    Game g1;
+    private JFrame mainFrame = new MainFrame();
+    private JPanel panelCont = new JPanel(); // create Panel Container to add all panels inside
+    private MainPage mainPage = new MainPage();
+    private InitialBoard iniBoard = new InitialBoard();
+    private CardLayout cLayout = new CardLayout(); // create card layout
+    private Game g1;
 
     /**
      * This method is used to set the game that is played

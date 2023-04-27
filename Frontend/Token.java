@@ -10,14 +10,14 @@ public abstract class Token extends JLabel {
     /**
      * This class is used to create the token
      */
-    protected int coordinateX;
-    protected int coordinateY;
-    protected int times;
+    private int coordinateX;
+    private int coordinateY;
+    private int times;
     protected Boolean selected = false;
     protected int index;
     protected Color tokenColor;
 
-    protected InitialBoard iniBoard;
+    private InitialBoard iniBoard;
 
     // Constructor
     public Token(int coordinateX, int coordinateY, InitialBoard iniBoard){

@@ -7,10 +7,10 @@ public class MainPage extends JLayeredPane{
     /**
      * Customized the main page and this page is the first page that user will see
      */
-    JLabel gameName = new JLabel();
-    BtnPlay btnPlay = new BtnPlay();
-    BtnTutorial btnTut = new BtnTutorial();
-    JLabel background=new JLabel(new ImageIcon("Frontend/Icons/background.png"));
+    private JLabel gameName = new JLabel();
+    protected BtnPlay btnPlay = new BtnPlay();
+    private BtnTutorial btnTut = new BtnTutorial();
+    private JLabel background=new JLabel(new ImageIcon("Frontend/Icons/background.png"));
 
     // Constructor
     public MainPage(){

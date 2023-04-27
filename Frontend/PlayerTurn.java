@@ -7,9 +7,9 @@ public class PlayerTurn extends JLabel {
     /**
      * Customized label for Player Turn
      */
-    ImageIcon whiteToken = new ImageIcon("Frontend/Icons/white-token.png");
-    ImageIcon blackToken = new ImageIcon("Frontend/Icons/black-token.png");
-    Boolean isWhite = true;
+    private ImageIcon whiteToken = new ImageIcon("Frontend/Icons/white-token.png");
+    private ImageIcon blackToken = new ImageIcon("Frontend/Icons/black-token.png");
+    private Boolean isWhite = true;
 
     // Constructor
     public PlayerTurn(){

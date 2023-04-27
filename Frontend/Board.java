@@ -11,32 +11,32 @@ public class Board extends JPanel {
      */
 
     // Create 24 intersections
-    Intersection intersection_11 = new Intersection(1, 1);
-    Intersection intersection_12 = new Intersection(1, 2);
-    Intersection intersection_13 = new Intersection(1, 3);
-    Intersection intersection_21 = new Intersection(2, 1);
-    Intersection intersection_22 = new Intersection(2, 2);
-    Intersection intersection_23 = new Intersection(2, 3);
-    Intersection intersection_31 = new Intersection(3, 1);
-    Intersection intersection_32 = new Intersection(3, 2);
-    Intersection intersection_33 = new Intersection(3, 3);
-    Intersection intersection_18 = new Intersection(1, 8);
-    Intersection intersection_28 = new Intersection(2, 8);
-    Intersection intersection_38 = new Intersection(3, 8);
-    Intersection intersection_34 = new Intersection(3, 4);
-    Intersection intersection_24 = new Intersection(2, 4);
-    Intersection intersection_14 = new Intersection(1, 4);
-    Intersection intersection_37 = new Intersection(3, 7);
-    Intersection intersection_36 = new Intersection(3, 6);
-    Intersection intersection_35 = new Intersection(3, 5);
-    Intersection intersection_27 = new Intersection(2, 7);
-    Intersection intersection_26 = new Intersection(2, 6);
-    Intersection intersection_25 = new Intersection(2, 5);
-    Intersection intersection_17 = new Intersection(1, 7);
-    Intersection intersection_16 = new Intersection(1, 6);
-    Intersection intersection_15 = new Intersection(1, 5);
+    private Intersection intersection_11 = new Intersection(1, 1);
+    private Intersection intersection_12 = new Intersection(1, 2);
+    private Intersection intersection_13 = new Intersection(1, 3);
+    private Intersection intersection_21 = new Intersection(2, 1);
+    private Intersection intersection_22 = new Intersection(2, 2);
+    private Intersection intersection_23 = new Intersection(2, 3);
+    private Intersection intersection_31 = new Intersection(3, 1);
+    private Intersection intersection_32 = new Intersection(3, 2);
+    private Intersection intersection_33 = new Intersection(3, 3);
+    private Intersection intersection_18 = new Intersection(1, 8);
+    private Intersection intersection_28 = new Intersection(2, 8);
+    private Intersection intersection_38 = new Intersection(3, 8);
+    private Intersection intersection_34 = new Intersection(3, 4);
+    private Intersection intersection_24 = new Intersection(2, 4);
+    private Intersection intersection_14 = new Intersection(1, 4);
+    private Intersection intersection_37 = new Intersection(3, 7);
+    private Intersection intersection_36 = new Intersection(3, 6);
+    private Intersection intersection_35 = new Intersection(3, 5);
+    private Intersection intersection_27 = new Intersection(2, 7);
+    private Intersection intersection_26 = new Intersection(2, 6);
+    private Intersection intersection_25 = new Intersection(2, 5);
+    private Intersection intersection_17 = new Intersection(1, 7);
+    private Intersection intersection_16 = new Intersection(1, 6);
+    private Intersection intersection_15 = new Intersection(1, 5);
 
-    ArrayList<Intersection> intersectionList = new ArrayList<>(); // create a list to store intersections
+    private ArrayList<Intersection> intersectionList = new ArrayList<>(); // create a list to store intersections
 
     public List<Intersection> getIntersectionList() {
         // Add all intersections to the list

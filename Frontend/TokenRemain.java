@@ -7,8 +7,8 @@ public abstract class TokenRemain extends JLabel {
     /**
      * This class is used to show the remaining token
      */
-    ImageIcon tokenIcon;
-    int amountToken = 9; // default amount of token
+    private ImageIcon tokenIcon;
+    private int amountToken = 9; // default amount of token
 
     // Constructor
     public TokenRemain(){

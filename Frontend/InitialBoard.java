@@ -10,16 +10,16 @@ public class InitialBoard extends JPanel {
     /**
      * The initial board that players can see when they start the game
      */
-    ArrayList<Token> tokenList = new ArrayList<>(); // create a list to store tokens
-    Buttons buttons = new Buttons(); // buttons that illustrate hint, restart, close
-    Frontend.Board board = new Board(); // create a board
-    PlaceToken placeToken = new PlaceToken(); // create a layer to place tokens
-    PlayerTurn playerTurn = new PlayerTurn(); // show which player's turn
-    WhiteTokenRemain whiteTokenRemain = new WhiteTokenRemain(); // show the remaining number of white tokens
-    BlackTokenRemain blackTokenRemain = new BlackTokenRemain(); // show the remaining number of black tokens
-    Token selectedToken; // the token that is selected by the player
-    boolean isSelected; // whether the player has selected a token
-    Game g1; // the game that is played
+    private ArrayList<Token> tokenList = new ArrayList<>(); // create a list to store tokens
+    protected Buttons buttons = new Buttons(); // buttons that illustrate hint, restart, close
+    private Frontend.Board board = new Board(); // create a board
+    private PlaceToken placeToken = new PlaceToken(); // create a layer to place tokens
+    private PlayerTurn playerTurn = new PlayerTurn(); // show which player's turn
+    private WhiteTokenRemain whiteTokenRemain = new WhiteTokenRemain(); // show the remaining number of white tokens
+    private BlackTokenRemain blackTokenRemain = new BlackTokenRemain(); // show the remaining number of black tokens
+    private Token selectedToken; // the token that is selected by the player
+    protected boolean isSelected; // whether the player has selected a token
+    private Game g1; // the game that is played
 
     /**
      * This method is used to set the game that is played

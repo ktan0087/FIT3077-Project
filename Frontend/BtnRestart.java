@@ -3,8 +3,12 @@ package Frontend;
 import javax.swing.*;
 import java.awt.*;
 
-// Customized button for restart
 public class BtnRestart extends JButton {
+    /**
+     * Customized button for restart
+     */
+
+    // Constructor
     public BtnRestart(){
         this.setFocusable(false); // get rid of the annoying box in button
         ImageIcon iconRestart = new ImageIcon("Frontend/Icons/restart.png");

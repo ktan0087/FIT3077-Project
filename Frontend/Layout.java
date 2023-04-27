@@ -10,8 +10,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-// Use CardLayout to switch between different panels (MainPage and InitialBoard)
 public class Layout{
+    /**
+     * This class is used to switch between different panels (MainPage and InitialBoard)
+     */
     JFrame mainFrame = new MainFrame();
     JPanel panelCont = new JPanel(); // create Panel Container to add all panels inside
     MainPage mainPage = new MainPage();
@@ -19,23 +21,39 @@ public class Layout{
     CardLayout cLayout = new CardLayout(); // create card layout
     Game g1;
 
+    /**
+     * This method is used to set the game that is played
+     * @param g1 is the game that is played
+     */
     public void setGame(Game g1) {
         this.g1 = g1;
     }
 
+    /**
+     * This method is used to get the game that is played
+     * @return the current game that is played
+     */
     public Game getGame() {
         return g1;
     }
 
-
+    /**
+     * This method is used to set the initial board
+     * @param iniBoard is the initial board
+     */
     public void setIniBoard(InitialBoard iniBoard) {
         this.iniBoard = iniBoard;
     }
 
+    /**
+     * This method is used to get the initial board
+     * @return the current initial board
+     */
     public InitialBoard getIniBoard() {
         return iniBoard;
     }
 
+    // Constructor
     public Layout() {
         panelCont.setLayout(cLayout); // set card layout for panel container
 
@@ -54,8 +72,8 @@ public class Layout{
 
         });
 
-        iniBoard.buttons.btnRestart.addActionListener(restart);
-        iniBoard.buttons.btnClose.addActionListener(close);
+        iniBoard.buttons.btnRestart.addActionListener(restart); // make RESTART button work
+        iniBoard.buttons.btnClose.addActionListener(close); // make CLOSE button work
 
         mainFrame.add(panelCont); // add panel container to main frame
     }
@@ -97,14 +115,4 @@ public class Layout{
             }
         }
     };
-
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                new Layout();
-//            }
-//        });
-//    }
-
 }

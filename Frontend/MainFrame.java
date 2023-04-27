@@ -3,9 +3,13 @@ package Frontend;
 import javax.swing.*;
 import java.awt.*;
 
-// Customized main frame
 public class MainFrame extends JFrame {
+    /**
+     * Customized main frame
+     */
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // get the screen size
+
+    // Constructor
     public MainFrame(){
         this.setTitle("NINE MEN'S MORRIS"); // set title of frame
         this.setExtendedState(JFrame.MAXIMIZED_BOTH); // set frame to full screen in default

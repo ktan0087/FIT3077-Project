@@ -89,7 +89,7 @@ public abstract class Token extends JLabel {
                 selected = true; // click the white token to select it
                 iniBoard.isSelected = true;
             }
-            else if (iniBoard.isSelected && selected == true){
+            else if (iniBoard.isSelected && selected){
                 selected = false;
                 iniBoard.isSelected = false;
             }

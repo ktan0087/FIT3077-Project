@@ -3,8 +3,12 @@ package Frontend;
 import javax.swing.*;
 import java.awt.*;
 
-// Customized button for exit the game
 public class BtnClose extends JButton {
+    /**
+     * Customized button for exit the game
+     */
+
+    // Constructor
     public BtnClose(){
         this.setFocusable(false); // get rid of the annoying box in button
         ImageIcon iconClose = new ImageIcon("Frontend/Icons/close.png"); // import the image of close button

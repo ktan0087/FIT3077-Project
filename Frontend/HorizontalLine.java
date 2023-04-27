@@ -5,6 +5,14 @@ import java.awt.*;
 
 // Create a horizontal line
 public class HorizontalLine extends JLabel {
+    /**
+     * Create a horizontal line
+     */
+
+    /**
+     * draw a horizontal line
+     * @param g the abstract base class for all graphics contexts
+     */
     public void paintComponent(Graphics g){
         //set the width of line
         super.paintComponent(g);

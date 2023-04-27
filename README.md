@@ -7,7 +7,7 @@ User Guide: <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. Press "PLAY" button to start the game. <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5. You can play Nine Men's Morris now. <br />
 
-<i> Note: Some functions are not fully implemented yet. </i> <br/>
+<i> Note: Some features are not fully implemented yet. </i> <br/>
 
 __________________________________________________________________________________________________________________________________________
 

@@ -26,7 +26,7 @@ Playing Guide:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.  Players can higlight tokens by clicking on them but cannot move them to an empty intersection before placing all tokens.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3.  Player will gain the ability to move tokens on the board after placing all their tokens.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4.  Player can move token by highlighting a token on the board by clicking them then click on an empty intersection as destination,
-the token will be moved &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to the empty intersection.<br />
+the &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token will be moved to the empty intersection.<br />
 
 __________________________________________________________________________________________________________________________________________
 

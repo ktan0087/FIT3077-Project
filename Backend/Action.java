@@ -16,9 +16,11 @@ public abstract class Action {
      * The game the action is being performed in
      */
     protected Game game;
-
     /**
      * Constructor for the action class
+     *
+     * @param player the player performing the action
+     * @param game the game the action is being performed in
      */
     public Action(Player player, Game game){
         this.player = player;

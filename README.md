@@ -1,13 +1,25 @@
 # FIT3077_project
 
 User Guide: <br />
+&nbsp;&nbsp;&nbsp;First option: <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. Download the project folder. <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Open the project folder in any integrated development environment (IDE) that supports Java. <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. Run the Application Class under Backend folder. <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. Press "PLAY" button to start the game. <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5. You can play Nine Men's Morris now. <br />
 
-<i> Note: Some features are not fully implemented yet. </i> <br/>
+&nbsp;&nbsp;&nbsp;Second option (Intellij): <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. Download the project folder. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Open the project folder in any integrated development environment (IDE) that supports Java. <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. Go to File -> Project Structure<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. Under Project Settings, select Artifacts -> Add -> From modules with dependencies<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5. Under Main Class, choose Application class, click ok<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 6. Go to Build -> Rebuild Project -> FirstProject:jar -> Build<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7. Go to the folder named "out", "artifacts", "FirstProject_jar"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8. You will see a file named, "FirstProject.jar"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9. Right click the file, choose Open In, choose Explorer<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5. You can play Nine Men's Morris now. <br /><br />
+<i> Note: Some features are not fully implemented yet. If running using the executable file, the icons are not showing.</i> <br/>
 
 __________________________________________________________________________________________________________________________________________
 

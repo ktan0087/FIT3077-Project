@@ -20,7 +20,8 @@ public class InitialBoard extends JPanel {
     private Token selectedToken; // the token that is selected by the player
     protected boolean isSelected; // whether the player has selected a token
     private Game game; // the game that is played
-
+    private PlaceToken millLayer = new PlaceToken(); // the layer that shows the mill
+    
     /**
      * This method is used to set the game that is played
      * @param game is the game that is played
@@ -63,6 +64,7 @@ public class InitialBoard extends JPanel {
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.CENTER;
         this.add(placeToken, gbc);
+        this.add(millLayer, gbc);
         this.add(board, gbc);
 
         // add the player turn to the bottom of the panel
@@ -143,9 +145,10 @@ public class InitialBoard extends JPanel {
                         if(newPlaceAction.execute()){
                             placeToken.remove(index); // remove the placeholder at the same index
                             placeToken.add(token, index); // add white token at the same index
+                            addMill(0, 156, millLayer);
                             placeToken.repaint();
                             placeToken.revalidate();
-                            token.index = index; // set the index of the white token
+                            token.setIndex(index); // set the index of the white token
                             tokenList.add(token); // add white token to the list
                             decreaseTokenRemainder(); // decrease the token remainder after placing a token
                             getGame().endTurn();
@@ -183,6 +186,42 @@ public class InitialBoard extends JPanel {
         }
         else {
             blackTokenRemain.decreaseAmountToken(); // decrease the black token remainder
+        }
+    }
+
+    public void addMill(int index1, int index2, PlaceToken millLayer){
+        int minusValue;
+        int smallIndex;
+        int bigIndex;
+        if (index2 > index1){
+            smallIndex = index1;
+            bigIndex = index2;
+        }
+        else {
+            smallIndex = index2;
+            bigIndex = index1;
+        }
+
+        minusValue = bigIndex - smallIndex;
+        if (minusValue == 52 || minusValue == 104 || minusValue == 156){
+            millLayer.remove(smallIndex);
+            millLayer.add(new Mill(Mill.Direction.FIRST_HALF_VERTICAL), smallIndex);
+            for (int i = smallIndex + 13; i < bigIndex; i += 13){
+                millLayer.remove(i);
+                millLayer.add(new Mill(Mill.Direction.VERTICAL), i);
+            }
+            millLayer.remove(bigIndex);
+            millLayer.add(new Mill(Mill.Direction.LAST_HALF_VERTICAL), bigIndex);
+        }
+        else if (minusValue == 4 || minusValue == 8 || minusValue == 12){
+            millLayer.remove(smallIndex);
+            millLayer.add(new Mill(Mill.Direction.FIRST_HALF_HORIZONTAL), smallIndex);
+            for (int i = smallIndex + 1; i < bigIndex; i++){
+                millLayer.remove(i);
+                millLayer.add(new Mill(Mill.Direction.HORIZONTAL), i);
+            }
+            millLayer.remove(bigIndex);
+            millLayer.add(new Mill(Mill.Direction.LAST_HALF_HORIZONTAL), bigIndex);
         }
     }
 

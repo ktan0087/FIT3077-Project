@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Mill extends JLabel {
-    protected Direction direction;
+    private Direction direction;
     public enum Direction{
         HORIZONTAL,
         VERTICAL,

@@ -155,7 +155,7 @@ public class InitialBoard extends JPanel {
                             getGame().endTurn();
                             playerTurn.changeIcon();
 
-                            new Result();
+                            new Result(Win.WhoWin.WHITEWIN);
                         }
 
                     }

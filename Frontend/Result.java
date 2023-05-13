@@ -5,10 +5,10 @@ import java.awt.*;
 
 public class Result extends JDialog {
     protected resultButton resultButton = new resultButton();
-    protected WhiteWin whiteWin = new WhiteWin();
+    private Win win;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // get the screen size
 
-    public Result() {
+    public Result(Win.WhoWin winner) {
         // result screen cannot be closed unless press the 2 buttons (restart or close)
         super(new JFrame(), true);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -30,7 +30,8 @@ public class Result extends JDialog {
         gbc.gridy = 0; // set the y position of the component
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER; // set the position of the component
-        this.add(whiteWin, gbc); // add the component to this panel
+        win = new Win(winner);
+        this.add(win, gbc); // add the component to this panel
 
         // Display the restart and close buttons
         gbc.gridx = 0;

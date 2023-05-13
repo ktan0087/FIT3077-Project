@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Result extends JDialog {
-    protected resultButton resultButton = new resultButton();
+    protected ResultButton resultButton = new ResultButton();
     private Win win;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // get the screen size
 
@@ -38,6 +38,7 @@ public class Result extends JDialog {
         gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.CENTER;
         this.add(resultButton, gbc);
+
         pack();
         setLocationRelativeTo(null);
         setVisible(true);

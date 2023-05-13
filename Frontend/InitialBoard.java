@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+
 public class InitialBoard extends JPanel {
     /**
      * The initial board that players can see when they start the game
@@ -21,6 +23,9 @@ public class InitialBoard extends JPanel {
     protected boolean isSelected; // whether the player has selected a token
     private Game game; // the game that is played
     private PlaceToken millLayer = new PlaceToken(); // the layer that shows the mill
+    protected ResultButton resultButton = new ResultButton();
+    private Win win;
+    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // get the screen size
     
     /**
      * This method is used to set the game that is played
@@ -146,7 +151,6 @@ public class InitialBoard extends JPanel {
                         if(newPlaceAction.execute()){
                             placeToken.remove(index); // remove the placeholder at the same index
                             placeToken.add(token, index); // add white token at the same index
-                            addMill(110, 162, millLayer);
                             placeToken.repaint();
                             placeToken.revalidate();
                             token.setIndex(index); // set the index of the white token
@@ -154,10 +158,18 @@ public class InitialBoard extends JPanel {
                             decreaseTokenRemainder(); // decrease the token remainder after placing a token
                             getGame().endTurn();
                             playerTurn.changeIcon();
-
-                            new Result(Win.WhoWin.WHITEWIN);
                         }
+                    }
 
+                    // Check if a mill is formed
+                    if (true){
+                        addMill(110, 162, millLayer);
+                    }
+
+                    // Display which player wins the game
+                    if (true){
+//                        result = new Result(Win.WhoWin.BLACKWIN);
+                        displayResult(Win.WhoWin.BLACKWIN);
                     }
                 }
             });
@@ -226,6 +238,45 @@ public class InitialBoard extends JPanel {
             millLayer.remove(bigIndex);
             millLayer.add(new Mill(Mill.Direction.LAST_HALF_HORIZONTAL), bigIndex);
         }
+    }
+
+    public void displayResult(Win.WhoWin winner){
+        JFrame frame = new JFrame();
+        frame.isDoubleBuffered();
+        JDialog result = new JDialog(frame);
+
+        // result screen cannot be closed unless press the 2 buttons (restart or close)
+        result.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        result.setUndecorated(true);
+
+        // set a dimmed and transparent background for the result page
+        result.setPreferredSize(screenSize);
+        result.getRootPane().setOpaque (false);
+        result.getContentPane().setBackground (new Color (0, 0, 0, 0));
+        result.setBackground(new Color(0x80000000, true));
+
+        // arrange the components in result page
+        result.setLayout(new GridBagLayout()); // set the layout of this panel
+        GridBagConstraints gbc = new GridBagConstraints(); // create a GridBagConstraint object
+        gbc.insets = new Insets(5, 5, 5, 5); // add gaps between the components
+
+        // Display which player wins
+        gbc.gridx = 0; // set the x position of the component
+        gbc.gridy = 0; // set the y position of the component
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER; // set the position of the component
+        win = new Win(winner);
+        result.add(win, gbc); // add the component to this panel
+
+        // Display the restart and close buttons
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.CENTER;
+        result.add(resultButton, gbc);
+
+        result.pack();
+        result.setLocationRelativeTo(null);
+        result.setVisible(true);
     }
 
 }

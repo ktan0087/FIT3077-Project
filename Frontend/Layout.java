@@ -64,6 +64,20 @@ public class Layout{
         iniBoard.buttons.btnRestart.addActionListener(restart); // make RESTART button work
         iniBoard.buttons.btnClose.addActionListener(close); // make CLOSE button work
 
+        iniBoard.resultButton.btnRestart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                restartGame();
+            }
+        });
+
+        iniBoard.resultButton.btnClose.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeGame();
+            }
+        });
+
         mainFrame.add(panelCont); // add panel container to main frame
     }
 
@@ -91,13 +105,7 @@ public class Layout{
             String title = "NINE MEN'S MORRIS";
             int result = JOptionPane.showConfirmDialog(iniBoard.buttons.btnRestart, message, title, JOptionPane.YES_NO_OPTION);
             if (result == JOptionPane.YES_OPTION){
-                panelCont.remove(getIniBoard()); // remove old initial board
-                InitialBoard newIniBoard = new InitialBoard(); // create new initial board
-                setIniBoard(newIniBoard); // set new initial board
-                panelCont.add(getIniBoard(), "2"); // add new initial board to panel container
-                iniBoard.buttons.btnRestart.addActionListener(restart); // add action listener to RESTART button, otherwise the button won't work after restart
-                iniBoard.buttons.btnClose.addActionListener(close); // add action listener to CLOSE button
-                cLayout.show(panelCont, "2"); // show initial board
+                restartGame();
             }
         }
     };
@@ -113,14 +121,28 @@ public class Layout{
             String title = "NINE MEN'S MORRIS";
             int result = JOptionPane.showConfirmDialog(iniBoard.buttons.btnClose, message, title, JOptionPane.YES_NO_OPTION);
             if (result == JOptionPane.YES_OPTION){
-                panelCont.remove(getIniBoard());
-                InitialBoard newIniBoard = new InitialBoard();
-                setIniBoard(newIniBoard);
-                panelCont.add(getIniBoard(), "2");
-                iniBoard.buttons.btnClose.addActionListener(close);
-                iniBoard.buttons.btnRestart.addActionListener(restart);
-                cLayout.show(panelCont, "1"); // show main page
+                closeGame();
             }
         }
     };
+
+    public void restartGame() {
+        panelCont.remove(getIniBoard()); // remove old initial board
+        InitialBoard newIniBoard = new InitialBoard(); // create new initial board
+        setIniBoard(newIniBoard); // set new initial board
+        panelCont.add(getIniBoard(), "2"); // add new initial board to panel container
+        iniBoard.buttons.btnRestart.addActionListener(restart); // add action listener to RESTART button, otherwise the button won't work after restart
+        iniBoard.buttons.btnClose.addActionListener(close); // add action listener to CLOSE button
+        cLayout.show(panelCont, "2"); // show initial board
+    }
+
+    public void closeGame() {
+        panelCont.remove(getIniBoard());
+        InitialBoard newIniBoard = new InitialBoard();
+        setIniBoard(newIniBoard);
+        panelCont.add(getIniBoard(), "2");
+        iniBoard.buttons.btnClose.addActionListener(close);
+        iniBoard.buttons.btnRestart.addActionListener(restart);
+        cLayout.show(panelCont, "1"); // show main page
+    }
 }

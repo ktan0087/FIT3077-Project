@@ -50,7 +50,7 @@ public class InitialBoard extends JPanel {
         gbc.insets = new Insets(5, 5, 5, 5); // add gaps between the components
 
         // add buttons to top right of the panel
-        gbc.gridx = 2; // set the x position of the component
+        gbc.gridx = 3; // set the x position of the component
         gbc.gridy = 0; // set the y position of the component
         gbc.weightx = 0; // horizontal spacing (use values from 0.0 to 1.0)
         gbc.weighty = 0; // vertical spacing
@@ -63,6 +63,7 @@ public class InitialBoard extends JPanel {
         gbc.weightx = 1;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridwidth = 3;
         this.add(placeToken, gbc);
         this.add(millLayer, gbc);
         this.add(board, gbc);
@@ -145,7 +146,7 @@ public class InitialBoard extends JPanel {
                         if(newPlaceAction.execute()){
                             placeToken.remove(index); // remove the placeholder at the same index
                             placeToken.add(token, index); // add white token at the same index
-                            addMill(0, 156, millLayer);
+                            addMill(110, 162, millLayer);
                             placeToken.repaint();
                             placeToken.revalidate();
                             token.setIndex(index); // set the index of the white token
@@ -153,6 +154,8 @@ public class InitialBoard extends JPanel {
                             decreaseTokenRemainder(); // decrease the token remainder after placing a token
                             getGame().endTurn();
                             playerTurn.changeIcon();
+
+                            new Result();
                         }
 
                     }

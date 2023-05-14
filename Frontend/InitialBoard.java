@@ -24,9 +24,9 @@ public class InitialBoard extends JPanel {
     private Game game; // the game that is played
     private PlaceToken millLayer = new PlaceToken(); // the layer that shows the mill
     protected ResultButton resultButton = new ResultButton();
-    private Win win;
-    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // get the screen size
-    
+//    private Win win;
+//    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // get the screen size
+//
     /**
      * This method is used to set the game that is played
      * @param game is the game that is played
@@ -163,13 +163,12 @@ public class InitialBoard extends JPanel {
 
                     // Check if a mill is formed
                     if (true){
-                        addMill(110, 162, millLayer);
+                        addMill(0, 12, millLayer);
                     }
 
                     // Display which player wins the game
                     if (true){
-//                        result = new Result(Win.WhoWin.BLACKWIN);
-                        displayResult(Win.WhoWin.BLACKWIN);
+                        displayResult(Win.WhoWin.WHITEWIN);
                     }
                 }
             });
@@ -241,9 +240,12 @@ public class InitialBoard extends JPanel {
     }
 
     public void displayResult(Win.WhoWin winner){
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // get the screen size
+        Win win;
+
         JFrame frame = new JFrame();
-        frame.isDoubleBuffered();
-        JDialog result = new JDialog(frame);
+        JDialog result = new JDialog(frame); // super(new JFrame(), true)
+        result.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 
         // result screen cannot be closed unless press the 2 buttons (restart or close)
         result.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -277,6 +279,13 @@ public class InitialBoard extends JPanel {
         result.pack();
         result.setLocationRelativeTo(null);
         result.setVisible(true);
+    }
+
+    public void removeTokenFromBoard(Token token){
+        placeToken.remove(token.index);
+        placeToken.add(new JLabel(), token.index);
+        placeToken.repaint();
+        placeToken.revalidate();
     }
 
 }

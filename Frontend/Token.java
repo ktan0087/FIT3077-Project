@@ -125,6 +125,7 @@ public abstract class Token extends JLabel {
         public void mouseClicked(MouseEvent e) {
             if(iniBoard.canRemove){
                 iniBoard.placeToken.remove(index);
+                //TODO: add condition to make sure cannot remove self token
                 iniBoard.placeToken.add(new JLabel(), index);
                 iniBoard.placeToken.repaint();
                 iniBoard.placeToken.revalidate();

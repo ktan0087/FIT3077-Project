@@ -159,7 +159,6 @@ public class InitialBoard extends JPanel {
                             decreaseTokenRemainder(); // decrease the token remainder after placing a token
                             getGame().endTurn();
                             playerTurn.changeIcon();
-                            System.out.println("Token placed");
                         }
                     }
                     count++;
@@ -167,7 +166,7 @@ public class InitialBoard extends JPanel {
                     // Check if a mill is formed
                     if (count == 3){
                         canRemove = true;
-                        addMill(0, 12, millLayer);
+                        addMill(32, 58, 6, millLayer);
                     }
 
                     // Display which player wins the game
@@ -212,18 +211,40 @@ public class InitialBoard extends JPanel {
         }
     }
 
-    public void addMill(int index1, int index2, PlaceToken millLayer){
+    public int findSmallest(int index1, int index2, int index3){
+        if(index1 < index2 && index1 < index3)
+        {
+            return index1;
+        }
+        else if(index2 < index3)
+        {
+            return index2;
+        }
+        else
+        {
+            return index3;
+        }
+    };
+
+    public int findBiggest(int index1, int index2, int index3){
+        if(index1 > index2 && index1 > index3)
+        {
+            return index1;
+        }
+        else if(index2 > index3)
+        {
+            return index2;
+        }
+        else
+        {
+            return index3;
+        }
+    };
+
+    public void addMill(int index1, int index2, int index3, PlaceToken millLayer){
         int minusValue;
-        int smallIndex;
-        int bigIndex;
-        if (index2 > index1){
-            smallIndex = index1;
-            bigIndex = index2;
-        }
-        else {
-            smallIndex = index2;
-            bigIndex = index1;
-        }
+        int smallIndex = findSmallest(index1, index2, index3);
+        int bigIndex = findBiggest(index1, index2, index3);
 
         minusValue = bigIndex - smallIndex;
         if (minusValue == 52 || minusValue == 104 || minusValue == 156){

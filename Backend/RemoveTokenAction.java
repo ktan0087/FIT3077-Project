@@ -1,12 +1,11 @@
 package Backend;
 
-public class FlyTokenAction extends Action{
+public class RemoveTokenAction extends Action{
 
     /**
-     * Private attributes of FlyTokenAction
+     * Private attributes of RemoveTokenAction
      */
-    private Intersection currentIntersection;
-    private Intersection newIntersection;
+    private Intersection removeIntersection;
 
     /**
      * Constructor for the action class
@@ -14,10 +13,9 @@ public class FlyTokenAction extends Action{
      * @param player the player performing the action
      * @param game   the game the action is being performed in
      */
-    public FlyTokenAction(Player player,Intersection currentIntersection, Intersection newIntersection, Game game) {
+    public RemoveTokenAction(Player player,Intersection removeIntersection, Game game) {
         super(player, game);
-        this.currentIntersection = currentIntersection;
-        this.newIntersection = newIntersection;
+        this.removeIntersection = removeIntersection;
     }
 
     /**
@@ -28,12 +26,11 @@ public class FlyTokenAction extends Action{
     @Override
     public boolean execute() {
         boolean flag = false;
-        //check if the player is allowed to fly token
-        if (player.isActionAllowed(AllActions.CAN_FLY)){
-            //call flyToken() function from board
-            if (game.getBoard().flyToken(player, currentIntersection, newIntersection)){
+        //check if the player is allowed to remove token
+        if (player.isActionAllowed(AllActions.REMOVE_TOKEN)){
+            //call removeToken() function from board
+            if (game.getBoard().removeToken(player, removeIntersection)){
                 flag = true;
-                game.getBoard().isMill(player, newIntersection);
             }
         }
         return flag;
@@ -47,6 +44,6 @@ public class FlyTokenAction extends Action{
      */
     @Override
     public String menuDescription(Player player) {
-        return player + "Flying a token";
+        return player + "Remove a token";
     }
 }

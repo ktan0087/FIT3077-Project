@@ -10,5 +10,6 @@ public enum AllActions {
     CAN_FLY,    // Fly action
     PLACE_TOKEN, // Place token action
     MOVE_TOKEN,  // Move token action
+    REMOVE_TOKEN // Remove token action
 
 }

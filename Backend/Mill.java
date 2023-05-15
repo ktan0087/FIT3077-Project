@@ -24,12 +24,6 @@ public class Mill {
         this.player = player;
     }
 
-    public Mill(Intersection firstIntersection, Intersection secondIntersection, Intersection thirdIntersection){
-        this.intersectionList.add(firstIntersection);
-        this.intersectionList.add(secondIntersection);
-        this.intersectionList.add(thirdIntersection);
-    }
-
     /**
      * Getter function to get the intersectionList of the mill
      * @return array of intersectionList that form a mill

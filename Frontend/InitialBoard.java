@@ -269,6 +269,26 @@ public class InitialBoard extends JPanel {
         }
     }
 
+    public void removeMill(int index1, int index2, int index3, PlaceToken millLayer){
+        int minusValue;
+        int smallIndex = findSmallest(index1, index2, index3);
+        int bigIndex = findBiggest(index1, index2, index3);
+
+        minusValue = bigIndex - smallIndex;
+        if (minusValue == 52 || minusValue == 104 || minusValue == 156){
+            for (int i = smallIndex ; i <= bigIndex; i += 13){
+                millLayer.remove(i);
+                millLayer.add(new JLabel(), i);
+            }
+        }
+        else if (minusValue == 4 || minusValue == 8 || minusValue == 12){
+            for (int i = smallIndex; i <= bigIndex; i++){
+                millLayer.remove(i);
+                millLayer.add(new JLabel(), i);
+            }
+        }
+    }
+
     public void displayResult(Win.WhoWin winner){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // get the screen size
         Win win;

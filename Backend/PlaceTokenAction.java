@@ -34,8 +34,12 @@ public class PlaceTokenAction extends Action{
             //call the placeToken() function from board
             if (game.getBoard().placeToken(player, placeIntersection)) {
                 flag = true;
+                game.getBoard().isMill(player, placeIntersection);
             }
+
+
         }
+
         return flag;
     }
 

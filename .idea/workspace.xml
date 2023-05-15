@@ -6,10 +6,15 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f9c7453-4616-463d-ae35-df53754e53bb" name="Changes" comment="add javadoc to Application">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/FIT3077_Project_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
+    <list default="true" id="5f9c7453-4616-463d-ae35-df53754e53bb" name="Changes" comment="finalise everything">
+      <change afterPath="$PROJECT_DIR$/Backend/FlyTokenAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/Mill.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Intersection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Intersection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/PlaceTokenAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/PlaceTokenAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/InitialBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/InitialBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +24,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -64,11 +70,11 @@
       <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\Sprint 1" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\out\artifacts\FIT3077_Project_jar" />
       <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project" />
       <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\Backend" />
       <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\Sprint 2\Icons" />
       <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\Sprint 2" />
-      <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Application">
@@ -98,6 +104,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Intersection" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Backend.Intersection" />
+      <module name="FIT3077 Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Backend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Layout" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Frontend.Layout" />
       <module name="FIT3077 Project" />
@@ -115,6 +134,7 @@
       <list>
         <item itemvalue="Application.Application" />
         <item itemvalue="Application.Board" />
+        <item itemvalue="Application.Intersection" />
         <item itemvalue="Application.Layout" />
       </list>
     </recent_temporary>
@@ -268,7 +288,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682590996506</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="finalise everything">
+      <created>1682600138982</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1682600138982</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -304,7 +331,8 @@
     <MESSAGE value="Remove exceptions for actions" />
     <MESSAGE value="add javadoc to Board, Intersection, MoveTokenAction, PlaceTokenAction" />
     <MESSAGE value="add javadoc to Application" />
-    <option name="LAST_COMMIT_MESSAGE" value="add javadoc to Application" />
+    <MESSAGE value="finalise everything" />
+    <option name="LAST_COMMIT_MESSAGE" value="finalise everything" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -316,6 +344,10 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.IllegalArgumentException" package="java.lang" />
           <option name="timeStamp" value="6" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="7" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>

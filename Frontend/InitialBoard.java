@@ -151,11 +151,9 @@ public class InitialBoard extends JPanel {
                             getGame().endTurn();
                             playerTurn.changeIcon();
                         }
-
                     }
                 }
             });
-
         }
 
     }

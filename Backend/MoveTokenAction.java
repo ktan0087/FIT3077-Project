@@ -37,6 +37,7 @@ public class MoveTokenAction extends Action{
             //call moveToken() function from board
             if (game.getBoard().moveToken(player, currentIntersection, newIntersection)){
                 flag = true;
+                game.getBoard().isMill(player, newIntersection);
             }
         }
         return flag;

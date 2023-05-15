@@ -1,5 +1,8 @@
 package Backend;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Intersection {
     /**
      * Private attributes of Intersection
@@ -33,6 +36,14 @@ public class Intersection {
      */
     public int getPosition() {
         return position;
+    }
+
+    public void setLayer(int layer) {
+        this.layer = layer;
+    }
+
+    public int setPosition(int position) {
+        return this.position = position;
     }
 
     /**
@@ -69,13 +80,16 @@ public class Intersection {
         //get the difference between the layer and position of the two intersections
         int dx = Math.abs(this.layer - other.layer);
         int dy = Math.abs(this.position - other.position);
-        //check if the difference is 1 or 7
-        if (dx+dy == 1 || dx+dy == 7) {
+        //check if both intersection are on the same layer
+        if (dx == 0) {
+            //check if the difference is 1 or 7
+            if (dx+dy == 1 || dx+dy == 7)
             flag = true;
         }
-        else if (dx != 0 && position % 2 == 1){
-            if (this.position == other.position)
-                flag = true;
+        //check if both intersection are on the same position
+        //and the position is even
+        else if (dy == 0 && position % 2 == 0){
+            flag = true;
         }
         return flag;
     }
@@ -93,4 +107,20 @@ public class Intersection {
         }
         return flag;
     }
+
+    @Override
+    public String toString() {
+        return "Intersection{" +
+                "layer=" + layer +
+                ", position=" + position +
+                ", token=" + getToken() +
+                '}';
+    }
+
+//    public static void main(String[] args) {
+//        Intersection i2 = new Intersection(1, 1);
+//        i2.addToken(new Token(TokenColour.PLAYER_1_WHITE));
+//        Intersection i1 = new Intersection(1, 3);
+//        i1.getAdjacentIntersection();
+//    }
 }

@@ -33,6 +33,7 @@ public class FlyTokenAction extends Action{
             //call moveToken() function from board
             if (game.getBoard().flyToken(player, currentIntersection, newIntersection)){
                 flag = true;
+                game.getBoard().isMill(player, newIntersection);
             }
         }
         return flag;

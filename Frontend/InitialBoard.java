@@ -15,7 +15,7 @@ public class InitialBoard extends JPanel {
     private ArrayList<Token> tokenList = new ArrayList<>(); // create a list to store tokens
     protected Buttons buttons = new Buttons(); // buttons that illustrate hint, restart, close
     private Frontend.Board board = new Board(); // create a board
-    private PlaceToken placeToken = new PlaceToken(); // create a layer to place tokens
+    protected PlaceToken placeToken = new PlaceToken(); // create a layer to place tokens
     private PlayerTurn playerTurn = new PlayerTurn(); // show which player's turn
     private WhiteTokenRemain whiteTokenRemain = new WhiteTokenRemain(); // show the remaining number of white tokens
     private BlackTokenRemain blackTokenRemain = new BlackTokenRemain(); // show the remaining number of black tokens
@@ -24,9 +24,10 @@ public class InitialBoard extends JPanel {
     private Game game; // the game that is played
     private PlaceToken millLayer = new PlaceToken(); // the layer that shows the mill
     protected ResultButton resultButton = new ResultButton();
-//    private Win win;
-//    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // get the screen size
-//
+    private Token tokenToRemove; // the token that is selected to be removed
+    Boolean canRemove = false;
+    int count = 0;
+
     /**
      * This method is used to set the game that is played
      * @param game is the game that is played
@@ -158,18 +159,23 @@ public class InitialBoard extends JPanel {
                             decreaseTokenRemainder(); // decrease the token remainder after placing a token
                             getGame().endTurn();
                             playerTurn.changeIcon();
+                            System.out.println("Token placed");
                         }
                     }
-
+                    count++;
+                    System.out.println(count);
                     // Check if a mill is formed
-                    if (true){
+                    if (count == 3){
+                        canRemove = true;
                         addMill(0, 12, millLayer);
+
+
                     }
 
                     // Display which player wins the game
-                    if (true){
-                        displayResult(Win.WhoWin.WHITEWIN);
-                    }
+//                    if (true){
+//                        displayResult(Win.WhoWin.WHITEWIN);
+//                    }
                 }
             });
 
@@ -279,13 +285,6 @@ public class InitialBoard extends JPanel {
         result.pack();
         result.setLocationRelativeTo(null);
         result.setVisible(true);
-    }
-
-    public void removeTokenFromBoard(Token token){
-        placeToken.remove(token.index);
-        placeToken.add(new JLabel(), token.index);
-        placeToken.repaint();
-        placeToken.revalidate();
     }
 
 }

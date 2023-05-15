@@ -123,6 +123,15 @@ public abstract class Token extends JLabel {
     protected MouseListener tokenSelected = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
+            if(iniBoard.canRemove){
+                iniBoard.placeToken.remove(index);
+                iniBoard.placeToken.add(new JLabel(), index);
+                iniBoard.placeToken.repaint();
+                iniBoard.placeToken.revalidate();
+                iniBoard.canRemove = false;
+                iniBoard.getGame().getBoard().getIntersection(getCoordinateX(), getCoordinateY()).removeToken();
+                return;
+            }
             if (times%2 == 0 && !iniBoard.isSelected) {
                 selected = true; // click the white token to select it
                 iniBoard.isSelected = true;

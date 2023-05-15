@@ -164,12 +164,25 @@ public class InitialBoard extends JPanel {
                             System.out.println(board.getIndexLookUpTable(3, 3));
                         }
                     }
-                    count++;
-//                    System.out.println(count);
                     // Check if a mill is formed
-                    if (count == 3){
+                    if (game.getBoard().getMills().size() > 0){
+                        for (int i = 0; i < game.getBoard().getMills().size(); i++){
+                            //continue here
+                            int firstIndexLayer = game.getBoard().getMills().get(i).getIntersection().get(0).getLayer();
+                            int firstIndexPosition = game.getBoard().getMills().get(i).getIntersection().get(0).getPosition();
+                            int firstIndexTemp = board.getIndexLookUpTable(firstIndexLayer, firstIndexPosition);
+
+                            int secondIndexLayer = game.getBoard().getMills().get(i).getIntersection().get(1).getLayer();
+                            int secondIndexPosition = game.getBoard().getMills().get(i).getIntersection().get(1).getPosition();
+                            int secondIndexTemp = board.getIndexLookUpTable(secondIndexLayer, secondIndexPosition);
+
+                            int thirdIndexLayer = game.getBoard().getMills().get(i).getIntersection().get(2).getLayer();
+                            int thirdIndexPosition = game.getBoard().getMills().get(i).getIntersection().get(2).getPosition();
+                            int thirdIndexTemp = board.getIndexLookUpTable(thirdIndexLayer, thirdIndexPosition);
+
+                            addMill(firstIndexTemp, secondIndexTemp, thirdIndexTemp, millLayer);
+                        }
                         canRemove = true;
-                        addMill(32, 58, 6, millLayer);
                     }
 
                     // Display which player wins the game

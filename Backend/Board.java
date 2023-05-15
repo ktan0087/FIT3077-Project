@@ -49,6 +49,10 @@ public class Board {
         return new Intersection(layer, position);
     }
 
+    public ArrayList<Mill> getMills() {
+        return mills;
+    }
+
     /**
      * Function to place token on the intersection given by the player
      * @return true if token is placed successfully,
@@ -78,9 +82,6 @@ public class Board {
     public boolean moveToken(Player player, Intersection intersection, Intersection otherIntersection){
         // check if the other intersection is occupied and is adjacent to the origin intersection
         if (otherIntersection.isEmpty() && intersection.isAdjacent(otherIntersection)){
-            //call loseTokenOnBoard() function from player
-            //to reduce the number of tokens on board
-            player.loseTokenOnBoard();
             //remove token from the origin intersection
             intersection.removeToken();
             //add token to the new intersection
@@ -92,7 +93,7 @@ public class Board {
 
     public boolean flyToken(Player player, Intersection intersection, Intersection otherIntersection){
         // check if the other intersection is occupied
-        if (!otherIntersection.isEmpty() && player.canPlayerFly()){
+        if (otherIntersection.isEmpty()){
             //call loseTokenOnBoard() function from player
             //to reduce the number of tokens on board
             player.loseTokenOnBoard();
@@ -204,6 +205,7 @@ public class Board {
 
     //remove token from mill
     //remove mill object from mills arraylist
+    //when the player move token from mill
 
     /**
      * Function to check if the intersection is working

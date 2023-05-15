@@ -120,6 +120,7 @@ public class Layout{
             panelCont.remove(getIniBoard()); // remove old initial board
             InitialBoard newIniBoard = new InitialBoard(); // create new initial board
             setIniBoard(newIniBoard); // set new initial board
+            getGame().restartGame();
             iniBoard.setGame(getGame()); // set game for new initial board
             panelCont.add(getIniBoard(), "2"); // add new initial board to panel container
             iniBoard.buttons.btnRestart.addActionListener(restart); // add action listener to RESTART button, otherwise the button won't work after restart
@@ -136,6 +137,8 @@ public class Layout{
             panelCont.remove(getIniBoard());
             InitialBoard newIniBoard = new InitialBoard();
             setIniBoard(newIniBoard);
+            getGame().restartGame();
+            iniBoard.setGame(getGame());
             panelCont.add(getIniBoard(), "2");
             iniBoard.buttons.btnClose.addActionListener(close);
             iniBoard.buttons.btnRestart.addActionListener(restart);

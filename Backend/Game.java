@@ -115,14 +115,18 @@ public class Game {
      * @return A boolean to indicate if the game is over or not
      */
     public boolean isGameOver() {
-        // check if the game is over by checking if one of the players only has 2 tokens left on the board
-        if (player1.getTokensOnBoard() <= MIN_TOKENS_PLAYER || player2.getTokensOnBoard() <= MIN_TOKENS_PLAYER) {
-            isGameOver = true;
+
+        if (player1.getTokensInHand() == 0 && player2.getTokensInHand() == 0){
+            // check if the game is over by checking if one of the players only has 2 tokens left on the board
+            if (player1.getTokensOnBoard() <= MIN_TOKENS_PLAYER || player2.getTokensOnBoard() <= MIN_TOKENS_PLAYER) {
+                isGameOver = true;
+            }
         }
         return isGameOver;      // return the boolean to indicate if the game is over or not
     }
 
     public Player getWinner(){
+        // check if the game is over by checking if one of the players only has 2 tokens left on the board
         if (player1.getTokensOnBoard() <= MIN_TOKENS_PLAYER) {
             return player2;
         } else if (player2.getTokensOnBoard() <= MIN_TOKENS_PLAYER) {

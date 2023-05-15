@@ -116,6 +116,8 @@ public class InitialBoard extends JPanel {
 
                     Token token = whiteToken; // set the token to white token by default
 
+
+
                     // set the token to black token if the current player is player 2
                     if (getGame().getCurrentPlayer().getTokenColour() == TokenColour.PLAYER_2_BLACK) {
                         token = blackToken;
@@ -159,10 +161,11 @@ public class InitialBoard extends JPanel {
                             decreaseTokenRemainder(); // decrease the token remainder after placing a token
                             getGame().endTurn();
                             playerTurn.changeIcon();
+                            System.out.println(board.getIndexLookUpTable(3, 3));
                         }
                     }
                     count++;
-                    System.out.println(count);
+//                    System.out.println(count);
                     // Check if a mill is formed
                     if (count == 3){
                         canRemove = true;
@@ -216,14 +219,7 @@ public class InitialBoard extends JPanel {
         {
             return index1;
         }
-        else if(index2 < index3)
-        {
-            return index2;
-        }
-        else
-        {
-            return index3;
-        }
+        else return Math.min(index2, index3);
     };
 
     public int findBiggest(int index1, int index2, int index3){
@@ -231,14 +227,7 @@ public class InitialBoard extends JPanel {
         {
             return index1;
         }
-        else if(index2 > index3)
-        {
-            return index2;
-        }
-        else
-        {
-            return index3;
-        }
+        else return Math.max(index2, index3);
     };
 
     public void addMill(int index1, int index2, int index3, PlaceToken millLayer){

@@ -2,7 +2,7 @@ package Frontend;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 
 public class Board extends JPanel {
@@ -36,35 +36,10 @@ public class Board extends JPanel {
     private Intersection intersection_16 = new Intersection(1, 6);
     private Intersection intersection_15 = new Intersection(1, 5);
 
-    private ArrayList<Intersection> intersectionList = new ArrayList<>(); // create a list to store intersections
+    private ArrayList<Intersection> intersectionList;
+    private Map<Integer, Integer> indexLookUpTable;
 
     public List<Intersection> getIntersectionList() {
-        // Add all intersections to the list
-        intersectionList.add(intersection_11);
-        intersectionList.add(intersection_12);
-        intersectionList.add(intersection_13);
-        intersectionList.add(intersection_21);
-        intersectionList.add(intersection_22);
-        intersectionList.add(intersection_23);
-        intersectionList.add(intersection_31);
-        intersectionList.add(intersection_32);
-        intersectionList.add(intersection_33);
-        intersectionList.add(intersection_18);
-        intersectionList.add(intersection_28);
-        intersectionList.add(intersection_38);
-        intersectionList.add(intersection_34);
-        intersectionList.add(intersection_24);
-        intersectionList.add(intersection_14);
-        intersectionList.add(intersection_37);
-        intersectionList.add(intersection_36);
-        intersectionList.add(intersection_35);
-        intersectionList.add(intersection_27);
-        intersectionList.add(intersection_26);
-        intersectionList.add(intersection_25);
-        intersectionList.add(intersection_17);
-        intersectionList.add(intersection_16);
-        intersectionList.add(intersection_15);
-
         return this.intersectionList;
     }
 
@@ -282,10 +257,64 @@ public class Board extends JPanel {
         this.add(new HorizontalLine());
         intersection_15.choosePosition(Intersection.Position.BOTTOM_RIGHT);
         this.add(intersection_15);
+
+        this.intersectionList = new ArrayList<>(); // create a list to store intersections
+        // Add all intersections to the list
+        intersectionList.add(intersection_11);
+        intersectionList.add(intersection_12);
+        intersectionList.add(intersection_13);
+        intersectionList.add(intersection_21);
+        intersectionList.add(intersection_22);
+        intersectionList.add(intersection_23);
+        intersectionList.add(intersection_31);
+        intersectionList.add(intersection_32);
+        intersectionList.add(intersection_33);
+        intersectionList.add(intersection_18);
+        intersectionList.add(intersection_28);
+        intersectionList.add(intersection_38);
+        intersectionList.add(intersection_34);
+        intersectionList.add(intersection_24);
+        intersectionList.add(intersection_14);
+        intersectionList.add(intersection_37);
+        intersectionList.add(intersection_36);
+        intersectionList.add(intersection_35);
+        intersectionList.add(intersection_27);
+        intersectionList.add(intersection_26);
+        intersectionList.add(intersection_25);
+        intersectionList.add(intersection_17);
+        intersectionList.add(intersection_16);
+        intersectionList.add(intersection_15);
+
+        indexLookUpTable = new HashMap<>();
+        indexLookUpTable.put(11, 0);
+        indexLookUpTable.put(12, 6);
+        indexLookUpTable.put(13, 12);
+        indexLookUpTable.put(14, 90);
+        indexLookUpTable.put(15, 168);
+        indexLookUpTable.put(16, 162);
+        indexLookUpTable.put(17, 156);
+        indexLookUpTable.put(18, 78);
+        indexLookUpTable.put(21, 28);
+        indexLookUpTable.put(22, 32);
+        indexLookUpTable.put(23, 36);
+        indexLookUpTable.put(24, 88);
+        indexLookUpTable.put(25, 140);
+        indexLookUpTable.put(26, 136);
+        indexLookUpTable.put(27, 132);
+        indexLookUpTable.put(28, 80);
+        indexLookUpTable.put(31, 56);
+        indexLookUpTable.put(32, 58);
+        indexLookUpTable.put(33, 60);
+        indexLookUpTable.put(34, 86);
+        indexLookUpTable.put(35, 112);
+        indexLookUpTable.put(36, 110);
+        indexLookUpTable.put(37, 108);
+        indexLookUpTable.put(38, 82);
     }
 
     /**
      * get the index of intersection in the panel (from 0 to 168)
+     *
      * @param intersection is the place where the user can place or move token
      * @return the index of intersection in the panel
      */
@@ -295,6 +324,7 @@ public class Board extends JPanel {
 
     /**
      * get the intersection in the panel by coordinate
+     *
      * @param x is the layer coordinate
      * @param y is the position coordinate
      * @return the intersection in the panel
@@ -303,6 +333,17 @@ public class Board extends JPanel {
         for (Intersection intersection : getIntersectionList()) {
             if (intersection.getCoordinateX() == x && intersection.getCoordinateY() == y) {
                 return intersection;
+            }
+        }
+        return null;
+    }
+
+    public Integer getIndexLookUpTable(int layer, int position) {
+        String combine = String.valueOf(layer) + String.valueOf(position);
+
+        for (int i = 1; i <= 38; i++) {
+            if (i == Integer.parseInt(combine)){
+                return indexLookUpTable.get(i);
             }
         }
         return null;

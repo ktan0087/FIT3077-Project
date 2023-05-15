@@ -132,4 +132,12 @@ public class Game {
         }
     }
 
+    public void restartGame(){
+        player1 = new Player("Player 1", TokenColour.PLAYER_1_WHITE);
+        player2 = new Player("Player 2", TokenColour.PLAYER_2_BLACK);
+        currentPlayer = player1;
+        board = new Board();
+        isGameOver = false;
+    }
+
 }

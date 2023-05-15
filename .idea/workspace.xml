@@ -6,15 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f9c7453-4616-463d-ae35-df53754e53bb" name="Changes" comment="finalise everything">
-      <change afterPath="$PROJECT_DIR$/Backend/FlyTokenAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/Mill.java" afterDir="false" />
+    <list default="true" id="5f9c7453-4616-463d-ae35-df53754e53bb" name="Changes" comment="adding getAdjacentIntersection() and isMill() methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/Intersection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Intersection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/PlaceTokenAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/PlaceTokenAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/InitialBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/InitialBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -295,7 +288,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682600138982</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="create mill class and FlyingTokenAction class">
+      <created>1684136229722</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1684136229722</updated>
+    </task>
+    <task id="LOCAL-00023" summary="adding getAdjacentIntersection() and isMill() methods">
+      <created>1684136306782</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1684136306782</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -332,7 +339,9 @@
     <MESSAGE value="add javadoc to Board, Intersection, MoveTokenAction, PlaceTokenAction" />
     <MESSAGE value="add javadoc to Application" />
     <MESSAGE value="finalise everything" />
-    <option name="LAST_COMMIT_MESSAGE" value="finalise everything" />
+    <MESSAGE value="create mill class and FlyingTokenAction class" />
+    <MESSAGE value="adding getAdjacentIntersection() and isMill() methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding getAdjacentIntersection() and isMill() methods" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -167,8 +167,13 @@ public class InitialBoard extends JPanel {
                     }
 
                     // Display which player wins the game
-                    if (true){
-                        displayResult(Win.WhoWin.WHITEWIN);
+                    if (game.isGameOver()){
+                        if (game.getWinner().getTokenColour() == TokenColour.PLAYER_2_BLACK) {
+                            displayResult(Win.WhoWin.BLACKWIN);
+                        }
+                        else{
+                            displayResult(Win.WhoWin.WHITEWIN);
+                        }
                     }
                 }
             });

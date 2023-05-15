@@ -168,8 +168,6 @@ public class InitialBoard extends JPanel {
                     if (count == 3){
                         canRemove = true;
                         addMill(0, 12, millLayer);
-
-
                     }
 
                     // Display which player wins the game

@@ -18,8 +18,15 @@ User Guide: <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 7. Go to the folder named "out", "artifacts", "FirstProject_jar"<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8. You will see a file named, "FirstProject.jar"<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9. Right click the file, choose Open In, choose Explorer<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5. You can play Nine Men's Morris now. <br /><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10. You can play Nine Men's Morris now. <br /><br />
 <i> Note: Some features are not fully implemented yet. If running using the executable file, the icons are not showing.</i> <br/>
+
+Playing Guide:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1.  At first each player can place tokens on the board by clicking on the board, the player's turn will alternate automatically.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2.  Players can higlight tokens by clicking on them but cannot move them to an empty intersection before placing all tokens.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3.  Player will gain the ability to move tokens on the board after placing all their tokens.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4.  Player can move token by highlighting a token on the board by clicking them then click on an empty intersection as destination,
+the &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token will be moved to the empty intersection.<br />
 
 __________________________________________________________________________________________________________________________________________
 

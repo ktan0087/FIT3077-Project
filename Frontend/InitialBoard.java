@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+
 public class InitialBoard extends JPanel {
     /**
      * The initial board that players can see when they start the game
@@ -13,13 +15,18 @@ public class InitialBoard extends JPanel {
     private ArrayList<Token> tokenList = new ArrayList<>(); // create a list to store tokens
     protected Buttons buttons = new Buttons(); // buttons that illustrate hint, restart, close
     private Frontend.Board board = new Board(); // create a board
-    private PlaceToken placeToken = new PlaceToken(); // create a layer to place tokens
+    protected PlaceToken placeToken = new PlaceToken(); // create a layer to place tokens
     private PlayerTurn playerTurn = new PlayerTurn(); // show which player's turn
     private WhiteTokenRemain whiteTokenRemain = new WhiteTokenRemain(); // show the remaining number of white tokens
     private BlackTokenRemain blackTokenRemain = new BlackTokenRemain(); // show the remaining number of black tokens
     private Token selectedToken; // the token that is selected by the player
     protected boolean isSelected; // whether the player has selected a token
     private Game game; // the game that is played
+    private PlaceToken millLayer = new PlaceToken(); // the layer that shows the mill
+    protected ResultButton resultButton = new ResultButton();
+    private Token tokenToRemove; // the token that is selected to be removed
+    Boolean canRemove = false;
+    int count = 0;
 
     /**
      * This method is used to set the game that is played
@@ -49,7 +56,7 @@ public class InitialBoard extends JPanel {
         gbc.insets = new Insets(5, 5, 5, 5); // add gaps between the components
 
         // add buttons to top right of the panel
-        gbc.gridx = 2; // set the x position of the component
+        gbc.gridx = 3; // set the x position of the component
         gbc.gridy = 0; // set the y position of the component
         gbc.weightx = 0; // horizontal spacing (use values from 0.0 to 1.0)
         gbc.weighty = 0; // vertical spacing
@@ -62,7 +69,9 @@ public class InitialBoard extends JPanel {
         gbc.weightx = 1;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridwidth = 3;
         this.add(placeToken, gbc);
+        this.add(millLayer, gbc);
         this.add(board, gbc);
 
         // add the player turn to the bottom of the panel
@@ -145,15 +154,33 @@ public class InitialBoard extends JPanel {
                             placeToken.add(token, index); // add white token at the same index
                             placeToken.repaint();
                             placeToken.revalidate();
-                            token.index = index; // set the index of the white token
+                            token.setIndex(index); // set the index of the white token
                             tokenList.add(token); // add white token to the list
                             decreaseTokenRemainder(); // decrease the token remainder after placing a token
                             getGame().endTurn();
                             playerTurn.changeIcon();
                         }
                     }
+                    count++;
+                    System.out.println(count);
+                    // Check if a mill is formed
+                    if (count == 3){
+                        canRemove = true;
+                        addMill(32, 58, 6, millLayer);
+                    }
+
+                    // Display which player wins the game
+                    if (game.isGameOver()){
+                        if (game.getWinner().getTokenColour() == TokenColour.PLAYER_2_BLACK) {
+                            displayResult(Win.WhoWin.BLACKWIN);
+                        }
+                        else{
+                            displayResult(Win.WhoWin.WHITEWIN);
+                        }
+                    }
                 }
             });
+
         }
 
     }
@@ -182,6 +209,126 @@ public class InitialBoard extends JPanel {
         else {
             blackTokenRemain.decreaseAmountToken(); // decrease the black token remainder
         }
+    }
+
+    public int findSmallest(int index1, int index2, int index3){
+        if(index1 < index2 && index1 < index3)
+        {
+            return index1;
+        }
+        else if(index2 < index3)
+        {
+            return index2;
+        }
+        else
+        {
+            return index3;
+        }
+    };
+
+    public int findBiggest(int index1, int index2, int index3){
+        if(index1 > index2 && index1 > index3)
+        {
+            return index1;
+        }
+        else if(index2 > index3)
+        {
+            return index2;
+        }
+        else
+        {
+            return index3;
+        }
+    };
+
+    public void addMill(int index1, int index2, int index3, PlaceToken millLayer){
+        int minusValue;
+        int smallIndex = findSmallest(index1, index2, index3);
+        int bigIndex = findBiggest(index1, index2, index3);
+
+        minusValue = bigIndex - smallIndex;
+        if (minusValue == 52 || minusValue == 104 || minusValue == 156){
+            millLayer.remove(smallIndex);
+            millLayer.add(new Mill(Mill.Direction.FIRST_HALF_VERTICAL), smallIndex);
+            for (int i = smallIndex + 13; i < bigIndex; i += 13){
+                millLayer.remove(i);
+                millLayer.add(new Mill(Mill.Direction.VERTICAL), i);
+            }
+            millLayer.remove(bigIndex);
+            millLayer.add(new Mill(Mill.Direction.LAST_HALF_VERTICAL), bigIndex);
+        }
+        else if (minusValue == 4 || minusValue == 8 || minusValue == 12){
+            millLayer.remove(smallIndex);
+            millLayer.add(new Mill(Mill.Direction.FIRST_HALF_HORIZONTAL), smallIndex);
+            for (int i = smallIndex + 1; i < bigIndex; i++){
+                millLayer.remove(i);
+                millLayer.add(new Mill(Mill.Direction.HORIZONTAL), i);
+            }
+            millLayer.remove(bigIndex);
+            millLayer.add(new Mill(Mill.Direction.LAST_HALF_HORIZONTAL), bigIndex);
+        }
+    }
+
+    public void removeMill(int index1, int index2, int index3, PlaceToken millLayer){
+        int minusValue;
+        int smallIndex = findSmallest(index1, index2, index3);
+        int bigIndex = findBiggest(index1, index2, index3);
+
+        minusValue = bigIndex - smallIndex;
+        if (minusValue == 52 || minusValue == 104 || minusValue == 156){
+            for (int i = smallIndex ; i <= bigIndex; i += 13){
+                millLayer.remove(i);
+                millLayer.add(new JLabel(), i);
+            }
+        }
+        else if (minusValue == 4 || minusValue == 8 || minusValue == 12){
+            for (int i = smallIndex; i <= bigIndex; i++){
+                millLayer.remove(i);
+                millLayer.add(new JLabel(), i);
+            }
+        }
+    }
+
+    public void displayResult(Win.WhoWin winner){
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // get the screen size
+        Win win;
+
+        JFrame frame = new JFrame();
+        JDialog result = new JDialog(frame); // super(new JFrame(), true)
+        result.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+
+        // result screen cannot be closed unless press the 2 buttons (restart or close)
+        result.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        result.setUndecorated(true);
+
+        // set a dimmed and transparent background for the result page
+        result.setPreferredSize(screenSize);
+        result.getRootPane().setOpaque (false);
+        result.getContentPane().setBackground (new Color (0, 0, 0, 0));
+        result.setBackground(new Color(0x80000000, true));
+
+        // arrange the components in result page
+        result.setLayout(new GridBagLayout()); // set the layout of this panel
+        GridBagConstraints gbc = new GridBagConstraints(); // create a GridBagConstraint object
+        gbc.insets = new Insets(5, 5, 5, 5); // add gaps between the components
+
+        // Display which player wins
+        gbc.gridx = 0; // set the x position of the component
+        gbc.gridy = 0; // set the y position of the component
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER; // set the position of the component
+        win = new Win(winner);
+        result.add(win, gbc); // add the component to this panel
+
+        // Display the restart and close buttons
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.CENTER;
+        result.add(resultButton, gbc);
+
+        result.pack();
+        result.setLocationRelativeTo(null);
+        result.setVisible(true);
     }
 
 }

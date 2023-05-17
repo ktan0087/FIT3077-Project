@@ -170,7 +170,6 @@ public class InitialBoard extends JPanel {
 
                                 removeMill(firstIndexTemp, secondIndexTemp, thirdIndexTemp, millLayer);
                                 millCount--;
-
                             }
 
                             // Check if a mill is formed
@@ -203,6 +202,16 @@ public class InitialBoard extends JPanel {
 
                             getGame().endTurn(); // end the turn
                             playerTurn.changeIcon(); // change the player turn icon between black and white token
+
+                            if (game.isGameOver()){
+                                if (game.getWinner().getTokenColour() == TokenColour.PLAYER_2_BLACK) {
+                                    displayResult(Win.WhoWin.BLACKWIN);
+                                }
+                                else{
+                                    displayResult(Win.WhoWin.WHITEWIN);
+                                }
+                            }
+
                             return;
                         }
                     }

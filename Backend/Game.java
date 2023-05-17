@@ -108,6 +108,14 @@ public class Game {
             return currentPlayer;
     }
 
+    public Player getOtherPlayer() {
+        if (currentPlayer == player1) {
+            return player2;
+        } else {
+            return player1;
+        }
+    }
+
     /**
      * A function to check if the game is over.
      * The game is over if one of the players only has 2 tokens left on the board.
@@ -128,9 +136,9 @@ public class Game {
     public Player getWinner(){
         // check if the game is over by checking if one of the players only has 2 tokens left on the board
         if (player1.getTokensOnBoard() <= MIN_TOKENS_PLAYER) {
-            return player2;
-        } else if (player2.getTokensOnBoard() <= MIN_TOKENS_PLAYER) {
             return player1;
+        } else if (player2.getTokensOnBoard() <= MIN_TOKENS_PLAYER) {
+            return player2;
         } else {
             return null;
         }

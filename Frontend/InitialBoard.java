@@ -21,6 +21,7 @@ public class InitialBoard extends JPanel {
     private BlackTokenRemain blackTokenRemain = new BlackTokenRemain(); // show the remaining number of black tokens
     private Token selectedToken; // the token that is selected by the player
     protected boolean isSelected; // whether the player has selected a token
+    private Instruction instruction = new Instruction(Instruction.InstructionType.EMPTY); // provide the instruction of the game
     private Game game; // the game that is played
     private PlaceToken millLayer = new PlaceToken(); // the layer that shows the mill
     protected ResultButton resultButton = new ResultButton();
@@ -62,6 +63,15 @@ public class InitialBoard extends JPanel {
         gbc.weighty = 0; // vertical spacing
         gbc.anchor = GridBagConstraints.NORTHEAST; // set the position of the component
         this.add(buttons, gbc); // add the component to this panel
+
+        // add the board to the center of the panel
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+        gbc.weighty = 0;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.gridwidth = 3;
+        this.add(instruction, gbc);
 
         // add the board to the center of the panel
         gbc.gridx = 1;
@@ -199,6 +209,7 @@ public class InitialBoard extends JPanel {
                     if (!checkSelected()) { // if no white token is selected
                         PlaceTokenAction newPlaceAction = new PlaceTokenAction(getGame().getCurrentPlayer(),getGame().getBoard().getIntersection(intersection.getCoordinateX(),intersection.getCoordinateY()), getGame());
                         if(newPlaceAction.execute()){
+                            instruction.changeText(Instruction.InstructionType.PLACE);
                             placeToken.remove(index); // remove the placeholder at the same index
                             placeToken.add(token, index); // add white token at the same index
                             placeToken.repaint();
@@ -213,6 +224,7 @@ public class InitialBoard extends JPanel {
                     // Check if a mill is formed
                     if (game.getBoard().getMills().size() > 0){
                         if (millCount != game.getBoard().getMills().size()){
+                            instruction.changeText(Instruction.InstructionType.REMOVE);
                             game.swapPlayers();
                             playerTurn.changeIcon();
                             millCount = game.getBoard().getMills().size();
@@ -275,7 +287,10 @@ public class InitialBoard extends JPanel {
             whiteTokenRemain.decreaseAmountToken(); // decrease the white token remainder
         }
         else {
-            blackTokenRemain.decreaseAmountToken(); // decrease the black token remainder
+            int blackRemaining = blackTokenRemain.decreaseAmountToken(); // decrease the black token remainder
+            if (blackRemaining == 0){
+                instruction.changeText(Instruction.InstructionType.MOVE);
+            }
         }
     }
 

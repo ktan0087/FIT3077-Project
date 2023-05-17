@@ -29,7 +29,7 @@ public class FlyTokenAction extends Action{
     public boolean execute() {
         boolean flag = false;
         //check if the player is allowed to fly token
-        if (player.isActionAllowed(AllActions.CAN_FLY)){
+        if (player.isActionAllowed(AllActions.CAN_FLY) && !(player.isActionAllowed(AllActions.REMOVE_TOKEN))){
             //call flyToken() function from board
             if (game.getBoard().flyToken(player, currentIntersection, newIntersection)){
                 flag = true;

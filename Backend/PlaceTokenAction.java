@@ -30,16 +30,13 @@ public class PlaceTokenAction extends Action{
     public boolean execute() {
         boolean flag = false;
         //check if the player is allowed to move token
-        if (player.isActionAllowed(AllActions.PLACE_TOKEN)){
+        if (player.isActionAllowed(AllActions.PLACE_TOKEN) && !(player.isActionAllowed(AllActions.REMOVE_TOKEN))){
             //call the placeToken() function from board
             if (game.getBoard().placeToken(player, placeIntersection)) {
                 flag = true;
                 game.getBoard().isMill(player, placeIntersection);
             }
-
-
         }
-
         return flag;
     }
 

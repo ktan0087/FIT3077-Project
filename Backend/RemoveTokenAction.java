@@ -26,16 +26,12 @@ public class RemoveTokenAction extends Action{
     @Override
     public boolean execute() {
         boolean flag = false;
-        System.out.println(player.getTokenColour());
-        for (AllActions allactions: player.getAllowableActions()){
-            System.out.println(allactions);
-
-        }
         //check if the player is allowed to remove token
         if (player.isActionAllowed(AllActions.REMOVE_TOKEN)){
             //call removeToken() function from board
             if (game.getBoard().removeToken(player, removeIntersection)){
                 flag = true;
+                player.removeAllowableAction(AllActions.REMOVE_TOKEN);
             }
         }
         return flag;

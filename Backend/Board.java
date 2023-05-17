@@ -107,6 +107,11 @@ public class Board {
     }
 
     public boolean removeToken(Player player, Intersection intersection){
+        for (Mill mill : mills){
+            if (mill.getIntersection().contains(intersection)){
+                return false;
+            }
+        }
         //check if the intersection is occupied
         if (!intersection.isEmpty()){
             if(intersection.getToken().getTokenColour() != player.getTokenColour()){

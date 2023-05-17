@@ -144,6 +144,24 @@ public class InitialBoard extends JPanel {
                             iniBoard.isSelected = false; // no token is selected
                             placeToken.repaint();
                             placeToken.revalidate();
+
+                            for (Backend.Mill removedMill : newMoveAction.getRemoveMillList()) {
+                                int firstIndexLayer = removedMill.getIntersection().get(0).getLayer();
+                                int firstIndexPosition = removedMill.getIntersection().get(0).getPosition();
+                                int firstIndexTemp = board.getIndexLookUpTable(firstIndexLayer, firstIndexPosition);
+
+                                int secondIndexLayer = removedMill.getIntersection().get(1).getLayer();
+                                int secondIndexPosition = removedMill.getIntersection().get(1).getPosition();
+                                int secondIndexTemp = board.getIndexLookUpTable(secondIndexLayer, secondIndexPosition);
+
+                                int thirdIndexLayer = removedMill.getIntersection().get(2).getLayer();
+                                int thirdIndexPosition = removedMill.getIntersection().get(2).getPosition();
+                                int thirdIndexTemp = board.getIndexLookUpTable(thirdIndexLayer, thirdIndexPosition);
+
+                                removeMill(firstIndexTemp, secondIndexTemp, thirdIndexTemp, millLayer);
+                            }
+
+
                             getGame().endTurn(); // end the turn
                             playerTurn.changeIcon(); // change the player turn icon between black and white token
                             return;

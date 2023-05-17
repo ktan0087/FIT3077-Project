@@ -65,4 +65,8 @@ public class MoveTokenAction extends Action implements CanRemoveMill{
             }
         }
     }
+
+    public ArrayList<Mill> getRemoveMillList() {
+        return removeMillList;
+    }
 }

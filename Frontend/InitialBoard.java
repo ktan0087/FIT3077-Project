@@ -25,8 +25,8 @@ public class InitialBoard extends JPanel {
     private PlaceToken millLayer = new PlaceToken(); // the layer that shows the mill
     protected ResultButton resultButton = new ResultButton();
     private Token tokenToRemove; // the token that is selected to be removed
-    Boolean canRemove = false;
-    int count = 0;
+    protected Boolean canRemove = false;
+    private int millCount;
 
     /**
      * This method is used to set the game that is played
@@ -161,11 +161,15 @@ public class InitialBoard extends JPanel {
                             decreaseTokenRemainder(); // decrease the token remainder after placing a token
                             getGame().endTurn();
                             playerTurn.changeIcon();
-                            System.out.println(board.getIndexLookUpTable(3, 3));
                         }
                     }
                     // Check if a mill is formed
                     if (game.getBoard().getMills().size() > 0){
+                        if (millCount != game.getBoard().getMills().size()){
+                            game.swapPlayers();
+                            playerTurn.changeIcon();
+                            millCount = game.getBoard().getMills().size();
+                        }
 
                         for (int i = 0; i < game.getBoard().getMills().size(); i++){
                             //continue here

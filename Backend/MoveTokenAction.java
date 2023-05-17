@@ -64,9 +64,12 @@ public class MoveTokenAction extends Action implements CanRemoveMill{
                 removeMillList.add(mills);
             }
         }
+        System.out.println(removeMillList);
+        System.out.println(game.getBoard().getMills());
         for (Mill mills: removeMillList){
             game.getBoard().getMills().remove(mills);
         }
+        System.out.println(game.getBoard().getMills());
     }
 
     public ArrayList<Mill> getRemoveMillList() {

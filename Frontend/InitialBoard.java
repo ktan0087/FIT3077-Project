@@ -161,8 +161,33 @@ public class InitialBoard extends JPanel {
                                 removeMill(firstIndexTemp, secondIndexTemp, thirdIndexTemp, millLayer);
                                 millCount--;
 
-                                System.out.println("MillCount: " + millCount);
-                                System.out.println("list size" + game.getBoard().getMills().size());
+                            }
+
+                            // Check if a mill is formed
+                            if (game.getBoard().getMills().size() > 0){
+                                if (millCount != game.getBoard().getMills().size()){
+                                    game.swapPlayers();
+                                    playerTurn.changeIcon();
+                                    millCount = game.getBoard().getMills().size();
+                                }
+
+                                for (Backend.Mill mills : game.getBoard().getMills()){
+                                    //continue here
+                                    int firstIndexLayer = mills.getIntersection().get(0).getLayer();
+                                    int firstIndexPosition = mills.getIntersection().get(0).getPosition();
+                                    int firstIndexTemp = board.getIndexLookUpTable(firstIndexLayer, firstIndexPosition);
+
+                                    int secondIndexLayer = mills.getIntersection().get(1).getLayer();
+                                    int secondIndexPosition = mills.getIntersection().get(1).getPosition();
+                                    int secondIndexTemp = board.getIndexLookUpTable(secondIndexLayer, secondIndexPosition);
+
+                                    int thirdIndexLayer = mills.getIntersection().get(2).getLayer();
+                                    int thirdIndexPosition = mills.getIntersection().get(2).getPosition();
+                                    int thirdIndexTemp = board.getIndexLookUpTable(thirdIndexLayer, thirdIndexPosition);
+
+                                    addMill(firstIndexTemp, secondIndexTemp, thirdIndexTemp, millLayer);
+                                }
+                                canRemove = true;
                             }
 
 

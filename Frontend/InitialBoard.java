@@ -206,7 +206,6 @@ public class InitialBoard extends JPanel {
                             addMill(firstIndexTemp, secondIndexTemp, thirdIndexTemp, millLayer);
                         }
                         canRemove = true;
-                        //TODO: add swap player turn here
                     }
 
                     // Display which player wins the game

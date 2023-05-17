@@ -129,7 +129,6 @@ public abstract class Token extends JLabel {
                 RemoveTokenAction newRemoveTokenAction = new RemoveTokenAction(iniBoard.getGame().getCurrentPlayer(), iniBoard.getGame().getBoard().getIntersection(getCoordinateX(), getCoordinateY()),iniBoard.getGame());
                 if (newRemoveTokenAction.execute()){
                     iniBoard.placeToken.remove(index);
-                    //TODO: add condition to make sure cannot remove self token
                     iniBoard.placeToken.add(new JLabel(), index);
                     iniBoard.placeToken.repaint();
                     iniBoard.placeToken.revalidate();

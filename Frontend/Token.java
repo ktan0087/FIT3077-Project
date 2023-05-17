@@ -1,5 +1,7 @@
 package Frontend;
 
+import Backend.RemoveTokenAction;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -124,14 +126,18 @@ public abstract class Token extends JLabel {
         @Override
         public void mouseClicked(MouseEvent e) {
             if(iniBoard.canRemove){
-                iniBoard.placeToken.remove(index);
-                //TODO: add condition to make sure cannot remove self token
-                iniBoard.placeToken.add(new JLabel(), index);
-                iniBoard.placeToken.repaint();
-                iniBoard.placeToken.revalidate();
-                iniBoard.canRemove = false;
-                iniBoard.getGame().getBoard().getIntersection(getCoordinateX(), getCoordinateY()).removeToken();
-                return;
+                RemoveTokenAction newRemoveTokenAction = new RemoveTokenAction(iniBoard.getGame().getCurrentPlayer(), iniBoard.getGame().getBoard().getIntersection(getCoordinateX(), getCoordinateY()),iniBoard.getGame());
+                if (newRemoveTokenAction.execute()){
+                    iniBoard.placeToken.remove(index);
+                    //TODO: add condition to make sure cannot remove self token
+                    iniBoard.placeToken.add(new JLabel(), index);
+                    iniBoard.placeToken.repaint();
+                    iniBoard.placeToken.revalidate();
+                    iniBoard.canRemove = false;
+                    iniBoard.getGame().getBoard().getIntersection(getCoordinateX(), getCoordinateY()).removeToken();
+                    return;
+                }
+
             }
             if (times%2 == 0 && !iniBoard.isSelected) {
                 selected = true; // click the white token to select it

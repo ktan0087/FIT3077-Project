@@ -96,7 +96,7 @@ public class Board {
         if (otherIntersection.isEmpty()){
             //call loseTokenOnBoard() function from player
             //to reduce the number of tokens on board
-            player.loseTokenOnBoard();
+//            player.loseTokenOnBoard();
             //remove token from the origin intersection
             intersection.removeToken();
             //add token to the new intersection

@@ -184,6 +184,8 @@ public class InitialBoard extends JPanel {
                         }
                         canRemove = true;
                         //TODO: add swap player turn here
+                        getGame().swapPlayers();
+                        playerTurn.changeIcon();
 
                     }
 

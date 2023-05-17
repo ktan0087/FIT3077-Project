@@ -16,7 +16,7 @@ public class InitialBoard extends JPanel {
     protected Buttons buttons = new Buttons(); // buttons that illustrate hint, restart, close
     private Frontend.Board board = new Board(); // create a board
     protected PlaceToken placeToken = new PlaceToken(); // create a layer to place tokens
-    private PlayerTurn playerTurn = new PlayerTurn(); // show which player's turn
+    protected PlayerTurn playerTurn = new PlayerTurn(); // show which player's turn
     private WhiteTokenRemain whiteTokenRemain = new WhiteTokenRemain(); // show the remaining number of white tokens
     private BlackTokenRemain blackTokenRemain = new BlackTokenRemain(); // show the remaining number of black tokens
     private Token selectedToken; // the token that is selected by the player
@@ -166,6 +166,7 @@ public class InitialBoard extends JPanel {
                     }
                     // Check if a mill is formed
                     if (game.getBoard().getMills().size() > 0){
+
                         for (int i = 0; i < game.getBoard().getMills().size(); i++){
                             //continue here
                             int firstIndexLayer = game.getBoard().getMills().get(i).getIntersection().get(0).getLayer();
@@ -184,9 +185,6 @@ public class InitialBoard extends JPanel {
                         }
                         canRemove = true;
                         //TODO: add swap player turn here
-                        getGame().swapPlayers();
-                        playerTurn.changeIcon();
-
                     }
 
                     // Display which player wins the game

@@ -135,6 +135,8 @@ public abstract class Token extends JLabel {
                     iniBoard.placeToken.revalidate();
                     iniBoard.canRemove = false;
                     iniBoard.getGame().getBoard().getIntersection(getCoordinateX(), getCoordinateY()).removeToken();
+                    iniBoard.getGame().swapPlayers();
+                    iniBoard.playerTurn.changeIcon();
                     return;
                 }
 

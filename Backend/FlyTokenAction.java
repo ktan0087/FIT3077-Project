@@ -1,6 +1,6 @@
 package Backend;
 
-public class FlyTokenAction extends Action{
+public class FlyTokenAction extends Action implements CanRemoveMill{
 
     /**
      * Private attributes of FlyTokenAction
@@ -34,6 +34,7 @@ public class FlyTokenAction extends Action{
             if (game.getBoard().flyToken(player, currentIntersection, newIntersection)){
                 flag = true;
                 game.getBoard().isMill(player, newIntersection);
+                this.addRemoveMill();
             }
         }
         return flag;
@@ -48,5 +49,15 @@ public class FlyTokenAction extends Action{
     @Override
     public String menuDescription(Player player) {
         return player + "Flying a token";
+    }
+
+
+    @Override
+    public void addRemoveMill() {
+        for (Mill mills: game.getBoard().getMills()){
+            if(mills.getIntersection().contains(currentIntersection)){
+                CanRemoveMill.removeMillList.add(mills);
+            }
+        }
     }
 }

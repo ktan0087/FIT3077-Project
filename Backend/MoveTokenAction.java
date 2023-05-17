@@ -3,7 +3,7 @@ package Backend;
 /**
  * This class represents the action of moving a token from one intersection to another
  */
-public class MoveTokenAction extends Action{
+public class MoveTokenAction extends Action implements CanRemoveMill{
 
     /**
      * Private attributes of MoveTokenAction
@@ -38,6 +38,7 @@ public class MoveTokenAction extends Action{
             if (game.getBoard().moveToken(player, currentIntersection, newIntersection)){
                 flag = true;
                 game.getBoard().isMill(player, newIntersection);
+                this.addRemoveMill();
             }
         }
         return flag;
@@ -51,5 +52,14 @@ public class MoveTokenAction extends Action{
     @Override
     public String menuDescription(Player player) {
         return player + "moved a token to " + "(" + newIntersection.getLayer() + "," + newIntersection.getPosition() + ")";
+    }
+
+    @Override
+    public void addRemoveMill() {
+        for (Mill mills: game.getBoard().getMills()){
+            if(mills.getIntersection().contains(currentIntersection)){
+                CanRemoveMill.removeMillList.add(mills);
+            }
+        }
     }
 }

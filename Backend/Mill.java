@@ -52,7 +52,7 @@ public class Mill {
     public String toString() {
         return "Mill{" +
                 "intersectionList=" + intersectionList +
-                ", player=" + player +
+                ", player=" + player.toString() +
                 '}';
     }
 }

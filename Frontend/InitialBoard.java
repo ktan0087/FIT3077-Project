@@ -159,6 +159,10 @@ public class InitialBoard extends JPanel {
                                 int thirdIndexTemp = board.getIndexLookUpTable(thirdIndexLayer, thirdIndexPosition);
 
                                 removeMill(firstIndexTemp, secondIndexTemp, thirdIndexTemp, millLayer);
+                                millCount--;
+
+                                System.out.println("MillCount: " + millCount);
+                                System.out.println("list size" + game.getBoard().getMills().size());
                             }
 
 

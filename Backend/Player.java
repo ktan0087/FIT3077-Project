@@ -186,4 +186,10 @@ public class Player {
         return allowableActions.actionList();       // Return the list of allowable actions
     }
 
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

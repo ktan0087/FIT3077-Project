@@ -33,7 +33,7 @@ public class MoveTokenAction extends Action{
     public boolean execute() {
         boolean flag = false;
         //check if the player is allowed to move token
-        if (player.isActionAllowed(AllActions.MOVE_TOKEN)){
+        if (player.isActionAllowed(AllActions.MOVE_TOKEN) && !(player.isActionAllowed(AllActions.REMOVE_TOKEN))){
             //call moveToken() function from board
             if (game.getBoard().moveToken(player, currentIntersection, newIntersection)){
                 flag = true;

@@ -136,9 +136,9 @@ public class Game {
     public Player getWinner(){
         // check if the game is over by checking if one of the players only has 2 tokens left on the board
         if (player1.getTokensOnBoard() <= MIN_TOKENS_PLAYER) {
-            return player1;
-        } else if (player2.getTokensOnBoard() <= MIN_TOKENS_PLAYER) {
             return player2;
+        } else if (player2.getTokensOnBoard() <= MIN_TOKENS_PLAYER) {
+            return player1;
         } else {
             return null;
         }

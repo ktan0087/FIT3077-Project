@@ -203,6 +203,10 @@ public class InitialBoard extends JPanel {
                             getGame().endTurn(); // end the turn
                             playerTurn.changeIcon(); // change the player turn icon between black and white token
 
+                            System.out.println("------------------");
+                            System.out.println(getGame().getCurrentPlayer());
+                            System.out.println(getGame().getOtherPlayer());
+
                             if (game.isGameOver()){
                                 if (game.getWinner().getTokenColour() == TokenColour.PLAYER_2_BLACK) {
                                     displayResult(Win.WhoWin.BLACKWIN);
@@ -211,7 +215,6 @@ public class InitialBoard extends JPanel {
                                     displayResult(Win.WhoWin.WHITEWIN);
                                 }
                             }
-
                             return;
                         }
                     }
@@ -228,6 +231,9 @@ public class InitialBoard extends JPanel {
                             decreaseTokenRemainder(); // decrease the token remainder after placing a token
                             getGame().endTurn();
                             playerTurn.changeIcon();
+                            System.out.println("------------------");
+                            System.out.println(getGame().getCurrentPlayer());
+                            System.out.println(getGame().getOtherPlayer());
                         }
                     }
                     // Check if a mill is formed

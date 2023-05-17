@@ -139,6 +139,17 @@ public abstract class Token extends JLabel {
                     iniBoard.getGame().getBoard().getIntersection(getCoordinateX(), getCoordinateY()).removeToken();
                     iniBoard.getGame().swapPlayers();
                     iniBoard.playerTurn.changeIcon();
+                    System.out.println("------------------");
+                    System.out.println(iniBoard.getGame().getCurrentPlayer());
+                    System.out.println(iniBoard.getGame().getOtherPlayer());
+                    if (iniBoard.getGame().isGameOver()){
+                        if (iniBoard.getGame().getWinner().getTokenColour() == TokenColour.PLAYER_2_BLACK) {
+                            iniBoard.displayResult(Win.WhoWin.BLACKWIN);
+                        }
+                        else{
+                            iniBoard.displayResult(Win.WhoWin.WHITEWIN);
+                        }
+                    }
                     return;
                 }
 

@@ -117,7 +117,6 @@ public class Board {
         if (!intersection.isEmpty()){
             if(intersection.getToken().getTokenColour() != player.getTokenColour()){
                 intersection.removeToken();
-                player.loseTokenOnBoard();
                 return true;
             }
         }

@@ -1,6 +1,7 @@
 package Frontend;
 
 import Backend.RemoveTokenAction;
+import Backend.TokenColour;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,8 @@ public abstract class Token extends JLabel {
     protected Boolean selected = false;
     protected int index;
     protected Color tokenColor;
+
+    protected TokenColour ownerTokenColour;
 
     private InitialBoard iniBoard;
 
@@ -140,7 +143,7 @@ public abstract class Token extends JLabel {
                 }
 
             }
-            if (times%2 == 0 && !iniBoard.isSelected) {
+            if (times%2 == 0 && !iniBoard.isSelected && iniBoard.getGame().getCurrentPlayer().getTokenColour() == ownerTokenColour) {
                 selected = true; // click the white token to select it
                 iniBoard.isSelected = true;
             }

@@ -33,6 +33,7 @@ public class RemoveTokenAction extends Action{
             //call removeToken() function from board
             if (game.getBoard().removeToken(player, removeIntersection)){
                 flag = true;
+                game.getOtherPlayer().loseTokenOnBoard();
                 player.removeAllowableAction(AllActions.REMOVE_TOKEN);
             }
         }

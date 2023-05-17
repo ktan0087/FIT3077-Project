@@ -109,9 +109,11 @@ public class Board {
     public boolean removeToken(Player player, Intersection intersection){
         //check if the intersection is occupied
         if (!intersection.isEmpty()){
-            intersection.removeToken();
-            player.loseTokenOnBoard();
-            return true;
+            if(intersection.getToken().getTokenColour() != player.getTokenColour()){
+                intersection.removeToken();
+                player.loseTokenOnBoard();
+                return true;
+            }
         }
         return false;
     }
@@ -183,12 +185,15 @@ public class Board {
         return adjacentIntersection;
     }
 
-    public void isMill(Player player, Intersection currentIntersection){
+    public boolean isMill(Player player, Intersection currentIntersection){
+        boolean flag = false;
         if (!currentIntersection.isEmpty()) {
             if (!this.getAdjacentIntersection(currentIntersection).get(0).isEmpty() && !this.getAdjacentIntersection(currentIntersection).get(1).isEmpty()){
                 if (currentIntersection.getToken().getTokenColour() == this.getAdjacentIntersection(currentIntersection).get(0).getToken().getTokenColour() &&
                         currentIntersection.getToken().getTokenColour() == this.getAdjacentIntersection(currentIntersection).get(1).getToken().getTokenColour()) {
                     mills.add(new Mill(currentIntersection, this.getAdjacentIntersection(currentIntersection).get(0), this.getAdjacentIntersection(currentIntersection).get(1), player));
+                    player.addAllowableAction(AllActions.REMOVE_TOKEN);
+                    flag = true;
                     System.out.println("----------------------------"+ player.getName() + " Mill formed");
                 }
             }
@@ -196,11 +201,14 @@ public class Board {
                 if (currentIntersection.getToken().getTokenColour() == this.getAdjacentIntersection(currentIntersection).get(2).getToken().getTokenColour() &&
                         currentIntersection.getToken().getTokenColour() == this.getAdjacentIntersection(currentIntersection).get(3).getToken().getTokenColour()) {
                     mills.add(new Mill(currentIntersection, this.getAdjacentIntersection(currentIntersection).get(2), this.getAdjacentIntersection(currentIntersection).get(3), player));
+                    player.addAllowableAction(AllActions.REMOVE_TOKEN);
+                    flag = true;
                     System.out.println("----------------------------"+ player.getName() + " Mill formed");
                 }
             }
         }
         System.out.println("Mills: "+ mills.toString());
+        return flag;
     }
 
     //remove token from mill

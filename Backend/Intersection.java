@@ -111,9 +111,9 @@ public class Intersection {
     @Override
     public String toString() {
         return "Intersection{" +
-                "layer=" + layer +
-                ", position=" + position +
-                ", token=" + getToken() +
+                layer +
+                "," + position +
+                "," + getToken() +
                 '}';
     }
 

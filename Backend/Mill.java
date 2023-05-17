@@ -1,7 +1,6 @@
 package Backend;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Mill {
     /**
@@ -10,6 +9,7 @@ public class Mill {
     private ArrayList<Intersection> intersectionList = new ArrayList<>();
     private Intersection intersection[][] = new Intersection[4][9];
     private Player player;
+    private boolean isDrawn = false;
 
     /**
      * Constructor
@@ -30,6 +30,14 @@ public class Mill {
      */
     public ArrayList<Intersection> getIntersection() {
         return intersectionList;
+    }
+
+    public void setDrawn(boolean drawn) {
+        isDrawn = drawn;
+    }
+
+    public boolean getIsDrawn(){
+        return isDrawn;
     }
 
     /**

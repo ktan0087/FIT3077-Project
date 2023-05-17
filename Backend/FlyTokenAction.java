@@ -1,5 +1,7 @@
 package Backend;
 
+import java.util.ArrayList;
+
 public class FlyTokenAction extends Action implements CanRemoveMill{
 
     /**
@@ -7,6 +9,7 @@ public class FlyTokenAction extends Action implements CanRemoveMill{
      */
     private Intersection currentIntersection;
     private Intersection newIntersection;
+    private ArrayList<Mill> removeMillList = new ArrayList<>();
 
     /**
      * Constructor for the action class
@@ -56,7 +59,7 @@ public class FlyTokenAction extends Action implements CanRemoveMill{
     public void addRemoveMill() {
         for (Mill mills: game.getBoard().getMills()){
             if(mills.getIntersection().contains(currentIntersection)){
-                CanRemoveMill.removeMillList.add(mills);
+                removeMillList.add(mills);
             }
         }
     }

@@ -1,5 +1,7 @@
 package Backend;
 
+import java.util.ArrayList;
+
 /**
  * This class represents the action of moving a token from one intersection to another
  */
@@ -10,6 +12,7 @@ public class MoveTokenAction extends Action implements CanRemoveMill{
      */
     private Intersection currentIntersection;
     private Intersection newIntersection;
+    private ArrayList<Mill> removeMillList = new ArrayList<>();
 
     /**
      * Constructor
@@ -58,7 +61,7 @@ public class MoveTokenAction extends Action implements CanRemoveMill{
     public void addRemoveMill() {
         for (Mill mills: game.getBoard().getMills()){
             if(mills.getIntersection().contains(currentIntersection)){
-                CanRemoveMill.removeMillList.add(mills);
+                removeMillList.add(mills);
             }
         }
     }

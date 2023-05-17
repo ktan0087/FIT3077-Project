@@ -62,6 +62,12 @@ public class FlyTokenAction extends Action implements CanRemoveMill{
                 removeMillList.add(mills);
             }
         }
+        for (Mill mills: removeMillList){
+            game.getBoard().getMills().remove(mills);
+        }
     }
 
+    public ArrayList<Mill> getRemoveMillList() {
+        return removeMillList;
+    }
 }

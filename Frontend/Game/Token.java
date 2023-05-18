@@ -3,6 +3,7 @@ package Frontend.Game;
 import Backend.Action.RemoveTokenAction;
 import Backend.Token.TokenColour;
 import Frontend.Components.Instruction;
+import Frontend.Components.Win;
 
 import javax.swing.*;
 import java.awt.*;
@@ -145,6 +146,14 @@ public abstract class Token extends JLabel {
                     iniBoard.getGame().getBoard().getIntersection(getCoordinateX(), getCoordinateY()).removeToken();
                     iniBoard.getGame().endTurn();
                     iniBoard.playerTurn.changeIcon();
+                    if (!iniBoard.getGame().checkPossibleMove(iniBoard.getGame().getCurrentPlayer())){
+                        if (iniBoard.getGame().getCurrentPlayer().getTokenColour() == TokenColour.PLAYER_1_WHITE){
+                            iniBoard.displayResult(Win.WhoWin.BLACKWIN);
+                        }
+                        else {
+                            iniBoard.displayResult(Win.WhoWin.WHITEWIN);
+                        }
+                    }
                     iniBoard.checkEndGame();
                     swapInstruction();
                     return;

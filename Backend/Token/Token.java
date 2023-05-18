@@ -1,4 +1,4 @@
-package Backend;
+package Backend.Token;
 
 /**
  * A class to represent the token held by each player.

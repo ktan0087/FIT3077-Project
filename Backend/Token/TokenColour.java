@@ -1,4 +1,6 @@
-package Backend;
+package Backend.Token;
+
+import Backend.Token.Token;
 
 /**
  * An enum class to represent the colour of the token

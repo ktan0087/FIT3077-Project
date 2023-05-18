@@ -1,11 +1,16 @@
-package Backend;
+package Backend.Action;
+
+import Backend.*;
+import Backend.Board.Intersection;
+import Backend.Board.Mill;
+import Backend.Interfaces.CanRemoveMill;
 
 import java.util.ArrayList;
 
 /**
  * This class represents the action of moving a token from one intersection to another
  */
-public class MoveTokenAction extends Action implements CanRemoveMill{
+public class MoveTokenAction extends Action implements CanRemoveMill {
 
     /**
      * Private attributes of MoveTokenAction
@@ -21,7 +26,7 @@ public class MoveTokenAction extends Action implements CanRemoveMill{
      * @param newIntersection = new intersection of the token
      * @param game = current game
      */
-    public MoveTokenAction(Player player,Intersection currentIntersection, Intersection newIntersection,Game game){
+    public MoveTokenAction(Player player, Intersection currentIntersection, Intersection newIntersection, Game game){
         super(player,game);
         this.currentIntersection = currentIntersection;
         this.newIntersection = newIntersection;

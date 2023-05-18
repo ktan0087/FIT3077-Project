@@ -1,4 +1,7 @@
-package Backend;
+package Backend.Action;
+
+import Backend.Game;
+import Backend.Player;
 
 /**
  * An abstract class to represent the actions that can be performed by a player

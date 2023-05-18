@@ -1,6 +1,6 @@
 package Frontend;
 
-import Backend.TokenColour;
+import Backend.Token.TokenColour;
 
 import java.awt.*;
 

@@ -1,7 +1,7 @@
 package Frontend;
 
-import Backend.RemoveTokenAction;
-import Backend.TokenColour;
+import Backend.Action.RemoveTokenAction;
+import Backend.Token.TokenColour;
 
 import javax.swing.*;
 import java.awt.*;
@@ -139,19 +139,9 @@ public abstract class Token extends JLabel {
                     iniBoard.placeToken.revalidate();
                     iniBoard.canRemove = false;
                     iniBoard.getGame().getBoard().getIntersection(getCoordinateX(), getCoordinateY()).removeToken();
-                    iniBoard.getGame().swapPlayers();
+                    iniBoard.getGame().endTurn();
                     iniBoard.playerTurn.changeIcon();
-                    System.out.println("------------------");
-                    System.out.println(iniBoard.getGame().getCurrentPlayer());
-                    System.out.println(iniBoard.getGame().getOtherPlayer());
-                    if (iniBoard.getGame().isGameOver()){
-                        if (iniBoard.getGame().getWinner().getTokenColour() == TokenColour.PLAYER_2_BLACK) {
-                            iniBoard.displayResult(Win.WhoWin.BLACKWIN);
-                        }
-                        else{
-                            iniBoard.displayResult(Win.WhoWin.WHITEWIN);
-                        }
-                    }
+                    iniBoard.checkEndGame();
                     return;
                 }
 

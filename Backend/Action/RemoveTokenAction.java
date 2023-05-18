@@ -1,8 +1,10 @@
-package Backend;
+package Backend.Action;
 
-import java.util.ArrayList;
+import Backend.Game;
+import Backend.Board.Intersection;
+import Backend.Player;
 
-public class RemoveTokenAction extends Action{
+public class RemoveTokenAction extends Action {
 
     /**
      * Private attributes of RemoveTokenAction
@@ -15,7 +17,7 @@ public class RemoveTokenAction extends Action{
      * @param player the player performing the action
      * @param game   the game the action is being performed in
      */
-    public RemoveTokenAction(Player player,Intersection removeIntersection, Game game) {
+    public RemoveTokenAction(Player player, Intersection removeIntersection, Game game) {
         super(player, game);
         this.removeIntersection = removeIntersection;
     }

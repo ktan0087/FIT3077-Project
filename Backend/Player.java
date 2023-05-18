@@ -1,5 +1,9 @@
 package Backend;
 
+import Backend.Action.ActionList;
+import Backend.Action.AllActions;
+import Backend.Token.TokenColour;
+
 import java.util.List;
 
 /**
@@ -66,7 +70,7 @@ public class Player {
             this.removeAllowableAction(AllActions.PLACE_TOKEN); // remove the ability for place token action
             this.addAllowableAction(AllActions.MOVE_TOKEN);     // add the ability for move token action
         }
-        if (canPlayerFly()){        // If player has 3 tokens left, he can fly
+        if (tokensOnBoard == 3 && getTokensInHand()==0){        // If player has 3 tokens left, he can fly
             this.addAllowableAction(AllActions.CAN_FLY);    // add the ability for fly action
         }
     }
@@ -144,7 +148,7 @@ public class Player {
 
             // If the number of tokens on board is 3 and the number of tokens in hand is 0, the player can fly
             if (tokensOnBoard == 3 && getTokensInHand()==0) {
-                canFly = true;
+                canFly = true;// add the ability for fly action
             }
         }
     }

@@ -1,7 +1,10 @@
-package Backend;
+package Backend.Board;
+
+import Backend.Action.AllActions;
+import Backend.Player;
+import Backend.Token.Token;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * This class represents the board of the game, it contains a 2D array of intersections.
@@ -237,9 +240,9 @@ public class Board {
     //remove mill object from mills arraylist
     //when the player move token from mill
 
-    /**
-     * Function to check if the intersection is working
-     */
+//    /**
+//     * Function to check if the intersection is working
+//     */
 //    public static void main(String[] args) {
 //        Player p1 = new Player("KT", TokenColour.PLAYER_1_WHITE);
 //        Player p2 = new Player("ZW", TokenColour.PLAYER_2_BLACK);

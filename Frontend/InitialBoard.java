@@ -1,5 +1,10 @@
 package Frontend;
 import Backend.*;
+import Backend.Action.FlyTokenAction;
+import Backend.Action.MoveTokenAction;
+import Backend.Action.PlaceTokenAction;
+import Backend.Interfaces.CanRemoveMill;
+import Backend.Token.TokenColour;
 
 import javax.swing.*;
 import java.awt.*;
@@ -151,8 +156,9 @@ public class InitialBoard extends JPanel {
                     int index = intersection.getAccessibleContext().getAccessibleIndexInParent(); // get the index of the intersection from the list
 
                     if (checkSelected()){
-                        MoveTokenAction newMoveAction = new MoveTokenAction(getGame().getCurrentPlayer(),getGame().getBoard().getIntersection(selectedToken.getCoordinateX(), selectedToken.getCoordinateY()), getGame().getBoard().getIntersection(intersection.getCoordinateX(),intersection.getCoordinateY()), getGame());
-                        if (newMoveAction.execute()) {
+                        FlyTokenAction newFlyAction = new FlyTokenAction(getGame().getCurrentPlayer(),getGame().getBoard().getIntersection(selectedToken.getCoordinateX(), selectedToken.getCoordinateY()), getGame().getBoard().getIntersection(intersection.getCoordinateX(),intersection.getCoordinateY()), getGame());
+                        if (newFlyAction.execute()){
+                            System.out.println("*********************************************************************************************Fly Token Action executed");
                             // move token on board (placeToken panel)
                             placeToken.remove(selectedToken.index); // remove the selected white token from the previous intersection
                             placeToken.add(new JLabel(), selectedToken.index); // add the placeholder to the previous intersection at place token layer
@@ -166,66 +172,46 @@ public class InitialBoard extends JPanel {
                             placeToken.repaint();
                             placeToken.revalidate();
 
-                            for (Backend.Mill removedMill : newMoveAction.getRemoveMillList()) {
-                                int firstIndexLayer = removedMill.getIntersection().get(0).getLayer();
-                                int firstIndexPosition = removedMill.getIntersection().get(0).getPosition();
-                                int firstIndexTemp = board.getIndexLookUpTable(firstIndexLayer, firstIndexPosition);
+                            checkAndRemoveMills(newFlyAction);
 
-                                int secondIndexLayer = removedMill.getIntersection().get(1).getLayer();
-                                int secondIndexPosition = removedMill.getIntersection().get(1).getPosition();
-                                int secondIndexTemp = board.getIndexLookUpTable(secondIndexLayer, secondIndexPosition);
+                            // Check if a mill is formed and then do approriate actions and draw them
+                            checkAndDrawMills();
 
-                                int thirdIndexLayer = removedMill.getIntersection().get(2).getLayer();
-                                int thirdIndexPosition = removedMill.getIntersection().get(2).getPosition();
-                                int thirdIndexTemp = board.getIndexLookUpTable(thirdIndexLayer, thirdIndexPosition);
+                            getGame().endTurn(); // end the turn
+                            playerTurn.changeIcon(); // change the player turn icon between black and white token
+                            // Display which player wins the game
+                            checkEndGame();
+                            return;
+                        }
+                    }
 
-                                removeMill(firstIndexTemp, secondIndexTemp, thirdIndexTemp, millLayer);
-                                millCount--;
-                            }
+                    if (checkSelected()){
+                        MoveTokenAction newMoveAction = new MoveTokenAction(getGame().getCurrentPlayer(),getGame().getBoard().getIntersection(selectedToken.getCoordinateX(), selectedToken.getCoordinateY()), getGame().getBoard().getIntersection(intersection.getCoordinateX(),intersection.getCoordinateY()), getGame());
+                        if (newMoveAction.execute()) {
+                            System.out.println("*********************************************************************************************Move Token Action executed");
+                            // move token on board (placeToken panel)
+                            placeToken.remove(selectedToken.index); // remove the selected white token from the previous intersection
+                            placeToken.add(new JLabel(), selectedToken.index); // add the placeholder to the previous intersection at place token layer
+                            placeToken.remove(index); // remove the previous placeholder
+                            placeToken.add(selectedToken, index); // add the selected white token to the intersection that the player wants to move
+                            selectedToken.setCoordinateX(intersection.getCoordinateX()); // update the coordinate of the selected token
+                            selectedToken.setCoordinateY(intersection.getCoordinateY());
+                            selectedToken.setIndex(index); // update the index of the selected white token
+                            selectedToken.selected = false; // remove the red selected border
+                            iniBoard.isSelected = false; // no token is selected
+                            placeToken.repaint();
+                            placeToken.revalidate();
 
-                            // Check if a mill is formed
-                            if (game.getBoard().getMills().size() > 0){
-                                if (millCount != game.getBoard().getMills().size()){
-                                    game.swapPlayers();
-                                    playerTurn.changeIcon();
-                                    millCount = game.getBoard().getMills().size();
-                                }
+                            checkAndRemoveMills(newMoveAction);
 
-                                for (Backend.Mill mills : game.getBoard().getMills()){
-                                    //continue here
-                                    int firstIndexLayer = mills.getIntersection().get(0).getLayer();
-                                    int firstIndexPosition = mills.getIntersection().get(0).getPosition();
-                                    int firstIndexTemp = board.getIndexLookUpTable(firstIndexLayer, firstIndexPosition);
-
-                                    int secondIndexLayer = mills.getIntersection().get(1).getLayer();
-                                    int secondIndexPosition = mills.getIntersection().get(1).getPosition();
-                                    int secondIndexTemp = board.getIndexLookUpTable(secondIndexLayer, secondIndexPosition);
-
-                                    int thirdIndexLayer = mills.getIntersection().get(2).getLayer();
-                                    int thirdIndexPosition = mills.getIntersection().get(2).getPosition();
-                                    int thirdIndexTemp = board.getIndexLookUpTable(thirdIndexLayer, thirdIndexPosition);
-
-                                    addMill(firstIndexTemp, secondIndexTemp, thirdIndexTemp, millLayer);
-                                }
-                                canRemove = true;
-                            }
-
+                            // Check if a mill is formed and then do approriate actions and draw them
+                            checkAndDrawMills();
 
                             getGame().endTurn(); // end the turn
                             playerTurn.changeIcon(); // change the player turn icon between black and white token
 
-                            System.out.println("------------------");
-                            System.out.println(getGame().getCurrentPlayer());
-                            System.out.println(getGame().getOtherPlayer());
-
-                            if (game.isGameOver()){
-                                if (game.getWinner().getTokenColour() == TokenColour.PLAYER_2_BLACK) {
-                                    displayResult(Win.WhoWin.BLACKWIN);
-                                }
-                                else{
-                                    displayResult(Win.WhoWin.WHITEWIN);
-                                }
-                            }
+                            // Display which player wins the game
+                            checkEndGame();
                             return;
                         }
                     }
@@ -247,48 +233,80 @@ public class InitialBoard extends JPanel {
                             System.out.println(getGame().getOtherPlayer());
                         }
                     }
-                    // Check if a mill is formed
-                    if (game.getBoard().getMills().size() > 0){
-                        if (millCount != game.getBoard().getMills().size()){
-                            instruction.changeText(Instruction.InstructionType.REMOVE);
-                            game.swapPlayers();
-                            playerTurn.changeIcon();
-                            millCount = game.getBoard().getMills().size();
-                        }
 
-                        for (Backend.Mill mills : game.getBoard().getMills()){
-                            //continue here
-                            int firstIndexLayer = mills.getIntersection().get(0).getLayer();
-                            int firstIndexPosition = mills.getIntersection().get(0).getPosition();
-                            int firstIndexTemp = board.getIndexLookUpTable(firstIndexLayer, firstIndexPosition);
-
-                            int secondIndexLayer = mills.getIntersection().get(1).getLayer();
-                            int secondIndexPosition = mills.getIntersection().get(1).getPosition();
-                            int secondIndexTemp = board.getIndexLookUpTable(secondIndexLayer, secondIndexPosition);
-
-                            int thirdIndexLayer = mills.getIntersection().get(2).getLayer();
-                            int thirdIndexPosition = mills.getIntersection().get(2).getPosition();
-                            int thirdIndexTemp = board.getIndexLookUpTable(thirdIndexLayer, thirdIndexPosition);
-
-                            addMill(firstIndexTemp, secondIndexTemp, thirdIndexTemp, millLayer);
-                        }
-                        canRemove = true;
-                    }
-
+                    // Check if a mill is formed and then do approriate actions and draw them
+                    checkAndDrawMills();
                     // Display which player wins the game
-                    if (game.isGameOver()){
-                        if (game.getWinner().getTokenColour() == TokenColour.PLAYER_2_BLACK) {
-                            displayResult(Win.WhoWin.BLACKWIN);
-                        }
-                        else{
-                            displayResult(Win.WhoWin.WHITEWIN);
-                        }
-                    }
+                    checkEndGame();
                 }
             });
 
         }
 
+    }
+
+    public void checkAndRemoveMills(CanRemoveMill action){
+        for (Backend.Board.Mill removedMill : action.getRemoveMillList()) {
+            int firstIndexLayer = removedMill.getIntersection().get(0).getLayer();
+            int firstIndexPosition = removedMill.getIntersection().get(0).getPosition();
+            int firstIndexTemp = board.getIndexLookUpTable(firstIndexLayer, firstIndexPosition);
+
+            int secondIndexLayer = removedMill.getIntersection().get(1).getLayer();
+            int secondIndexPosition = removedMill.getIntersection().get(1).getPosition();
+            int secondIndexTemp = board.getIndexLookUpTable(secondIndexLayer, secondIndexPosition);
+
+            int thirdIndexLayer = removedMill.getIntersection().get(2).getLayer();
+            int thirdIndexPosition = removedMill.getIntersection().get(2).getPosition();
+            int thirdIndexTemp = board.getIndexLookUpTable(thirdIndexLayer, thirdIndexPosition);
+
+            removeMill(firstIndexTemp, secondIndexTemp, thirdIndexTemp, millLayer);
+            millCount--;
+        }
+    }
+
+    public void checkAndDrawMills(){
+        // Check if a mill is formed
+        if (game.getBoard().getMills().size() > 0){
+            if (millCount != game.getBoard().getMills().size()){
+                instruction.changeText(Instruction.InstructionType.REMOVE);
+                game.swapPlayers();
+                playerTurn.changeIcon();
+                millCount = game.getBoard().getMills().size();
+            }
+
+            for (Backend.Board.Mill mills : game.getBoard().getMills()){
+                //continue here
+                int firstIndexLayer = mills.getIntersection().get(0).getLayer();
+                int firstIndexPosition = mills.getIntersection().get(0).getPosition();
+                int firstIndexTemp = board.getIndexLookUpTable(firstIndexLayer, firstIndexPosition);
+
+                int secondIndexLayer = mills.getIntersection().get(1).getLayer();
+                int secondIndexPosition = mills.getIntersection().get(1).getPosition();
+                int secondIndexTemp = board.getIndexLookUpTable(secondIndexLayer, secondIndexPosition);
+
+                int thirdIndexLayer = mills.getIntersection().get(2).getLayer();
+                int thirdIndexPosition = mills.getIntersection().get(2).getPosition();
+                int thirdIndexTemp = board.getIndexLookUpTable(thirdIndexLayer, thirdIndexPosition);
+
+                addMill(firstIndexTemp, secondIndexTemp, thirdIndexTemp, millLayer);
+            }
+            canRemove = true;
+        }
+
+    }
+
+    /**
+     * This method is used to display the result of the game
+     */
+    public void checkEndGame(){
+        // Display which player wins the game
+        if (game.isGameOver()) {
+            if (game.getWinner().getTokenColour() == TokenColour.PLAYER_2_BLACK) {
+                displayResult(Win.WhoWin.BLACKWIN);
+            } else {
+                displayResult(Win.WhoWin.WHITEWIN);
+            }
+        }
     }
 
     /**

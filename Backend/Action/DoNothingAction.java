@@ -1,4 +1,8 @@
-package Backend;
+package Backend.Action;
+
+import Backend.Action.Action;
+import Backend.Game;
+import Backend.Player;
 
 /**
  * A class to represent the action of doing nothing.

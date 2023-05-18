@@ -1,7 +1,6 @@
-package Backend;
+package Backend.Board;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import Backend.Token.Token;
 
 public class Intersection {
     /**
@@ -111,9 +110,9 @@ public class Intersection {
     @Override
     public String toString() {
         return "Intersection{" +
-                "layer=" + layer +
-                ", position=" + position +
-                ", token=" + getToken() +
+                layer +
+                "," + position +
+                "," + getToken() +
                 '}';
     }
 

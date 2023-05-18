@@ -1,9 +1,13 @@
-package Backend;
+package Backend.Action;
+
+import Backend.Game;
+import Backend.Board.Intersection;
+import Backend.Player;
 
 /**
  * This class represents the action of placing a token on an intersection
  */
-public class PlaceTokenAction extends Action{
+public class PlaceTokenAction extends Action {
 
     /**
      * Private attributes of PlaceTokenAction
@@ -16,7 +20,7 @@ public class PlaceTokenAction extends Action{
      * @param placeIntersection = intersection where the token is placed
      * @param game = current game
      */
-    public PlaceTokenAction(Player player,Intersection placeIntersection, Game game) {
+    public PlaceTokenAction(Player player, Intersection placeIntersection, Game game) {
         super(player, game);
         this.placeIntersection = placeIntersection;
     }

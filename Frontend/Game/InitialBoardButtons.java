@@ -7,7 +7,7 @@ import Frontend.Button.BtnRestart;
 import javax.swing.*;
 import java.awt.*;
 
-public class InnitialBoardButtons extends JPanel {
+public class InitialBoardButtons extends JPanel {
     /**
      * This class is used to create the buttons in InitialBoard, they include hint, restart, close
      * The reason of create this class, instead of adding the buttons directly in InitialBoard, is to prevent disalignment
@@ -18,7 +18,7 @@ public class InnitialBoardButtons extends JPanel {
     protected BtnClose btnClose;
 
     // Constructor
-    public InnitialBoardButtons(){
+    public InitialBoardButtons(){
         this.btnHint = new BtnHint();
         this.btnRestart = new BtnRestart();
         this.btnClose = new BtnClose();

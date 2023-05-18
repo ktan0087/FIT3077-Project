@@ -1,5 +1,6 @@
-package Frontend.Game;
+package Frontend.Components;
 
+import Frontend.Game.Intersection;
 import Frontend.Line.HorizontalLine;
 import Frontend.Line.VerticalLine;
 

@@ -10,7 +10,7 @@ public class MainPage extends JLayeredPane{
     private JLabel gameName = new JLabel();
     protected BtnPlay btnPlay = new BtnPlay();
     private BtnTutorial btnTut = new BtnTutorial();
-    private JLabel background=new JLabel(new ImageIcon("Frontend/Icons/background.png"));
+    private JLabel background=new JLabel(new ImageIcon(getClass().getResource("/Icons/background.png")));
 
     // Constructor
     public MainPage(){

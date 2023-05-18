@@ -11,7 +11,7 @@ public class WhiteTokenRemain extends TokenRemain {
     // Constructor
     public WhiteTokenRemain(){
         super();
-        this.whiteToken = new ImageIcon("Frontend/Icons/white-token.png");
+        this.whiteToken = new ImageIcon(getClass().getResource("/Icons/white-token.png"));
         this.setIcon(whiteToken);
     }
 }

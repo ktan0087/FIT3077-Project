@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
         this.setResizable(false); // prevent frame from being resized
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // exit out of application
 
-        ImageIcon pvp = new ImageIcon("Frontend/Icons/pvp.png"); // create an image icon
+        ImageIcon pvp = new ImageIcon(getClass().getResource("/Icons/pvp.png")); // create an image icon
         this.setIconImage(pvp.getImage()); //change icon of frame
 
     }

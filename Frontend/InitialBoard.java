@@ -126,8 +126,6 @@ public class InitialBoard extends JPanel {
 
                     Token token = whiteToken; // set the token to white token by default
 
-
-
                     // set the token to black token if the current player is player 2
                     if (getGame().getCurrentPlayer().getTokenColour() == TokenColour.PLAYER_2_BLACK) {
                         token = blackToken;

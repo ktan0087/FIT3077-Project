@@ -1,4 +1,7 @@
-package Frontend;
+package Frontend.Game;
+
+import Frontend.Button.BtnPlay;
+import Frontend.Button.BtnTutorial;
 
 import javax.swing.*;
 import java.awt.*;

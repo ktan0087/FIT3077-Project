@@ -1,7 +1,8 @@
-package Frontend;
+package Frontend.Game;
 
 import Backend.Action.RemoveTokenAction;
 import Backend.Token.TokenColour;
+import Frontend.Components.Instruction;
 
 import javax.swing.*;
 import java.awt.*;

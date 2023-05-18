@@ -1,14 +1,17 @@
-package Frontend;
+package Frontend.Game;
+
+import Frontend.Button.BtnClose;
+import Frontend.Button.BtnRestart;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ResultButton extends JPanel {
+public class ResultButtons extends JPanel {
     protected BtnRestart btnRestart;
     protected BtnClose btnClose;
-    public ResultButton(){
+    public ResultButtons(){
         btnRestart = new BtnRestart();
         btnClose = new BtnClose();
 
@@ -26,7 +29,7 @@ public class ResultButton extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // close the result page
-                SwingUtilities.getWindowAncestor(ResultButton.this).dispose();
+                SwingUtilities.getWindowAncestor(ResultButtons.this).dispose();
             }
         });
         this.add(btnRestart, gbc);
@@ -39,7 +42,7 @@ public class ResultButton extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // close the result page
-                SwingUtilities.getWindowAncestor(ResultButton.this).dispose();
+                SwingUtilities.getWindowAncestor(ResultButtons.this).dispose();
             }
         });
         this.add(btnClose, gbc);

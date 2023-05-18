@@ -1,6 +1,5 @@
 package Backend;
-import Backend.*;
-import Frontend.*;
+import Frontend.Game.Layout;
 
 import javax.swing.*;
 

@@ -1,4 +1,4 @@
-package Frontend;
+package Frontend.Frame;
 
 import javax.swing.*;
 import java.awt.*;

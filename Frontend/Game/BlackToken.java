@@ -1,10 +1,10 @@
-package Frontend;
+package Frontend.Game;
 
 import Backend.Token.TokenColour;
 
 import java.awt.*;
 
-public class BlackToken extends Token{
+public class BlackToken extends Token {
     /**
      * Generate a black token
      * @param coordinateX the x coordinate of the token

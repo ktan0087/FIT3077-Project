@@ -1,10 +1,16 @@
-package Frontend;
+package Frontend.Game;
 import Backend.*;
 import Backend.Action.FlyTokenAction;
 import Backend.Action.MoveTokenAction;
 import Backend.Action.PlaceTokenAction;
 import Backend.Interfaces.CanRemoveMill;
 import Backend.Token.TokenColour;
+import Frontend.Components.Instruction;
+import Frontend.Components.PlayerTurn;
+import Frontend.Components.TokenRemain;
+import Frontend.Components.Win;
+import Frontend.Layer.PlaceToken;
+import Frontend.Line.Mill;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,8 +24,8 @@ public class InitialBoard extends JPanel {
      * The initial board that players can see when they start the game
      */
     private ArrayList<Token> tokenList; // create a list to store tokens
-    protected Buttons buttons; // buttons that illustrate hint, restart, close
-    private Frontend.Board board; // create a board
+    protected InnitialBoardButtons buttons; // buttons that illustrate hint, restart, close
+    private Board board; // create a board
     protected PlaceToken placeToken; // create a layer to place tokens
     protected PlayerTurn playerTurn; // show which player's turn
     private TokenRemain whiteTokenRemain; // show the remaining number of white tokens
@@ -29,7 +35,7 @@ public class InitialBoard extends JPanel {
     protected Instruction instruction; // provide the instruction of the game
     private Game game; // the game that is played
     private PlaceToken millLayer; // the layer that shows the mill
-    protected ResultButton resultButton;
+    protected ResultButtons resultButton;
     private Token tokenToRemove; // the token that is selected to be removed
 
     protected Boolean canRemove = false;
@@ -55,7 +61,7 @@ public class InitialBoard extends JPanel {
     public InitialBoard() {
         // Create components in the initial board
         this.tokenList = new ArrayList<>(); // create a list to store tokens
-        this.buttons = new Buttons(); // buttons that illustrate hint, restart, close
+        this.buttons = new InnitialBoardButtons(); // buttons that illustrate hint, restart, close
         this.board = new Board(); // create a board
         this.placeToken = new PlaceToken(); // create a layer to place tokens
         this.playerTurn = new PlayerTurn(); // show which player's turn
@@ -63,7 +69,7 @@ public class InitialBoard extends JPanel {
         this.blackTokenRemain = new TokenRemain(TokenRemain.TokenColour.BLACK); // show the remaining number of black tokens
         this.instruction = new Instruction(Instruction.InstructionType.EMPTY); // provide the instruction of the game
         this.millLayer = new PlaceToken(); // the layer that shows the mill
-        this.resultButton = new ResultButton();
+        this.resultButton = new ResultButtons();
 
         // set the background color of the board
         this.setBackground(new Color(0xE0A060));

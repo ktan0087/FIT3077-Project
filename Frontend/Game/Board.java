@@ -1,4 +1,7 @@
-package Frontend;
+package Frontend.Game;
+
+import Frontend.Line.HorizontalLine;
+import Frontend.Line.VerticalLine;
 
 import javax.swing.*;
 import java.awt.*;

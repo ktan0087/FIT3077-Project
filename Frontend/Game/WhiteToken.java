@@ -1,10 +1,10 @@
-package Frontend;
+package Frontend.Game;
 
 import Backend.Token.TokenColour;
 
 import java.awt.*;
 
-public class WhiteToken extends Token{
+public class WhiteToken extends Token {
     /**
      * This class is used to create the white token
      * @param coordinateX is the layer of the token (e.g. TOP_LEFT has the layer of 1)

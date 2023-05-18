@@ -1,8 +1,11 @@
 package Backend.Board;
 
 import Backend.Action.AllActions;
+import Backend.Action.PlaceTokenAction;
+import Backend.Game;
 import Backend.Player;
 import Backend.Token.Token;
+import Backend.Token.TokenColour;
 
 import java.util.ArrayList;
 
@@ -19,6 +22,9 @@ public class Board {
     private ArrayList<Mill> mills = new ArrayList<>();
     private ArrayList<Intersection> adjacentIntersection = new ArrayList<>();
     private ArrayList<Intersection> adjacentIntersectionList = new ArrayList<>();
+    private ArrayList<Intersection> adjacentIntersectionSmall = new ArrayList<>();
+    private ArrayList<Intersection> adjacentIntersectionListSmall = new ArrayList<>();
+
 
     /**
      * Constructor
@@ -191,6 +197,54 @@ public class Board {
         return adjacentIntersection;
     }
 
+    public ArrayList<Intersection> getAdjacentIntersectionSmall(Intersection currentIntersection){
+        Intersection adjacent1 = this.getIntersection(currentIntersection.getLayer(), currentIntersection.getPosition());
+        Intersection adjacent2 = this.getIntersection(currentIntersection.getLayer(), currentIntersection.getPosition());
+        Intersection adjacent3 = this.getIntersection(currentIntersection.getLayer(), currentIntersection.getPosition());
+        Intersection adjacent4 = this.getIntersection(currentIntersection.getLayer(), currentIntersection.getPosition());
+        adjacentIntersection.clear();
+
+        if (adjacent1.getPosition() + 1> 8){
+            int j = adjacent1.getPosition() - 7;
+            adjacent1 = this.getIntersection(currentIntersection.getLayer(), j);
+        }
+        else{
+            adjacent1 = this.getIntersection(currentIntersection.getLayer(), currentIntersection.getPosition() + 1);
+        }
+        if (adjacent2.getPosition() - 1<= 0){
+            int i = adjacent2.getPosition() + 7;
+            adjacent2 = this.getIntersection(currentIntersection.getLayer(), i);
+        }
+        else{
+            adjacent2 = this.getIntersection(currentIntersection.getLayer(), currentIntersection.getPosition() - 1);
+        }
+
+        if (currentIntersection.getPosition() % 2 == 1) {
+            adjacentIntersection.add(adjacent1);
+            adjacentIntersection.add(adjacent2);
+        }
+        else{
+            if (currentIntersection.getLayer() == 1) {
+                adjacentIntersection.add(adjacent2);
+                adjacentIntersection.add(adjacent1);
+                adjacentIntersection.add(intersection[currentIntersection.getLayer() + 1][currentIntersection.getPosition()]);
+            }
+            else if (currentIntersection.getLayer() == 2) {
+                adjacentIntersection.add(adjacent2);
+                adjacentIntersection.add(adjacent1);
+                adjacentIntersection.add(intersection[currentIntersection.getLayer() - 1][currentIntersection.getPosition()]);
+                adjacentIntersection.add(intersection[currentIntersection.getLayer() + 1][currentIntersection.getPosition()]);
+            }
+            else if (currentIntersection.getLayer() == 3) {
+                adjacentIntersection.add(adjacent2);
+                adjacentIntersection.add(adjacent1);
+                adjacentIntersection.add(intersection[currentIntersection.getLayer() - 1][currentIntersection.getPosition()]);
+            }
+        }
+
+        return adjacentIntersection;
+    }
+
     public boolean isMill(Player player, Intersection currentIntersection){
         boolean flag = false;
         if (!currentIntersection.isEmpty()) {
@@ -237,6 +291,26 @@ public class Board {
 //        return flag;
 //    }
 
+//    public static void main(String[] args) {
+//        Player p1 = new Player("KT", TokenColour.PLAYER_1_WHITE);
+//        Player p2 = new Player("ZW", TokenColour.PLAYER_2_BLACK);
+//        Game g = new Game();
+//        Board b = new Board();
+//
+//        b.getAdjacentIntersection(b.intersection[1][5]);
+//        PlaceTokenAction action1 = new PlaceTokenAction(p1, b.intersection[2][2], g);
+//        System.out.println(action1.execute());
+//        System.out.println(b.getAdjacentIntersectionSmall(b.intersection[2][2]));
+//        //b.placeToken(p1, b.intersection[1][1]);
+////        System.out.println(b.intersection[1][1].toString());
+////        b.placeToken(p2, b.intersection[1][2]);
+////        b.placeToken(p1, b.intersection[1][3]);
+////        System.out.println(b.intersection[1][1].isEmpty());
+////        System.out.println((b.intersection[1][1].getToken().getTokenColour()));
+////        System.out.println((b.intersection[1][2].getToken().getTokenColour()));
+//    }
+
+
 }
     //remove token from mill
     //remove mill object from mills arraylist
@@ -245,22 +319,5 @@ public class Board {
 //    /**
 //     * Function to check if the intersection is working
 //     */
-//    public static void main(String[] args) {
-//        Player p1 = new Player("KT", TokenColour.PLAYER_1_WHITE);
-//        Player p2 = new Player("ZW", TokenColour.PLAYER_2_BLACK);
-//        Game g = new Game();
-//        Board b = new Board();
-//
-//        b.getAdjacentIntersection(b.intersection[1][5]);
-//        PlaceTokenAction action1 = new PlaceTokenAction(p1, b.intersection[1][1], g);
-//        System.out.println(action1.execute());
-//
-//        //b.placeToken(p1, b.intersection[1][1]);
-//        System.out.println(b.intersection[1][1].toString());
-//        b.placeToken(p2, b.intersection[1][2]);
-//        b.placeToken(p1, b.intersection[1][3]);
-//        System.out.println(b.intersection[1][1].isEmpty());
-//        System.out.println((b.intersection[1][1].getToken().getTokenColour()));
-//        System.out.println((b.intersection[1][2].getToken().getTokenColour()));
 
 

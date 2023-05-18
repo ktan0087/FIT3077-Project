@@ -57,6 +57,8 @@ public class Game {
      */
     private boolean isGameOver;
 
+    private ArrayList<Intersection> adjacentIntersectionList;
+
 //    // not yet implemented in this sprint
 //    private GameMode gameMode;
 
@@ -163,6 +165,32 @@ public class Game {
         isGameOver = false;
     }
 
+    public boolean checkPossibleMove(Player player) {
+        boolean flag = false;
+        //Loop through the layers and positions to create the intersections
+        for (int i = 1; i < MAX_LAYERS; i++) {
+            for (int j = 1; j < MAX_POSITIONS; j++) {
+                flag = false;
+                if (!getBoard().getIntersection(i, j).isEmpty() && getBoard().getIntersection(i, j).getToken().getTokenColour() == player.getTokenColour()) {
+                    adjacentIntersectionList = board.getAdjacentIntersectionSmall(getBoard().getIntersection(i,j));
+                }
+                if (adjacentIntersectionList != null) {
+                    for (Intersection intersection : adjacentIntersectionList) {
+                        if (intersection.isEmpty()) {
+                            flag = true;
+                        }
+                    }
+                }
+            }
+            System.out.println(flag);
+        }
+        return flag;
+    }
+
+    public static void main(String[] args) {
+        Board b = new Board();
+        System.out.println(b.getAdjacentIntersectionSmall(b.getIntersection(1,1)));
+    }
     public boolean checkPossibleRemove(Player player){
         boolean flag = true;
         ArrayList<Intersection> intersections = new ArrayList<>();

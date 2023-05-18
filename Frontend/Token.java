@@ -142,6 +142,7 @@ public abstract class Token extends JLabel {
                     iniBoard.getGame().endTurn();
                     iniBoard.playerTurn.changeIcon();
                     iniBoard.checkEndGame();
+                    swapInstruction();
                     return;
                 }
 
@@ -160,5 +161,19 @@ public abstract class Token extends JLabel {
             times++;
         }
     };
+
+    public void swapInstruction(){
+        if (iniBoard.blackTokenRemain.getAmountToken() > 0){
+            iniBoard.instruction.changeText(Instruction.InstructionType.PLACE);
+        }
+        else if (iniBoard.blackTokenRemain.getAmountToken() == 0){
+            if (iniBoard.getGame().getCurrentPlayer().getTokensOnBoard() == 3){
+                iniBoard.instruction.changeText(Instruction.InstructionType.FLY);
+            }
+            else {
+                iniBoard.instruction.changeText(Instruction.InstructionType.MOVE);
+            }
+        }
+    }
 
 }

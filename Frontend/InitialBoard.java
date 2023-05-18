@@ -22,11 +22,11 @@ public class InitialBoard extends JPanel {
     private Frontend.Board board; // create a board
     protected PlaceToken placeToken; // create a layer to place tokens
     protected PlayerTurn playerTurn; // show which player's turn
-    private WhiteTokenRemain whiteTokenRemain; // show the remaining number of white tokens
-    private BlackTokenRemain blackTokenRemain; // show the remaining number of black tokens
+    private TokenRemain whiteTokenRemain; // show the remaining number of white tokens
+    protected TokenRemain blackTokenRemain; // show the remaining number of black tokens
     private Token selectedToken; // the token that is selected by the player
     protected boolean isSelected; // whether the player has selected a token
-    private Instruction instruction; // provide the instruction of the game
+    protected Instruction instruction; // provide the instruction of the game
     private Game game; // the game that is played
     private PlaceToken millLayer; // the layer that shows the mill
     protected ResultButton resultButton;
@@ -59,8 +59,8 @@ public class InitialBoard extends JPanel {
         this.board = new Board(); // create a board
         this.placeToken = new PlaceToken(); // create a layer to place tokens
         this.playerTurn = new PlayerTurn(); // show which player's turn
-        this.whiteTokenRemain = new WhiteTokenRemain(); // show the remaining number of white tokens
-        this.blackTokenRemain = new BlackTokenRemain(); // show the remaining number of black tokens
+        this.whiteTokenRemain = new TokenRemain(TokenRemain.TokenColour.WHITE); // show the remaining number of white tokens
+        this.blackTokenRemain = new TokenRemain(TokenRemain.TokenColour.BLACK); // show the remaining number of black tokens
         this.instruction = new Instruction(Instruction.InstructionType.EMPTY); // provide the instruction of the game
         this.millLayer = new PlaceToken(); // the layer that shows the mill
         this.resultButton = new ResultButton();
@@ -301,6 +301,7 @@ public class InitialBoard extends JPanel {
     public void checkEndGame(){
         // Display which player wins the game
         if (game.isGameOver()) {
+            this.instruction.changeText(Instruction.InstructionType.EMPTY);
             if (game.getWinner().getTokenColour() == TokenColour.PLAYER_2_BLACK) {
                 displayResult(Win.WhoWin.BLACKWIN);
             } else {

@@ -5,10 +5,7 @@ import Backend.Action.MoveTokenAction;
 import Backend.Action.PlaceTokenAction;
 import Backend.Interfaces.CanRemoveMill;
 import Backend.Token.TokenColour;
-import Frontend.Components.Instruction;
-import Frontend.Components.PlayerTurn;
-import Frontend.Components.TokenRemain;
-import Frontend.Components.Win;
+import Frontend.Components.*;
 import Frontend.Layer.PlaceToken;
 import Frontend.Line.Mill;
 
@@ -24,7 +21,7 @@ public class InitialBoard extends JPanel {
      * The initial board that players can see when they start the game
      */
     private ArrayList<Token> tokenList; // create a list to store tokens
-    protected InnitialBoardButtons buttons; // buttons that illustrate hint, restart, close
+    protected InitialBoardButtons buttons; // buttons that illustrate hint, restart, close
     private Board board; // create a board
     protected PlaceToken placeToken; // create a layer to place tokens
     protected PlayerTurn playerTurn; // show which player's turn
@@ -61,7 +58,7 @@ public class InitialBoard extends JPanel {
     public InitialBoard() {
         // Create components in the initial board
         this.tokenList = new ArrayList<>(); // create a list to store tokens
-        this.buttons = new InnitialBoardButtons(); // buttons that illustrate hint, restart, close
+        this.buttons = new InitialBoardButtons(); // buttons that illustrate hint, restart, close
         this.board = new Board(); // create a board
         this.placeToken = new PlaceToken(); // create a layer to place tokens
         this.playerTurn = new PlayerTurn(); // show which player's turn

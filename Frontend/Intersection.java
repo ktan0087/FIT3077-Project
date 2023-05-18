@@ -25,10 +25,11 @@ public class Intersection extends JLabel {
         BOTTOM_RIGHT
     }
 
-    IntersectionPoint inter = new IntersectionPoint(); // create a circle button for intersection
+    IntersectionPoint inter; // create a circle button for intersection
 
     // Constructor
     public Intersection(int coordinateX, int coordinateY){
+        this.inter = new IntersectionPoint(); // create a circle button for intersection
         this.setLayout(new GridLayout(3, 3, -1, -1)); // -1 is to prevent showing grid border
         this.coordinateX = coordinateX;
         this.coordinateY = coordinateY;

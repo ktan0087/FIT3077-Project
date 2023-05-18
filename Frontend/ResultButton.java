@@ -6,9 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ResultButton extends JPanel {
-    protected BtnRestart btnRestart = new BtnRestart();
-    protected BtnClose btnClose = new BtnClose();
+    protected BtnRestart btnRestart;
+    protected BtnClose btnClose;
     public ResultButton(){
+        btnRestart = new BtnRestart();
+        btnClose = new BtnClose();
+
         this.setOpaque(false); // set the background of this panel transparent
 
         this.setLayout(new GridBagLayout()); // set the layout of this panel

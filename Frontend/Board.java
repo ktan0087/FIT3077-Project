@@ -342,11 +342,6 @@ public class Board extends JPanel {
         String combine = String.valueOf(layer) + String.valueOf(position);
         int combine1 = Integer.parseInt(combine);
 
-//        for (int i = 1; i <= 38; i++) {
-//            if (i == Integer.parseInt(combine)){
-//                return indexLookUpTable.get(i);
-//            }
-//        }
         return indexLookUpTable.get(combine1);
     }
 

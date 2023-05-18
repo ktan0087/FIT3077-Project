@@ -16,7 +16,7 @@ public abstract class Token extends JLabel {
     private int coordinateX;
     private int coordinateY;
     private int times;
-    protected Boolean selected = false;
+    protected Boolean selected;
     protected int index;
     protected Color tokenColor;
 
@@ -26,6 +26,8 @@ public abstract class Token extends JLabel {
 
     // Constructor
     public Token(int coordinateX, int coordinateY, InitialBoard iniBoard){
+        this.selected = false;
+
         this.coordinateX = coordinateX;
         this.coordinateY = coordinateY;
         this.times = 0;

@@ -28,10 +28,10 @@ public class Win extends JLabel {
 
     public void setWinner(WhoWin winner){
         if (this.winner == WhoWin.WHITEWIN){
-            setIcon(new ImageIcon("Frontend/Icons/white-token.png"));
+            setIcon(new ImageIcon("Icons/white-token.png"));
         }
         else if (this.winner == WhoWin.BLACKWIN){
-            setIcon(new ImageIcon("Frontend/Icons/black-token.png"));
+            setIcon(new ImageIcon("Icons/black-token.png"));
         }
     }
 }

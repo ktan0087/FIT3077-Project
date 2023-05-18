@@ -1,20 +1,19 @@
-package Frontend;
+package Frontend.Button;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class BtnRestart extends JButton {
+public class BtnHint extends JButton {
     /**
-     * Customized button for restart
+     * Customized button for hint
      */
 
     // Constructor
-    public BtnRestart(){
+    public BtnHint(){
         this.setFocusable(false); // get rid of the annoying box in button
-        ImageIcon iconRestart = new ImageIcon(getClass().getResource("/Icons/restart.png"));
-        this.setIcon(iconRestart);
+        ImageIcon iconHint = new ImageIcon(getClass().getResource("/Icons/hint.png"));
+        this.setIcon(iconHint);
         this.setBackground(new Color(0xE6B380));
         this.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
-
     }
 }

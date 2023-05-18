@@ -1,20 +1,28 @@
-package Frontend;
+package Frontend.Game;
+
+import Frontend.Button.BtnClose;
+import Frontend.Button.BtnHint;
+import Frontend.Button.BtnRestart;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Buttons extends JPanel {
+public class InnitialBoardButtons extends JPanel {
     /**
      * This class is used to create the buttons in InitialBoard, they include hint, restart, close
      * The reason of create this class, instead of adding the buttons directly in InitialBoard, is to prevent disalignment
      * between the buttons and BlackTokenRemain label
      */
-    private BtnHint btnHint = new BtnHint();
-    protected BtnRestart btnRestart = new BtnRestart();
-    protected BtnClose btnClose = new BtnClose();
+    private BtnHint btnHint;
+    protected BtnRestart btnRestart;
+    protected BtnClose btnClose;
 
     // Constructor
-    public Buttons(){
+    public InnitialBoardButtons(){
+        this.btnHint = new BtnHint();
+        this.btnRestart = new BtnRestart();
+        this.btnClose = new BtnClose();
+
         this.setOpaque(false); // set the background of this panel transparent
 
         this.setLayout(new GridBagLayout()); // set the layout of this panel

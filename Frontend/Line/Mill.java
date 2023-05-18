@@ -1,4 +1,4 @@
-package Frontend;
+package Frontend.Line;
 
 import javax.swing.*;
 import java.awt.*;

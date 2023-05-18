@@ -1,4 +1,4 @@
-package Frontend;
+package Frontend.Layer;
 
 import javax.swing.*;
 import java.awt.*;

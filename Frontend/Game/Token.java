@@ -1,7 +1,8 @@
-package Frontend;
+package Frontend.Game;
 
 import Backend.Action.RemoveTokenAction;
 import Backend.Token.TokenColour;
+import Frontend.Components.Instruction;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +17,7 @@ public abstract class Token extends JLabel {
     private int coordinateX;
     private int coordinateY;
     private int times;
-    protected Boolean selected = false;
+    protected Boolean selected;
     protected int index;
     protected Color tokenColor;
 
@@ -26,6 +27,8 @@ public abstract class Token extends JLabel {
 
     // Constructor
     public Token(int coordinateX, int coordinateY, InitialBoard iniBoard){
+        this.selected = false;
+
         this.coordinateX = coordinateX;
         this.coordinateY = coordinateY;
         this.times = 0;
@@ -143,6 +146,7 @@ public abstract class Token extends JLabel {
                     iniBoard.getGame().endTurn();
                     iniBoard.playerTurn.changeIcon();
                     iniBoard.checkEndGame();
+                    swapInstruction();
                     return;
                 }
 
@@ -161,5 +165,19 @@ public abstract class Token extends JLabel {
             times++;
         }
     };
+
+    public void swapInstruction(){
+        if (iniBoard.blackTokenRemain.getAmountToken() > 0){
+            iniBoard.instruction.changeText(Instruction.InstructionType.PLACE);
+        }
+        else if (iniBoard.blackTokenRemain.getAmountToken() == 0){
+            if (iniBoard.getGame().getCurrentPlayer().getTokensOnBoard() == 3){
+                iniBoard.instruction.changeText(Instruction.InstructionType.FLY);
+            }
+            else {
+                iniBoard.instruction.changeText(Instruction.InstructionType.MOVE);
+            }
+        }
+    }
 
 }

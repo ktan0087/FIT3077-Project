@@ -1,16 +1,17 @@
-package Frontend;
+package Frontend.Line;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class VerticalLine extends JLabel {
+// Create a horizontal line
+public class HorizontalLine extends JLabel {
     /**
-     * This class is used to create a vertical line
+     * Create a horizontal line
      */
 
     /**
-     * This class is used to create a vertical line
-     * @param g is the abstract base class for all graphics contexts
+     * draw a horizontal line
+     * @param g the abstract base class for all graphics contexts
      */
     public void paintComponent(Graphics g){
         //set the width of line
@@ -20,6 +21,6 @@ public class VerticalLine extends JLabel {
 
         //draw the line from x and y coordinates of first point to the other
         Dimension dimension = this.getSize();
-        g.drawLine(dimension.height/2,0,dimension.height/2, dimension.width);
+        g.drawLine(0,dimension.height/2,dimension.width, dimension.height/2);
     }
 }

@@ -1,4 +1,7 @@
-package Frontend;
+package Frontend.Game;
+
+import Frontend.Button.BtnPlay;
+import Frontend.Button.BtnTutorial;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,13 +10,18 @@ public class MainPage extends JLayeredPane{
     /**
      * Customized the main page and this page is the first page that user will see
      */
-    private JLabel gameName = new JLabel();
-    protected BtnPlay btnPlay = new BtnPlay();
-    private BtnTutorial btnTut = new BtnTutorial();
-    private JLabel background=new JLabel(new ImageIcon(getClass().getResource("/Icons/background.png")));
+    private JLabel gameName;
+    protected BtnPlay btnPlay;
+    private BtnTutorial btnTut;
+    private JLabel background;
 
     // Constructor
     public MainPage(){
+        this.gameName = new JLabel();
+        this.btnPlay = new BtnPlay();
+        this.btnTut = new BtnTutorial();
+        this.background=new JLabel(new ImageIcon(getClass().getResource("/Icons/background.png")));
+
         this.setBackground(new Color(0xE0A060));
         this.setOpaque(true);
 

@@ -1,10 +1,16 @@
-package Frontend;
+package Frontend.Game;
 import Backend.*;
 import Backend.Action.FlyTokenAction;
 import Backend.Action.MoveTokenAction;
 import Backend.Action.PlaceTokenAction;
 import Backend.Interfaces.CanRemoveMill;
 import Backend.Token.TokenColour;
+import Frontend.Components.Instruction;
+import Frontend.Components.PlayerTurn;
+import Frontend.Components.TokenRemain;
+import Frontend.Components.Win;
+import Frontend.Layer.PlaceToken;
+import Frontend.Line.Mill;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,20 +23,21 @@ public class InitialBoard extends JPanel {
     /**
      * The initial board that players can see when they start the game
      */
-    private ArrayList<Token> tokenList = new ArrayList<>(); // create a list to store tokens
-    protected Buttons buttons = new Buttons(); // buttons that illustrate hint, restart, close
-    private Frontend.Board board = new Board(); // create a board
-    protected PlaceToken placeToken = new PlaceToken(); // create a layer to place tokens
-    protected PlayerTurn playerTurn = new PlayerTurn(); // show which player's turn
-    private WhiteTokenRemain whiteTokenRemain = new WhiteTokenRemain(); // show the remaining number of white tokens
-    private BlackTokenRemain blackTokenRemain = new BlackTokenRemain(); // show the remaining number of black tokens
+    private ArrayList<Token> tokenList; // create a list to store tokens
+    protected InnitialBoardButtons buttons; // buttons that illustrate hint, restart, close
+    private Board board; // create a board
+    protected PlaceToken placeToken; // create a layer to place tokens
+    protected PlayerTurn playerTurn; // show which player's turn
+    private TokenRemain whiteTokenRemain; // show the remaining number of white tokens
+    protected TokenRemain blackTokenRemain; // show the remaining number of black tokens
     private Token selectedToken; // the token that is selected by the player
     protected boolean isSelected; // whether the player has selected a token
-    private Instruction instruction = new Instruction(Instruction.InstructionType.EMPTY); // provide the instruction of the game
+    protected Instruction instruction; // provide the instruction of the game
     private Game game; // the game that is played
-    private PlaceToken millLayer = new PlaceToken(); // the layer that shows the mill
-    protected ResultButton resultButton = new ResultButton();
+    private PlaceToken millLayer; // the layer that shows the mill
+    protected ResultButtons resultButton;
     private Token tokenToRemove; // the token that is selected to be removed
+
     protected Boolean canRemove = false;
     private int millCount;
 
@@ -52,6 +59,18 @@ public class InitialBoard extends JPanel {
 
     // Constructor
     public InitialBoard() {
+        // Create components in the initial board
+        this.tokenList = new ArrayList<>(); // create a list to store tokens
+        this.buttons = new InnitialBoardButtons(); // buttons that illustrate hint, restart, close
+        this.board = new Board(); // create a board
+        this.placeToken = new PlaceToken(); // create a layer to place tokens
+        this.playerTurn = new PlayerTurn(); // show which player's turn
+        this.whiteTokenRemain = new TokenRemain(TokenRemain.TokenColour.WHITE); // show the remaining number of white tokens
+        this.blackTokenRemain = new TokenRemain(TokenRemain.TokenColour.BLACK); // show the remaining number of black tokens
+        this.instruction = new Instruction(Instruction.InstructionType.EMPTY); // provide the instruction of the game
+        this.millLayer = new PlaceToken(); // the layer that shows the mill
+        this.resultButton = new ResultButtons();
+
         // set the background color of the board
         this.setBackground(new Color(0xE0A060));
         this.setOpaque(true);
@@ -288,6 +307,7 @@ public class InitialBoard extends JPanel {
     public void checkEndGame(){
         // Display which player wins the game
         if (game.isGameOver()) {
+            this.instruction.changeText(Instruction.InstructionType.EMPTY);
             if (game.getWinner().getTokenColour() == TokenColour.PLAYER_2_BLACK) {
                 displayResult(Win.WhoWin.BLACKWIN);
             } else {

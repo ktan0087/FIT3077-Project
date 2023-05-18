@@ -1,9 +1,11 @@
 // Lazic B. (10 Mar 2013). Java swing GUI tutorial #18: CardLayout.
 // Retrieved from https://www.youtube.com/watch?v=sAReaaTxNGU
 
-package Frontend;
+package Frontend.Game;
 
 import Backend.Game;
+import Frontend.Frame.MainFrame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,11 +15,11 @@ public class Layout{
     /**
      * This class is used to switch between different panels (MainPage and InitialBoard)
      */
-    private JFrame mainFrame = new MainFrame();
-    private JPanel panelCont = new JPanel(); // create Panel Container to add all panels inside
-    private MainPage mainPage = new MainPage();
-    private InitialBoard iniBoard = new InitialBoard();
-    private CardLayout cLayout = new CardLayout(); // create card layout
+    private JFrame mainFrame;
+    private JPanel panelCont; // create Panel Container to add all panels inside
+    private MainPage mainPage;
+    private InitialBoard iniBoard;
+    private CardLayout cLayout; // create card layout
     private Game game;
 
     /**
@@ -54,6 +56,12 @@ public class Layout{
 
     // Constructor
     public Layout() {
+        this.mainFrame = new MainFrame();
+        this.panelCont = new JPanel(); // create Panel Container to add all panels inside
+        this.mainPage = new MainPage();
+        this.iniBoard = new InitialBoard();
+        this.cLayout = new CardLayout(); // create card layout
+
         panelCont.setLayout(cLayout); // set card layout for panel container
 
         panelCont.add(mainPage, "1"); // add main page to panel container

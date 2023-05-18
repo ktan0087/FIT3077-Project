@@ -1,14 +1,20 @@
-package Frontend;
+package Frontend.Game;
+
+import Frontend.Button.BtnClose;
+import Frontend.Button.BtnRestart;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ResultButton extends JPanel {
-    protected BtnRestart btnRestart = new BtnRestart();
-    protected BtnClose btnClose = new BtnClose();
-    public ResultButton(){
+public class ResultButtons extends JPanel {
+    protected BtnRestart btnRestart;
+    protected BtnClose btnClose;
+    public ResultButtons(){
+        btnRestart = new BtnRestart();
+        btnClose = new BtnClose();
+
         this.setOpaque(false); // set the background of this panel transparent
 
         this.setLayout(new GridBagLayout()); // set the layout of this panel
@@ -23,7 +29,7 @@ public class ResultButton extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // close the result page
-                SwingUtilities.getWindowAncestor(ResultButton.this).dispose();
+                SwingUtilities.getWindowAncestor(ResultButtons.this).dispose();
             }
         });
         this.add(btnRestart, gbc);
@@ -36,7 +42,7 @@ public class ResultButton extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // close the result page
-                SwingUtilities.getWindowAncestor(ResultButton.this).dispose();
+                SwingUtilities.getWindowAncestor(ResultButtons.this).dispose();
             }
         });
         this.add(btnClose, gbc);

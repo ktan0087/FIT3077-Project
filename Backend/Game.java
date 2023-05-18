@@ -1,8 +1,15 @@
 package Backend;
 
 import Backend.Board.Board;
+import Backend.Board.Intersection;
+import Backend.Board.Mill;
 import Backend.Token.Token;
 import Backend.Token.TokenColour;
+
+import java.util.ArrayList;
+
+import static Backend.Board.Board.MAX_LAYERS;
+import static Backend.Board.Board.MAX_POSITIONS;
 
 /**
  * A class to represent the game of Nine Men's Morris.
@@ -139,9 +146,9 @@ public class Game {
 
     public Player getWinner(){
         // check if the game is over by checking if one of the players only has 2 tokens left on the board
-        if (player1.getTokensOnBoard() <= MIN_TOKENS_PLAYER) {
+        if (player1.getTokensOnBoard() < player2.getTokensOnBoard()) {
             return player2;
-        } else if (player2.getTokensOnBoard() <= MIN_TOKENS_PLAYER) {
+        } else if (player2.getTokensOnBoard() < player1.getTokensOnBoard()) {
             return player1;
         } else {
             return null;
@@ -156,4 +163,31 @@ public class Game {
         isGameOver = false;
     }
 
+    public boolean checkPossibleRemove(Player player){
+        boolean flag = true;
+        ArrayList<Intersection> intersections = new ArrayList<>();
+        ArrayList<Intersection> millIntersections = new ArrayList<>();
+        for(int i = 1; i < MAX_LAYERS; i++){
+            for(int j = 1; j < MAX_POSITIONS; j++){
+                if(!board.getIntersection(i,j).isEmpty() && board.getIntersection(i,j).getToken().getTokenColour() == player.getTokenColour()){
+                    intersections.add(board.getIntersection(i, j));
+                }
+            }
+        }
+        for (Mill mill : board.getMills()) {
+            if (mill.getPlayer()==player) {
+                for (Intersection intersection : mill.getIntersection()) {
+                    if(!millIntersections.contains(intersection)){
+                        millIntersections.add(intersection);
+                    }
+                }
+            }
+        }
+        if(intersections.size() == millIntersections.size()){
+            flag = false;
+        }
+        System.out.println(intersections);
+        System.out.println(millIntersections);
+        return flag;
+    }
 }

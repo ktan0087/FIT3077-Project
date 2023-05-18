@@ -7,7 +7,8 @@ public class Win extends JLabel {
     private WhoWin winner;
     public enum WhoWin {
         WHITEWIN,
-        BLACKWIN
+        BLACKWIN,
+        DRAW
     }
 
     // Constructor
@@ -32,6 +33,9 @@ public class Win extends JLabel {
         }
         else if (this.winner == WhoWin.BLACKWIN){
             setIcon(new ImageIcon("Icons/black-token.png"));
+        }
+        else if (this.winner == WhoWin.DRAW){
+            setText("DRAW");
         }
     }
 }

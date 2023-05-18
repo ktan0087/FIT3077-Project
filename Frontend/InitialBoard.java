@@ -1,5 +1,10 @@
 package Frontend;
 import Backend.*;
+import Backend.Action.FlyTokenAction;
+import Backend.Action.MoveTokenAction;
+import Backend.Action.PlaceTokenAction;
+import Backend.Interfaces.CanRemoveMill;
+import Backend.Token.TokenColour;
 
 import javax.swing.*;
 import java.awt.*;
@@ -228,7 +233,7 @@ public class InitialBoard extends JPanel {
     }
 
     public void checkAndRemoveMills(CanRemoveMill action){
-        for (Backend.Mill removedMill : action.getRemoveMillList()) {
+        for (Backend.Board.Mill removedMill : action.getRemoveMillList()) {
             int firstIndexLayer = removedMill.getIntersection().get(0).getLayer();
             int firstIndexPosition = removedMill.getIntersection().get(0).getPosition();
             int firstIndexTemp = board.getIndexLookUpTable(firstIndexLayer, firstIndexPosition);
@@ -256,7 +261,7 @@ public class InitialBoard extends JPanel {
                 millCount = game.getBoard().getMills().size();
             }
 
-            for (Backend.Mill mills : game.getBoard().getMills()){
+            for (Backend.Board.Mill mills : game.getBoard().getMills()){
                 //continue here
                 int firstIndexLayer = mills.getIntersection().get(0).getLayer();
                 int firstIndexPosition = mills.getIntersection().get(0).getPosition();

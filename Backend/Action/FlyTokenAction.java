@@ -1,8 +1,13 @@
-package Backend;
+package Backend.Action;
+
+import Backend.*;
+import Backend.Board.Intersection;
+import Backend.Board.Mill;
+import Backend.Interfaces.CanRemoveMill;
 
 import java.util.ArrayList;
 
-public class FlyTokenAction extends Action implements CanRemoveMill{
+public class FlyTokenAction extends Action implements CanRemoveMill {
 
     /**
      * Private attributes of FlyTokenAction
@@ -17,7 +22,7 @@ public class FlyTokenAction extends Action implements CanRemoveMill{
      * @param player the player performing the action
      * @param game   the game the action is being performed in
      */
-    public FlyTokenAction(Player player,Intersection currentIntersection, Intersection newIntersection, Game game) {
+    public FlyTokenAction(Player player, Intersection currentIntersection, Intersection newIntersection, Game game) {
         super(player, game);
         this.currentIntersection = currentIntersection;
         this.newIntersection = newIntersection;

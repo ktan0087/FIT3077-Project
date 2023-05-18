@@ -1,5 +1,9 @@
 package Backend;
 
+import Backend.Board.Board;
+import Backend.Token.Token;
+import Backend.Token.TokenColour;
+
 /**
  * A class to represent the game of Nine Men's Morris.
  * A game can have two players, a board, and a current player.

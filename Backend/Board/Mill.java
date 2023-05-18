@@ -1,4 +1,7 @@
-package Backend;
+package Backend.Board;
+
+import Backend.Board.Intersection;
+import Backend.Player;
 
 import java.util.ArrayList;
 

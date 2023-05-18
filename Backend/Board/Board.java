@@ -1,7 +1,10 @@
-package Backend;
+package Backend.Board;
+
+import Backend.Action.AllActions;
+import Backend.Player;
+import Backend.Token.Token;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * This class represents the board of the game, it contains a 2D array of intersections.

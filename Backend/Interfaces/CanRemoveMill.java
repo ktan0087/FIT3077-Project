@@ -1,4 +1,6 @@
-package Backend;
+package Backend.Interfaces;
+
+import Backend.Board.Mill;
 
 import java.util.ArrayList;
 

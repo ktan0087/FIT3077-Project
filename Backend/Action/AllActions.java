@@ -1,4 +1,5 @@
-package Backend;
+package Backend.Action;
+
 
 /**
  * An enum class to represent the actions that can be performed by a player

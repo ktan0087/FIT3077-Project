@@ -1,7 +1,7 @@
 package Frontend;
 
-import Backend.RemoveTokenAction;
-import Backend.TokenColour;
+import Backend.Action.RemoveTokenAction;
+import Backend.Token.TokenColour;
 
 import javax.swing.*;
 import java.awt.*;

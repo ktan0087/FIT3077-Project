@@ -216,6 +216,8 @@ public class Board {
         return flag;
     }
 
+
+
 //    public boolean isMill(Player player, Intersection currentIntersection) {
 //        boolean flag = false;
 //        adjacentIntersectionList = this.getAdjacentIntersection(currentIntersection);

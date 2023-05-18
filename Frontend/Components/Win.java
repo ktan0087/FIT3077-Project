@@ -37,5 +37,8 @@ public class Win extends JLabel {
         else if (this.winner == WhoWin.DRAW){
             this.setText("DRAW");
         }
+        else if (this.winner == WhoWin.DRAW){
+            setText("DRAW");
+        }
     }
 }

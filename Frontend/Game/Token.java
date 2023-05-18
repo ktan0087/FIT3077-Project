@@ -132,6 +132,9 @@ public abstract class Token extends JLabel {
         @Override
         public void mouseClicked(MouseEvent e) {
             if(iniBoard.canRemove){
+                if (!iniBoard.getGame().checkPossibleRemove(iniBoard.getGame().getOtherPlayer())){
+                    iniBoard.displayResult(Win.WhoWin.DRAW);
+                }
                 RemoveTokenAction newRemoveTokenAction = new RemoveTokenAction(iniBoard.getGame().getCurrentPlayer(), iniBoard.getGame().getBoard().getIntersection(getCoordinateX(), getCoordinateY()),iniBoard.getGame());
                 if (newRemoveTokenAction.execute()){
                     iniBoard.placeToken.remove(index);

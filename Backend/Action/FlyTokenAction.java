@@ -7,6 +7,16 @@ import Backend.Interfaces.CanRemoveMill;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the action of flying a token from one intersection to another.
+ * This action execute when the player has 3 tokens on board.
+ *
+ * @see Backend.Board.Intersection
+ * @see Backend.Board.Mill
+ * @see Backend.Interfaces.CanRemoveMill
+ * @see Backend.Action.Action
+ *
+ */
 public class FlyTokenAction extends Action implements CanRemoveMill {
 
     /**
@@ -38,10 +48,15 @@ public class FlyTokenAction extends Action implements CanRemoveMill {
         boolean flag = false;
         //check if the player is allowed to fly token
         if (player.isActionAllowed(AllActions.CAN_FLY) && !(player.isActionAllowed(AllActions.REMOVE_TOKEN))){
-            //call flyToken() function from board
+            //call flyToken() function from board that removes the token from the current intersection
+            // and adds it to the new intersection
             if (game.getBoard().flyToken(player, currentIntersection, newIntersection)){
+                // if the function is successfully excuted, set flag to true
                 flag = true;
+                // check if the new intersection is part of a mill after the token is fly to the new intersection
                 game.getBoard().isMill(player, newIntersection);
+                // add the mill to the removeMillList, which will be used to remove
+                // the mill from the board as the mill is no longer valid at the current intersection
                 this.addRemoveMill();
             }
         }
@@ -60,18 +75,30 @@ public class FlyTokenAction extends Action implements CanRemoveMill {
     }
 
 
+    /**
+     * A function to add the mill to the removeMillList
+     */
     @Override
     public void addRemoveMill() {
+        //loop through all the mills on the board
         for (Mill mills: game.getBoard().getMills()){
+            //if the mill contains the current intersection, add the mill to the removeMillList
+            // so that the mill can be removed from the board after the fly action
             if(mills.getIntersection().contains(currentIntersection)){
+                //add the mill to the removeMillList
                 removeMillList.add(mills);
             }
         }
+        //loop through the removeMillList and remove the mill from the board
         for (Mill mills: removeMillList){
             game.getBoard().getMills().remove(mills);
         }
     }
 
+    /**
+     * A function to get the Mill list that wanted to remove
+     * @return
+     */
     public ArrayList<Mill> getRemoveMillList() {
         return removeMillList;
     }

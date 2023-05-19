@@ -11,19 +11,44 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * This class is used to create the token
+ */
 public abstract class Token extends JLabel {
+
     /**
-     * This class is used to create the token
+     * x coordinates of the Token (Layer in backend)
      */
     private int coordinateX;
+    /**
+     * y coordinates of the Token (Position in backend)
+     */
     private int coordinateY;
+    /**
+     * times is used to keep track of the number of times the token is clicked
+     */
     private int times;
+    /**
+     * selected is used to keep track of whether the token is selected
+     */
     protected Boolean selected;
+    /**
+     * index is used to keep track of the index of the token in frontend Board
+     */
     protected int index;
+    /**
+     * tokenColor is used to keep track of the color of the token
+     */
     protected Color tokenColor;
 
+    /**
+     * ownerTokenColour is used to keep track of the color of the token
+     */
     protected TokenColour ownerTokenColour;
 
+    /**
+     * iniBoard is the iniBoard of frontend
+     */
     private InitialBoard iniBoard;
 
     // Constructor
@@ -127,17 +152,24 @@ public abstract class Token extends JLabel {
     }
 
     /**
-     * This method is to select the token that player wants to move
+     * This method dictates the action of the token when it is clicked
+     * This method check if a player can remove a token after forming a mill, if yes, the player can remove a token.
+     * If the player cannot remove a token, the game will draw.
+     * If the player can remove a token, the player can remove a token by clicking on the token. After removing the
+     * token, the game will check if the game is over.
+     *
      */
     protected MouseListener tokenSelected = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
+            //If there is a player that can remove a token by forming a mill
             if(iniBoard.canRemove){
+                //Checks if the current player have any valid tokens to remove(tokens not in a mill)
                 if (!iniBoard.getGame().checkPossibleRemove(iniBoard.getGame().getOtherPlayer())){
-                    iniBoard.displayResult(Win.WhoWin.DRAW);
+                    iniBoard.displayResult(Win.WhoWin.DRAW); //Game draws if the player cannot remove a token after forming a mill
                 }
                 RemoveTokenAction newRemoveTokenAction = new RemoveTokenAction(iniBoard.getGame().getCurrentPlayer(), iniBoard.getGame().getBoard().getIntersection(getCoordinateX(), getCoordinateY()),iniBoard.getGame());
-                if (newRemoveTokenAction.execute()){
+                if (newRemoveTokenAction.execute()){                //If a player can remove a token
                     iniBoard.placeToken.remove(index);
                     iniBoard.placeToken.add(new JLabel(), index);
                     iniBoard.placeToken.repaint();
@@ -146,7 +178,9 @@ public abstract class Token extends JLabel {
                     iniBoard.getGame().getBoard().getIntersection(getCoordinateX(), getCoordinateY()).removeToken();
                     iniBoard.getGame().endTurn();
                     iniBoard.playerTurn.changeIcon();
+                    //Check if the opponent have any possible moves after its token is removed
                     if (!iniBoard.getGame().checkPossibleMove(iniBoard.getGame().getCurrentPlayer())){
+                        //If the opponent does not have any possible moves, the game ends and the player that has possible moves wins
                         if (iniBoard.getGame().getCurrentPlayer().getTokenColour() == TokenColour.PLAYER_1_WHITE){
                             iniBoard.displayResult(Win.WhoWin.BLACKWIN);
                         }
@@ -175,6 +209,9 @@ public abstract class Token extends JLabel {
         }
     };
 
+    /**
+     * This method is used to swap the instruction displayed during various phases of the game
+     */
     public void swapInstruction(){
         if (iniBoard.blackTokenRemain.getAmountToken() > 0){
             iniBoard.instruction.changeText(Instruction.InstructionType.PLACE);

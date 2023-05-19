@@ -139,7 +139,8 @@ public class Game {
 
         if (player1.getTokensInHand() == 0 && player2.getTokensInHand() == 0){
             // check if the game is over by checking if one of the players only has 2 tokens left on the board
-            if (player1.getTokensOnBoard() <= MIN_TOKENS_PLAYER || player2.getTokensOnBoard() <= MIN_TOKENS_PLAYER) {
+            if ((player1.getTokensOnBoard() <= MIN_TOKENS_PLAYER || player2.getTokensOnBoard() <= MIN_TOKENS_PLAYER) ||
+                    !(this.checkPossibleMove(player1) || !(this.checkPossibleMove(player2)))) {
                 isGameOver = true;
             }
         }
@@ -148,9 +149,16 @@ public class Game {
 
     public Player getWinner(){
         // check if the game is over by checking if one of the players only has 2 tokens left on the board
-        if (player1.getTokensOnBoard() < player2.getTokensOnBoard()) {
+        if (!this.checkPossibleMove(player1)){
             return player2;
-        } else if (player2.getTokensOnBoard() < player1.getTokensOnBoard()) {
+        }
+        else if(!this.checkPossibleMove(player2)){
+            return player1;
+        }
+        else if(player1.getTokensOnBoard() < player2.getTokensOnBoard()) {
+            return player2;
+        }
+        else if (player2.getTokensOnBoard() < player1.getTokensOnBoard()) {
             return player1;
         } else {
             return null;
@@ -169,8 +177,8 @@ public class Game {
         boolean flag = false;
         //Loop through the layers and positions to create the intersections
         for (int i = 1; i < MAX_LAYERS; i++) {
+            adjacentIntersectionList = null;
             for (int j = 1; j < MAX_POSITIONS; j++) {
-                flag = false;
                 if (!getBoard().getIntersection(i, j).isEmpty() && getBoard().getIntersection(i, j).getToken().getTokenColour() == player.getTokenColour()) {
                     adjacentIntersectionList = board.getAdjacentIntersectionSmall(getBoard().getIntersection(i,j));
                 }

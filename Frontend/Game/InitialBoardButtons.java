@@ -7,17 +7,36 @@ import Frontend.Button.BtnRestart;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A class to represent the buttons in InitialBoard, they include hint, restart, close
+ * The reason of create this class, instead of adding the buttons directly in InitialBoard, is to prevent disalignment
+ * between the buttons and BlackTokenRemain label.
+ *
+ * @see BtnHint
+ * @see BtnRestart
+ * @see BtnClose
+ */
+
 public class InitialBoardButtons extends JPanel {
     /**
-     * This class is used to create the buttons in InitialBoard, they include hint, restart, close
-     * The reason of create this class, instead of adding the buttons directly in InitialBoard, is to prevent disalignment
-     * between the buttons and BlackTokenRemain label
+     * The hint button
      */
     private BtnHint btnHint;
+
+    /**
+     * The restart button
+     */
     protected BtnRestart btnRestart;
+
+    /**
+     * The close button
+     */
     protected BtnClose btnClose;
 
-    // Constructor
+    /**
+     * Constructor.
+     * Create the buttons and add them to this panel.
+     */
     public InitialBoardButtons(){
         this.btnHint = new BtnHint();
         this.btnRestart = new BtnRestart();

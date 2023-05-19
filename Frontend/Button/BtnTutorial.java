@@ -5,12 +5,15 @@ import javax.swing.BorderFactory;
 import java.awt.Font;
 import java.awt.Color;
 
+/**
+ * A class to create the tutorial button in the game, which is used to navigate to the tutorial of Nine Men's Morris.
+ */
+
 public class BtnTutorial extends JButton {
     /**
-     * Customized button for TUTORIAL
+     * Constructor.
+     * Creates a tutorial button in the game.
      */
-
-    // Constructor
     public BtnTutorial(){
         this.setText("TUTORIAL");
         this.setFocusable(false); // get rid of the annoying box in button

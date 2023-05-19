@@ -3,14 +3,15 @@ package Frontend.Line;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A class to represent a vertical line.
+ */
+
 public class VerticalLine extends JLabel {
     /**
-     * This class is used to create a vertical line
-     */
-
-    /**
-     * This class is used to create a vertical line
-     * @param g is the abstract base class for all graphics contexts
+     * A method to draw a vertical line.
+     *
+     * @param g the abstract base class for all graphics contexts
      */
     public void paintComponent(Graphics g){
         //set the width of line

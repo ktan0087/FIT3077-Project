@@ -3,14 +3,13 @@ package Frontend.Line;
 import javax.swing.*;
 import java.awt.*;
 
-// Create a horizontal line
+/**
+ * A class to represent a horizontal line.
+ */
 public class HorizontalLine extends JLabel {
     /**
-     * Create a horizontal line
-     */
-
-    /**
-     * draw a horizontal line
+     * A method to draw a horizontal line.
+     *
      * @param g the abstract base class for all graphics contexts
      */
     public void paintComponent(Graphics g){

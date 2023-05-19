@@ -24,7 +24,7 @@ import static Backend.Board.Board.MAX_POSITIONS;
 public class Game {
 
     /**
-     * A constant tp indicate the maximum number of tokens a player can have in a game
+     * A constant to indicate the maximum number of tokens a player can have in a game.
      */
     public static final int MAX_TOKENS_PLAYER = 9;
 

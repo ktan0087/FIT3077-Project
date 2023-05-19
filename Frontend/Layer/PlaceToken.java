@@ -3,12 +3,15 @@ package Frontend.Layer;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A class to represent the place token panel
+ */
+
 public class PlaceToken extends JPanel {
     /**
-     * This class is used to place the token on the board
+     * Constructor.
+     * Create a panel to place token.
      */
-
-    // Constructor
     public PlaceToken(){
         this.setOpaque(false); // set the background of this panel transparent
         this.setPreferredSize(new Dimension(500,500)); // set the size of the board

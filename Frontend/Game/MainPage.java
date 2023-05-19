@@ -6,16 +6,39 @@ import Frontend.Button.BtnTutorial;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A class to represent the main page of the game.
+ * The main page includes the game title, play button and tutorial button.
+ *
+ * @see BtnPlay
+ * @see BtnTutorial
+ */
+
 public class MainPage extends JLayeredPane{
     /**
-     * Customized the main page and this page is the first page that user will see
+     * The game title
      */
     private JLabel gameName;
+
+    /**
+     * The play button
+     */
     protected BtnPlay btnPlay;
+
+    /**
+     * The tutorial button
+     */
     private BtnTutorial btnTut;
+
+    /**
+     * The background of the main page
+     */
     private JLabel background;
 
-    // Constructor
+    /**
+     * Constructor for the main page.
+     * Creates a new main page with a game title, play button and tutorial button.
+     */
     public MainPage(){
         this.gameName = new JLabel();
         this.btnPlay = new BtnPlay();

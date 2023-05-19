@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * @see Backend.Board.Mill
  * @see Backend.Interfaces.CanRemoveMill
  * @see Backend.Action.Action
+ *
  */
 public class FlyTokenAction extends Action implements CanRemoveMill {
 

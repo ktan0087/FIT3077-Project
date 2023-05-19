@@ -5,27 +5,25 @@ import Backend.Board.Mill;
 import java.util.ArrayList;
 
 /**
- * This interface represents the ability to remove a mill
+ * This interface is used to remove mill after action is performed
  *
- * @see Backend.Board.Mill
  * @see Backend.Action.MoveTokenAction
  * @see Backend.Action.RemoveTokenAction
  */
-
 public interface CanRemoveMill {
     /**
-     * Private attributes of CanRemoveMill
+     * removeMillList is a list of mills that are to be removed
      */
     ArrayList<Mill> removeMillList = new ArrayList<>();
 
     /**
-     * Function to add mill to the removeMillList
+     * Function to add mill to the list of mills to be removed
      */
     void addRemoveMill();
 
     /**
-     * Getter function to get the removeMillList
-     * @return
+     * Function to get the list of mills to be removed
+     * @return the list of mills to be removed
      */
     ArrayList<Mill> getRemoveMillList();
 }

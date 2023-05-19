@@ -7,11 +7,19 @@ import Frontend.Line.VerticalLine;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A class to represent the intersection of the board
+ */
+
 public class Intersection extends JLabel {
     /**
-     * Customized intersection
+     * The x coordinate (layer) of intersection. The range is from 1 to 3.
      */
     private int coordinateX;
+
+    /**
+     * The y coordinate (position) of intersection. The range is from 1 to 8.
+     */
     private int coordinateY;
 
     /**
@@ -29,9 +37,21 @@ public class Intersection extends JLabel {
         BOTTOM_RIGHT
     }
 
-    IntersectionPoint inter; // create a circle button for intersection
+    /**
+     * The intersection point of the intersection
+     * Creates a circle button for intersection
+     */
+    IntersectionPoint inter;
 
-    // Constructor
+    /**
+     * Constructor.
+     * Creates a new intersection with the given x and y coordinates.
+     *
+     * @param coordinateX the x coordinate (layer) of intersection, e.g. the outmost layer has the x coordinate of 1
+     * @param coordinateY the y coordinate (position) of intersection, which is counted like this: 1 2 3
+     *                                                                                             8   4
+     *                                                                                             7 6 5
+     */
     public Intersection(int coordinateX, int coordinateY){
         this.inter = new IntersectionPoint(); // create a circle button for intersection
         this.setLayout(new GridLayout(3, 3, -1, -1)); // -1 is to prevent showing grid border
@@ -40,7 +60,8 @@ public class Intersection extends JLabel {
     }
 
     /**
-     * Get the x coordinate (layer) of intersection
+     * Getter for x coordinate (layer) of intersection.
+     *
      * @return x coordinate (layer)
      */
     public int getCoordinateX() {
@@ -48,7 +69,8 @@ public class Intersection extends JLabel {
     }
 
     /**
-     * Get the y coordinate (position) of intersection
+     * Getter for y coordinate (position) of intersection.
+     *
      * @return y coordinate (position)
      */
     public int getCoordinateY() {
@@ -56,7 +78,8 @@ public class Intersection extends JLabel {
     }
 
     /**
-     * This method is used to choose the type of intersection by selecting the position of it
+     * This method is used to choose the type of intersection by selecting the position of it.
+     *
      * @param position the position of intersection, e.g. the top leftmost intersection (1, 1) has the position of TOP_LEFT
      */
     public void choosePosition(Position position){

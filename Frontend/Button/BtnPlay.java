@@ -5,12 +5,15 @@ import javax.swing.BorderFactory;
 import java.awt.Font;
 import java.awt.Color;
 
+/**
+ * A class to create the play button in the game, which is used to start the game of Nine Men's Morris.
+ */
+
 public class BtnPlay extends JButton {
     /**
-     * Customized button for PLAY that starts the game
+     * Constructor.
+     * Creates a play button in the game.
      */
-
-    // Constructor
     public BtnPlay(){
         this.setText("PLAY"); // set the text of button
         this.setFocusable(false); // get rid of the annoying box in button

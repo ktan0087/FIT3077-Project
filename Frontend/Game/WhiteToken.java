@@ -4,9 +4,17 @@ import Backend.Token.TokenColour;
 
 import java.awt.*;
 
+/**
+ * A class to represent a white token
+ * @see Token
+ * @see TokenColour
+ */
+
 public class WhiteToken extends Token {
     /**
-     * This class is used to create the white token
+     * Constructor.
+     * Creates a white token.
+     *
      * @param coordinateX is the layer of the token (e.g. TOP_LEFT has the layer of 1)
      * @param coordinateY is the position of the token (e.g. TOP_LEFT has the position of 1)
      * @param initialBoard is the initial board

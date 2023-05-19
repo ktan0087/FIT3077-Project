@@ -9,11 +9,16 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class Board extends JPanel {
-    /**
-     * Display the board
-     */
+/**
+ * A class to represent the board of the game.
+ * A board has 24 intersections and 32 lines.
+ *
+ * @see Intersection
+ * @see HorizontalLine
+ * @see VerticalLine
+ */
 
+public class Board extends JPanel {
     // Create 24 intersections
     private Intersection intersection_11 = new Intersection(1, 1);
     private Intersection intersection_12 = new Intersection(1, 2);
@@ -40,14 +45,22 @@ public class Board extends JPanel {
     private Intersection intersection_16 = new Intersection(1, 6);
     private Intersection intersection_15 = new Intersection(1, 5);
 
-    private ArrayList<Intersection> intersectionList;
-    private Map<Integer, Integer> indexLookUpTable;
+    private ArrayList<Intersection> intersectionList; // a list of all intersections on the board
+    private Map<Integer, Integer> indexLookUpTable; // a lookup table to find the index of an intersection
 
+    /**
+     * Getter for the intersection list.
+     *
+     * @return the intersection list
+     */
     public List<Intersection> getIntersectionList() {
         return this.intersectionList;
     }
 
-    // Constructor
+    /**
+     * Constructor for the board.
+     * Creates a new board with 24 intersections and 32 lines.
+     */
     public Board() {
         this.setBackground(new Color(0xE6B380)); // set the background color of the board
         this.setPreferredSize(new Dimension(500, 500)); // set the size of the board
@@ -289,6 +302,7 @@ public class Board extends JPanel {
         intersectionList.add(intersection_16);
         intersectionList.add(intersection_15);
 
+        // Create a hash map to store the index of each intersection
         indexLookUpTable = new HashMap<>();
         indexLookUpTable.put(11, 0);
         indexLookUpTable.put(12, 6);
@@ -317,36 +331,32 @@ public class Board extends JPanel {
     }
 
     /**
-     * get the index of intersection in the panel (from 0 to 168)
+     * Get the index of the intersection in the list.
+     * There are 24 intersections in the list, and each intersection has a unique index.
+     * The index the position of the (13x13) grid, therefore the index is from 0 to 168.
      *
-     * @param intersection is the place where the user can place or move token
-     * @return the index of intersection in the panel
-     */
-    public int getIntersectionPanelIndex(Intersection intersection) {
-        return intersection.getAccessibleContext().getAccessibleIndexInParent();
-    }
-
-    /**
-     * get the intersection in the panel by coordinate
+     * For example, if there is a token at bottom left of the intersection:
+     * the layer is 1, because it is the out most layer
+     * the position is 7, because it is counted like this: 1 2 3
+     *                                                     8   4
+     *                                                     7 6 5
+     * the index is 156, because the index is counted from left to right, from top to bottom,
+     * which is like this: 0  1  2  3  4  5  6  7  8  9 10 11 12
+     *                    13 14 15 16 17 18 19 20 21 22 23 24 25
+     *                    26 27 28 29 30 31 32 33 34 35 36 37 38
+     *                    39 40 41 42 43 44 45 46 47 48 49 50 51
+     *                    52 53 54 55 56 57 58 59 60 61 62 63 64
+     *                    65 66 67 68 69 70 71 72 73 74 75 76 77 (and so on)
      *
-     * @param x is the layer coordinate
-     * @param y is the position coordinate
-     * @return the intersection in the panel
+     * @param layer is the layer of the intersection, from 1 to 3
+     * @param position is the position of the intersection, from 1 to 8
+     * @return the index of the intersection in the list
      */
-    public Intersection getIntersectionByCoordinate(int x, int y) {
-        for (Intersection intersection : getIntersectionList()) {
-            if (intersection.getCoordinateX() == x && intersection.getCoordinateY() == y) {
-                return intersection;
-            }
-        }
-        return null;
-    }
-
     public Integer getIndexLookUpTable(int layer, int position) {
-        String combine = String.valueOf(layer) + String.valueOf(position);
-        int combine1 = Integer.parseInt(combine);
+        String combine = String.valueOf(layer) + String.valueOf(position); // combine the value of layer and position to String
+        int combine1 = Integer.parseInt(combine); // convert the String to Integer
 
-        return indexLookUpTable.get(combine1);
+        return indexLookUpTable.get(combine1); // return the index of the intersection
     }
 
 }

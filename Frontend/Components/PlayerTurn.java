@@ -3,15 +3,30 @@ package Frontend.Components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A class to represent the player turn label that will show at the bottom-middle section of the game board
+ */
+
 public class PlayerTurn extends JLabel {
     /**
-     * Customized label for Player Turn
+     * The white token icon of the label
      */
     private ImageIcon whiteToken;
+
+    /**
+     * The black token icon of the label
+     */
     private ImageIcon blackToken;
+
+    /**
+     * A boolean to represent whether the label is showing the white token icon or the black token icon
+     */
     private Boolean isWhite;
 
-    // Constructor
+    /**
+     * A constructor to create a player turn label.
+     * The label will show the white token icon by default.
+     */
     public PlayerTurn(){
         this.whiteToken = new ImageIcon(getClass().getResource("/Icons/white-token.png"));
         this.blackToken = new ImageIcon(getClass().getResource("/Icons/black-token.png"));
@@ -28,13 +43,16 @@ public class PlayerTurn extends JLabel {
         this.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
     }
 
+    /**
+     * A method to change the icon of the label.
+     */
     public void changeIcon(){
         if (isWhite){
-            this.setIcon(blackToken);
+            this.setIcon(blackToken); // set the icon of label to black token
             isWhite = false;
         }
         else{
-            this.setIcon(whiteToken);
+            this.setIcon(whiteToken); // set the icon of label to white token
             isWhite = true;
         }
     }

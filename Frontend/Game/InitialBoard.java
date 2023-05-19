@@ -16,30 +16,99 @@ import java.util.ArrayList;
 
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 
+/**
+ * A class to represent the initial board of the game.
+ *
+ * @see InitialBoardButtons
+ * @see PlaceToken
+ * @see PlayerTurn
+ * @see TokenRemain
+ * @see Instruction
+ * @see Game
+ * @see ResultButtons
+ * @see Token
+ * @see Mill
+ */
+
 public class InitialBoard extends JPanel {
     /**
-     * The initial board that players can see when they start the game
+     * The list of tokens in the game
      */
-    private ArrayList<Token> tokenList; // create a list to store tokens
-    protected InitialBoardButtons buttons; // buttons that illustrate hint, restart, close
-    private Board board; // create a board
-    protected PlaceToken placeToken; // create a layer to place tokens
-    protected PlayerTurn playerTurn; // show which player's turn
-    private TokenRemain whiteTokenRemain; // show the remaining number of white tokens
-    protected TokenRemain blackTokenRemain; // show the remaining number of black tokens
-    private Token selectedToken; // the token that is selected by the player
-    protected boolean isSelected; // whether the player has selected a token
-    protected Instruction instruction; // provide the instruction of the game
-    private Game game; // the game that is played
-    private PlaceToken millLayer; // the layer that shows the mill
-    protected ResultButtons resultButton;
-    private Token tokenToRemove; // the token that is selected to be removed
+    private ArrayList<Token> tokenList;
 
+    /**
+     * The buttons that illustrate hint, restart, close
+     */
+    protected InitialBoardButtons buttons;
+
+    /**
+     * A board that the game is played on
+     */
+    private Board board;
+
+    /**
+     * The layer that is used to place tokens
+     */
+    protected PlaceToken placeToken; // create a layer to place tokens
+
+    /**
+     * The layer that is used to show the player's turn
+     */
+    protected PlayerTurn playerTurn; // show which player's turn
+
+    /**
+     * The layer that is used to show the remaining number of white token
+     */
+    private TokenRemain whiteTokenRemain;
+
+    /**
+     * The layer that is used to show the remaining number of black token
+     */
+    protected TokenRemain blackTokenRemain;
+
+    /**
+     * The token that is selected by the player
+     */
+    private Token selectedToken;
+
+    /**
+     * A boolean to check whether any token that is selected
+     */
+    protected boolean isSelected;
+
+    /**
+     * The label that is used to show the instruction of the game
+     */
+    protected Instruction instruction;
+
+    /**
+     * The game that is played
+     */
+    private Game game;
+
+    /**
+     * The layer that is used to show the mill
+     */
+    private PlaceToken millLayer;
+
+    /**
+     * The result buttons include restart, close
+     */
+    protected ResultButtons resultButton;
+
+    /**
+     * A boolean to check whether the player can remove a mill
+     */
     protected Boolean canRemove = false;
+
+    /**
+     * The number of mills that the player can remove
+     */
     private int millCount;
 
     /**
      * This method is used to set the game that is played
+     *
      * @param game is the game that is played
      */
     public void setGame(Game game) {
@@ -48,13 +117,17 @@ public class InitialBoard extends JPanel {
 
     /**
      * This method is used to get the game that is played
+     *
      * @return the current game that is played
      */
     public Game getGame() {
         return game;
     }
 
-    // Constructor
+    /**
+     * Constructor.
+     * Create the initial board of the game.
+     */
     public InitialBoard() {
         // Create components in the initial board
         this.tokenList = new ArrayList<>(); // create a list to store tokens
@@ -137,6 +210,7 @@ public class InitialBoard extends JPanel {
             intersection.inter.addActionListener(new ActionListener() {
                 /**
                  * Invoked when an intersection point is clicked.
+                 *
                  * @param e the event to be processed
                  */
                 @Override
@@ -248,11 +322,17 @@ public class InitialBoard extends JPanel {
 
     }
 
+    /**
+     * Check and remove mills. If a mill is formed, remove the token from the board.
+     *
+     * @param action is the action that is executed that implements the CanRemoveMill interface
+     */
     public void checkAndRemoveMills(CanRemoveMill action){
         for (Backend.Board.Mill removedMill : action.getRemoveMillList()) {
-            int firstIndexLayer = removedMill.getIntersection().get(0).getLayer();
-            int firstIndexPosition = removedMill.getIntersection().get(0).getPosition();
-            int firstIndexTemp = board.getIndexLookUpTable(firstIndexLayer, firstIndexPosition);
+            // get the first, second and third index of the mill
+            int firstIndexLayer = removedMill.getIntersection().get(0).getLayer(); // get the layer of the intersection
+            int firstIndexPosition = removedMill.getIntersection().get(0).getPosition(); // get the position of the intersection
+            int firstIndexTemp = board.getIndexLookUpTable(firstIndexLayer, firstIndexPosition); // get the index of the intersection from lookup table
 
             int secondIndexLayer = removedMill.getIntersection().get(1).getLayer();
             int secondIndexPosition = removedMill.getIntersection().get(1).getPosition();
@@ -262,23 +342,29 @@ public class InitialBoard extends JPanel {
             int thirdIndexPosition = removedMill.getIntersection().get(2).getPosition();
             int thirdIndexTemp = board.getIndexLookUpTable(thirdIndexLayer, thirdIndexPosition);
 
+            // remove the token from the board
             removeMill(firstIndexTemp, secondIndexTemp, thirdIndexTemp, millLayer);
+
+            // decrease the mill count by 1
             millCount--;
         }
     }
 
+    /**
+     * Check and draw mills. If a mill is formed, draw the mill.
+     */
     public void checkAndDrawMills(){
         // Check if a mill is formed
-        if (game.getBoard().getMills().size() > 0){
-            if (millCount != game.getBoard().getMills().size()){
-                instruction.changeText(Instruction.InstructionType.REMOVE);
-                game.swapPlayers();
-                playerTurn.changeIcon();
-                millCount = game.getBoard().getMills().size();
+        if (game.getBoard().getMills().size() > 0){ // if a mill is formed
+            if (millCount != game.getBoard().getMills().size()){ // if the mill count is not equal to the number of mills in the board
+                instruction.changeText(Instruction.InstructionType.REMOVE); // change the instruction that show at the top-middle to remove
+                game.swapPlayers(); // swap the player
+                playerTurn.changeIcon(); // change the player turn icon
+                millCount = game.getBoard().getMills().size(); // update the mill count
             }
 
-            for (Backend.Board.Mill mills : game.getBoard().getMills()){
-                //continue here
+            for (Backend.Board.Mill mills : game.getBoard().getMills()){ // for each mill in the board
+                // get the first, second and third index of the mill
                 int firstIndexLayer = mills.getIntersection().get(0).getLayer();
                 int firstIndexPosition = mills.getIntersection().get(0).getPosition();
                 int firstIndexTemp = board.getIndexLookUpTable(firstIndexLayer, firstIndexPosition);
@@ -291,11 +377,11 @@ public class InitialBoard extends JPanel {
                 int thirdIndexPosition = mills.getIntersection().get(2).getPosition();
                 int thirdIndexTemp = board.getIndexLookUpTable(thirdIndexLayer, thirdIndexPosition);
 
+                // draw the mill
                 addMill(firstIndexTemp, secondIndexTemp, thirdIndexTemp, millLayer);
             }
-            canRemove = true;
+            canRemove = true; // the player can remove a token
         }
-
     }
 
     /**
@@ -303,10 +389,10 @@ public class InitialBoard extends JPanel {
      */
     public void checkEndGame(){
         // Display which player wins the game
-        if (game.isGameOver()) {
-            this.instruction.changeText(Instruction.InstructionType.EMPTY);
-            if (game.getWinner().getTokenColour() == TokenColour.PLAYER_2_BLACK) {
-                displayResult(Win.WhoWin.BLACKWIN);
+        if (game.isGameOver()) { // if the game is over
+            this.instruction.changeText(Instruction.InstructionType.EMPTY); // change the instruction to empty
+            if (game.getWinner().getTokenColour() == TokenColour.PLAYER_2_BLACK) { // if the winner is black
+                displayResult(Win.WhoWin.BLACKWIN); // display black win
             } else {
                 displayResult(Win.WhoWin.WHITEWIN);
             }
@@ -315,6 +401,7 @@ public class InitialBoard extends JPanel {
 
     /**
      * This method is used to check if any token is selected
+     *
      * @return true if a token is selected, false otherwise
      */
     public boolean checkSelected(){
@@ -342,14 +429,30 @@ public class InitialBoard extends JPanel {
         }
     }
 
+    /**
+     * This method is used to find the smallest number among 3 numbers
+     *
+     * @param index1 is the first number
+     * @param index2 is the second number
+     * @param index3 is the third number
+     * @return the smallest number
+     */
     public int findSmallest(int index1, int index2, int index3){
-        if(index1 < index2 && index1 < index3)
+        if(index1 < index2 && index1 < index3) // if index1 is smaller than index2 and index3
         {
             return index1;
         }
-        else return Math.min(index2, index3);
+        else return Math.min(index2, index3); // return the smallest number among index2 and index3
     };
 
+    /**
+     * This method is used to find the biggest number among 3 numbers
+     *
+     * @param index1 is the first number
+     * @param index2 is the second number
+     * @param index3 is the third number
+     * @return the biggest number
+     */
     public int findBiggest(int index1, int index2, int index3){
         if(index1 > index2 && index1 > index3)
         {
@@ -358,13 +461,40 @@ public class InitialBoard extends JPanel {
         else return Math.max(index2, index3);
     };
 
+    /**
+     * This method is used to add the yellow mill line on the board
+     *
+     * @param index1 is the first index of the token
+     * @param index2 is the second index of the token
+     * @param index3 is the third index of the token
+     * @param millLayer is the layer that contains the mill
+     */
     public void addMill(int index1, int index2, int index3, PlaceToken millLayer){
-        int minusValue;
-        int smallIndex = findSmallest(index1, index2, index3);
-        int bigIndex = findBiggest(index1, index2, index3);
+        int minusValue; // the difference between the biggest and smallest index
+        int smallIndex = findSmallest(index1, index2, index3); // find the smallest index
+        int bigIndex = findBiggest(index1, index2, index3); // find the biggest index
 
-        minusValue = bigIndex - smallIndex;
-        if (minusValue == 52 || minusValue == 104 || minusValue == 156){
+        minusValue = bigIndex - smallIndex; // calculate the difference between the biggest and smallest index
+
+        /* The following if-else statements are used to add the mill line on the board
+           The mill line is added based on the difference between the biggest and smallest index
+           The (13x13) board has 169 grids in total, and the index of the grids are from 0 to 168.
+           The first 13 grids are the first row, the second 13 grids are the second row, and so on.
+
+           It looks like this: 0  1  2  3  4  5  6  7  8  9  10  11  12
+                               13                19                  25
+                               26    28 29 30 31 32 33 34 35 36      38
+                               39    41          45          49      51
+                               52    54    56 57 58 59 60    62      64
+                               65    67    69          73    75      77
+                               78 79 80 81 82          86 87 88  89  90
+                               91    93    95          99    101     103
+                               104   106   108 ...
+
+           If the difference between the biggest and smallest index is 52, 104, or 156, it means that the mill is vertical
+           If the difference between the biggest and smallest index is 4, 8, or 12, it means that the mill is horizontal
+        */
+        if (minusValue == 52 || minusValue == 104 || minusValue == 156){ // if the mill is vertical
             millLayer.remove(smallIndex);
             millLayer.add(new Mill(Mill.Direction.FIRST_HALF_VERTICAL), smallIndex);
             for (int i = smallIndex + 13; i < bigIndex; i += 13){
@@ -374,7 +504,7 @@ public class InitialBoard extends JPanel {
             millLayer.remove(bigIndex);
             millLayer.add(new Mill(Mill.Direction.LAST_HALF_VERTICAL), bigIndex);
         }
-        else if (minusValue == 4 || minusValue == 8 || minusValue == 12){
+        else if (minusValue == 4 || minusValue == 8 || minusValue == 12){ // if the mill is horizontal
             millLayer.remove(smallIndex);
             millLayer.add(new Mill(Mill.Direction.FIRST_HALF_HORIZONTAL), smallIndex);
             for (int i = smallIndex + 1; i < bigIndex; i++){
@@ -386,12 +516,39 @@ public class InitialBoard extends JPanel {
         }
     }
 
+    /**
+     * This method is used to remove the yellow mill line on the board
+     *
+     * @param index1 is the first index of the token
+     * @param index2 is the second index of the token
+     * @param index3 is the third index of the token
+     * @param millLayer is the layer that contains the mill
+     */
     public void removeMill(int index1, int index2, int index3, PlaceToken millLayer){
-        int minusValue;
-        int smallIndex = findSmallest(index1, index2, index3);
-        int bigIndex = findBiggest(index1, index2, index3);
+        int minusValue; // the difference between the biggest and smallest index
+        int smallIndex = findSmallest(index1, index2, index3); // find the smallest index
+        int bigIndex = findBiggest(index1, index2, index3); // find the biggest index
 
-        minusValue = bigIndex - smallIndex;
+        minusValue = bigIndex - smallIndex; // calculate the difference between the biggest and smallest index
+
+        /* The following if-else statements are used to add the mill line on the board
+           The mill line is added based on the difference between the biggest and smallest index
+           The (13x13) board has 169 grids in total, and the index of the grids are from 0 to 168.
+           The first 13 grids are the first row, the second 13 grids are the second row, and so on.
+
+           It looks like this: 0  1  2  3  4  5  6  7  8  9  10  11  12
+                               13                19                  25
+                               26    28 29 30 31 32 33 34 35 36      38
+                               39    41          45          49      51
+                               52    54    56 57 58 59 60    62      64
+                               65    67    69          73    75      77
+                               78 79 80 81 82          86 87 88  89  90
+                               91    93    95          99    101     103
+                               104   106   108 ...
+
+           If the difference between the biggest and smallest index is 52, 104, or 156, it means that the mill is vertical
+           If the difference between the biggest and smallest index is 4, 8, or 12, it means that the mill is horizontal
+        */
         if (minusValue == 52 || minusValue == 104 || minusValue == 156){
             for (int i = smallIndex ; i <= bigIndex; i += 13){
                 millLayer.remove(i);
@@ -406,13 +563,18 @@ public class InitialBoard extends JPanel {
         }
     }
 
+    /**
+     * This method is used to display the result of the game
+     *
+     * @param winner is the winner of the game
+     */
     public void displayResult(Win.WhoWin winner){
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // get the screen size
         Win win;
 
         JFrame frame = new JFrame();
-        JDialog result = new JDialog(frame); // super(new JFrame(), true)
-        result.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+        JDialog result = new JDialog(frame); // create a new dialog that extends JFrame
+        result.setModalityType(Dialog.ModalityType.APPLICATION_MODAL); // set the result screen to be a modal
 
         // result screen cannot be closed unless press the 2 buttons (restart or close)
         result.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

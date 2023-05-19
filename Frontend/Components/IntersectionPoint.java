@@ -5,12 +5,15 @@ package Frontend.Components;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A class to represent the intersection point (circle button) on the game board
+ */
+
 public class IntersectionPoint extends JButton {
     /**
-     * Customized intersection point (circle button)
+     * Constructor.
+     * Creates an intersection point (circle button)
      */
-
-    // Constructor
     public IntersectionPoint(){
         this.setBackground(new Color(0x000000)); // set the background color of the circle button to Black
         setContentAreaFilled(false); // to have a transparent button, otherwise it will show like a square button
@@ -18,6 +21,7 @@ public class IntersectionPoint extends JButton {
 
     /**
      * This method is used to paint the intersection point (circle button)
+     *
      * @param g is the abstract base class for all graphics contexts
      */
     protected void paintComponent(Graphics g) {
@@ -27,6 +31,7 @@ public class IntersectionPoint extends JButton {
 
     /**
      * This method is used to paint the border of the intersection point (circle button)
+     *
      * @param g is the abstract base class for all graphics contexts
      */
     protected void paintBorder(Graphics g) {

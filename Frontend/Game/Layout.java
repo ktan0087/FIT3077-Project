@@ -11,19 +11,47 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A class to represent the layout of the game.
+ * A layout can have a main frame, a panel container, a main page, an initial board, and a card layout.
+ *
+ * @see MainFrame
+ */
+
 public class Layout{
     /**
-     * This class is used to switch between different panels (MainPage and InitialBoard)
+     * The main frame of the game
      */
     private JFrame mainFrame;
+
+    /**
+     * The panel container of the game
+     */
     private JPanel panelCont; // create Panel Container to add all panels inside
+
+    /**
+     * The main page of the game
+     */
     private MainPage mainPage;
+
+    /**
+     * The initial board of the game
+     */
     private InitialBoard iniBoard;
+
+    /**
+     * The card layout of the game
+     */
     private CardLayout cLayout; // create card layout
+
+    /**
+     * The game that is played
+     */
     private Game game;
 
     /**
      * This method is used to set the game that is played
+     *
      * @param game is the game that is played
      */
     public void setGame(Game game) {
@@ -32,6 +60,7 @@ public class Layout{
 
     /**
      * This method is used to get the game that is played
+     *
      * @return the current game that is played
      */
     public Game getGame() {
@@ -40,6 +69,7 @@ public class Layout{
 
     /**
      * This method is used to set the initial board
+     *
      * @param iniBoard is the initial board
      */
     public void setIniBoard(InitialBoard iniBoard) {
@@ -48,13 +78,17 @@ public class Layout{
 
     /**
      * This method is used to get the initial board
+     *
      * @return the current initial board
      */
     public InitialBoard getIniBoard() {
         return iniBoard;
     }
 
-    // Constructor
+    /**
+     * Constructor.
+     * Creates a layout of the game.
+     */
     public Layout() {
         this.mainFrame = new MainFrame();
         this.panelCont = new JPanel(); // create Panel Container to add all panels inside
@@ -80,6 +114,7 @@ public class Layout{
     protected ActionListener play = new ActionListener() {
         /**
          * This method is used to bring the user to start the game (InitialBoard)
+         *
          * @param e the event to be processed
          */
         @Override
@@ -93,6 +128,8 @@ public class Layout{
     protected ActionListener restart = new ActionListener() {
         /**
          * This method is used to restart the game
+         * and it will show a confirmation dialog to ask the user whether they intend to restart
+         *
          * @param e the event to be processed
          */
         @Override
@@ -109,6 +146,8 @@ public class Layout{
     protected ActionListener close = new ActionListener() {
         /**
          * This method is used to exit the game (bring the user to main page (MainPage))
+         * and it will show a confirmation dialog to ask the user whether they intend to exit
+         *
          * @param e the event to be processed
          */
         @Override
@@ -122,6 +161,9 @@ public class Layout{
         }
     };
 
+    /**
+     * This method is used to restart the game
+     */
     protected ActionListener getRestart = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -139,6 +181,9 @@ public class Layout{
         }
     };
 
+    /**
+     * This method is used to exit the game (bring the user to main page (MainPage))
+     */
     protected ActionListener getClose = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {

@@ -3,13 +3,20 @@ package Frontend.Frame;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A class to represent the main frame of the game
+ */
+
 public class MainFrame extends JFrame {
     /**
-     * Customized main frame
+     * The screen size of the frame
      */
-    private Dimension screenSize; // get the screen size
+    private Dimension screenSize;
 
-    // Constructor
+    /**
+     * Constructor.
+     * Creates the main frame of the application.
+     */
     public MainFrame(){
         this.screenSize = Toolkit.getDefaultToolkit().getScreenSize(); // get the screen size
         this.setTitle("NINE MEN'S MORRIS"); // set title of frame

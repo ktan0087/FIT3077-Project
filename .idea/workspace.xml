@@ -6,10 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f9c7453-4616-463d-ae35-df53754e53bb" name="Changes" comment="add javadoc to Application">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/FIT3077_Project_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
+    <list default="true" id="5f9c7453-4616-463d-ae35-df53754e53bb" name="Changes" comment="fix bug: edge cases">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -52,6 +52,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Sprint 2" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.0" />
@@ -64,11 +65,11 @@
       <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\Sprint 1" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\out\artifacts\FIT3077_Project_jar" />
       <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project" />
       <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\Backend" />
       <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\Sprint 2\Icons" />
       <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\Sprint 2" />
-      <recent name="C:\Users\User\Desktop\IDEA Code\FIT3077 Project\" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Application">
@@ -78,6 +79,19 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Backend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Board (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Backend.Board.Board" />
+      <module name="FIT3077 Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Backend.Board.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -98,12 +112,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Layout" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Frontend.Layout" />
+    <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Backend.Game" />
       <module name="FIT3077 Project" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Frontend.*" />
+          <option name="PATTERN" value="Backend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Intersection" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Backend.Intersection" />
+      <module name="FIT3077 Project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Backend.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -114,8 +141,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Application" />
+        <item itemvalue="Application.Game" />
+        <item itemvalue="Application.Board (1)" />
         <item itemvalue="Application.Board" />
-        <item itemvalue="Application.Layout" />
+        <item itemvalue="Application.Intersection" />
       </list>
     </recent_temporary>
   </component>
@@ -268,7 +297,133 @@
       <option name="project" value="LOCAL" />
       <updated>1682590996506</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="finalise everything">
+      <created>1682600138982</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1682600138982</updated>
+    </task>
+    <task id="LOCAL-00022" summary="create mill class and FlyingTokenAction class">
+      <created>1684136229722</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1684136229722</updated>
+    </task>
+    <task id="LOCAL-00023" summary="adding getAdjacentIntersection() and isMill() methods">
+      <created>1684136306782</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1684136306782</updated>
+    </task>
+    <task id="LOCAL-00024" summary="fix bug moveTokenAction()">
+      <created>1684136825817</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1684136825817</updated>
+    </task>
+    <task id="LOCAL-00025" summary="fix mill bugs">
+      <created>1684140549416</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1684140549416</updated>
+    </task>
+    <task id="LOCAL-00026" summary="fix mill bugs">
+      <created>1684149280815</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1684149280815</updated>
+    </task>
+    <task id="LOCAL-00027" summary="add todo to continue">
+      <created>1684149499419</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1684149499419</updated>
+    </task>
+    <task id="LOCAL-00028" summary="add removeToken capability to player once the mill is formed.">
+      <created>1684302990417</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1684302990417</updated>
+    </task>
+    <task id="LOCAL-00029" summary="add boolean variable to check if the mill is drawn in frontend">
+      <created>1684303018543</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1684303018543</updated>
+    </task>
+    <task id="LOCAL-00030" summary="fix bugs: cannot remove token that is mill">
+      <created>1684304780850</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1684304780850</updated>
+    </task>
+    <task id="LOCAL-00031" summary="fix bugs: remove mill when token of mill is move or fly">
+      <created>1684307262220</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1684307262220</updated>
+    </task>
+    <task id="LOCAL-00032" summary="adding removeMill arraylist to Move and Fly action">
+      <created>1684308261014</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1684308261014</updated>
+    </task>
+    <task id="LOCAL-00033" summary="optimised isMill function in Board">
+      <created>1684316069799</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1684316069799</updated>
+    </task>
+    <task id="LOCAL-00034" summary="add remove mill">
+      <created>1684320281611</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1684320281611</updated>
+    </task>
+    <task id="LOCAL-00035" summary="change toString">
+      <created>1684323554961</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1684323554961</updated>
+    </task>
+    <task id="LOCAL-00036" summary="add flyToken action to the game">
+      <created>1684329393465</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1684329393465</updated>
+    </task>
+    <task id="LOCAL-00037" summary="fix bug: edge cases">
+      <created>1684424482513</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1684424482513</updated>
+    </task>
+    <task id="LOCAL-00038" summary="fix bug: edge cases">
+      <created>1684424492647</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1684424492647</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -285,16 +440,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Adding Domain Model version 1" />
-    <MESSAGE value="Finalise Domain Model" />
-    <MESSAGE value="Create Domain Model file" />
-    <MESSAGE value="Adding WBS final version" />
-    <MESSAGE value="Finalise Sprint 1" />
-    <MESSAGE value="Finalise Sprint 1 - final" />
-    <MESSAGE value="Finalise Sprint 1 - final: Adding UI pdf in document" />
-    <MESSAGE value="Create a new branch from main" />
-    <MESSAGE value="Create Board class with all the intersections." />
-    <MESSAGE value="Create Intersection class, with an isAdjacent method" />
     <MESSAGE value="Create Layout and MainPage class for user to interact" />
     <MESSAGE value="Change file locations" />
     <MESSAGE value="Change Intersection file location" />
@@ -304,7 +449,23 @@
     <MESSAGE value="Remove exceptions for actions" />
     <MESSAGE value="add javadoc to Board, Intersection, MoveTokenAction, PlaceTokenAction" />
     <MESSAGE value="add javadoc to Application" />
-    <option name="LAST_COMMIT_MESSAGE" value="add javadoc to Application" />
+    <MESSAGE value="finalise everything" />
+    <MESSAGE value="create mill class and FlyingTokenAction class" />
+    <MESSAGE value="adding getAdjacentIntersection() and isMill() methods" />
+    <MESSAGE value="fix bug moveTokenAction()" />
+    <MESSAGE value="fix mill bugs" />
+    <MESSAGE value="add todo to continue" />
+    <MESSAGE value="add removeToken capability to player once the mill is formed." />
+    <MESSAGE value="add boolean variable to check if the mill is drawn in frontend" />
+    <MESSAGE value="fix bugs: cannot remove token that is mill" />
+    <MESSAGE value="fix bugs: remove mill when token of mill is move or fly" />
+    <MESSAGE value="adding removeMill arraylist to Move and Fly action" />
+    <MESSAGE value="optimised isMill function in Board" />
+    <MESSAGE value="add remove mill" />
+    <MESSAGE value="change toString" />
+    <MESSAGE value="add flyToken action to the game" />
+    <MESSAGE value="fix bug: edge cases" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix bug: edge cases" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -316,6 +477,10 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.IllegalArgumentException" package="java.lang" />
           <option name="timeStamp" value="6" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="7" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>

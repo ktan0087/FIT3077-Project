@@ -5,6 +5,16 @@ import Backend.Player;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents a mill object on the board
+ * A mill object is formed by 3 intersections
+ *
+ * @see Backend.Board.Intersection
+ * @see Backend.Board.Board
+ * @see Backend.Board.Mill
+ * @see Backend.Action.MoveTokenAction
+ * @see Backend.Action.RemoveTokenAction
+ */
 public class Mill {
     /**
      * Private attributes of Mill
@@ -12,12 +22,11 @@ public class Mill {
     private ArrayList<Intersection> intersectionList = new ArrayList<>();
     private Intersection intersection[][] = new Intersection[4][9];
     private Player player;
-    private boolean isDrawn = false;
 
     /**
      * Constructor
      * Function to initialise Mill
-     * @param intersections = array of intersectionList that form a mill
+     * @param firstIntersection, secondIntersection, thirdIntersection = intersections that form a mill
      * @param player = player who owns the mill
      */
     public Mill(Intersection firstIntersection, Intersection secondIntersection, Intersection thirdIntersection, Player player){
@@ -35,14 +44,6 @@ public class Mill {
         return intersectionList;
     }
 
-    public void setDrawn(boolean drawn) {
-        isDrawn = drawn;
-    }
-
-    public boolean getIsDrawn(){
-        return isDrawn;
-    }
-
     /**
      * Getter function to get the player who owns the mill
      * @return player who owns the mill
@@ -51,6 +52,10 @@ public class Mill {
         return player;
     }
 
+    /**
+     * Fucntion to print Mill object
+     * @return
+     */
     @Override
     public String toString() {
         return "Mill{" +

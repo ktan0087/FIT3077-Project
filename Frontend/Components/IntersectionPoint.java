@@ -2,6 +2,8 @@
 // Retrieved from https://www.roseindia.net/tutorial/java/swing/createRoundButton.html
 package Frontend.Components;
 
+import Frontend.Size;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -29,7 +31,7 @@ public class IntersectionPoint extends JButton {
 
         int x = getWidth()/2; // to get the middle point
         int y = getHeight()/2; // to get the middle point
-        int radius = 6;
+        int radius = new Size(6, 6).getWidth();
         int diameter = radius * 2;
 
         //shift x and y by the radius of the circle in order to correctly center it
@@ -46,7 +48,7 @@ public class IntersectionPoint extends JButton {
 
         int x = getX()/2; // to get the middle point
         int y = getY()/2; // to get the middle point
-        int radius = 6;
+        int radius = new Size(6, 6).getWidth();
         int diameter = radius * 2;
 
         //shift x and y by the radius of the circle in order to correctly center it

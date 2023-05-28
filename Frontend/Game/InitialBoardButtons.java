@@ -3,6 +3,7 @@ package Frontend.Game;
 import Frontend.Button.BtnClose;
 import Frontend.Button.BtnHint;
 import Frontend.Button.BtnRestart;
+import Frontend.Size;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,7 +47,8 @@ public class InitialBoardButtons extends JPanel {
 
         this.setLayout(new GridBagLayout()); // set the layout of this panel
         GridBagConstraints gbc = new GridBagConstraints(); // create a GridBagConstraint object
-        gbc.insets = new Insets(5, 5, 5, 5); // add gaps between the components
+        Size gapSize = new Size(5, 5);
+        gbc.insets = new Insets(gapSize.getHeight(), gapSize.getHeight(), gapSize.getHeight(), gapSize.getHeight()); // add gaps between the components
 
         gbc.gridx = 0; // set the x position of the component
         gbc.gridy = 0; // set the y position of the component

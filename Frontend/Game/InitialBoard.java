@@ -9,6 +9,7 @@ import Frontend.Components.*;
 import Frontend.HintCircle;
 import Frontend.Layer.PlaceToken;
 import Frontend.Line.Mill;
+import Frontend.Size;
 
 import javax.swing.*;
 import java.awt.*;
@@ -170,7 +171,8 @@ public class InitialBoard extends JPanel {
         // Set layout of Buttons in board
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5); // add gaps between the components
+        Size gapSize = new Size(5, 5);
+        gbc.insets = new Insets(gapSize.getHeight(), gapSize.getHeight(), gapSize.getHeight(), gapSize.getHeight()); // add gaps between the components
 
         // add buttons to top right of the panel
         gbc.gridx = 3; // set the x position of the component

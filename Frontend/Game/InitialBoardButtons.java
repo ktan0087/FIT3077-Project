@@ -21,7 +21,7 @@ public class InitialBoardButtons extends JPanel {
     /**
      * The hint button
      */
-    private BtnHint btnHint;
+    protected BtnHint btnHint;
 
     /**
      * The restart button

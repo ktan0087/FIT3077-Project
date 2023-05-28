@@ -141,8 +141,8 @@ public abstract class Token extends JLabel {
             // paint the white token
             g.setColor(this.tokenColor);
 
-            int x = 500 / (13 * 2); // 500 is the width of the panel, 13 is the number of columns/rows, 2 is to get the middle point
-            int y = 500 / (13 * 2); // this is to get the middle point of each grid
+            int x = getWidth()/2; // to get the middle point
+            int y = getHeight()/2; // to get the middle point
             int radius = 15;
             int diameter = radius * 2;
 

@@ -25,8 +25,15 @@ public class IntersectionPoint extends JButton {
      * @param g is the abstract base class for all graphics contexts
      */
     protected void paintComponent(Graphics g) {
-        g.fillOval(0, 0, getSize().width-1,getSize().height-1);
         super.paintComponent(g);
+
+        int x = getWidth()/2; // to get the middle point
+        int y = getHeight()/2; // to get the middle point
+        int radius = 6;
+        int diameter = radius * 2;
+
+        //shift x and y by the radius of the circle in order to correctly center it
+        g.fillOval(x - radius, y - radius, diameter, diameter);
     }
 
     /**
@@ -36,7 +43,14 @@ public class IntersectionPoint extends JButton {
      */
     protected void paintBorder(Graphics g) {
         g.setColor(getForeground());
-        g.drawOval(0, 0, getSize().width-1,getSize().height-1);
+
+        int x = getX()/2; // to get the middle point
+        int y = getY()/2; // to get the middle point
+        int radius = 6;
+        int diameter = radius * 2;
+
+        //shift x and y by the radius of the circle in order to correctly center it
+        g.drawOval(x - radius, y - radius, diameter, diameter);
     }
 
 }

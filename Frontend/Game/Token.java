@@ -4,6 +4,7 @@ import Backend.Action.RemoveTokenAction;
 import Backend.Token.TokenColour;
 import Frontend.Components.Instruction;
 import Frontend.Components.Win;
+import Frontend.Size;
 
 import javax.swing.*;
 import java.awt.*;
@@ -112,17 +113,17 @@ public abstract class Token extends JLabel {
             repaint();
             revalidate();
 
-            int x = 500/(13*2); // 500 is the width of the panel, 13 is the number of columns/rows, 2 is to get the middle point
-            int y = 500/(13*2); // this is to get the middle point of each grid
+            int x = getWidth()/2; // to get the middle point
+            int y = getHeight()/2; // to get the middle point
 
             // draw the outer circle
             g.setColor(new Color(0xFF0000));
-            int diameterOuter = 500/13;
+            int diameterOuter = getWidth();
             g.fillOval(0, 0, diameterOuter, diameterOuter);
 
             // draw the inner circle
             g.setColor(this.tokenColor);
-            int radiusInner = 15;
+            int radiusInner = new Size(15, 15).getHeight();
             int diameterInner = radiusInner * 2;
             g.fillOval(x - radiusInner, y - radiusInner, diameterInner, diameterInner);
         }
@@ -141,9 +142,9 @@ public abstract class Token extends JLabel {
             // paint the white token
             g.setColor(this.tokenColor);
 
-            int x = 500 / (13 * 2); // 500 is the width of the panel, 13 is the number of columns/rows, 2 is to get the middle point
-            int y = 500 / (13 * 2); // this is to get the middle point of each grid
-            int radius = 15;
+            int x = getWidth()/2; // to get the middle point
+            int y = getHeight()/2; // to get the middle point
+            int radius = new Size(15, 15).getHeight();
             int diameter = radius * 2;
 
             //shift x and y by the radius of the circle in order to correctly center it

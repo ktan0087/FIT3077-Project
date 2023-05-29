@@ -1,5 +1,8 @@
 package Frontend.Components;
 
+import Frontend.IconProcessor;
+import Frontend.Size;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -30,16 +33,17 @@ public class PlayerTurn extends JLabel {
     public PlayerTurn(){
         this.whiteToken = new ImageIcon(getClass().getResource("/Icons/white-token.png"));
         this.blackToken = new ImageIcon(getClass().getResource("/Icons/black-token.png"));
-        this.isWhite = true;
+        this.isWhite = false;
 
         this.setText("TURN"); // set the text of label
-        this.setFont(new Font("Inter", Font.PLAIN, 42)); // set the font of label
+        this.setFont(new Font("Inter", Font.PLAIN, new Size(42, 42).getHeight())); // set the font of label
         this.setForeground(new Color(0x000000)); // set the color of label
-        this.setIcon(whiteToken); // set the icon of label
+        this.changeIcon();
         this.setHorizontalTextPosition(JLabel.LEFT);
         this.setHorizontalAlignment(JLabel.CENTER);
         this.setIconTextGap(45); // set the distance between text and icon
-        this.setPreferredSize(new Dimension(300, 80));
+        Size size = new Size(300, 80);
+        this.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
         this.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
     }
 
@@ -47,12 +51,23 @@ public class PlayerTurn extends JLabel {
      * A method to change the icon of the label.
      */
     public void changeIcon(){
+        IconProcessor icon;
+        ImageIcon resizedIcon;
+
         if (isWhite){
-            this.setIcon(blackToken); // set the icon of label to black token
+            // Resize the icon
+            icon = new IconProcessor(this.blackToken, 68, 68);
+            resizedIcon = icon.resizeIcon();
+
+            this.setIcon(resizedIcon);
             isWhite = false;
         }
         else{
-            this.setIcon(whiteToken); // set the icon of label to white token
+            // Resize the icon
+            icon = new IconProcessor(this.whiteToken, 68, 68);
+            resizedIcon = icon.resizeIcon();
+
+            this.setIcon(resizedIcon);
             isWhite = true;
         }
     }

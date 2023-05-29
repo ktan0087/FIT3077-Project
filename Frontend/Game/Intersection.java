@@ -54,7 +54,7 @@ public class Intersection extends JLabel {
      */
     public Intersection(int coordinateX, int coordinateY){
         this.inter = new IntersectionPoint(); // create a circle button for intersection
-        this.setLayout(new GridLayout(3, 3, -1, -1)); // -1 is to prevent showing grid border
+        this.setLayout(new GridLayout(3, 3));
         this.coordinateX = coordinateX;
         this.coordinateY = coordinateY;
     }

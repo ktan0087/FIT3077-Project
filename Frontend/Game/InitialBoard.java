@@ -6,8 +6,10 @@ import Backend.Action.PlaceTokenAction;
 import Backend.Interfaces.CanRemoveMill;
 import Backend.Token.TokenColour;
 import Frontend.Components.*;
+import Frontend.HintCircle;
 import Frontend.Layer.PlaceToken;
 import Frontend.Line.Mill;
+import Frontend.Size;
 
 import javax.swing.*;
 import java.awt.*;
@@ -92,6 +94,11 @@ public class InitialBoard extends JPanel {
     private PlaceToken millLayer;
 
     /**
+     * The layer that is used to display hint
+     */
+    private PlaceToken hintLayer;
+
+    /**
      * The result buttons include restart, close
      */
     protected ResultButtons resultButton;
@@ -99,7 +106,17 @@ public class InitialBoard extends JPanel {
     /**
      * A boolean to check whether the player can remove a mill
      */
-    protected Boolean canRemove = false;
+    protected Boolean canRemove;
+
+    /**
+     * A boolean to check whether the player pressed hint button
+     */
+    private Boolean hintPressed;
+
+    /**
+     * A list to store hint's intersections
+     */
+    private ArrayList<Intersection> hintList; // a list of all intersections on the board
 
     /**
      * The number of mills that the player can remove
@@ -139,7 +156,13 @@ public class InitialBoard extends JPanel {
         this.blackTokenRemain = new TokenRemain(TokenRemain.TokenColour.BLACK); // show the remaining number of black tokens
         this.instruction = new Instruction(Instruction.InstructionType.EMPTY); // provide the instruction of the game
         this.millLayer = new PlaceToken(); // the layer that shows the mill
+        this.hintLayer = new PlaceToken(); // the layer that shows the hint
         this.resultButton = new ResultButtons();
+        this.canRemove = false;
+        this.hintPressed = false;
+        this.hintList = (ArrayList<Intersection>) board.getIntersectionList();
+
+        this.buttons.btnHint.addActionListener(hintAction);
 
         // set the background color of the board
         this.setBackground(new Color(0xE0A060));
@@ -148,7 +171,8 @@ public class InitialBoard extends JPanel {
         // Set layout of Buttons in board
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5); // add gaps between the components
+        Size gapSize = new Size(5, 5);
+        gbc.insets = new Insets(gapSize.getHeight(), gapSize.getHeight(), gapSize.getHeight(), gapSize.getHeight()); // add gaps between the components
 
         // add buttons to top right of the panel
         gbc.gridx = 3; // set the x position of the component
@@ -176,6 +200,7 @@ public class InitialBoard extends JPanel {
         gbc.gridwidth = 3;
         this.add(placeToken, gbc);
         this.add(millLayer, gbc);
+        this.add(hintLayer, gbc);
         this.add(board, gbc);
 
         // add the player turn to the bottom of the panel
@@ -251,7 +276,7 @@ public class InitialBoard extends JPanel {
 
                             checkAndRemoveMills(newFlyAction);
 
-                            // Check if a mill is formed and then do approriate actions and draw them
+                            // Check if a mill is formed and then do appropriate actions and draw them
                             checkAndDrawMills();
 
                             getGame().endTurn(); // end the turn
@@ -609,5 +634,26 @@ public class InitialBoard extends JPanel {
         result.setLocationRelativeTo(null);
         result.setVisible(true);
     }
+
+    protected ActionListener hintAction = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (!hintPressed){
+                hintPressed = true;
+                for (Intersection intersection : hintList) {
+                    new HintCircle().showHint(hintLayer, intersection);
+                }
+            }
+            else {
+                hintPressed = false;
+                for (Intersection intersection : hintList) {
+                    hintLayer.remove(intersection.getAccessibleContext().getAccessibleIndexInParent());
+                    hintLayer.add(new JLabel(), intersection.getAccessibleContext().getAccessibleIndexInParent());
+                }
+            }
+            hintLayer.repaint();
+            hintLayer.revalidate();
+        }
+    };
 
 }

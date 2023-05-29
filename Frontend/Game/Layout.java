@@ -5,6 +5,7 @@ package Frontend.Game;
 
 import Backend.Game;
 import Frontend.Frame.MainFrame;
+import Frontend.Tutorial;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,6 +39,8 @@ public class Layout{
      * The initial board of the game
      */
     private InitialBoard iniBoard;
+
+    private Tutorial tutorial;
 
     /**
      * The card layout of the game
@@ -94,15 +97,18 @@ public class Layout{
         this.panelCont = new JPanel(); // create Panel Container to add all panels inside
         this.mainPage = new MainPage();
         this.iniBoard = new InitialBoard();
+        this.tutorial = new Tutorial();
         this.cLayout = new CardLayout(); // create card layout
 
         panelCont.setLayout(cLayout); // set card layout for panel container
 
         panelCont.add(mainPage, "1"); // add main page to panel container
         panelCont.add(iniBoard, "2"); // add initial board to panel container
+        panelCont.add(tutorial, "3");
         cLayout.show(panelCont, "1"); // show main page first
 
         mainPage.btnPlay.addActionListener(play); // make PLAY button work
+        mainPage.btnTut.addActionListener(startTutorial);
         iniBoard.buttons.btnRestart.addActionListener(restart); // make RESTART button work
         iniBoard.buttons.btnClose.addActionListener(close); // make CLOSE button work
         iniBoard.resultButton.btnRestart.addActionListener(getRestart);
@@ -110,6 +116,13 @@ public class Layout{
 
         mainFrame.add(panelCont); // add panel container to main frame
     }
+
+    protected ActionListener startTutorial = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            cLayout.show(panelCont, "3");
+        }
+    };
 
     protected ActionListener play = new ActionListener() {
         /**

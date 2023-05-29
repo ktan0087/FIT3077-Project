@@ -46,8 +46,8 @@ public class IntersectionPoint extends JButton {
     protected void paintBorder(Graphics g) {
         g.setColor(getForeground());
 
-        int x = getX()/2; // to get the middle point
-        int y = getY()/2; // to get the middle point
+        int x = getWidth()/2; // to get the middle point
+        int y = getHeight()/2; // to get the middle point
         int radius = new Size(6, 6).getWidth();
         int diameter = radius * 2;
 

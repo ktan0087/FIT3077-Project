@@ -30,7 +30,7 @@ public class MainPage extends JLayeredPane{
     /**
      * The tutorial button
      */
-    private BtnTutorial btnTut;
+    protected BtnTutorial btnTut;
 
     /**
      * The background of the main page

@@ -641,7 +641,7 @@ public class InitialBoard extends JPanel {
             if (!hintPressed){
                 hintPressed = true;
                 for (Intersection intersection : hintList) {
-                    new HintCircle().showHint(hintLayer, intersection);
+                    new HintCircle(HintCircle.Type.TOKEN).showHint(hintLayer, intersection);
                 }
             }
             else {

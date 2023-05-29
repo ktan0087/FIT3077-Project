@@ -10,9 +10,17 @@ import java.awt.event.*;
 import java.util.*;
 
 public class HintCircle extends JLabel {
-    private boolean circleVisible = true;
+    private boolean circleVisible;
+    private Type type;
 
-    public HintCircle() {
+    public enum Type{
+        INTERSECTION,
+        TOKEN
+    }
+
+    public HintCircle(Type type) {
+        this.circleVisible = true;
+        this.type = type;
         Timer timer = new Timer(500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -25,15 +33,22 @@ public class HintCircle extends JLabel {
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        int radius = 0;
+
+        if (this.type == Type.INTERSECTION) {
+            radius = new Size(8, 8).getHeight();
+        }
+        else if (this.type == Type.TOKEN) {
+            radius = new Size(16, 16).getHeight();
+        }
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.RED);
+        g2d.setColor(new Color(0xFF5F1F));
         g2d.setStroke(new BasicStroke(5));
 
         if (circleVisible) {
             int x = getWidth()/2; // to get the middle point
             int y = getHeight()/2; // to get the middle point
-            int radius = 8;
             int diameter = radius * 2;
 
             //shift x and y by the radius of the circle in order to correctly center it

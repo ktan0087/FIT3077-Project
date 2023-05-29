@@ -47,7 +47,7 @@ public class FlyTokenAction extends Action implements CanRemoveMill {
     public boolean execute() {
         boolean flag = false;
         //check if the player is allowed to fly token
-        if (player.isActionAllowed(AllActions.CAN_FLY) && !(player.isActionAllowed(AllActions.REMOVE_TOKEN))){
+        if (player.isActionAllowed(AllActions.FLY_TOKEN) && !(player.isActionAllowed(AllActions.REMOVE_TOKEN))){
             //call flyToken() function from board that removes the token from the current intersection
             // and adds it to the new intersection
             if (game.getBoard().flyToken(player, currentIntersection, newIntersection)){

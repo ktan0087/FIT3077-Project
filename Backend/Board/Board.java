@@ -71,10 +71,45 @@ public class Board {
 
     /**
      * Function to get all the Mills on board
-     * @return
+     * @return the mill list
      */
     public ArrayList<Mill> getMills() {
         return mills;
+    }
+
+    /**
+     * Function to get all the empty intersections on board
+     * @return list of all empty intersections
+     */
+    public ArrayList<Intersection> getEmptyIntersection(){
+        ArrayList<Intersection> emptyIntersection = new ArrayList<>();
+        // Loop through the layers and positions to get the empty intersections
+        for(int i = 1; i < MAX_LAYERS; i++){
+            for(int j = 1; j < MAX_POSITIONS; j++){
+                if(intersection[i][j].isEmpty()){
+                    emptyIntersection.add(intersection[i][j]);
+                }
+            }
+        }
+        return emptyIntersection;
+    }
+
+    /**
+     * Function to get all the tokens by player on board
+     * @param player
+     * @return list of all tokens by player on board
+     */
+    public ArrayList<Token> getPlayerTokensOnBoard(Player player){
+        ArrayList<Token> tokensOnBoard = new ArrayList<>();
+        // Loop through the layers and positions to get the tokens by player
+        for(int i = 1; i < MAX_LAYERS; i++){
+            for(int j = 1; j < MAX_POSITIONS; j++){
+                if(!intersection[i][j].isEmpty() && intersection[i][j].getToken().getTokenColour() == player.getTokenColour()){
+                    tokensOnBoard.add(intersection[i][j].getToken());
+                }
+            }
+        }
+        return tokensOnBoard;
     }
 
     /**

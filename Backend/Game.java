@@ -59,6 +59,8 @@ public class Game {
     private boolean isGameOver;
 
     private ArrayList<Intersection> adjacentIntersectionList;
+    private ArrayList<Intersection> possibleIntersectionList;
+    private ArrayList<Token> possibleTokenList;
 
     // not yet implemented in this sprint
     private GameMode gameMode;
@@ -210,7 +212,7 @@ public class Game {
         boolean flag = false;
         // If a player still has tokens in hand or the player can fly, the player has possible moves.
         // Thus, function returns true.
-        if (player.getTokensInHand()>0 || player.isActionAllowed(AllActions.CAN_FLY)) {
+        if (player.getTokensInHand()>0 || player.isActionAllowed(AllActions.FLY_TOKEN)) {
             return true;
         }
         //Loop through all the layers of the board
@@ -281,5 +283,42 @@ public class Game {
             flag = false;
         }
         return flag;
+    }
+
+    /**
+     * A function to get the possible intersections for the player to place a token.
+     * @param currentIntersection the current intersection of the token
+     * @param player current player
+     * @return an array list of possible intersections for the player select
+     */
+    public ArrayList<Intersection> getPossibleIntersectionList(Intersection currentIntersection, Player player) {
+        // check if player has any possible moves
+        if (this.checkPossibleMove(player)) {
+            // check if the player can fly or place a token
+            if (player.isActionAllowed(AllActions.FLY_TOKEN) || player.isActionAllowed(AllActions.PLACE_TOKEN)) {
+                possibleIntersectionList =  board.getEmptyIntersection();
+            }
+            // check if the player can move a token
+            else if (player.isActionAllowed(AllActions.MOVE_TOKEN)) {
+                possibleIntersectionList = board.getAdjacentIntersectionSmall(currentIntersection);
+            }
+        }
+        return possibleIntersectionList;
+    }
+
+    /**
+     * A function to get the possible tokens for the player to remove.
+     * @param player current player
+     * @return an array list of possible tokens of the opponent for the player to remove
+     */
+    public ArrayList<Token> getPossibleTokenList(Player player) {
+        // check if player can remove a token
+        if (player == player1 && player.isActionAllowed(AllActions.REMOVE_TOKEN)) {
+            possibleTokenList = board.getPlayerTokensOnBoard(player2);
+        }
+        else{
+            possibleTokenList = board.getPlayerTokensOnBoard(player1);
+        }
+        return possibleTokenList;
     }
 }

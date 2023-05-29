@@ -60,8 +60,8 @@ public class Game {
 
     private ArrayList<Intersection> adjacentIntersectionList;
 
-//    // not yet implemented in this sprint
-//    private GameMode gameMode;
+    // not yet implemented in this sprint
+    private GameMode gameMode;
 
     /**
      * Constructor.
@@ -76,6 +76,11 @@ public class Game {
         currentPlayer = player1;
         board = new Board();
         isGameOver = false;
+        gameMode = new TutorialMode(this);
+    }
+
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
     }
 
     /**

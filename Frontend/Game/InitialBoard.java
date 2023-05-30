@@ -172,7 +172,7 @@ public class InitialBoard extends JPanel {
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         Size gapSize = new Size(5, 5);
-        gbc.insets = new Insets(gapSize.getHeight(), gapSize.getHeight(), gapSize.getHeight(), gapSize.getHeight()); // add gaps between the components
+        gbc.insets = new Insets(gapSize.getHeight(), gapSize.getWidth(), gapSize.getHeight(), gapSize.getWidth()); // add gaps between the components
 
         // add buttons to top right of the panel
         gbc.gridx = 3; // set the x position of the component

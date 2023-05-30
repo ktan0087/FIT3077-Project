@@ -5,6 +5,8 @@ import Frontend.Game.InitialBoard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Tutorial extends JPanel{
     protected JButton btnClose;
@@ -13,6 +15,8 @@ public class Tutorial extends JPanel{
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        Size gapSize = new Size(10, 25);
+        gbc.insets = new Insets(gapSize.getHeight(), gapSize.getWidth(), gapSize.getHeight(), gapSize.getWidth()); // add gaps between the components
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -33,8 +37,11 @@ public class Tutorial extends JPanel{
         gbc.weightx = 0;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.SOUTHEAST;
-        this.add(createNextButton(), gbc);
+        JButton next = createNextButton();
+        next.setBounds(20, 500, 3, 100);
+        this.add(next, gbc);
 
+        gbc.insets = new Insets(0, 0, 0, 0);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 1;
@@ -53,6 +60,8 @@ public class Tutorial extends JPanel{
         background.setLayout(new OverlayLayout(background));
 
         JPanel initialBoard = new InitialBoard();
+        initialBoard.setEnabled(false); // make buttons enabled
+
         JPanel dimLayer = createDimLayer();
 
         background.add(dimLayer);
@@ -130,14 +139,27 @@ public class Tutorial extends JPanel{
     private static JButton createNextButton(){
         JButton next = new JButton();
 
-        ImageIcon whiteToken = new ImageIcon(Tutorial.class.getResource("/Icons/next.png"));
-        IconProcessor icon = new IconProcessor(whiteToken, 100, 100);
-        ImageIcon resizedIcon = icon.resizeIcon();
-        next.setIcon(resizedIcon);
+        ImageIcon nextImage = new ImageIcon(Tutorial.class.getResource("/Icons/next.png"));
+        IconProcessor nextIcon = new IconProcessor(nextImage, 100, 100);
+        ImageIcon nextResizedIcon = nextIcon.resizeIcon();
+        next.setIcon(nextResizedIcon);
         next.setFocusable(false);
         next.setOpaque(false);
         next.setContentAreaFilled(false);
         next.setBorderPainted(false);
+
+        // Make the visual effect when the next button is pressed
+        ImageIcon pressedNextImage = new ImageIcon(Tutorial.class.getResource("/Icons/next-pressed.png"));
+        IconProcessor pressedNextIcon = new IconProcessor(pressedNextImage, 100, 100);
+        ImageIcon pressedNextResizedIcon = pressedNextIcon.resizeIcon();
+        next.setPressedIcon(new ImageIcon(pressedNextResizedIcon.getImage()));
+
+        next.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("CLICKED");
+            }
+        });
 
         return next;
     }

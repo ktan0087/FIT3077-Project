@@ -83,9 +83,19 @@ public class Tutorial extends JPanel{
             this.initialBoard.board.getIntersectionList().get(0).inter.isEnabled(); //change index!!!
         }
         else if (this.nextCount == 5){
+            this.initialBoard.placeToken.remove(0);
+            this.initialBoard.placeToken.add(new BlackToken(1, 3, this.initialBoard));
+        }
+        else if (this.nextCount == 6){
             this.background.add(this.dimLayer);
             this.background.setComponentZOrder(this.dimLayer, 0);
             intro.setText("Move Token");
+            this.setComponentZOrder(intro, 2);
+        }
+        else if (this.nextCount == 9){
+            this.background.add(this.dimLayer);
+            this.background.setComponentZOrder(this.dimLayer, 0);
+            intro.setText("Remove Token");
             this.setComponentZOrder(intro, 2);
         }
         else if (this.nextCount == 13){

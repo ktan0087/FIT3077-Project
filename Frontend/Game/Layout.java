@@ -5,7 +5,6 @@ package Frontend.Game;
 
 import Backend.Game;
 import Frontend.Frame.MainFrame;
-import Frontend.Tutorial;
 
 import javax.swing.*;
 import java.awt.*;
@@ -113,6 +112,7 @@ public class Layout{
         iniBoard.buttons.btnClose.addActionListener(close); // make CLOSE button work
         iniBoard.resultButton.btnRestart.addActionListener(getRestart);
         iniBoard.resultButton.btnClose.addActionListener(getClose);
+        tutorial.btnClose.addActionListener(close);
 
         mainFrame.add(panelCont); // add panel container to main frame
     }
@@ -121,6 +121,7 @@ public class Layout{
         @Override
         public void actionPerformed(ActionEvent e) {
             cLayout.show(panelCont, "3");
+            setGame(new Backend.Tutorial());
         }
     };
 

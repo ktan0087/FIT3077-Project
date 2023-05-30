@@ -46,7 +46,7 @@ public class InitialBoard extends JPanel {
     /**
      * A board that the game is played on
      */
-    private Board board;
+    protected Board board;
 
     /**
      * The layer that is used to place tokens

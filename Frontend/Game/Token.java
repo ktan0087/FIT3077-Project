@@ -108,6 +108,7 @@ public abstract class Token extends JLabel {
      * @param g  is the graphics object
      */
     protected void paintBorder(Graphics g) {
+        super.paintBorder(g);
         if (this.selected) {
             // to cover the intersection point
             repaint();
@@ -134,6 +135,7 @@ public abstract class Token extends JLabel {
      * @param g is the graphics object
      */
     protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
         if (!this.selected) {
             // to cover the intersection point
             repaint();

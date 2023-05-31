@@ -6,6 +6,10 @@ import Frontend.IconProcessor;
 import Frontend.Size;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -75,7 +79,7 @@ public class Tutorial extends JPanel{
     }
 
     private void checkNext(GridBagConstraints gbc){
-        JLabel intro = introPage(gbc);
+        JLabel intro = createIntro(gbc);
         if (this.nextCount == 1){
             this.remove(2); // remove welcome message
             intro.setText("Place Token");
@@ -235,7 +239,13 @@ public class Tutorial extends JPanel{
             this.background.setComponentZOrder(this.dimLayer, 0);
 
             intro.setText("Move Token");
-            this.setComponentZOrder(intro, 2);
+            this.background.setComponentZOrder(intro, 0);
+            System.out.println(intro.getPreferredSize());
+        }
+        else if (this.nextCount == 5){
+            this.background.remove(0); // remove intro label
+            this.background.remove(this.dimLayer);
+
         }
         else if (this.nextCount == 9){
             this.background.add(this.dimLayer);
@@ -304,8 +314,8 @@ public class Tutorial extends JPanel{
         JPanel dimLayer = new JPanel(){
             @Override
             protected void paintComponent(Graphics g){
-            g.setColor(new Color(0x80000000, true));
-            g.fillRect(0, 0, getWidth(), getHeight());
+                g.setColor(new Color(0x80000000, true));
+                g.fillRect(0, 0, getWidth(), getHeight());
             }
         };
         dimLayer.setOpaque(false);
@@ -366,7 +376,43 @@ public class Tutorial extends JPanel{
         return welcomeMessage;
     }
 
-    private JLabel introPage(GridBagConstraints gbc){
+    private JLabel createIntro(GridBagConstraints gbc){
+        JLabel intro = new JLabel();
+        intro.setFont(new Font("Inter", Font.PLAIN, new Size(42, 42).getHeight()));
+        intro.setBackground(new Color(0xF4E3D3));
+
+//        // Set the inner distance between text and border
+//        int topPadding = 10;
+//        int leftPadding = 20;
+//        int bottomPadding = 10;
+//        int rightPadding = 20;
+//        Border empty = new EmptyBorder(topPadding, leftPadding, bottomPadding, rightPadding);
+//        Border matte = new MatteBorder(5, 5, 5, 5, new Color(0xE27408));
+//        Border compound = new CompoundBorder(empty, matte);
+//        intro.setBorder(compound);
+
+        intro.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(0xE27408)));
+        intro.setHorizontalAlignment(JLabel.CENTER);
+        intro.setOpaque(true);
+
+//        Size size = new Size(480, 110);
+//        intro.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
+//        intro.setMinimumSize(new Dimension(size.getWidth(), size.getHeight()));
+//        intro.setMaximumSize(new Dimension(size.getWidth(), size.getHeight()));
+
+        gbc.insets = new Insets(0, 0, 0, 0);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0;
+        gbc.weighty = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.NONE;
+        this.add(intro, gbc);
+
+        return intro;
+    }
+
+    private JLabel intro(){
         JLabel intro = new JLabel();
         intro.setFont(new Font("Inter", Font.PLAIN, new Size(42, 42).getHeight()));
         intro.setBackground(new Color(0xF4E3D3));
@@ -376,14 +422,6 @@ public class Tutorial extends JPanel{
 
         Size size = new Size(500, 110);
         intro.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
-
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 0;
-        gbc.weighty = 0;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.fill = GridBagConstraints.NONE;
-        this.add(intro, gbc);
 
         return intro;
     }
@@ -411,15 +449,6 @@ public class Tutorial extends JPanel{
         ImageIcon resizedIcon = clickIcon.resizeIcon();
 
         clickHint.setIcon(resizedIcon);
-//        Timer timer = new Timer(500, new ActionListener() {
-//            Boolean clickVisible = false;
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                clickVisible = !clickVisible;
-//                repaint();
-//            }
-//        });
-//        timer.start();
 
         return clickHint;
     }

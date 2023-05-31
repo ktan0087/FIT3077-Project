@@ -122,6 +122,7 @@ public class Layout{
         public void actionPerformed(ActionEvent e) {
             cLayout.show(panelCont, "3");
             setGame(new Backend.Tutorial());
+            iniBoard.setGame(getGame());
         }
     };
 

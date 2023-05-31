@@ -80,7 +80,7 @@ public class Tutorial extends JPanel{
         else if (this.nextCount == 2){
             this.remove(2); // remove intro page
             this.background.remove(this.dimLayer);
-            this.initialBoard.board.getIntersectionList().get(0).inter.isEnabled(); //change index!!!
+            this.initialBoard.board.getIntersectionList().get(0).inter.isEnabled();
             JLabel instruction = createInstruction(450, 80);
             instruction.setText("Click to place a token");
 

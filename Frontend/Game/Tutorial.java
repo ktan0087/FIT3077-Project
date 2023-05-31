@@ -81,10 +81,85 @@ public class Tutorial extends JPanel{
             this.remove(2); // remove intro page
             this.background.remove(this.dimLayer);
             this.initialBoard.board.getIntersectionList().get(0).inter.isEnabled(); //change index!!!
+            JLabel instruction = createInstruction(450, 80);
+            instruction.setText("Click to place a token");
+
+//            Size instructionLocation = new Size(125, 165);
+//            gbc.insets = new Insets(instructionLocation.getHeight(), instructionLocation.getWidth(), instructionLocation.getHeight(), instructionLocation.getWidth());
+//
+//            gbc.gridx = 0;
+//            gbc.gridy = 0;
+//            gbc.weightx = 0;
+//            gbc.weighty = 0;
+//            gbc.anchor = GridBagConstraints.NORTHEAST;
+//            gbc.fill = GridBagConstraints.NONE;
+//            this.add(instruction, gbc);
+//            this.setComponentZOrder(instruction, 2);
+//
+//            Size clickLocation = new Size(540, 258);
+//            gbc.insets = new Insets(clickLocation.getHeight(), clickLocation.getWidth(), clickLocation.getHeight(), clickLocation.getWidth());
+//
+//            gbc.gridx = 0;
+//            gbc.gridy = 0;
+//            gbc.weightx = 0;
+//            gbc.weighty = 0;
+//            gbc.anchor = GridBagConstraints.NORTHEAST;
+//            gbc.fill = GridBagConstraints.NONE;
+//            JLabel click = createClickHint();
+//            this.add(click, gbc);
+//            this.setComponentZOrder(click, 2);
         }
         else if (this.nextCount == 5){
-            this.initialBoard.placeToken.remove(0);
-            this.initialBoard.placeToken.add(new BlackToken(1, 3, this.initialBoard));
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 3))));
+            this.initialBoard.placeToken.add(new BlackToken(1, 3, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 3))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 2))));
+            this.initialBoard.placeToken.add(new BlackToken(2, 2, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 2))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 1))));
+            this.initialBoard.placeToken.add(new BlackToken(3, 1, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 1))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 3))));
+            this.initialBoard.placeToken.add(new WhiteToken(2, 3, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 3))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 8))));
+            this.initialBoard.placeToken.add(new WhiteToken(1, 8, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 8))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 8))));
+            this.initialBoard.placeToken.add(new BlackToken(2, 8, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 8))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 8))));
+            this.initialBoard.placeToken.add(new BlackToken(3, 8, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 8))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 4))));
+            this.initialBoard.placeToken.add(new WhiteToken(3, 4, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 4))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 4))));
+            this.initialBoard.placeToken.add(new BlackToken(2, 4, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 4))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 4))));
+            this.initialBoard.placeToken.add(new WhiteToken(1, 4, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 4))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 7))));
+            this.initialBoard.placeToken.add(new WhiteToken(3, 7, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 7))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 6))));
+            this.initialBoard.placeToken.add(new WhiteToken(2, 6, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 6))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 5))));
+            this.initialBoard.placeToken.add(new BlackToken(3, 5, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 5))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 5))));
+            this.initialBoard.placeToken.add(new BlackToken(2, 5, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 5))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 7))));
+            this.initialBoard.placeToken.add(new BlackToken(1, 7, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 7))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 6))));
+            this.initialBoard.placeToken.add(new WhiteToken(1, 6, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 6))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 5))));
+            this.initialBoard.placeToken.add(new WhiteToken(1, 5, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 5))));
         }
         else if (this.nextCount == 6){
             this.background.add(this.dimLayer);
@@ -130,6 +205,7 @@ public class Tutorial extends JPanel{
         }
         else if (this.nextCount == 29){
             this.remove(2); // remove intro page
+            this.remove(1); // remove next button
             this.background.remove(this.dimLayer);
         }
     }
@@ -237,6 +313,42 @@ public class Tutorial extends JPanel{
         this.add(intro, gbc);
 
         return intro;
+    }
+
+    private JLabel createInstruction(int width, int height){
+        JLabel instruction = new JLabel();
+        instruction.setFont(new Font("Inter", Font.PLAIN, new Size(36, 36).getHeight()));
+        instruction.setBackground(new Color(0xF4E3D3));
+        instruction.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(0xFF0000)));
+        instruction.setHorizontalAlignment(JLabel.CENTER);
+        instruction.setOpaque(true);
+
+        Size size = new Size(width, height);
+        instruction.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
+
+        return instruction;
+    }
+
+    private JLabel createClickHint(){
+        JLabel clickHint = new JLabel();
+        clickHint.setOpaque(false);
+
+        ImageIcon click = new ImageIcon(Tutorial.class.getResource("/Icons/click.png"));
+        IconProcessor clickIcon = new IconProcessor(click, 48, 48);
+        ImageIcon resizedIcon = clickIcon.resizeIcon();
+
+        clickHint.setIcon(resizedIcon);
+        Timer timer = new Timer(500, new ActionListener() {
+            Boolean clickVisible = false;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clickVisible = !clickVisible;
+                repaint();
+            }
+        });
+        timer.start();
+
+        return clickHint;
     }
 
 }

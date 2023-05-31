@@ -61,7 +61,7 @@ public class InitialBoard extends JPanel {
     /**
      * The layer that is used to show the remaining number of white token
      */
-    private TokenRemain whiteTokenRemain;
+    protected TokenRemain whiteTokenRemain;
 
     /**
      * The layer that is used to show the remaining number of black token

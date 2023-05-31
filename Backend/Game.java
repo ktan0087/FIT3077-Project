@@ -85,6 +85,10 @@ public class Game {
         this.gameMode = gameMode;
     }
 
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
     /**
      * A function to end a player's turn.
      * The function checks if the game has ended, swaps the current player,

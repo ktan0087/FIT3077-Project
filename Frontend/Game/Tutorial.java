@@ -84,36 +84,93 @@ public class Tutorial extends JPanel{
         else if (this.nextCount == 2){
             this.remove(2); // remove intro page
             this.background.remove(this.dimLayer);
-            this.initialBoard.board.getIntersectionList().get(0).inter.setEnabled(true); //change index!!!
+
             JLabel instruction = createInstruction(450, 80);
             instruction.setText("Click to place a token");
 
-//            Size instructionLocation = new Size(125, 165);
-//            gbc.insets = new Insets(instructionLocation.getHeight(), instructionLocation.getWidth(), instructionLocation.getHeight(), instructionLocation.getWidth());
-//
-//            gbc.gridx = 0;
-//            gbc.gridy = 0;
-//            gbc.weightx = 0;
-//            gbc.weighty = 0;
-//            gbc.anchor = GridBagConstraints.NORTHEAST;
-//            gbc.fill = GridBagConstraints.NONE;
-//            this.add(instruction, gbc);
-//            this.setComponentZOrder(instruction, 2);
-//
-//            Size clickLocation = new Size(540, 258);
-//            gbc.insets = new Insets(clickLocation.getHeight(), clickLocation.getWidth(), clickLocation.getHeight(), clickLocation.getWidth());
-//
-//            gbc.gridx = 0;
-//            gbc.gridy = 0;
-//            gbc.weightx = 0;
-//            gbc.weighty = 0;
-//            gbc.anchor = GridBagConstraints.NORTHEAST;
-//            gbc.fill = GridBagConstraints.NONE;
-//            JLabel click = createClickHint();
-//            this.add(click, gbc);
-//            this.setComponentZOrder(click, 2);
+            Size instructionLocation = new Size(125, 165);
+            gbc.insets = new Insets(instructionLocation.getHeight(), instructionLocation.getWidth(), instructionLocation.getHeight(), instructionLocation.getWidth());
+
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.weightx = 0;
+            gbc.weighty = 0;
+            gbc.anchor = GridBagConstraints.NORTHEAST;
+            gbc.fill = GridBagConstraints.NONE;
+            this.add(instruction, gbc);
+            this.setComponentZOrder(instruction, 2);
+
+            Size clickLocation = new Size(540, 258);
+            gbc.insets = new Insets(clickLocation.getHeight(), clickLocation.getWidth(), clickLocation.getHeight(), clickLocation.getWidth());
+
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.weightx = 0;
+            gbc.weighty = 0;
+            gbc.anchor = GridBagConstraints.NORTHEAST;
+            gbc.fill = GridBagConstraints.NONE;
+            JLabel click = createClickHint();
+            this.add(click, gbc);
+            this.setComponentZOrder(click, 2);
+
+            this.remove(this.btnNext); // remove next button
+
+            this.initialBoard.board.getIntersectionList().get(8).inter.setEnabled(true);
+            this.initialBoard.board.getIntersectionList().get(8).inter.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    remove(instruction);
+                    remove(click);
+
+                    Size gapSize = new Size(10, 25);
+                    gbc.insets = new Insets(gapSize.getHeight(), gapSize.getWidth(), gapSize.getHeight(), gapSize.getWidth()); // add gaps between the components
+
+                    gbc.gridx = 0;
+                    gbc.gridy = 0;
+                    gbc.weightx = 0;
+                    gbc.weighty = 0;
+                    gbc.anchor = GridBagConstraints.SOUTHEAST;
+                    gbc.fill = GridBagConstraints.NONE;
+                    add(btnNext, gbc);
+                    setComponentZOrder(btnNext, 1);
+
+                    repaint();
+                    revalidate();
+                }
+            });
         }
-        else if (this.nextCount == 5){
+        else if (this.nextCount == 3){
+            initialBoard.getGame().getGameMode().displayBoardMove();
+
+            JLabel instruction = createInstruction(350, 125);
+            instruction.setText("<html>After you place all<br/>your tokens ...</html>");
+
+            Size instructionLocation = new Size(45, 100);
+            gbc.insets = new Insets(instructionLocation.getHeight(), instructionLocation.getWidth(), instructionLocation.getHeight(), instructionLocation.getWidth());
+
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.weightx = 0;
+            gbc.weighty = 0;
+            gbc.anchor = GridBagConstraints.SOUTHWEST;
+            gbc.fill = GridBagConstraints.NONE;
+            this.add(instruction, gbc);
+            this.setComponentZOrder(instruction, 2);
+
+            JLabel arrow = createArrowLeft();
+
+            Size arrowLocation = new Size(115, 225);
+            gbc.insets = new Insets(arrowLocation.getHeight(), arrowLocation.getWidth(), arrowLocation.getHeight(), arrowLocation.getWidth());
+
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.weightx = 0;
+            gbc.weighty = 0;
+            gbc.anchor = GridBagConstraints.SOUTHWEST;
+            gbc.fill = GridBagConstraints.NONE;
+            this.add(arrow, gbc);
+            this.setComponentZOrder(arrow, 2);
+
             this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 3))));
             this.initialBoard.placeToken.add(new BlackToken(1, 3, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 3))));
 
@@ -164,10 +221,19 @@ public class Tutorial extends JPanel{
 
             this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 5))));
             this.initialBoard.placeToken.add(new WhiteToken(1, 5, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 5))));
+
+            initialBoard.blackTokenRemain.setText("0");
+            initialBoard.whiteTokenRemain.setText("0");
+            initialBoard.playerTurn.changeIcon();
         }
-        else if (this.nextCount == 6){
+        else if (this.nextCount == 4){
+            // remove instruction and left arrow
+            this.remove(2);
+            this.remove(2);
+
             this.background.add(this.dimLayer);
             this.background.setComponentZOrder(this.dimLayer, 0);
+
             intro.setText("Move Token");
             this.setComponentZOrder(intro, 2);
         }
@@ -224,10 +290,8 @@ public class Tutorial extends JPanel{
         background.setLayout(new OverlayLayout(background));
 
         this.initialBoard.setEnabled(false); // make buttons enabled
-//        System.out.println(this.initialBoard.board.getIntersectionList().size());
         for (Intersection intersection : this.initialBoard.board.getIntersectionList()){
             intersection.inter.setEnabled(false);
-            System.out.println(intersection.isEnabled());
         }
 
         background.add(this.dimLayer);
@@ -347,17 +411,30 @@ public class Tutorial extends JPanel{
         ImageIcon resizedIcon = clickIcon.resizeIcon();
 
         clickHint.setIcon(resizedIcon);
-        Timer timer = new Timer(500, new ActionListener() {
-            Boolean clickVisible = false;
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clickVisible = !clickVisible;
-                repaint();
-            }
-        });
-        timer.start();
+//        Timer timer = new Timer(500, new ActionListener() {
+//            Boolean clickVisible = false;
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                clickVisible = !clickVisible;
+//                repaint();
+//            }
+//        });
+//        timer.start();
 
         return clickHint;
+    }
+
+    private JLabel createArrowLeft(){
+        JLabel arrowLeft = new JLabel();
+        arrowLeft.setOpaque(false);
+
+        ImageIcon arrow = new ImageIcon(Tutorial.class.getResource("/Icons/arrow-left.png"));
+        IconProcessor arrowIcon = new IconProcessor(arrow, 100, 100);
+        ImageIcon resizedIcon = arrowIcon.resizeIcon();
+
+        arrowLeft.setIcon(resizedIcon);
+
+        return arrowLeft;
     }
 
 }

@@ -224,6 +224,11 @@ public class Tutorial extends JPanel{
         background.setLayout(new OverlayLayout(background));
 
         this.initialBoard.setEnabled(false); // make buttons enabled
+//        System.out.println(this.initialBoard.board.getIntersectionList().size());
+        for (Intersection intersection : this.initialBoard.board.getIntersectionList()){
+            intersection.inter.setEnabled(false);
+            System.out.println(intersection.isEnabled());
+        }
 
         background.add(this.dimLayer);
         background.add(this.initialBoard);

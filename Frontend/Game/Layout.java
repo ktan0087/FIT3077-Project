@@ -122,6 +122,8 @@ public class Layout{
         public void actionPerformed(ActionEvent e) {
             cLayout.show(panelCont, "3");
             setGame(new Backend.Tutorial());
+            tutorial.getInitialBoard().setGame(getGame());
+            System.out.println(iniBoard.getGame());
         }
     };
 
@@ -136,6 +138,7 @@ public class Layout{
             cLayout.show(panelCont, "2"); // show initial board
             setGame(new Game()); // create new game
             iniBoard.setGame(getGame());
+            System.out.println(iniBoard.getGame());
         }
     };
 

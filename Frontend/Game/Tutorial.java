@@ -6,10 +6,6 @@ import Frontend.IconProcessor;
 import Frontend.Size;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -148,7 +144,7 @@ public class Tutorial extends JPanel{
             initialBoard.getGame().getGameMode().displayBoardMove();
 
             JLabel instruction = createInstruction(350, 125);
-            instruction.setText("<html>After you place all<br/>your tokens ...<center></html>");
+            instruction.setText("<html><center>After you place all<br/>your tokens ...<center></html>");
 
             Size instructionLocation = new Size(45, 100);
             gbc.insets = new Insets(instructionLocation.getHeight(), instructionLocation.getWidth(), instructionLocation.getHeight(), instructionLocation.getWidth());
@@ -247,7 +243,7 @@ public class Tutorial extends JPanel{
             this.remove(this.btnNext); // remove next button
 
             JLabel instruction = createInstruction(350, 125);
-            instruction.setText("<html>Select the token that<br/>you want to move<center></html>");
+            instruction.setText("<html><center>Select the token that<br/>you want to move<center></html>");
 
             this.labelLayer.add(instruction);
 

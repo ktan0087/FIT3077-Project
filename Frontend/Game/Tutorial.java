@@ -18,6 +18,7 @@ public class Tutorial extends JPanel{
     private JPanel dimLayer;
     private JPanel labelLayer;
     private JPanel background;
+    private WhiteToken whiteToken_37;
     public Tutorial(){
         this.nextCount = 0;
         this.btnClose = new BtnClose();
@@ -202,8 +203,9 @@ public class Tutorial extends JPanel{
             this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 4))));
             this.initialBoard.placeToken.add(new WhiteToken(1, 4, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 4))));
 
+            this.whiteToken_37 = new WhiteToken(3, 7, this.initialBoard);
             this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 7))));
-            this.initialBoard.placeToken.add(new WhiteToken(3, 7, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 7))));
+            this.initialBoard.placeToken.add(whiteToken_37, Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 7))));
 
             this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 6))));
             this.initialBoard.placeToken.add(new WhiteToken(2, 6, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 6))));
@@ -245,7 +247,32 @@ public class Tutorial extends JPanel{
             JLabel instruction = createInstruction(350, 125);
             instruction.setText("<html><center>Select the token that<br/>you want to move<center></html>");
 
-            this.labelLayer.add(instruction);
+            // Set the location for the instruction
+            Size instructionLocation = new Size(332, 275);
+            gbc.insets = new Insets(instructionLocation.getHeight(), instructionLocation.getWidth(), instructionLocation.getHeight(), instructionLocation.getWidth());
+
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.weightx = 1;
+            gbc.weighty = 1;
+            gbc.anchor = GridBagConstraints.NORTHEAST;
+            gbc.fill = GridBagConstraints.NONE;
+
+            this.labelLayer.add(instruction, gbc);
+
+            // Set the location for the clicking arrow
+            Size clickLocation = new Size(548, 248);
+            gbc.insets = new Insets(clickLocation.getHeight(), clickLocation.getWidth(), clickLocation.getHeight(), clickLocation.getWidth());
+
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.weightx = 0;
+            gbc.weighty = 0;
+            gbc.anchor = GridBagConstraints.SOUTHWEST;
+            gbc.fill = GridBagConstraints.NONE;
+            JLabel click = createClickHint();
+            this.labelLayer.add(click, gbc);
+
 
         }
     }
@@ -289,6 +316,7 @@ public class Tutorial extends JPanel{
         labelLayer.setLayout(new GridBagLayout());
         labelLayer.setOpaque(false);
         labelLayer.setVisible(true);
+
         return labelLayer;
     }
 
@@ -380,6 +408,17 @@ public class Tutorial extends JPanel{
 
         Size size = new Size(width, height);
         instruction.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
+
+//        GridBagConstraints gbc = new GridBagConstraints();
+//
+//        gbc.insets = new Insets(0, 0, 0, 0);
+//        gbc.gridx = 0;
+//        gbc.gridy = 0;
+//        gbc.weightx = 1;
+//        gbc.weighty = 1;
+//        gbc.anchor = GridBagConstraints.NORTH;
+//        gbc.fill = GridBagConstraints.NONE;
+//        this.labelLayer.add(instruction, gbc);
 
         return instruction;
     }

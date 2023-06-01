@@ -91,7 +91,7 @@ public class InitialBoard extends JPanel {
     /**
      * The layer that is used to show the mill
      */
-    private PlaceToken millLayer;
+    protected PlaceToken millLayer;
 
     /**
      * The layer that is used to display hint

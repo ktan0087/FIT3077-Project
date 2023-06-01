@@ -3,12 +3,15 @@ package Frontend.Game;
 import Frontend.Button.BtnClose;
 import Frontend.Button.BtnNext;
 import Frontend.IconProcessor;
+import Frontend.Layer.PlaceToken;
 import Frontend.Size;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Tutorial extends JPanel{
     private int nextCount;
@@ -19,6 +22,10 @@ public class Tutorial extends JPanel{
     private JPanel labelLayer;
     private JPanel background;
     private WhiteToken whiteToken_37;
+    private BlackToken blackToken_38;
+    private JLabel click;
+    private JLabel leftArrow;
+    private JLabel rightArrow;
     public Tutorial(){
         this.nextCount = 0;
         this.btnClose = new BtnClose();
@@ -26,6 +33,9 @@ public class Tutorial extends JPanel{
         this.initialBoard = new InitialBoard();
         this.labelLayer = createLabelLayer();
         this.dimLayer = createDimLayer();
+        this.click = createClickHint();
+        this.leftArrow = createArrowLeft();
+        this.rightArrow = createArrowRight();
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -80,40 +90,19 @@ public class Tutorial extends JPanel{
     private void checkNext(GridBagConstraints gbc){
         if (this.nextCount == 1){
             this.remove(2); // remove welcome message
-
-            createIntro("Place Token", gbc);
+            createIntro("Place Token");
         }
         else if (this.nextCount == 2){
             this.labelLayer.remove(0); // remove intro
             this.background.remove(this.dimLayer);
 
-            JLabel instruction = createInstruction(450, 80);
+            JLabel instruction = createInstruction(420, 80);
             instruction.setText("Click to place a token");
+            instruction.setLocation(720, 180);
+            this.labelLayer.add(instruction);
 
-            Size instructionLocation = new Size(125, 165);
-            gbc.insets = new Insets(instructionLocation.getHeight(), instructionLocation.getWidth(), instructionLocation.getHeight(), instructionLocation.getWidth());
-
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.weightx = 0;
-            gbc.weighty = 0;
-            gbc.anchor = GridBagConstraints.NORTHEAST;
-            gbc.fill = GridBagConstraints.NONE;
-            this.add(instruction, gbc);
-            this.setComponentZOrder(instruction, 2);
-
-            Size clickLocation = new Size(540, 258);
-            gbc.insets = new Insets(clickLocation.getHeight(), clickLocation.getWidth(), clickLocation.getHeight(), clickLocation.getWidth());
-
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.weightx = 0;
-            gbc.weighty = 0;
-            gbc.anchor = GridBagConstraints.NORTHEAST;
-            gbc.fill = GridBagConstraints.NONE;
-            JLabel click = createClickHint();
-            this.add(click, gbc);
-            this.setComponentZOrder(click, 2);
+            this.click.setBounds(693, 258, 48, 48);
+            this.labelLayer.add(this.click);
 
             this.remove(this.btnNext); // remove next button
 
@@ -121,20 +110,10 @@ public class Tutorial extends JPanel{
             this.initialBoard.board.getIntersectionList().get(8).inter.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    remove(instruction);
-                    remove(click);
+                    labelLayer.remove(instruction);
+                    labelLayer.remove(click);
 
-                    Size gapSize = new Size(10, 25);
-                    gbc.insets = new Insets(gapSize.getHeight(), gapSize.getWidth(), gapSize.getHeight(), gapSize.getWidth()); // add gaps between the components
-
-                    gbc.gridx = 0;
-                    gbc.gridy = 0;
-                    gbc.weightx = 0;
-                    gbc.weighty = 0;
-                    gbc.anchor = GridBagConstraints.SOUTHEAST;
-                    gbc.fill = GridBagConstraints.NONE;
-                    add(btnNext, gbc);
-                    setComponentZOrder(btnNext, 1);
+                    addNextButton(gbc);
 
                     repaint();
                     revalidate();
@@ -146,32 +125,11 @@ public class Tutorial extends JPanel{
 
             JLabel instruction = createInstruction(350, 125);
             instruction.setText("<html><center>After you place all<br/>your tokens ...<center></html>");
+            instruction.setLocation(15, 485);
+            this.labelLayer.add(instruction);
 
-            Size instructionLocation = new Size(45, 100);
-            gbc.insets = new Insets(instructionLocation.getHeight(), instructionLocation.getWidth(), instructionLocation.getHeight(), instructionLocation.getWidth());
-
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.weightx = 0;
-            gbc.weighty = 0;
-            gbc.anchor = GridBagConstraints.SOUTHWEST;
-            gbc.fill = GridBagConstraints.NONE;
-            this.add(instruction, gbc);
-            this.setComponentZOrder(instruction, 2);
-
-            JLabel arrow = createArrowLeft();
-
-            Size arrowLocation = new Size(115, 225);
-            gbc.insets = new Insets(arrowLocation.getHeight(), arrowLocation.getWidth(), arrowLocation.getHeight(), arrowLocation.getWidth());
-
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.weightx = 0;
-            gbc.weighty = 0;
-            gbc.anchor = GridBagConstraints.SOUTHWEST;
-            gbc.fill = GridBagConstraints.NONE;
-            this.add(arrow, gbc);
-            this.setComponentZOrder(arrow, 2);
+            this.leftArrow.setBounds(82, 380, 100, 100);
+            this.labelLayer.add(this.leftArrow);
 
             this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 3))));
             this.initialBoard.placeToken.add(new BlackToken(1, 3, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 3))));
@@ -191,8 +149,9 @@ public class Tutorial extends JPanel{
             this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 8))));
             this.initialBoard.placeToken.add(new BlackToken(2, 8, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 8))));
 
+            this.blackToken_38 = new BlackToken(3, 8, this.initialBoard);
             this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 8))));
-            this.initialBoard.placeToken.add(new BlackToken(3, 8, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 8))));
+            this.initialBoard.placeToken.add(this.blackToken_38, Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 8))));
 
             this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 4))));
             this.initialBoard.placeToken.add(new WhiteToken(3, 4, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 4))));
@@ -205,7 +164,7 @@ public class Tutorial extends JPanel{
 
             this.whiteToken_37 = new WhiteToken(3, 7, this.initialBoard);
             this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 7))));
-            this.initialBoard.placeToken.add(whiteToken_37, Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 7))));
+            this.initialBoard.placeToken.add(this.whiteToken_37, Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 7))));
 
             this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 6))));
             this.initialBoard.placeToken.add(new WhiteToken(2, 6, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 6))));
@@ -231,10 +190,10 @@ public class Tutorial extends JPanel{
         }
         else if (this.nextCount == 4){
             // remove instruction and left arrow
-            this.remove(2);
-            this.remove(2);
+            this.labelLayer.remove(0);
+            this.labelLayer.remove(this.leftArrow);
 
-            createIntro("Move Token", gbc);
+            createIntro("Move Token");
 
             this.background.add(this.dimLayer);
             this.background.setComponentZOrder(this.dimLayer, 1);
@@ -244,35 +203,180 @@ public class Tutorial extends JPanel{
             this.background.remove(this.dimLayer);
             this.remove(this.btnNext); // remove next button
 
-            JLabel instruction = createInstruction(350, 125);
+            JLabel instruction = createInstruction(380, 125);
             instruction.setText("<html><center>Select the token that<br/>you want to move<center></html>");
-
-            // Set the location for the instruction
-            Size instructionLocation = new Size(332, 275);
-            gbc.insets = new Insets(instructionLocation.getHeight(), instructionLocation.getWidth(), instructionLocation.getHeight(), instructionLocation.getWidth());
-
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.weightx = 1;
-            gbc.weighty = 1;
-            gbc.anchor = GridBagConstraints.NORTHEAST;
-            gbc.fill = GridBagConstraints.NONE;
-
-            this.labelLayer.add(instruction, gbc);
+            instruction.setLocation(585, 280);
+            this.labelLayer.add(instruction);
 
             // Set the location for the clicking arrow
-            Size clickLocation = new Size(548, 248);
-            gbc.insets = new Insets(clickLocation.getHeight(), clickLocation.getWidth(), clickLocation.getHeight(), clickLocation.getWidth());
+            this.click.setBounds(548, 402, 48, 48);
+            this.labelLayer.add(this.click);
 
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.weightx = 0;
-            gbc.weighty = 0;
-            gbc.anchor = GridBagConstraints.SOUTHWEST;
-            gbc.fill = GridBagConstraints.NONE;
-            JLabel click = createClickHint();
-            this.labelLayer.add(click, gbc);
+            this.whiteToken_37.setEnabled(true);
+            this.whiteToken_37.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
+                    whiteToken_37.selected = true;
 
+                    labelLayer.remove(instruction);
+                    labelLayer.remove(click);
+
+                    click.setBounds(621, 402, 48, 48);
+                    labelLayer.add(click);
+
+                    JLabel instruction = createInstruction(380, 125);
+                    instruction.setText("<html><center>Move to the empty<br/>adjacent intersection<center></html>");
+                    instruction.setLocation(650, 265);
+                    labelLayer.add(instruction);
+
+                    repaint();
+                    revalidate();
+                }
+            });
+
+            this.initialBoard.board.getIntersectionList().get(16).inter.setEnabled(true);
+            this.initialBoard.board.getIntersectionList().get(16).inter.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    labelLayer.remove(1); // remove instruction
+                    labelLayer.remove(click);
+                    initialBoard.placeToken.remove(whiteToken_37); // remove token from initial board
+                    initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 7)))); // add empty label to initial board
+
+                    initialBoard.whiteTokenRemain.setText("0"); //---------------------WHY NOT WORKING-----------------------------
+                    initialBoard.playerTurn.changeIcon();
+
+                    addNextButton(gbc);
+
+                    repaint();
+                    revalidate();
+                }
+            });
+        }
+        else if (this.nextCount == 6){
+            this.background.add(this.dimLayer);
+            this.background.setComponentZOrder(this.dimLayer, 1);
+
+            createIntro("Remove Token");
+        }
+        else if (this.nextCount == 7) {
+            this.background.remove(this.dimLayer);
+            this.labelLayer.remove(0); // remove intro label
+
+            JLabel instruction = createInstruction(280, 80);
+            instruction.setText("A Mill Formed");
+            instruction.setLocation(700, 550);
+            this.labelLayer.add(instruction);
+
+            this.leftArrow.setBounds(670, 440, 100, 100);
+            this.labelLayer.add(this.leftArrow);
+        }
+        else if (this.nextCount == 8){
+            this.labelLayer.remove(0); // remove intro label
+            this.labelLayer.remove(this.leftArrow);
+            this.remove(this.btnNext); // remove next button
+
+            JLabel instruction = createInstruction(300, 165);
+            instruction.setText("<html><center><h1>Click to remove your<br/>opponent's token</h1><h3>NOTE: You cannot remove your<br/>opponent's token that is in mill</h3></html>");
+            instruction.setLocation(450, 150);
+            this.labelLayer.add(instruction);
+
+            this.click.setBounds(548, 328, 48, 48);
+            this.labelLayer.add(this.click);
+
+            this.blackToken_38.setEnabled(true);
+            this.blackToken_38.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
+                    labelLayer.remove(instruction);
+                    labelLayer.remove(click);
+
+                    initialBoard.placeToken.remove(blackToken_38);
+                    initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 8))));
+
+                    addNextButton(gbc);
+
+                    repaint();
+                    revalidate();
+                }
+            });
+        }
+        else if (this.nextCount == 9) {
+            JLabel instruction = createInstruction(300, 165);
+            instruction.setText("<html><center>When you only have 3<br/>tokens left ...<center></html>");
+            instruction.setLocation(450, 150);
+            this.labelLayer.add(instruction);
+
+            // Remove Mill
+            this.initialBoard.removeMill(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 6))), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(2, 6))), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 6))), this.initialBoard.millLayer);
+
+            // Remove token from the board
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(2, 2))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(2, 2))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(2, 3))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(2, 3))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 1))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 1))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 3))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 3))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 4))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 4))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(2, 4))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(2, 4))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 4))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 4))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 5))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 5))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(2, 5))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(2, 5))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 5))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 5))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 6))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 6))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 7))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 7))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 8))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 8))));
+
+            // Add Token to the board
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 5))));
+            this.initialBoard.placeToken.add(new BlackToken(1, 5, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 5))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 6))));
+            this.initialBoard.placeToken.add(new BlackToken(1, 6, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 6))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 8))));
+            this.initialBoard.placeToken.add(new BlackToken(1, 8, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 8))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 8))));
+            this.initialBoard.placeToken.add(new BlackToken(3, 8, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 8))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 7))));
+            this.initialBoard.placeToken.add(new WhiteToken(3, 7, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 7))));
+        }
+        else if (nextCount == 10) {
+            this.background.add(this.dimLayer);
+            this.background.setComponentZOrder(this.dimLayer, 1);
+
+            createIntro("Fly Token");
+        }
+        else if (nextCount == 11) {
+            this.background.remove(this.dimLayer);
+            this.labelLayer.remove(0); // remove the intro label
 
         }
     }
@@ -313,11 +417,29 @@ public class Tutorial extends JPanel{
 
     private JPanel createLabelLayer(){
         JPanel labelLayer = new JPanel();
-        labelLayer.setLayout(new GridBagLayout());
+        labelLayer.setLayout(null);
         labelLayer.setOpaque(false);
         labelLayer.setVisible(true);
 
         return labelLayer;
+    }
+
+    public void setComponentCenter(JLabel label) {
+        // Set the size of the label
+        label.setSize(label.getPreferredSize());
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        // Get the frame's width and height
+        double screenSizeWidth = screenSize.getWidth();
+        double screenSizeHeight = screenSize.getHeight();
+
+        // Calculate the center position for the label
+        int labelX = (int) (screenSizeWidth - label.getWidth()) / 2;
+        int labelY = (int) (screenSizeHeight - label.getHeight()) / 2;
+
+        // Set the position of the label
+        label.setLocation(labelX, labelY);
     }
 
     private JPanel createWelcomeMessage(){
@@ -373,7 +495,7 @@ public class Tutorial extends JPanel{
         return welcomeMessage;
     }
 
-    private JLabel createIntro(String text, GridBagConstraints gbc){
+    private JLabel createIntro(String text){
         JLabel intro = new JLabel();
         intro.setFont(new Font("Inter", Font.PLAIN, new Size(42, 42).getHeight()));
         intro.setText(text);
@@ -386,14 +508,8 @@ public class Tutorial extends JPanel{
         Size size = new Size(500, 110);
         intro.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
 
-        gbc.insets = new Insets(0, 0, 0, 0);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 0;
-        gbc.weighty = 0;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.fill = GridBagConstraints.NONE;
-        this.labelLayer.add(intro, gbc);
+        setComponentCenter(intro);
+        labelLayer.add(intro);
 
         return intro;
     }
@@ -408,17 +524,7 @@ public class Tutorial extends JPanel{
 
         Size size = new Size(width, height);
         instruction.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
-
-//        GridBagConstraints gbc = new GridBagConstraints();
-//
-//        gbc.insets = new Insets(0, 0, 0, 0);
-//        gbc.gridx = 0;
-//        gbc.gridy = 0;
-//        gbc.weightx = 1;
-//        gbc.weighty = 1;
-//        gbc.anchor = GridBagConstraints.NORTH;
-//        gbc.fill = GridBagConstraints.NONE;
-//        this.labelLayer.add(instruction, gbc);
+        instruction.setSize(new Dimension(size.getWidth(), size.getHeight()));
 
         return instruction;
     }
@@ -447,6 +553,33 @@ public class Tutorial extends JPanel{
         arrowLeft.setIcon(resizedIcon);
 
         return arrowLeft;
+    }
+
+    private JLabel createArrowRight(){
+        JLabel arrowRight = new JLabel();
+        arrowRight.setOpaque(false);
+
+        ImageIcon arrow = new ImageIcon(Tutorial.class.getResource("/Icons/arrow-right.png"));
+        IconProcessor arrowIcon = new IconProcessor(arrow, 100, 100);
+        ImageIcon resizedIcon = arrowIcon.resizeIcon();
+
+        arrowRight.setIcon(resizedIcon);
+
+        return arrowRight;
+    }
+
+    private void addNextButton(GridBagConstraints gbc){
+        Size gapSize = new Size(10, 25);
+        gbc.insets = new Insets(gapSize.getHeight(), gapSize.getWidth(), gapSize.getHeight(), gapSize.getWidth()); // add gaps between the components
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0;
+        gbc.weighty = 0;
+        gbc.anchor = GridBagConstraints.SOUTHEAST;
+        gbc.fill = GridBagConstraints.NONE;
+        add(btnNext, gbc);
+        setComponentZOrder(btnNext, 1);
     }
 
 }

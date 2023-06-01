@@ -20,12 +20,14 @@ public class Tutorial extends JPanel{
     protected BtnClose btnClose;
     private InitialBoard initialBoard;
     private JPanel dimLayer;
+    private JPanel labelLayer;
     private JPanel background;
     public Tutorial(){
         this.nextCount = 0;
         this.btnClose = new BtnClose();
         this.btnNext = new BtnNext();
         this.initialBoard = new InitialBoard();
+        this.labelLayer = createLabelLayer();
         this.dimLayer = createDimLayer();
 
         this.setLayout(new GridBagLayout());
@@ -79,14 +81,13 @@ public class Tutorial extends JPanel{
     }
 
     private void checkNext(GridBagConstraints gbc){
-        JLabel intro = createIntro(gbc);
         if (this.nextCount == 1){
             this.remove(2); // remove welcome message
-            intro.setText("Place Token");
-            this.setComponentZOrder(intro, 2);
+
+            createIntro("Place Token", gbc);
         }
         else if (this.nextCount == 2){
-            this.remove(2); // remove intro page
+            this.labelLayer.remove(0); // remove intro
             this.background.remove(this.dimLayer);
 
             JLabel instruction = createInstruction(450, 80);
@@ -147,7 +148,7 @@ public class Tutorial extends JPanel{
             initialBoard.getGame().getGameMode().displayBoardMove();
 
             JLabel instruction = createInstruction(350, 125);
-            instruction.setText("<html>After you place all<br/>your tokens ...</html>");
+            instruction.setText("<html>After you place all<br/>your tokens ...<center></html>");
 
             Size instructionLocation = new Size(45, 100);
             gbc.insets = new Insets(instructionLocation.getHeight(), instructionLocation.getWidth(), instructionLocation.getHeight(), instructionLocation.getWidth());
@@ -235,58 +236,21 @@ public class Tutorial extends JPanel{
             this.remove(2);
             this.remove(2);
 
-            this.background.add(this.dimLayer);
-            this.background.setComponentZOrder(this.dimLayer, 0);
+            createIntro("Move Token", gbc);
 
-            intro.setText("Move Token");
-            this.background.setComponentZOrder(intro, 0);
-            System.out.println(intro.getPreferredSize());
+            this.background.add(this.dimLayer);
+            this.background.setComponentZOrder(this.dimLayer, 1);
         }
         else if (this.nextCount == 5){
-            this.background.remove(0); // remove intro label
+            this.labelLayer.remove(0); // remove intro label
             this.background.remove(this.dimLayer);
+            this.remove(this.btnNext); // remove next button
 
-        }
-        else if (this.nextCount == 9){
-            this.background.add(this.dimLayer);
-            this.background.setComponentZOrder(this.dimLayer, 0);
-            intro.setText("Remove Token");
-            this.setComponentZOrder(intro, 2);
-        }
-        else if (this.nextCount == 13){
-            this.background.add(this.dimLayer);
-            this.background.setComponentZOrder(this.dimLayer, 0);
-            intro.setText("Fly Token");
-            this.setComponentZOrder(intro, 2);
-        }
-        else if (this.nextCount == 17){
-            this.background.add(this.dimLayer);
-            this.background.setComponentZOrder(this.dimLayer, 0);
-            intro.setText("MWin Condition");
-            this.setComponentZOrder(intro, 2);
-        }
-        else if (this.nextCount == 20){
-            this.background.add(this.dimLayer);
-            this.background.setComponentZOrder(this.dimLayer, 0);
-            intro.setText("Button: Hint");
-            this.setComponentZOrder(intro, 2);
-        }
-        else if (this.nextCount == 25){
-            this.background.add(this.dimLayer);
-            this.background.setComponentZOrder(this.dimLayer, 0);
-            intro.setText("Button: Restart");
-            this.setComponentZOrder(intro, 2);
-        }
-        else if (this.nextCount == 28){
-            this.background.add(this.dimLayer);
-            this.background.setComponentZOrder(this.dimLayer, 0);
-            intro.setText("You are ready to play!");
-            this.setComponentZOrder(intro, 2);
-        }
-        else if (this.nextCount == 29){
-            this.remove(2); // remove intro page
-            this.remove(1); // remove next button
-            this.background.remove(this.dimLayer);
+            JLabel instruction = createInstruction(350, 125);
+            instruction.setText("<html>Select the token that<br/>you want to move<center></html>");
+
+            this.labelLayer.add(instruction);
+
         }
     }
 
@@ -304,6 +268,7 @@ public class Tutorial extends JPanel{
             intersection.inter.setEnabled(false);
         }
 
+        background.add(this.labelLayer);
         background.add(this.dimLayer);
         background.add(this.initialBoard);
 
@@ -321,6 +286,14 @@ public class Tutorial extends JPanel{
         dimLayer.setOpaque(false);
         dimLayer.setVisible(true);
         return dimLayer;
+    }
+
+    private JPanel createLabelLayer(){
+        JPanel labelLayer = new JPanel();
+        labelLayer.setLayout(new GridBagLayout());
+        labelLayer.setOpaque(false);
+        labelLayer.setVisible(true);
+        return labelLayer;
     }
 
     private JPanel createWelcomeMessage(){
@@ -376,29 +349,18 @@ public class Tutorial extends JPanel{
         return welcomeMessage;
     }
 
-    private JLabel createIntro(GridBagConstraints gbc){
+    private JLabel createIntro(String text, GridBagConstraints gbc){
         JLabel intro = new JLabel();
         intro.setFont(new Font("Inter", Font.PLAIN, new Size(42, 42).getHeight()));
+        intro.setText(text);
         intro.setBackground(new Color(0xF4E3D3));
-
-//        // Set the inner distance between text and border
-//        int topPadding = 10;
-//        int leftPadding = 20;
-//        int bottomPadding = 10;
-//        int rightPadding = 20;
-//        Border empty = new EmptyBorder(topPadding, leftPadding, bottomPadding, rightPadding);
-//        Border matte = new MatteBorder(5, 5, 5, 5, new Color(0xE27408));
-//        Border compound = new CompoundBorder(empty, matte);
-//        intro.setBorder(compound);
 
         intro.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(0xE27408)));
         intro.setHorizontalAlignment(JLabel.CENTER);
         intro.setOpaque(true);
 
-//        Size size = new Size(480, 110);
-//        intro.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
-//        intro.setMinimumSize(new Dimension(size.getWidth(), size.getHeight()));
-//        intro.setMaximumSize(new Dimension(size.getWidth(), size.getHeight()));
+        Size size = new Size(500, 110);
+        intro.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
 
         gbc.insets = new Insets(0, 0, 0, 0);
         gbc.gridx = 0;
@@ -407,21 +369,7 @@ public class Tutorial extends JPanel{
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.NONE;
-        this.add(intro, gbc);
-
-        return intro;
-    }
-
-    private JLabel intro(){
-        JLabel intro = new JLabel();
-        intro.setFont(new Font("Inter", Font.PLAIN, new Size(42, 42).getHeight()));
-        intro.setBackground(new Color(0xF4E3D3));
-        intro.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(0xE27408)));
-        intro.setHorizontalAlignment(JLabel.CENTER);
-        intro.setOpaque(true);
-
-        Size size = new Size(500, 110);
-        intro.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
+        this.labelLayer.add(intro, gbc);
 
         return intro;
     }

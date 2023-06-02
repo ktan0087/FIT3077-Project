@@ -1,5 +1,6 @@
 package Frontend;
 
+import Frontend.Components.Board;
 import Frontend.Game.Intersection;
 import Frontend.Layer.PlaceToken;
 
@@ -43,7 +44,7 @@ public class HintCircle extends JLabel {
         }
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(new Color(0xFF5F1F));
+        g2d.setColor(new Color(0xFF0000));
         g2d.setStroke(new BasicStroke(5));
 
         if (circleVisible) {
@@ -57,8 +58,8 @@ public class HintCircle extends JLabel {
         }
     }
 
-    public void showHint(PlaceToken hintLayer, Intersection intersection){
-        hintLayer.remove(intersection.getAccessibleContext().getAccessibleIndexInParent());
-        hintLayer.add(this, intersection.getAccessibleContext().getAccessibleIndexInParent());
+    public void showHint(PlaceToken hintLayer, Intersection intersection, Board b){
+        hintLayer.remove(Integer.parseInt(String.valueOf(b.getIndexLookUpTable(intersection.getCoordinateX(), intersection.getCoordinateY()))));
+        hintLayer.add(this, Integer.parseInt(String.valueOf(b.getIndexLookUpTable(intersection.getCoordinateX(), intersection.getCoordinateY()))));
     }
 }

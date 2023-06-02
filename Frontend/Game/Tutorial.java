@@ -6,6 +6,9 @@ import Frontend.IconProcessor;
 import Frontend.Frame.Size;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +16,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Tutorial extends JPanel{
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private double heightConst = screenSize.getHeight()/720 - 1;
     private int nextCount;
     private BtnNext btnNext;
     protected BtnClose btnClose;
@@ -38,7 +43,9 @@ public class Tutorial extends JPanel{
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        Size gapSize = new Size(10, 25);
+        double width = Math.floor(25 * heightConst);
+        Size gapSize = new Size(10, (int) (width));
+//        Size gapSize = new Size(0, 0);
         gbc.insets = new Insets(gapSize.getHeight(), gapSize.getWidth(), gapSize.getHeight(), gapSize.getWidth()); // add gaps between the components
 
         gbc.gridx = 0;
@@ -514,6 +521,7 @@ public class Tutorial extends JPanel{
         }
         else if (nextCount == 16) {
             this.background.remove(this.dimLayer);
+            this.labelLayer.remove(0); // remove the intro label
 
         }
     }
@@ -554,7 +562,8 @@ public class Tutorial extends JPanel{
 
     private JPanel createLabelLayer(){
         JPanel labelLayer = new JPanel();
-        labelLayer.setLayout(null);
+//        labelLayer.setLayout(null);
+        labelLayer.setLayout(new GridBagLayout());
         labelLayer.setOpaque(false);
         labelLayer.setVisible(true);
 
@@ -655,13 +664,17 @@ public class Tutorial extends JPanel{
         JLabel instruction = new JLabel();
         instruction.setFont(new Font("Inter", Font.PLAIN, new Size(36, 36).getHeight()));
         instruction.setBackground(new Color(0xF4E3D3));
-        instruction.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(0xFF0000)));
+
+        Border matteBorder = new MatteBorder(5, 5, 5, 5, new Color(0xFF0000));
+        Border emptyBorder = new EmptyBorder(10, 10, 10, 10);
+        instruction.setBorder(BorderFactory.createCompoundBorder(matteBorder, emptyBorder));
+
         instruction.setHorizontalAlignment(JLabel.CENTER);
         instruction.setOpaque(true);
 
-        Size size = new Size(width, height);
-        instruction.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
-        instruction.setSize(new Dimension(size.getWidth(), size.getHeight()));
+//        Size size = new Size(width, height);
+//        instruction.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
+//        instruction.setSize(new Dimension(size.getWidth(), size.getHeight()));
 
         return instruction;
     }

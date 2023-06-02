@@ -13,8 +13,6 @@ public class MainFrame extends JFrame {
      */
     private Dimension screenSize;
 
-    protected Dimension frameSize;
-
     /**
      * Constructor.
      * Creates the main frame of the application.
@@ -31,12 +29,11 @@ public class MainFrame extends JFrame {
         ImageIcon pvp = new ImageIcon(getClass().getResource("/Icons/pvp.png")); // create an image icon
         this.setIconImage(pvp.getImage()); //change icon of frame
 
-        this.frameSize = this.getContentPane().getSize(); // get the size of the frame
-
+        System.out.println(getFrameSize());
     }
 
-    public Dimension getFrameSize() {
-        return this.frameSize;
+    public Dimension getFrameSize(){
+        return this.getContentPane().getSize();
     }
 
 }

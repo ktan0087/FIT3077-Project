@@ -1,22 +1,27 @@
 package Backend;
 
+/**
+ * A class to represent the tutorial mode of the game.
+ *
+ * @see GameMode
+ */
 public class TutorialMode extends GameMode{
 
+    /**
+     * Constructor.
+     * Creates a new TutorialMode object with the game object that it is associated with.
+     *
+     * @param game is the game that is played
+     */
     public TutorialMode(Game game) {
         super(game);
     }
-    @Override
-    public void startGame() {
 
-    }
-
-    @Override
-    public void endGame() {
-
-    }
-
-
-
+    /**
+     * This method is specifically used by tutorial mode to setup the board required
+     * on the Move phase of tutorial mode.
+     *
+     */
     public void displayBoardMove() {
         game.restartGame();
         // Set up all black tokens on the board
@@ -29,7 +34,7 @@ public class TutorialMode extends GameMode{
         game.getBoard().placeToken(game.getOtherPlayer(), game.getBoard().getIntersection(3,5));
         game.getBoard().placeToken(game.getOtherPlayer(), game.getBoard().getIntersection(2,5));
         game.getBoard().placeToken(game.getOtherPlayer(), game.getBoard().getIntersection(1,7));
-        game.getOtherPlayer().playTurn();
+        game.getOtherPlayer().playTurn(); // Check Player 2's capability after the moves
 
 
         // Set up all white tokens on the board
@@ -42,9 +47,14 @@ public class TutorialMode extends GameMode{
         game.getBoard().placeToken(game.getCurrentPlayer(), game.getBoard().getIntersection(2,6));
         game.getBoard().placeToken(game.getCurrentPlayer(), game.getBoard().getIntersection(1,6));
         game.getBoard().placeToken(game.getCurrentPlayer(), game.getBoard().getIntersection(1,5));
-        game.getCurrentPlayer().playTurn();
+        game.getCurrentPlayer().playTurn(); // Check Player 1's capability after the moves
     }
 
+    /**
+     * This method is specifically used by tutorial mode to setup the board required
+     * on the Fly phase of tutorial mode.
+     *
+     */
     public void displayBoardFly(){
         game.restartGame();
         // Set up all black tokens on the board
@@ -58,7 +68,7 @@ public class TutorialMode extends GameMode{
             game.getOtherPlayer().placeTokenOnBoard();
             game.getOtherPlayer().loseTokenOnBoard();
         }
-        game.getOtherPlayer().playTurn();
+        game.getOtherPlayer().playTurn(); // Check Player 2's capability after the moves
 
         // Set up all white tokens on the board
         game.getBoard().placeToken(game.getCurrentPlayer(), game.getBoard().getIntersection(1,1));
@@ -68,7 +78,7 @@ public class TutorialMode extends GameMode{
             game.getCurrentPlayer().placeTokenOnBoard();
             game.getCurrentPlayer().loseTokenOnBoard();
         }
-        game.getCurrentPlayer().playTurn();
+        game.getCurrentPlayer().playTurn(); ;// Check Player 1's capability after the moves
     }
 
     public void displayBoardButton(){
@@ -83,7 +93,7 @@ public class TutorialMode extends GameMode{
         game.getBoard().placeToken(game.getOtherPlayer(), game.getBoard().getIntersection(3,5));
         game.getBoard().placeToken(game.getOtherPlayer(), game.getBoard().getIntersection(3,6));
         game.getBoard().placeToken(game.getOtherPlayer(), game.getBoard().getIntersection(2,5));
-        game.getOtherPlayer().playTurn();
+        game.getOtherPlayer().playTurn(); // Check Player 2's capability after the moves
 
         // Set up all white tokens on the board
         game.getBoard().placeToken(game.getCurrentPlayer(), game.getBoard().getIntersection(2,3));
@@ -95,7 +105,7 @@ public class TutorialMode extends GameMode{
         game.getBoard().placeToken(game.getCurrentPlayer(), game.getBoard().getIntersection(2,6));
         game.getBoard().placeToken(game.getCurrentPlayer(), game.getBoard().getIntersection(1,6));
         game.getBoard().placeToken(game.getCurrentPlayer(), game.getBoard().getIntersection(1,5));
-        game.getCurrentPlayer().playTurn();
+        game.getCurrentPlayer().playTurn(); // Check Player 1's capability after the moves
     }
 
 

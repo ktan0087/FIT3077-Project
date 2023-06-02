@@ -58,11 +58,22 @@ public class Game {
      */
     private boolean isGameOver;
 
+    /**
+     * A list of all the adjacent intersections of a selected intersection
+     */
     private ArrayList<Intersection> adjacentIntersectionList;
+    /**
+     * A list of all the possible intersections that a token can be moved to
+     */
     private ArrayList<Intersection> possibleIntersectionList;
+    /**
+     * A list of all the possible tokens that can be selected
+     */
     private ArrayList<Token> possibleTokenList;
 
-    // not yet implemented in this sprint
+    /**
+     * The game mode of the game, used to add different methods to game based on game mode
+     */
     private GameMode gameMode;
 
     /**

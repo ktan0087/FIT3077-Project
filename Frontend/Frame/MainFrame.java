@@ -29,6 +29,11 @@ public class MainFrame extends JFrame {
         ImageIcon pvp = new ImageIcon(getClass().getResource("/Icons/pvp.png")); // create an image icon
         this.setIconImage(pvp.getImage()); //change icon of frame
 
+        System.out.println(getFrameSize());
+    }
+
+    public Dimension getFrameSize(){
+        return this.getContentPane().getSize();
     }
 
 }

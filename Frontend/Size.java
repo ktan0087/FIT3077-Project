@@ -1,5 +1,7 @@
 package Frontend;
 
+import Frontend.Frame.MainFrame;
+
 import java.awt.*;
 
 public class Size {

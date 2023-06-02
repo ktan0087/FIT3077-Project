@@ -43,7 +43,9 @@ public class Tutorial extends JPanel{
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        Size gapSize = new Size(10, 25);
+        double width = Math.floor(25 * heightConst);
+        Size gapSize = new Size(10, (int) (width));
+//        Size gapSize = new Size(0, 0);
         gbc.insets = new Insets(gapSize.getHeight(), gapSize.getWidth(), gapSize.getHeight(), gapSize.getWidth()); // add gaps between the components
 
         gbc.gridx = 0;

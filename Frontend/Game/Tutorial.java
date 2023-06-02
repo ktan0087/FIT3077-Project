@@ -213,6 +213,25 @@ public class Tutorial extends JPanel{
             this.click.setBounds(548, 402, 48, 48);
             this.labelLayer.add(this.click);
 
+            ActionListener whiteTokenTutAction = (new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    labelLayer.remove(1); // remove instruction
+                    labelLayer.remove(click);
+                    whiteToken_37.selected = false;
+                    initialBoard.placeToken.remove(whiteToken_37); // remove token from initial board
+                    initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 7)))); // add empty label to initial board
+
+                    initialBoard.whiteTokenRemain.setText("0"); //---------------------WHY NOT WORKING-----------------------------
+                    initialBoard.playerTurn.changeIcon();
+
+                    addNextButton(gbc);
+
+                    repaint();
+                    revalidate();
+                }
+            });
+
             this.whiteToken_37.setEnabled(true);
             this.whiteToken_37.addMouseListener(new MouseAdapter() {
                 @Override
@@ -232,26 +251,8 @@ public class Tutorial extends JPanel{
                     labelLayer.add(instruction);
 
                     whiteToken_37.removeMouseListener(this);
-
-                    repaint();
-                    revalidate();
-                }
-            });
-
-            this.initialBoard.board.getIntersectionList().get(16).inter.setEnabled(true);
-            this.initialBoard.board.getIntersectionList().get(16).inter.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    labelLayer.remove(1); // remove instruction
-                    labelLayer.remove(click);
-                    whiteToken_37.selected = false;
-                    initialBoard.placeToken.remove(whiteToken_37); // remove token from initial board
-                    initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 7)))); // add empty label to initial board
-
-                    initialBoard.whiteTokenRemain.setText("0"); //---------------------WHY NOT WORKING-----------------------------
-                    initialBoard.playerTurn.changeIcon();
-
-                    addNextButton(gbc);
+                    initialBoard.board.getIntersectionList().get(16).inter.setEnabled(true);
+                    initialBoard.board.getIntersectionList().get(16).inter.addActionListener(whiteTokenTutAction);
 
                     repaint();
                     revalidate();
@@ -309,7 +310,7 @@ public class Tutorial extends JPanel{
         }
         else if (this.nextCount == 9) {
             JLabel instruction = createInstruction(380, 165);
-            instruction.setText("<html><center>When you only have 3<br/>tokens left ...<center></html>");
+            instruction.setText("<html><center>When you only have<br/><b>3</b> tokens left ...<center></html>");
             instruction.setLocation(150, 505);
             this.labelLayer.add(instruction);
 
@@ -399,6 +400,27 @@ public class Tutorial extends JPanel{
             this.click.setBounds(548, 402, 48, 48);
             this.labelLayer.add(this.click);
 
+            ActionListener whiteTokenTutAction = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    whiteToken_37.selected = false;
+
+                    initialBoard.placeToken.remove(whiteToken_37);
+                    initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 7))));
+
+                    initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 4))));
+                    initialBoard.placeToken.add(new WhiteToken(1, 4, initialBoard), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 4))));
+
+                    labelLayer.remove(0);
+                    labelLayer.remove(click);
+
+                    addNextButton(gbc);
+
+                    repaint();
+                    revalidate();
+                }
+            };
+
             this.whiteToken_37.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -417,27 +439,9 @@ public class Tutorial extends JPanel{
                     click.setBounds(835, 328, 48, 48);
                     labelLayer.add(click);
 
-                    repaint();
-                    revalidate();
-                }
-            });
-
-            this.initialBoard.board.getIntersectionList().get(14).inter.setEnabled(true);
-            this.initialBoard.board.getIntersectionList().get(14).inter.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    whiteToken_37.selected = false;
-
-                    initialBoard.placeToken.remove(whiteToken_37);
-                    initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 7))));
-
-                    initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 4))));
-                    initialBoard.placeToken.add(new WhiteToken(1, 4, initialBoard), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 4))));
-
-                    labelLayer.remove(0);
-                    labelLayer.remove(click);
-
-                    addNextButton(gbc);
+                    whiteToken_37.removeMouseListener(this);
+                    initialBoard.board.getIntersectionList().get(14).inter.setEnabled(true);
+                    initialBoard.board.getIntersectionList().get(14).inter.addActionListener(whiteTokenTutAction);
 
                     repaint();
                     revalidate();

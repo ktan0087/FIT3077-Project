@@ -2,6 +2,7 @@ package Frontend.Game;
 
 import Frontend.Button.BtnPlay;
 import Frontend.Button.BtnTutorial;
+import Frontend.BackgroundProcessor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +36,8 @@ public class MainPage extends JLayeredPane{
      */
     private JLabel background;
 
+    private Image backgroundImg;
+
     /**
      * Constructor for the main page.
      * Creates a new main page with a game title, play button and tutorial button.
@@ -43,7 +46,8 @@ public class MainPage extends JLayeredPane{
         this.gameName = new JLabel();
         this.btnPlay = new BtnPlay();
         this.btnTut = new BtnTutorial();
-        this.background=new JLabel(new ImageIcon(getClass().getResource("/Icons/background.png")));
+        this.backgroundImg = new ImageIcon(getClass().getResource("/Icons/background.png")).getImage();
+        this.background = new BackgroundProcessor(this.backgroundImg, 600, 600);
 
         this.setBackground(new Color(0xE0A060));
         this.setOpaque(true);
@@ -59,7 +63,7 @@ public class MainPage extends JLayeredPane{
         background.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL; // make the box of buttons same
-        gbc.insets = new Insets(10, 10, 10, 10); // add gaps between the components
+        gbc.insets = new Insets(10, 10,10,10); // add gaps between the components
 
         gbc.gridx = 0;
         gbc.gridy = 0;

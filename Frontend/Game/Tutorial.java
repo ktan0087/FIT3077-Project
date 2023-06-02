@@ -3,7 +3,6 @@ package Frontend.Game;
 import Frontend.Button.BtnClose;
 import Frontend.Button.BtnNext;
 import Frontend.IconProcessor;
-import Frontend.Size;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -16,8 +15,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Tutorial extends JPanel{
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    private double heightConst = screenSize.getHeight()/720 - 1;
     private int nextCount;
     private BtnNext btnNext;
     protected BtnClose btnClose;
@@ -35,6 +32,7 @@ public class Tutorial extends JPanel{
         this.btnClose = new BtnClose();
         this.btnNext = new BtnNext();
         this.initialBoard = new InitialBoard();
+        this.initialBoard.remove(this.initialBoard.buttons.btnClose);
         this.labelLayer = createLabelLayer();
         this.dimLayer = createDimLayer();
         this.click = createClickHint();
@@ -43,10 +41,7 @@ public class Tutorial extends JPanel{
 
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        double width = Math.floor(25 * heightConst);
-        Size gapSize = new Size(10, (int) (width));
-//        Size gapSize = new Size(0, 0);
-        gbc.insets = new Insets(gapSize.getHeight(), gapSize.getWidth(), gapSize.getHeight(), gapSize.getWidth()); // add gaps between the components
+        gbc.insets = new Insets(17, 10, 17, 10); // add gaps between the components
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -102,16 +97,12 @@ public class Tutorial extends JPanel{
             this.labelLayer.remove(0); // remove intro
             this.background.remove(this.dimLayer);
 
-            Size instructionSize = new Size(420, 80);
-            JLabel instruction = createInstruction(instructionSize.getWidth(), instructionSize.getHeight());
+            JLabel instruction = createInstruction(420, 80);
             instruction.setText("Click to place a token");
-            Size instructionLocation = new Size(720, 180);
-            instruction.setLocation(instructionLocation.getWidth(), instructionLocation.getHeight());
+            instruction.setLocation(720, 180);
             this.labelLayer.add(instruction);
 
-            Size clickSize = new Size(48, 48);
-            Size clickLocation = new Size(693, 258);
-            this.click.setBounds(clickLocation.getWidth(), clickLocation.getHeight(), clickSize.getWidth(), clickSize.getHeight());
+            this.click.setBounds(690, 258, 48, 48);
             this.labelLayer.add(this.click);
 
             this.remove(this.btnNext); // remove next button
@@ -513,7 +504,7 @@ public class Tutorial extends JPanel{
             JLabel whiteWin = createIntro("WIN");
             whiteWin.setIcon(new ImageIcon(getClass().getResource("/Icons/white-token.png")));
             whiteWin.setHorizontalTextPosition(JLabel.RIGHT);
-            whiteWin.setIconTextGap(new Size(45, 45).getHeight()); // set the distance between text and icon
+            whiteWin.setIconTextGap(45); // set the distance between text and icon
         }
         else if (nextCount == 15) {
             this.labelLayer.remove(0); // remove the intro label
@@ -562,8 +553,7 @@ public class Tutorial extends JPanel{
 
     private JPanel createLabelLayer(){
         JPanel labelLayer = new JPanel();
-//        labelLayer.setLayout(null);
-        labelLayer.setLayout(new GridBagLayout());
+        labelLayer.setLayout(null);
         labelLayer.setOpaque(false);
         labelLayer.setVisible(true);
 
@@ -591,7 +581,7 @@ public class Tutorial extends JPanel{
     private JPanel createWelcomeMessage(){
         JLabel welcome = new JLabel();
         welcome.setText("Welcome to the tutorial");
-        welcome.setFont(new Font("Inter", Font.PLAIN, new Size(42, 42).getHeight()));
+        welcome.setFont(new Font("Inter", Font.PLAIN, 42));
         welcome.setBackground(new Color(0xF4E3D3));
         welcome.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(0xE27408)));
         welcome.setHorizontalAlignment(JLabel.CENTER);
@@ -599,7 +589,7 @@ public class Tutorial extends JPanel{
 
         JLabel message = new JLabel();
         message.setText("You are ");
-        message.setFont(new Font("Inter", Font.PLAIN, new Size(42, 42).getHeight()));
+        message.setFont(new Font("Inter", Font.PLAIN, 42));
         message.setBackground(new Color(0xF4E3D3));
         message.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, new Color(0xE27408)));
         message.setOpaque(true);
@@ -608,9 +598,8 @@ public class Tutorial extends JPanel{
         IconProcessor icon = new IconProcessor(whiteToken, 68, 68);
         ImageIcon resizedIcon = icon.resizeIcon();
 
-        Size size = new Size(500, 110);
-        welcome.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
-        message.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
+        welcome.setPreferredSize(new Dimension(500, 110));
+        message.setPreferredSize(new Dimension(500, 110));
 
         message.setIcon(resizedIcon);
         message.setHorizontalTextPosition(JLabel.LEFT);
@@ -621,8 +610,7 @@ public class Tutorial extends JPanel{
         welcomeMessage.setOpaque(false);
         welcomeMessage.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        Size gapSize = new Size(25, 25);
-        gbc.insets = new Insets(gapSize.getHeight(), gapSize.getWidth(), gapSize.getHeight(), gapSize.getWidth()); // add gaps between the components
+        gbc.insets = new Insets(25, 25, 25, 25); // add gaps between the components
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -643,7 +631,7 @@ public class Tutorial extends JPanel{
 
     private JLabel createIntro(String text){
         JLabel intro = new JLabel();
-        intro.setFont(new Font("Inter", Font.PLAIN, new Size(42, 42).getHeight()));
+        intro.setFont(new Font("Inter", Font.PLAIN, 42));
         intro.setText(text);
         intro.setBackground(new Color(0xF4E3D3));
 
@@ -651,8 +639,7 @@ public class Tutorial extends JPanel{
         intro.setHorizontalAlignment(JLabel.CENTER);
         intro.setOpaque(true);
 
-        Size size = new Size(500, 110);
-        intro.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
+        intro.setPreferredSize(new Dimension(500, 110));
 
         setComponentCenter(intro);
         labelLayer.add(intro);
@@ -662,7 +649,7 @@ public class Tutorial extends JPanel{
 
     private JLabel createInstruction(int width, int height){
         JLabel instruction = new JLabel();
-        instruction.setFont(new Font("Inter", Font.PLAIN, new Size(36, 36).getHeight()));
+        instruction.setFont(new Font("Inter", Font.PLAIN, 36));
         instruction.setBackground(new Color(0xF4E3D3));
 
         Border matteBorder = new MatteBorder(5, 5, 5, 5, new Color(0xFF0000));
@@ -672,9 +659,8 @@ public class Tutorial extends JPanel{
         instruction.setHorizontalAlignment(JLabel.CENTER);
         instruction.setOpaque(true);
 
-//        Size size = new Size(width, height);
-//        instruction.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
-//        instruction.setSize(new Dimension(size.getWidth(), size.getHeight()));
+        instruction.setPreferredSize(new Dimension(width, height));
+        instruction.setSize(new Dimension(width, height));
 
         return instruction;
     }
@@ -719,8 +705,7 @@ public class Tutorial extends JPanel{
     }
 
     private void addNextButton(GridBagConstraints gbc){
-        Size gapSize = new Size(10, 25);
-        gbc.insets = new Insets(gapSize.getHeight(), gapSize.getWidth(), gapSize.getHeight(), gapSize.getWidth()); // add gaps between the components
+        gbc.insets = new Insets(25, 10, 25, 10); // add gaps between the components
 
         gbc.gridx = 0;
         gbc.gridy = 0;

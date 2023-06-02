@@ -7,13 +7,11 @@ public class IconProcessor {
     private ImageIcon icon;
     private int width;
     private int height;
-    private Size size;
 
     public IconProcessor(ImageIcon icon, int width, int height) {
         this.icon = icon;
-        this.size = new Size(width, height);
-        this.width = this.size.getWidth();
-        this.height = this.size.getHeight();
+        this.width = width;
+        this.height = height;
     }
 
     public ImageIcon resizeIcon() {

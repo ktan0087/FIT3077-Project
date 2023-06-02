@@ -564,15 +564,13 @@ public class Tutorial extends JPanel{
         // Set the size of the label
         label.setSize(label.getPreferredSize());
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
         // Get the frame's width and height
-        double screenSizeWidth = screenSize.getWidth();
-        double screenSizeHeight = screenSize.getHeight();
+        double frameSizeWidth = 1280.0;
+        double frameSizeHeight = 720.0;
 
         // Calculate the center position for the label
-        int labelX = (int) ((screenSizeWidth - label.getWidth()) / 2);
-        int labelY = (int) ((screenSizeHeight - label.getHeight()) / 2);
+        int labelX = (int) ((frameSizeWidth - label.getWidth()) / 2);
+        int labelY = (int) ((frameSizeHeight - label.getHeight()) / 2);
 
         // Set the position of the label
         label.setLocation(labelX, labelY);

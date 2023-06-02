@@ -210,7 +210,7 @@ public class Tutorial extends JPanel{
             this.labelLayer.add(instruction);
 
             // Set the location for the clicking arrow
-            this.click.setBounds(543, 394, 48, 48);
+            this.click.setBounds(540, 394, 48, 48);
             this.labelLayer.add(this.click);
 
             ActionListener whiteTokenTutAction = (new ActionListener() {
@@ -242,7 +242,7 @@ public class Tutorial extends JPanel{
                     labelLayer.remove(instruction);
                     labelLayer.remove(click);
 
-                    click.setBounds(616, 394, 48, 48);
+                    click.setBounds(613, 394, 48, 48);
                     labelLayer.add(click);
 
                     JLabel instruction = createInstruction(380, 125);
@@ -397,7 +397,7 @@ public class Tutorial extends JPanel{
             this.labelLayer.add(instruction);
 
             // Set the location for the clicking arrow
-            this.click.setBounds(540, 397, 48, 48);
+            this.click.setBounds(540, 394, 48, 48);
             this.labelLayer.add(this.click);
 
             ActionListener whiteTokenTutAction = new ActionListener() {
@@ -436,7 +436,7 @@ public class Tutorial extends JPanel{
                     labelLayer.add(instruction);
 
                     // Set the location for the clicking arrow
-                    click.setBounds(827, 323, 48, 48);
+                    click.setBounds(829, 321, 48, 48);
                     labelLayer.add(click);
 
                     whiteToken_37.removeMouseListener(this);

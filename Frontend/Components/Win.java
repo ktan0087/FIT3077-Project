@@ -1,7 +1,5 @@
 package Frontend.Components;
 
-import Frontend.Size;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -34,14 +32,13 @@ public class Win extends JLabel {
         this.setText("WIN"); // set the text of label to WIN
         this.setOpaque(true); // make the background visible
         this.setBackground(new Color(0xF4E3D3));
-        this.setFont(new Font("Inter", Font.PLAIN, new Size(52, 52).getHeight()));
+        this.setFont(new Font("Inter", Font.PLAIN, 52));
         this.setForeground(new Color(0x000000));
         this.setWinner(this.winner);
         this.setHorizontalTextPosition(JLabel.RIGHT);
         this.setHorizontalAlignment(JLabel.CENTER);
-        this.setIconTextGap(new Size(45, 45).getHeight()); // set the distance between text and icon
-        Size size = new Size(300, 100);
-        this.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
+        this.setIconTextGap(45); // set the distance between text and icon
+        this.setPreferredSize(new Dimension(300, 100));
         this.setBorder(BorderFactory.createLineBorder(new Color(0xE27408), 5));
     }
 

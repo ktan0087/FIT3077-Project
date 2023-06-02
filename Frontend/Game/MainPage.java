@@ -3,7 +3,6 @@ package Frontend.Game;
 import Frontend.Button.BtnPlay;
 import Frontend.Button.BtnTutorial;
 import Frontend.BackgroundProcessor;
-import Frontend.Size;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,7 +53,7 @@ public class MainPage extends JLayeredPane{
         this.setOpaque(true);
 
         // Add Game Title
-        gameName.setFont(new Font("Inter", Font.BOLD, new Size(100, 100).getHeight()));
+        gameName.setFont(new Font("Inter", Font.BOLD, 100));
         gameName.setText("<html>NINE MEN'S<br/><center>MORRIS<center></html>");
         gameName.setForeground(new Color(0x000000));
 
@@ -64,8 +63,7 @@ public class MainPage extends JLayeredPane{
         background.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL; // make the box of buttons same
-        int gapSize = new Size(10, 10).getHeight();
-        gbc.insets = new Insets(gapSize, gapSize, gapSize, gapSize); // add gaps between the components
+        gbc.insets = new Insets(10, 10,10,10); // add gaps between the components
 
         gbc.gridx = 0;
         gbc.gridy = 0;

@@ -37,10 +37,10 @@ public class HintCircle extends JLabel {
         int radius = 0;
 
         if (this.type == Type.INTERSECTION) {
-            radius = new Size(8, 8).getHeight();
+            radius = 8;
         }
         else if (this.type == Type.TOKEN) {
-            radius = new Size(16, 16).getHeight();
+            radius = 16;
         }
 
         Graphics2D g2d = (Graphics2D) g;

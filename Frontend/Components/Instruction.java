@@ -1,7 +1,5 @@
 package Frontend.Components;
 
-import Frontend.Size;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -35,10 +33,9 @@ public class Instruction extends JLabel {
      */
     public Instruction(InstructionType instructionType){
         changeText(InstructionType.PLACE); // set the text of label to PLACE
-        this.setFont(new java.awt.Font("Inter", java.awt.Font.PLAIN, new Size(36, 36).getHeight())); // set the font of label
+        this.setFont(new java.awt.Font("Inter", java.awt.Font.PLAIN, 36)); // set the font of label
         this.setForeground(new Color(0x000000)); // set the color of label
-        Size size = new Size(500, 80); // create a new size object
-        this.setPreferredSize(new Dimension(size.getWidth(), size.getHeight())); // set the size of label
+        this.setPreferredSize(new Dimension(500, 80)); // set the size of label
         this.setHorizontalAlignment(JLabel.CENTER); // make the text at center
     }
 

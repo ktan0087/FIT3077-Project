@@ -4,7 +4,6 @@ import Backend.Action.RemoveTokenAction;
 import Backend.Token.TokenColour;
 import Frontend.Components.Instruction;
 import Frontend.Components.Win;
-import Frontend.Size;
 
 import javax.swing.*;
 import java.awt.*;
@@ -108,6 +107,7 @@ public abstract class Token extends JLabel {
      * @param g  is the graphics object
      */
     protected void paintBorder(Graphics g) {
+        super.paintBorder(g);
         if (this.selected) {
             // to cover the intersection point
             repaint();
@@ -123,7 +123,7 @@ public abstract class Token extends JLabel {
 
             // draw the inner circle
             g.setColor(this.tokenColor);
-            int radiusInner = new Size(15, 15).getHeight();
+            int radiusInner = 15;
             int diameterInner = radiusInner * 2;
             g.fillOval(x - radiusInner, y - radiusInner, diameterInner, diameterInner);
         }
@@ -134,6 +134,7 @@ public abstract class Token extends JLabel {
      * @param g is the graphics object
      */
     protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
         if (!this.selected) {
             // to cover the intersection point
             repaint();
@@ -144,7 +145,7 @@ public abstract class Token extends JLabel {
 
             int x = getWidth()/2; // to get the middle point
             int y = getHeight()/2; // to get the middle point
-            int radius = new Size(15, 15).getHeight();
+            int radius = 15;
             int diameter = radius * 2;
 
             //shift x and y by the radius of the circle in order to correctly center it

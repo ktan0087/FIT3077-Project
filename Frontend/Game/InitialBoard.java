@@ -10,7 +10,6 @@ import Frontend.Components.*;
 import Frontend.HintCircle;
 import Frontend.Layer.PlaceToken;
 import Frontend.Line.Mill;
-import Frontend.Size;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,7 +61,7 @@ public class InitialBoard extends JPanel {
     /**
      * The layer that is used to show the remaining number of white token
      */
-    private TokenRemain whiteTokenRemain;
+    protected TokenRemain whiteTokenRemain;
 
     /**
      * The layer that is used to show the remaining number of black token
@@ -92,7 +91,7 @@ public class InitialBoard extends JPanel {
     /**
      * The layer that is used to show the mill
      */
-    private PlaceToken millLayer;
+    protected PlaceToken millLayer;
 
     /**
      * The layer that is used to display hint
@@ -177,8 +176,7 @@ public class InitialBoard extends JPanel {
         // Set layout of Buttons in board
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        Size gapSize = new Size(5, 5);
-        gbc.insets = new Insets(gapSize.getHeight(), gapSize.getWidth(), gapSize.getHeight(), gapSize.getWidth()); // add gaps between the components
+        gbc.insets = new Insets(5, 5, 5, 5); // add gaps between the components
 
         // add buttons to top right of the panel
         gbc.gridx = 3; // set the x position of the component

@@ -1,5 +1,6 @@
 package Frontend.Game;
 import Backend.*;
+import Backend.Action.AllActions;
 import Backend.Action.FlyTokenAction;
 import Backend.Action.MoveTokenAction;
 import Backend.Action.PlaceTokenAction;
@@ -116,6 +117,11 @@ public class InitialBoard extends JPanel {
      * A list to store hint's intersections
      */
     private ArrayList<Intersection> hintList; // a list of all intersections on the board
+
+    /**
+     * A list to store possible hint's intersections
+     */
+    private ArrayList<Backend.Board.Intersection> possibleHintListBackend; // a list of all intersections on the board
 
     /**
      * The number of mills that the player can remove
@@ -334,10 +340,15 @@ public class InitialBoard extends JPanel {
                         }
                     }
 
-                    // Check if a mill is formed and then do approriate actions and draw them
+                    // Check if a mill is formed and then do appropriate actions and draw them
                     checkAndDrawMills();
+                    //prompt error message when a player is trying to place a token when there is a token selected
+                    if (game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN) && hintPressed) {
+                        JOptionPane.showMessageDialog(null, "Place token action cannot be done while a token is selected.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                     // Display which player wins the game
                     checkEndGame();
+
                 }
             });
 
@@ -419,6 +430,18 @@ public class InitialBoard extends JPanel {
             } else {
                 displayResult(Win.WhoWin.WHITEWIN);
             }
+        }
+        //set hintPressed to false after every round
+        hintPressed = false;
+        //remove all hint layers drawn on the board
+        for (Intersection intersection : hintList) {
+            hintLayer.remove(Integer.parseInt(String.valueOf(board.getIndexLookUpTable(intersection.getCoordinateX(), intersection.getCoordinateY()))));
+            hintLayer.add(new JLabel(), Integer.parseInt(String.valueOf(board.getIndexLookUpTable(intersection.getCoordinateX(), intersection.getCoordinateY()))));
+        }
+        //check if the selected token is null and reset the selected token to false
+        if (selectedToken != null){
+            isSelected=false;
+            selectedToken.selected = false; // set the selected token to false
         }
     }
 
@@ -633,25 +656,72 @@ public class InitialBoard extends JPanel {
         result.setVisible(true);
     }
 
+    /**
+     * This method is used to provide legal moves as hints to user when the hint button is pressed,
+     * based on user's capability and the current state of the game.
+     *
+     * @return hint layer that shown in board
+     */
     protected ActionListener hintAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (!hintPressed){
-                hintPressed = true;
-                for (Intersection intersection : hintList) {
-                    new HintCircle(HintCircle.Type.TOKEN).showHint(hintLayer, intersection);
+            //check if the player is allowed to place token
+            if (!checkSelected() && !game.getCurrentPlayer().isActionAllowed(AllActions.REMOVE_TOKEN) && !game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN)){
+                //if no token is selected, prompt error message asking user to select a token
+                JOptionPane.showMessageDialog(null, "Please select a token first!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else if (!hintPressed){
+                if (game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN)){
+                    hintPressed = true;
+                    //create hint circles for all possible intersections
+                    for (Intersection intersection : hintList) {
+                        new HintCircle(HintCircle.Type.INTERSECTION).showHint(hintLayer, intersection, board);
+                    }
+                }
+                //check if player is allowed to remove token
+                else if (game.getCurrentPlayer().isActionAllowed(AllActions.REMOVE_TOKEN)) {
+                    //clear hintList
+                    hintList.clear();
+                    //get all possible tokens' list that can be removed
+                    possibleHintListBackend = game.getPossibleTokenList(game.getCurrentPlayer());
+                    //add all possible tokens' intersections to be removed to hintList
+                    for (Backend.Board.Intersection intersection: possibleHintListBackend){
+                        hintList.add(new Intersection(intersection.getLayer(), intersection.getPosition()));
+                    }
+                    hintPressed = true;
+                    //create hint circle for all possible tokens to be removed
+                    for (Intersection intersection : hintList) {
+                        new HintCircle(HintCircle.Type.TOKEN).showHint(hintLayer, intersection, board);
+                    }
+                }
+                //check if player is allowed to move, fly or place token
+                else if (game.getCurrentPlayer().isActionAllowed(AllActions.FLY_TOKEN) || game.getCurrentPlayer().isActionAllowed(AllActions.MOVE_TOKEN) || game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN)) {
+                    //clear hintList
+                    hintList.clear();
+                    //get all possible intersections' list that can be moved to
+                    possibleHintListBackend = game.getPossibleIntersectionList(new Backend.Board.Intersection(selectedToken.getCoordinateX(), selectedToken.getCoordinateY()), game.getCurrentPlayer());
+                    //add all possible intersections to hintList
+                    for (Backend.Board.Intersection intersection: possibleHintListBackend){
+                        hintList.add(new Intersection(intersection.getLayer(), intersection.getPosition()));
+                    }
+                    System.out.println(hintList.toString());
+                    hintPressed = true;
+                    //create hint circle for all possible intersections to be moved to
+                    for (Intersection intersection : hintList) {
+                        new HintCircle(HintCircle.Type.INTERSECTION).showHint(hintLayer, intersection, board);
+                    }
                 }
             }
             else {
                 hintPressed = false;
+                //remove any hint layer that is shown, and add a new layer
                 for (Intersection intersection : hintList) {
-                    hintLayer.remove(intersection.getAccessibleContext().getAccessibleIndexInParent());
-                    hintLayer.add(new JLabel(), intersection.getAccessibleContext().getAccessibleIndexInParent());
+                    hintLayer.remove(Integer.parseInt(String.valueOf(board.getIndexLookUpTable(intersection.getCoordinateX(), intersection.getCoordinateY()))));
+                    hintLayer.add(new JLabel(), Integer.parseInt(String.valueOf(board.getIndexLookUpTable(intersection.getCoordinateX(), intersection.getCoordinateY()))));
                 }
             }
             hintLayer.repaint();
             hintLayer.revalidate();
         }
     };
-
 }

@@ -1,6 +1,6 @@
 package Frontend.Button;
 
-import Frontend.Size;
+import Frontend.Frame.Size;
 
 import javax.swing.JButton;
 import javax.swing.BorderFactory;

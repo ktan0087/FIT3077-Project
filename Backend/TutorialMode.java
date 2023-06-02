@@ -15,15 +15,7 @@ public class TutorialMode extends GameMode{
 
     }
 
-    @Override
-    public void playGame() {
 
-    }
-
-    @Override
-    public void quitGame() {
-
-    }
 
     public void displayBoardMove() {
         game.restartGame();

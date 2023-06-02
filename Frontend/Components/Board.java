@@ -3,7 +3,7 @@ package Frontend.Components;
 import Frontend.Game.Intersection;
 import Frontend.Line.HorizontalLine;
 import Frontend.Line.VerticalLine;
-import Frontend.Size;
+import Frontend.Frame.Size;
 
 import javax.swing.*;
 import java.awt.*;

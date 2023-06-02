@@ -2,7 +2,7 @@
 // Retrieved from https://www.roseindia.net/tutorial/java/swing/createRoundButton.html
 package Frontend.Components;
 
-import Frontend.Size;
+import Frontend.Frame.Size;
 
 import javax.swing.*;
 import java.awt.*;

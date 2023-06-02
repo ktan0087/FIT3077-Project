@@ -11,8 +11,6 @@ public abstract class GameMode {
 
     public abstract void startGame();
     public abstract void endGame();
-    public abstract void playGame();
-    public abstract void quitGame();
 
     public abstract void displayBoardMove();
     public abstract void displayBoardFly();

@@ -1,5 +1,7 @@
 package Frontend;
 
+import Frontend.Frame.Size;
+
 import javax.swing.*;
 import java.awt.*;
 

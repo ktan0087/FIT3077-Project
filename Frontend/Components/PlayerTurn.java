@@ -1,7 +1,7 @@
 package Frontend.Components;
 
 import Frontend.IconProcessor;
-import Frontend.Size;
+import Frontend.Frame.Size;
 
 import javax.swing.*;
 import java.awt.*;

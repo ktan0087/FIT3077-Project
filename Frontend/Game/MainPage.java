@@ -3,7 +3,7 @@ package Frontend.Game;
 import Frontend.Button.BtnPlay;
 import Frontend.Button.BtnTutorial;
 import Frontend.BackgroundProcessor;
-import Frontend.Size;
+import Frontend.Frame.Size;
 
 import javax.swing.*;
 import java.awt.*;

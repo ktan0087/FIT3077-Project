@@ -1,5 +1,6 @@
 package Frontend;
 
+import Frontend.Frame.Size;
 import Frontend.Game.Intersection;
 import Frontend.Layer.PlaceToken;
 
@@ -7,7 +8,6 @@ import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 
 public class HintCircle extends JLabel {
     private boolean circleVisible;

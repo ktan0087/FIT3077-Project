@@ -3,7 +3,6 @@ package Frontend.Game;
 import Frontend.Button.BtnClose;
 import Frontend.Button.BtnNext;
 import Frontend.IconProcessor;
-import Frontend.Layer.PlaceToken;
 import Frontend.Size;
 
 import javax.swing.*;
@@ -96,12 +95,16 @@ public class Tutorial extends JPanel{
             this.labelLayer.remove(0); // remove intro
             this.background.remove(this.dimLayer);
 
-            JLabel instruction = createInstruction(420, 80);
+            Size instructionSize = new Size(420, 80);
+            JLabel instruction = createInstruction(instructionSize.getWidth(), instructionSize.getHeight());
             instruction.setText("Click to place a token");
-            instruction.setLocation(720, 180);
+            Size instructionLocation = new Size(720, 180);
+            instruction.setLocation(instructionLocation.getWidth(), instructionLocation.getHeight());
             this.labelLayer.add(instruction);
 
-            this.click.setBounds(693, 258, 48, 48);
+            Size clickSize = new Size(48, 48);
+            Size clickLocation = new Size(693, 258);
+            this.click.setBounds(clickLocation.getWidth(), clickLocation.getHeight(), clickSize.getWidth(), clickSize.getHeight());
             this.labelLayer.add(this.click);
 
             this.remove(this.btnNext); // remove next button
@@ -230,6 +233,8 @@ public class Tutorial extends JPanel{
                     instruction.setLocation(650, 265);
                     labelLayer.add(instruction);
 
+                    whiteToken_37.removeMouseListener(this);
+
                     repaint();
                     revalidate();
                 }
@@ -241,6 +246,7 @@ public class Tutorial extends JPanel{
                 public void actionPerformed(ActionEvent e) {
                     labelLayer.remove(1); // remove instruction
                     labelLayer.remove(click);
+                    whiteToken_37.selected = false;
                     initialBoard.placeToken.remove(whiteToken_37); // remove token from initial board
                     initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 7)))); // add empty label to initial board
 
@@ -304,10 +310,13 @@ public class Tutorial extends JPanel{
             });
         }
         else if (this.nextCount == 9) {
-            JLabel instruction = createInstruction(300, 165);
+            JLabel instruction = createInstruction(380, 165);
             instruction.setText("<html><center>When you only have 3<br/>tokens left ...<center></html>");
-            instruction.setLocation(450, 150);
+            instruction.setLocation(150, 505);
             this.labelLayer.add(instruction);
+
+            this.rightArrow.setBounds(435, 400, 100, 100);
+            this.labelLayer.add(this.rightArrow);
 
             // Remove Mill
             this.initialBoard.removeMill(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 6))), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(2, 6))), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 6))), this.initialBoard.millLayer);
@@ -366,17 +375,145 @@ public class Tutorial extends JPanel{
             this.initialBoard.placeToken.add(new BlackToken(3, 8, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 8))));
 
             this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 7))));
-            this.initialBoard.placeToken.add(new WhiteToken(3, 7, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 7))));
+            this.initialBoard.placeToken.add(this.whiteToken_37, Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 7))));
         }
         else if (nextCount == 10) {
             this.background.add(this.dimLayer);
             this.background.setComponentZOrder(this.dimLayer, 1);
+            this.labelLayer.remove(0); // remove the intro label
+            this.labelLayer.remove(this.rightArrow);
 
             createIntro("Fly Token");
         }
         else if (nextCount == 11) {
+            initialBoard.getGame().getGameMode().displayBoardFly();
+
             this.background.remove(this.dimLayer);
             this.labelLayer.remove(0); // remove the intro label
+            this.remove(this.btnNext);
+
+            JLabel instruction = createInstruction(380, 165);
+            instruction.setText("<html><center>Select the token that<br/>you want to fly<center></html>");
+            instruction.setLocation(220, 455);
+            this.labelLayer.add(instruction);
+
+            // Set the location for the clicking arrow
+            this.click.setBounds(548, 402, 48, 48);
+            this.labelLayer.add(this.click);
+
+            this.whiteToken_37.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
+                    whiteToken_37.selected = true;
+
+                    labelLayer.remove(instruction);
+                    labelLayer.remove(click);
+
+                    JLabel instruction = createInstruction(380, 165);
+                    instruction.setText("<html><center>Fly to any empty<br/>intersection<center></html>");
+                    instruction.setLocation(720, 400);
+                    labelLayer.add(instruction);
+
+                    // Set the location for the clicking arrow
+                    click.setBounds(835, 328, 48, 48);
+                    labelLayer.add(click);
+
+                    repaint();
+                    revalidate();
+                }
+            });
+
+            this.initialBoard.board.getIntersectionList().get(14).inter.setEnabled(true);
+            this.initialBoard.board.getIntersectionList().get(14).inter.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    whiteToken_37.selected = false;
+
+                    initialBoard.placeToken.remove(whiteToken_37);
+                    initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 7))));
+
+                    initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 4))));
+                    initialBoard.placeToken.add(new WhiteToken(1, 4, initialBoard), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 4))));
+
+                    labelLayer.remove(0);
+                    labelLayer.remove(click);
+
+                    addNextButton(gbc);
+
+                    repaint();
+                    revalidate();
+                }
+            });
+        }
+        else if (nextCount == 12) {
+            this.background.add(this.dimLayer);
+            this.background.setComponentZOrder(this.dimLayer, 1);
+
+            // Remove token from board
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 3))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 3))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 8))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 8))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 6))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(3, 6))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 6))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 6))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 4))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 4))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 5))));
+            this.initialBoard.placeToken.add(new JLabel(), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 5))));
+
+            // Create token on board
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 8))));
+            this.initialBoard.placeToken.add(new WhiteToken(1, 8, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 8))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 3))));
+            this.initialBoard.placeToken.add(new WhiteToken(2, 3, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(2, 3))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 5))));
+            this.initialBoard.placeToken.add(new WhiteToken(1, 5, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 5))));
+
+            this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 6))));
+            this.initialBoard.placeToken.add(new WhiteToken(1, 6, this.initialBoard), Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(1, 6))));
+
+            createIntro("Win Condition");
+        }
+        else if (nextCount == 13) {
+            this.background.remove(this.dimLayer);
+            this.labelLayer.remove(0); // remove the intro label
+
+            JLabel instruction = createInstruction(380, 125);
+            instruction.setText("<html><center>When your opponent<br/>only has 2 tokens ...<center></html>");
+            instruction.setLocation(575, 445);
+            this.labelLayer.add(instruction);
+
+            this.leftArrow.setBounds(600, 328, 100, 100);
+            this.labelLayer.add(this.leftArrow);
+        }
+        else if (nextCount == 14) {
+            this.background.add(this.dimLayer);
+            this.background.setComponentZOrder(this.dimLayer, 1);
+
+            this.labelLayer.remove(0); // remove the instruction label
+            this.labelLayer.remove(this.leftArrow);
+
+            JLabel whiteWin = createIntro("WIN");
+            whiteWin.setIcon(new ImageIcon(getClass().getResource("/Icons/white-token.png")));
+            whiteWin.setHorizontalTextPosition(JLabel.RIGHT);
+            whiteWin.setIconTextGap(new Size(45, 45).getHeight()); // set the distance between text and icon
+        }
+        else if (nextCount == 15) {
+            this.labelLayer.remove(0); // remove the intro label
+            createIntro("Button: Hint");
+        }
+        else if (nextCount == 16) {
+            this.background.remove(this.dimLayer);
 
         }
     }
@@ -435,8 +572,8 @@ public class Tutorial extends JPanel{
         double screenSizeHeight = screenSize.getHeight();
 
         // Calculate the center position for the label
-        int labelX = (int) (screenSizeWidth - label.getWidth()) / 2;
-        int labelY = (int) (screenSizeHeight - label.getHeight()) / 2;
+        int labelX = (int) ((screenSizeWidth - label.getWidth()) / 2);
+        int labelY = (int) ((screenSizeHeight - label.getHeight()) / 2);
 
         // Set the position of the label
         label.setLocation(labelX, labelY);

@@ -57,7 +57,7 @@ public class Instruction extends JLabel {
                 this.setText("Move a token");
                 break;
             case REMOVE:
-                this.setText("Remove a token");
+                this.setText("Remove opponent's token");
                 break;
             case FLY:
                 this.setText("Fly a token");

@@ -3,6 +3,7 @@ package Frontend.Game;
 import Frontend.Button.BtnClose;
 import Frontend.Button.BtnNext;
 import Frontend.Click;
+import Frontend.Components.Instruction;
 import Frontend.Components.TokenRemain;
 import Frontend.IconProcessor;
 
@@ -131,6 +132,7 @@ public class Tutorial extends JPanel{
         else if (this.nextCount == 3){
             this.initialBoard.getGame().getGameMode().displayBoardMove();
             this.initialBoard.playerTurn.changeIcon();
+            this.initialBoard.instruction.changeText(Instruction.InstructionType.MOVE);
 
             JLabel instruction = createInstruction(350, 125);
             instruction.setText("<html><center>After you place all<br/>your tokens ...<center></html>");
@@ -290,6 +292,8 @@ public class Tutorial extends JPanel{
         }
         else if (this.nextCount == 9) {
             initialBoard.playerTurn.changeIcon();
+            this.initialBoard.instruction.changeText(Instruction.InstructionType.FLY);
+
             JLabel instruction = createInstruction(380, 165);
             instruction.setText("<html><center>When you only have<br/><b>3</b> tokens left ...<center></html>");
             instruction.setLocation(150, 505);
@@ -341,6 +345,8 @@ public class Tutorial extends JPanel{
             ActionListener whiteTokenTutAction = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    initialBoard.instruction.changeText(Instruction.InstructionType.MOVE);
+
                     labelLayer.remove(0);
                     labelLayer.remove(click);
 
@@ -380,6 +386,8 @@ public class Tutorial extends JPanel{
         }
         else if (nextCount == 12) {
             this.initialBoard.playerTurn.changeIcon();
+            this.initialBoard.instruction.changeText(Instruction.InstructionType.MOVE);
+
             this.background.add(this.dimLayer);
             this.background.setComponentZOrder(this.dimLayer, 1);
 
@@ -478,6 +486,8 @@ public class Tutorial extends JPanel{
             ActionListener intersectionTutAction = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    initialBoard.instruction.changeText(Instruction.InstructionType.REMOVE);
+
                     labelLayer.removeAll();
 
                     addNextButton(gbc);
@@ -585,6 +595,7 @@ public class Tutorial extends JPanel{
                         initialBoard.playerTurn.changeIcon();
                         initialBoard.blackTokenRemain.setText("9");
                         initialBoard.whiteTokenRemain.setText("9");
+                        initialBoard.instruction.changeText(Instruction.InstructionType.PLACE);
 
                         repaint();
                         revalidate();

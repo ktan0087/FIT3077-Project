@@ -102,7 +102,7 @@ public class Tutorial extends JPanel{
             instruction.setLocation(720, 180);
             this.labelLayer.add(instruction);
 
-            this.click.setBounds(690, 258, 48, 48);
+            this.click.setBounds(685, 250, 48, 48);
             this.labelLayer.add(this.click);
 
             this.remove(this.btnNext); // remove next button
@@ -210,7 +210,7 @@ public class Tutorial extends JPanel{
             this.labelLayer.add(instruction);
 
             // Set the location for the clicking arrow
-            this.click.setBounds(548, 402, 48, 48);
+            this.click.setBounds(543, 394, 48, 48);
             this.labelLayer.add(this.click);
 
             ActionListener whiteTokenTutAction = (new ActionListener() {
@@ -242,7 +242,7 @@ public class Tutorial extends JPanel{
                     labelLayer.remove(instruction);
                     labelLayer.remove(click);
 
-                    click.setBounds(621, 402, 48, 48);
+                    click.setBounds(616, 394, 48, 48);
                     labelLayer.add(click);
 
                     JLabel instruction = createInstruction(380, 125);
@@ -287,7 +287,7 @@ public class Tutorial extends JPanel{
             instruction.setLocation(450, 150);
             this.labelLayer.add(instruction);
 
-            this.click.setBounds(548, 328, 48, 48);
+            this.click.setBounds(540, 323, 48, 48);
             this.labelLayer.add(this.click);
 
             this.blackToken_38.setEnabled(true);
@@ -397,7 +397,7 @@ public class Tutorial extends JPanel{
             this.labelLayer.add(instruction);
 
             // Set the location for the clicking arrow
-            this.click.setBounds(548, 402, 48, 48);
+            this.click.setBounds(540, 397, 48, 48);
             this.labelLayer.add(this.click);
 
             ActionListener whiteTokenTutAction = new ActionListener() {
@@ -436,7 +436,7 @@ public class Tutorial extends JPanel{
                     labelLayer.add(instruction);
 
                     // Set the location for the clicking arrow
-                    click.setBounds(835, 328, 48, 48);
+                    click.setBounds(827, 323, 48, 48);
                     labelLayer.add(click);
 
                     whiteToken_37.removeMouseListener(this);

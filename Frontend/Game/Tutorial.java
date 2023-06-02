@@ -16,6 +16,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Tutorial extends JPanel{
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private double heightConst = screenSize.getHeight()/720 - 1;
     private int nextCount;
     private BtnNext btnNext;
     protected BtnClose btnClose;

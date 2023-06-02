@@ -116,10 +116,15 @@ public abstract class Token extends JLabel {
             int x = getWidth()/2; // to get the middle point
             int y = getHeight()/2; // to get the middle point
 
-            // draw the outer circle
-            g.setColor(new Color(0xFF0000));
-            int diameterOuter = getWidth();
-            g.fillOval(0, 0, diameterOuter, diameterOuter);
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.setColor(new Color(0xFF0000));
+            g2d.setStroke(new BasicStroke(5));
+
+            int radius = 16;
+            int diameter = radius * 2;
+
+            //shift x and y by the radius of the circle in order to correctly center it
+            g.drawOval(x - radius, y - radius, diameter, diameter);
 
             // draw the inner circle
             g.setColor(this.tokenColor);
@@ -164,6 +169,7 @@ public abstract class Token extends JLabel {
     protected MouseListener tokenSelected = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
+            System.out.println("Token is clicked");
             //If there is a player that can remove a token by forming a mill
             if(iniBoard.canRemove){
                 //Checks if the current player have any valid tokens to remove(tokens not in a mill)
@@ -196,6 +202,9 @@ public abstract class Token extends JLabel {
                 }
 
             }
+            System.out.println("cannot remove");
+            System.out.println(iniBoard.isSelected);
+            System.out.println(selected);
             if (times%2 == 0 && !iniBoard.isSelected && iniBoard.getGame().getCurrentPlayer().getTokenColour() == ownerTokenColour) {
                 selected = true; // click the white token to select it
                 iniBoard.isSelected = true;

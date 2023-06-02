@@ -71,7 +71,7 @@ public class InitialBoard extends JPanel {
     /**
      * The token that is selected by the player
      */
-    private Token selectedToken;
+    protected Token selectedToken;
 
     /**
      * A boolean to check whether any token that is selected
@@ -144,6 +144,10 @@ public class InitialBoard extends JPanel {
      */
     public Game getGame() {
         return game;
+    }
+
+    public ArrayList<Token> getTokenList() {
+        return tokenList;
     }
 
     /**
@@ -667,6 +671,15 @@ public class InitialBoard extends JPanel {
         public void actionPerformed(ActionEvent e) {
             //check if the player is allowed to place token
             if (!checkSelected() && !game.getCurrentPlayer().isActionAllowed(AllActions.REMOVE_TOKEN) && !game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN)){
+                if (!checkSelected()){
+                    System.out.println(1);
+                }
+                else if(!game.getCurrentPlayer().isActionAllowed(AllActions.REMOVE_TOKEN)){
+                    System.out.println(2);
+                }
+                else if(!game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN)){
+                    System.out.println(3);
+                }
                 //if no token is selected, prompt error message asking user to select a token
                 JOptionPane.showMessageDialog(null, "Please select a token first!", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -724,4 +737,5 @@ public class InitialBoard extends JPanel {
             hintLayer.revalidate();
         }
     };
+
 }

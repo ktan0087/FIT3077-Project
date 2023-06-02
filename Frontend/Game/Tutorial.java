@@ -537,7 +537,9 @@ public class Tutorial extends JPanel{
         };
         background.setLayout(new OverlayLayout(background));
 
-        this.initialBoard.setEnabled(false); // make buttons enabled
+        this.initialBoard.setEnabled(false); // make buttons not enabled
+        this.initialBoard.buttons.btnHint.setEnabled(false); // make hint button not enabled
+
         for (Intersection intersection : this.initialBoard.board.getIntersectionList()){
             intersection.inter.setEnabled(false);
         }

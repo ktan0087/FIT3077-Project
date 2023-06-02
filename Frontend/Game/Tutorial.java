@@ -518,6 +518,13 @@ public class Tutorial extends JPanel{
             this.background.remove(this.dimLayer);
             this.labelLayer.remove(0); // remove the intro label
 
+            JLabel instruction = createInstruction(380, 125);
+            instruction.setText("<html><center>Click to show all<br/>legal moves<center></html>");
+            instruction.setLocation(575, 445);
+            this.labelLayer.add(instruction);
+
+            this.click.setBounds(600, 328, 48, 48);
+            this.labelLayer.add(this.click);
         }
     }
 

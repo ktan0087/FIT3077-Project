@@ -24,6 +24,13 @@ public abstract class GameMode {
     }
 
     /**
+     * This method is used to start the game.
+     * Main difference between each game mode
+     *
+     */
+    public abstract void startGame();
+
+    /**
      * This method is specifically used by tutorial mode to setup the board required
      * on the Move phase of tutorial mode.
      *

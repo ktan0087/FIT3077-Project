@@ -18,10 +18,21 @@ public class TutorialMode extends GameMode{
     }
 
     /**
+     * This method is used to start the game.
+     * Tutorial mode does not have a normal game procedure, so this method does nothing.
+     *
+     */
+    @Override
+    public void startGame() {
+        return;
+    }
+
+    /**
      * This method is specifically used by tutorial mode to setup the board required
      * on the Move phase of tutorial mode.
      *
      */
+    @Override
     public void displayBoardMove() {
         game.restartGame();
         // Set up all black tokens on the board
@@ -55,6 +66,7 @@ public class TutorialMode extends GameMode{
      * on the Fly phase of tutorial mode.
      *
      */
+    @Override
     public void displayBoardFly(){
         game.restartGame();
         // Set up all black tokens on the board
@@ -81,6 +93,12 @@ public class TutorialMode extends GameMode{
         game.getCurrentPlayer().playTurn(); ;// Check Player 1's capability after the moves
     }
 
+    /**
+     * This method is specifically used by tutorial mode to setup the board required
+     * on the Button showcase phase of tutorial mode.
+     *
+     */
+    @Override
     public void displayBoardButton(){
         game.restartGame();
         // Set up all black tokens on the board

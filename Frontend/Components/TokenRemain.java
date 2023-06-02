@@ -1,5 +1,7 @@
 package Frontend.Components;
 
+import Backend.Player;
+import Backend.Token.TokenColour;
 import Frontend.IconProcessor;
 
 import javax.swing.*;
@@ -72,11 +74,10 @@ public class TokenRemain extends JLabel {
      *
      * @return the amount of token remainder after decreasing
      */
-    public int decreaseAmountToken() {
-        if (this.amountToken > 0){ // if the amount of token is more than 0, which means there are still token left
-            this.amountToken--; // decrease the amount of token by 1
-            this.setText(Integer.valueOf(amountToken).toString()); // set the text of label to the amount of token
-        }
+    public int decreaseAmountToken(Player player) {
+        this.amountToken = player.getTokensInHand();
+        this.setText(Integer.valueOf(amountToken).toString());
+
         return this.amountToken; // return the amount of token
     }
 

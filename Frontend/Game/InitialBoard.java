@@ -465,10 +465,10 @@ public class InitialBoard extends JPanel {
      */
     public void decreaseTokenRemainder(){
         if (getGame().getCurrentPlayer().getTokenColour() == TokenColour.PLAYER_1_WHITE){
-            whiteTokenRemain.decreaseAmountToken(); // decrease the white token remainder
+            whiteTokenRemain.decreaseAmountToken(game.getPlayer1()); // decrease the white token remainder
         }
         else {
-            int blackRemaining = blackTokenRemain.decreaseAmountToken(); // decrease the black token remainder
+            int blackRemaining = blackTokenRemain.decreaseAmountToken(game.getPlayer2()); // decrease the black token remainder
             if (blackRemaining == 0){
                 instruction.changeText(Instruction.InstructionType.MOVE);
             }

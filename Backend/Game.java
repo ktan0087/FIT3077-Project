@@ -141,6 +141,14 @@ public class Game {
         }
     }
 
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
     /**
      * A function to check if the game is over.
      * The game is over if one of the players only has 2 tokens left on the board.

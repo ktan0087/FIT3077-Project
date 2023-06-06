@@ -698,7 +698,7 @@ public class InitialBoard extends JPanel {
                 buttons.btnHint.setEnabledHint(true);
             }
             else if (!hintPressed){
-                if (game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN)){
+                if (game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN) && !game.getCurrentPlayer().isActionAllowed(AllActions.REMOVE_TOKEN)){
                     hintPressed = true;
                     //create hint circles for all possible intersections
                     for (Intersection intersection : hintList) {
@@ -713,7 +713,10 @@ public class InitialBoard extends JPanel {
                     possibleHintListBackend = game.getPossibleTokenList(game.getCurrentPlayer());
                     //add all possible tokens' intersections to be removed to hintList
                     for (Backend.Board.Intersection intersection: possibleHintListBackend){
-                        hintList.add(new Intersection(intersection.getLayer(), intersection.getPosition()));
+                        if (!game.getBoard().checkMill(intersection)){
+                            hintList.add(new Intersection(intersection.getLayer(), intersection.getPosition()));
+
+                        }
                     }
                     hintPressed = true;
                     //create hint circle for all possible tokens to be removed

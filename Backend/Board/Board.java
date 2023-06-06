@@ -464,4 +464,17 @@ public class Board {
         }
         return flag;
     }
+
+    public boolean checkMill (Intersection intersection){
+        boolean ret = false;
+        //loop through the mills to check if the intersection is part of a mill
+        for (Mill mill : mills){
+            //check if the intersection is part of a mill
+            if (mill.getIntersection().contains(intersection)){
+                ret = true;
+                return ret;
+            }
+        }
+        return ret;
+    }
 }

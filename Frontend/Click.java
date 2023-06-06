@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
  * This class is used to create the click icon.
  */
 public class Click extends JLabel {
+    private Boolean clickVisible;
 
     /**
      * Constructor.
@@ -26,17 +27,19 @@ public class Click extends JLabel {
 
         this.setIcon(resizedIcon);
 
+        this.clickVisible = true;
+
         /**
          * Create a timer to make the click icon blink.
          */
         Timer timer = new Timer(500, new ActionListener() {
-            Boolean clickVisible = false;
             @Override
             public void actionPerformed(ActionEvent e) {
                 clickVisible = !clickVisible; // change the visibility of the click icon
                 repaint();
             }
         });
+
         timer.start(); // start the timer
     }
 }

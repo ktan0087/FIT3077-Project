@@ -186,7 +186,6 @@ public class InitialBoard extends JPanel {
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5); // add gaps between the components
-
         // add buttons to top right of the panel
         gbc.gridx = 3; // set the x position of the component
         gbc.gridy = 0; // set the y position of the component
@@ -664,6 +663,7 @@ public class InitialBoard extends JPanel {
         result.setLocationRelativeTo(null);
         result.setVisible(true);
     }
+
 
     /**
      * This method is used to provide legal moves as hints to user when the hint button is pressed,

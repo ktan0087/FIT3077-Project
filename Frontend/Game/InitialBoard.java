@@ -347,7 +347,7 @@ public class InitialBoard extends JPanel {
                     // Check if a mill is formed and then do appropriate actions and draw them
                     checkAndDrawMills();
                     //prompt error message when a player is trying to place a token when there is a token selected
-                    if (game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN) && hintPressed) {
+                    if (game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN) && isSelected) {
                         JOptionPane.showMessageDialog(null, "Place token action cannot be done while a token is selected.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                     // Display which player wins the game

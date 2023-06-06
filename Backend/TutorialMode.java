@@ -12,21 +12,6 @@ public class TutorialMode extends GameMode{
 
     }
 
-    @Override
-    public void endGame() {
-
-    }
-
-    @Override
-    public void playGame() {
-
-    }
-
-    @Override
-    public void quitGame() {
-
-    }
-
     public void displayBoardMove() {
         game.restartGame();
         // Set up all black tokens on the board

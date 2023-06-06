@@ -630,8 +630,6 @@ public class Tutorial extends JPanel{
 
                     addNextButton(gbc);
 
-                    initialBoard.board.getIntersectionList().get(21).inter.removeActionListener(this);
-
                     repaint();
                     revalidate();
                 }
@@ -756,6 +754,8 @@ public class Tutorial extends JPanel{
                         initialBoard.blackTokenRemain.setText("9");
                         initialBoard.whiteTokenRemain.setText("9");
                         initialBoard.instruction.changeText(Instruction.InstructionType.PLACE);
+
+                        initialBoard.board.getIntersectionList().get(21).inter.setEnabled(false);
 
                         repaint();
                         revalidate();

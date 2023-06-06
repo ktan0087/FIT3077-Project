@@ -46,6 +46,7 @@ public class Instruction extends JLabel {
      *                        EMPTY, PLACE, MOVE, REMOVE, FLY
      */
     public void changeText(InstructionType instructionType){
+        setInstructionType(instructionType);
         switch (instructionType){
             case EMPTY:
                 this.setText(""); // set the text of label to empty
@@ -63,5 +64,13 @@ public class Instruction extends JLabel {
                 this.setText("Fly a token");
                 break;
         }
+    }
+
+    public void setInstructionType(InstructionType instructionType) {
+        this.instructionType = instructionType;
+    }
+
+    public InstructionType getInstructionType() {
+        return instructionType;
     }
 }

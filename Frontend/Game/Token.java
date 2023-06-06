@@ -203,7 +203,7 @@ public abstract class Token extends JLabel {
                         }
                     }
                     iniBoard.checkEndGame();
-                    swapInstruction();
+                    changeRemoveInstruction();
                     return;
                 }
 
@@ -223,10 +223,7 @@ public abstract class Token extends JLabel {
         }
     };
 
-    /**
-     * This method is used to swap the instruction displayed during various phases of the game
-     */
-    public void swapInstruction(){
+    public void changeRemoveInstruction(){
         if (iniBoard.blackTokenRemain.getAmountToken() > 0){
             iniBoard.instruction.changeText(Instruction.InstructionType.PLACE);
         }

@@ -129,14 +129,6 @@ public class InitialBoard extends JPanel {
      */
     private int millCount;
 
-    /**
-     * Image Icon for the hint button
-     */
-    private ImageIcon hintIcon;
-    /**
-     * boolean from button hint class
-     */
-    private boolean enableHint;
 
     /**
      * This method is used to set the game that is played
@@ -183,10 +175,12 @@ public class InitialBoard extends JPanel {
         this.resultButton = new ResultButtons();
         this.canRemove = false;
         this.hintPressed = false;
-        this.hintList = (ArrayList<Intersection>) board.getIntersectionList();
-        this.enableHint = this.buttons.btnHint.getEnabledHint();
+        this.hintList = new ArrayList<>(); // a list of all intersections on the board
+//        this.hintList = (ArrayList<Intersection>) board.getIntersectionList();
+        for (Intersection frontIntersection: board.getIntersectionList()){
+            hintList.add(frontIntersection);
+        }
         this.buttons.btnHint.addActionListener(hintAction);
-        this.hintIcon = new ImageIcon(getClass().getResource("/Icons/hint.png"));
 
         // set the background color of the board
         this.setBackground(new Color(0xE0A060));
@@ -457,18 +451,12 @@ public class InitialBoard extends JPanel {
             hintLayer.remove(Integer.parseInt(String.valueOf(board.getIndexLookUpTable(intersection.getCoordinateX(), intersection.getCoordinateY()))));
             hintLayer.add(new JLabel(), Integer.parseInt(String.valueOf(board.getIndexLookUpTable(intersection.getCoordinateX(), intersection.getCoordinateY()))));
         }
-        //change the hint icon to disabled
-        hintIcon = new ImageIcon(getClass().getResource("/Icons/hint.png"));
-        // Resize the icon
-        IconProcessor icon = new IconProcessor(hintIcon, 60, 60);
-        ImageIcon resizedIcon = icon.resizeIcon();
-        buttons.btnHint.setIcon(resizedIcon); // set the image of hint button to disabled
-        enableHint = true; // enable the hint button
         //check if the selected token is null and reset the selected token to false
         if (selectedToken != null){
             isSelected=false;
             selectedToken.selected = false; // set the selected token to false
         }
+        swapInstruction(); // swap the instruction
     }
 
     /**
@@ -691,6 +679,10 @@ public class InitialBoard extends JPanel {
     protected ActionListener hintAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
+            hintList.clear();
+            for (Intersection frontIntersection: board.getIntersectionList()){
+                hintList.add(frontIntersection);
+            }
             //check if the player is allowed to place token
             if (!checkSelected() && !game.getCurrentPlayer().isActionAllowed(AllActions.REMOVE_TOKEN) && !game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN)){
                 //if no token is selected, prompt error message asking user to select a token
@@ -698,8 +690,13 @@ public class InitialBoard extends JPanel {
                 buttons.btnHint.setEnabledHint(true);
             }
             else if (!hintPressed){
+                System.out.println(game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN));
+                System.out.println(game.getCurrentPlayer().isActionAllowed(AllActions.REMOVE_TOKEN));
                 if (game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN) && !game.getCurrentPlayer().isActionAllowed(AllActions.REMOVE_TOKEN)){
                     hintPressed = true;
+                    System.out.println(1);
+                    System.out.println(hintList);
+
                     //create hint circles for all possible intersections
                     for (Intersection intersection : hintList) {
                         new HintCircle(HintCircle.Type.INTERSECTION).showHint(hintLayer, intersection, board);
@@ -715,7 +712,6 @@ public class InitialBoard extends JPanel {
                     for (Backend.Board.Intersection intersection: possibleHintListBackend){
                         if (!game.getBoard().checkMill(intersection)){
                             hintList.add(new Intersection(intersection.getLayer(), intersection.getPosition()));
-
                         }
                     }
                     hintPressed = true;
@@ -754,5 +750,25 @@ public class InitialBoard extends JPanel {
             hintLayer.revalidate();
         }
     };
+    /**
+     * This method is used to swap the instruction displayed during various phases of the game
+     */
+    public void swapInstruction(){
+        if(instruction.getInstructionType() == Instruction.InstructionType.REMOVE){
+            return;
+        }
+
+        if (blackTokenRemain.getAmountToken() > 0){
+            instruction.changeText(Instruction.InstructionType.PLACE);
+        }
+        else if (blackTokenRemain.getAmountToken() == 0){
+            if (getGame().getCurrentPlayer().getTokensOnBoard() == 3){
+                instruction.changeText(Instruction.InstructionType.FLY);
+            }
+            else {
+                instruction.changeText(Instruction.InstructionType.MOVE);
+            }
+        }
+    }
 
 }

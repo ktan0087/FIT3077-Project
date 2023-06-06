@@ -37,37 +37,37 @@ public class BtnHint extends JButton {
         this.setBackground(new Color(0xE6B380)); // set the background color of hint button
         this.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK)); // set the border of hint button
 
-        this.addActionListener(new ActionListener() {
-            /**
-             * When the 'enabled' hint button is clicked, the hint button will be showed 'disabled'.
-             * When the 'disabled' hint button is clicked, the hint button will be showed 'enabled'.
-             *
-             * @param e the event to be processed
-             */
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!enabledHint) {
-                    iconHint = new ImageIcon(getClass().getResource("/Icons/disabled-hint.png"));
-
-                    // Resize the icon
-                    IconProcessor icon = new IconProcessor(iconHint, 60, 60);
-                    ImageIcon resizedIcon = icon.resizeIcon();
-                    setIcon(resizedIcon); // set the image of disabled hint button
-
-                    enabledHint = true;
-                }
-                else {
-                    iconHint = new ImageIcon(getClass().getResource("/Icons/hint.png"));
-
-                    // Resize the icon
-                    IconProcessor icon = new IconProcessor(iconHint, 60, 60);
-                    ImageIcon resizedIcon = icon.resizeIcon();
-                    setIcon(resizedIcon); // set the image of enabled hint button
-
-                    enabledHint = false;
-                }
-            }
-        });
+//        this.addActionListener(new ActionListener() {
+//            /**
+//             * When the 'enabled' hint button is clicked, the hint button will be showed 'disabled'.
+//             * When the 'disabled' hint button is clicked, the hint button will be showed 'enabled'.
+//             *
+//             * @param e the event to be processed
+//             */
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if (!enabledHint) {
+//                    iconHint = new ImageIcon(getClass().getResource("/Icons/disabled-hint.png"));
+//
+//                    // Resize the icon
+//                    IconProcessor icon = new IconProcessor(iconHint, 60, 60);
+//                    ImageIcon resizedIcon = icon.resizeIcon();
+//                    setIcon(resizedIcon); // set the image of disabled hint button
+//
+//                    enabledHint = true;
+//                }
+//                else {
+//                    iconHint = new ImageIcon(getClass().getResource("/Icons/hint.png"));
+//
+//                    // Resize the icon
+//                    IconProcessor icon = new IconProcessor(iconHint, 60, 60);
+//                    ImageIcon resizedIcon = icon.resizeIcon();
+//                    setIcon(resizedIcon); // set the image of enabled hint button
+//
+//                    enabledHint = false;
+//                }
+//            }
+//        });
     }
 
     /**

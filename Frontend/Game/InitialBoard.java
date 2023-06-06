@@ -7,7 +7,7 @@ import Backend.Action.PlaceTokenAction;
 import Backend.Interfaces.CanRemoveMill;
 import Backend.Token.TokenColour;
 import Frontend.Components.*;
-import Frontend.HintCircle;
+import Frontend.Components.HintCircle;
 import Frontend.Layer.PlaceToken;
 import Frontend.Line.Mill;
 
@@ -146,6 +146,11 @@ public class InitialBoard extends JPanel {
         return game;
     }
 
+    /**
+     * This method is used to get the token list of tokens in the game
+     *
+     * @return the list of tokens in the game
+     */
     public ArrayList<Token> getTokenList() {
         return tokenList;
     }
@@ -166,12 +171,12 @@ public class InitialBoard extends JPanel {
         this.instruction = new Instruction(Instruction.InstructionType.EMPTY); // provide the instruction of the game
         this.millLayer = new PlaceToken(); // the layer that shows the mill
         this.hintLayer = new PlaceToken(); // the layer that shows the hint
-        this.resultButton = new ResultButtons();
-        this.canRemove = false;
-        this.hintPressed = false;
-        this.hintList = (ArrayList<Intersection>) board.getIntersectionList();
+        this.resultButton = new ResultButtons(); // the buttons that show restart and close in result page
+        this.canRemove = false; // the player cannot remove a mill at the beginning
+        this.hintPressed = false; // the player has not pressed hint button at the beginning
+        this.hintList = (ArrayList<Intersection>) board.getIntersectionList(); // a list of all intersections that will be used to show hint
 
-        this.buttons.btnHint.addActionListener(hintAction);
+        this.buttons.btnHint.addActionListener(hintAction); // add action listener to hint button
 
         // set the background color of the board
         this.setBackground(new Color(0xE0A060));
@@ -671,15 +676,6 @@ public class InitialBoard extends JPanel {
         public void actionPerformed(ActionEvent e) {
             //check if the player is allowed to place token
             if (!checkSelected() && !game.getCurrentPlayer().isActionAllowed(AllActions.REMOVE_TOKEN) && !game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN)){
-                if (!checkSelected()){
-                    System.out.println(1);
-                }
-                else if(!game.getCurrentPlayer().isActionAllowed(AllActions.REMOVE_TOKEN)){
-                    System.out.println(2);
-                }
-                else if(!game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN)){
-                    System.out.println(3);
-                }
                 //if no token is selected, prompt error message asking user to select a token
                 JOptionPane.showMessageDialog(null, "Please select a token first!", "Error", JOptionPane.ERROR_MESSAGE);
             }

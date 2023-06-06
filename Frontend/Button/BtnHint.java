@@ -1,6 +1,6 @@
 package Frontend.Button;
 
-import Frontend.IconProcessor;
+import Frontend.Utils.IconProcessor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,13 @@ import java.awt.event.ActionListener;
  */
 
 public class BtnHint extends JButton {
+    /**
+     * The image icon of hint button.
+     */
     private ImageIcon iconHint;
+    /**
+     * A boolean to check if the hint button is enabled.
+     */
     private boolean enabledHint = false;
 
     /**
@@ -32,6 +38,12 @@ public class BtnHint extends JButton {
         this.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK)); // set the border of hint button
 
         this.addActionListener(new ActionListener() {
+            /**
+             * When the 'enabled' hint button is clicked, the hint button will be showed 'disabled'.
+             * When the 'disabled' hint button is clicked, the hint button will be showed 'enabled'.
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!enabledHint) {
@@ -40,7 +52,7 @@ public class BtnHint extends JButton {
                     // Resize the icon
                     IconProcessor icon = new IconProcessor(iconHint, 60, 60);
                     ImageIcon resizedIcon = icon.resizeIcon();
-                    setIcon(resizedIcon); // set the image of hint button
+                    setIcon(resizedIcon); // set the image of disabled hint button
 
                     enabledHint = true;
                 }
@@ -50,7 +62,7 @@ public class BtnHint extends JButton {
                     // Resize the icon
                     IconProcessor icon = new IconProcessor(iconHint, 60, 60);
                     ImageIcon resizedIcon = icon.resizeIcon();
-                    setIcon(resizedIcon); // set the image of hint button
+                    setIcon(resizedIcon); // set the image of enabled hint button
 
                     enabledHint = false;
                 }

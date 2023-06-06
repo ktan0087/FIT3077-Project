@@ -4,8 +4,7 @@ import Frontend.Button.BtnClose;
 import Frontend.Button.BtnNext;
 import Frontend.Click;
 import Frontend.Components.Instruction;
-import Frontend.Components.TokenRemain;
-import Frontend.IconProcessor;
+import Frontend.Utils.IconProcessor;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -17,17 +16,63 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * This class is used to create the tutorial to guide the user to play the Nine Men's Morris game.
+ */
 public class Tutorial extends JPanel{
+    /**
+     * nextCount is used to keep track of the number of times the next button is clicked
+     */
     private int nextCount;
+
+    /**
+     * btnNext is the next button to continue the tutorial
+     */
     private BtnNext btnNext;
+
+    /**
+     * btnClose is the close button to close the tutorial and go back to the main menu
+     */
     protected BtnClose btnClose;
+
+    /**
+     * initialBoard is the initial board that will be presented in the tutorial
+     */
     protected InitialBoard initialBoard;
+
+    /**
+     * dimLayer is the dim layer that will be used to dim the background
+     */
     private JPanel dimLayer;
+
+    /**
+     * labelLayer is the label layer that will be used to display the instructions and supportive images
+     */
     private JPanel labelLayer;
+
+    /**
+     * The background of the tutorial
+     */
     private JPanel background;
+
+    /**
+     * The white token that layer is 3, and position is 7
+     */
     private WhiteToken whiteToken_37;
+
+    /**
+     * The black token that layer is 3, and position is 8
+     */
     private BlackToken blackToken_38;
+
+    /**
+     * The white token that layer is 1, and position is 8
+     */
     private WhiteToken whiteToken_18;
+
+    /**
+     * Create a click icon to assist the user to click the token/intersection/buttons.
+     */
     private JLabel click;
     private JLabel leftArrow;
     private JLabel rightArrow;

@@ -4,6 +4,7 @@ import Frontend.Button.BtnClose;
 import Frontend.Button.BtnNext;
 import Frontend.Components.Click;
 import Frontend.Components.Instruction;
+import Frontend.Components.IntersectionPoint;
 import Frontend.Layer.DimLayer;
 import Frontend.Utils.IconProcessor;
 
@@ -12,10 +13,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 /**
  * This class is used to create the tutorial to guide the user to play the Nine Men's Morris game.
@@ -298,12 +296,16 @@ public class Tutorial extends JPanel{
 
                     addNextButton(gbc);
 
+                    initialBoard.board.getIntersectionList().get(16).inter.setEnabled(false); // disable the intersection
+                    initialBoard.board.getIntersectionList().get(16).inter.removeActionListener(this); // remove the action listener
+
                     repaint();
                     revalidate();
                 }
             });
 
             this.whiteToken_37.addMouseListener(this.whiteToken_37.tokenSelected); // add tokenSelected mouse listener to the token
+
             this.whiteToken_37.addMouseListener(new MouseAdapter() {
                 /**
                  * Page 7: Instruct user to move the selected token
@@ -325,8 +327,9 @@ public class Tutorial extends JPanel{
                     instruction.setLocation(650, 265);
                     labelLayer.add(instruction);
 
-                    whiteToken_37.removeMouseListener(this);
                     whiteToken_37.removeMouseListener(whiteToken_37.tokenSelected);
+                    whiteToken_37.removeMouseListener(this);
+
                     initialBoard.board.getIntersectionList().get(16).inter.setEnabled(true);
                     initialBoard.board.getIntersectionList().get(16).inter.addActionListener(whiteTokenTutAction);
 
@@ -617,6 +620,9 @@ public class Tutorial extends JPanel{
             this.click.setBounds(398, 324, 48, 48);
             this.labelLayer.add(this.click);
 
+            // The intersection that the user needs to move to (click)
+            IntersectionPoint intersect_17 = initialBoard.board.getIntersectionList().get(21).inter;
+
             ActionListener intersectionTutAction = new ActionListener() {
                 /**
                  * Show the board after moving the token according to the hint given
@@ -630,6 +636,9 @@ public class Tutorial extends JPanel{
                     labelLayer.removeAll();
 
                     addNextButton(gbc);
+
+                    intersect_17.removeActionListener(this);
+                    intersect_17.setEnabled(false);
 
                     repaint();
                     revalidate();
@@ -666,8 +675,8 @@ public class Tutorial extends JPanel{
 
                     initialBoard.buttons.btnHint.removeActionListener(this);
 
-                    initialBoard.board.getIntersectionList().get(21).inter.setEnabled(true);
-                    initialBoard.board.getIntersectionList().get(21).inter.addActionListener(intersectionTutAction);
+                    intersect_17.setEnabled(true);
+                    intersect_17.addActionListener(intersectionTutAction);
 
                     repaint();
                     revalidate();
@@ -755,8 +764,6 @@ public class Tutorial extends JPanel{
                         initialBoard.blackTokenRemain.setText("9");
                         initialBoard.whiteTokenRemain.setText("9");
                         initialBoard.instruction.changeText(Instruction.InstructionType.PLACE);
-
-                        initialBoard.board.getIntersectionList().get(21).inter.setEnabled(false);
 
                         repaint();
                         revalidate();

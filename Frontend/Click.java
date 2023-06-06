@@ -26,20 +26,5 @@ public class Click extends JLabel {
         ImageIcon resizedIcon = clickIcon.resizeIcon();
 
         this.setIcon(resizedIcon);
-
-        this.clickVisible = true;
-
-        /**
-         * Create a timer to make the click icon blink.
-         */
-        Timer timer = new Timer(500, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clickVisible = !clickVisible; // change the visibility of the click icon
-                repaint();
-            }
-        });
-
-        timer.start(); // start the timer
     }
 }

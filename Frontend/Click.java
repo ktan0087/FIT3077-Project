@@ -4,8 +4,6 @@ import Frontend.Game.Tutorial;
 import Frontend.Utils.IconProcessor;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * This class is used to create the click icon.

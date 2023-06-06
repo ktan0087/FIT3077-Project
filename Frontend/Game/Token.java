@@ -51,7 +51,14 @@ public abstract class Token extends JLabel {
      */
     private InitialBoard iniBoard;
 
-    // Constructor
+    /**
+     * Constructor.
+     * Creates a new token with the given x and y coordinates.
+     *
+     * @param coordinateX the layer of the token
+     * @param coordinateY the position of the token
+     * @param iniBoard the initial board
+     */
     public Token(int coordinateX, int coordinateY, InitialBoard iniBoard){
         this.selected = false;
 
@@ -169,7 +176,6 @@ public abstract class Token extends JLabel {
     protected MouseListener tokenSelected = new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
-            System.out.println("Token is clicked");
             //If there is a player that can remove a token by forming a mill
             if(iniBoard.canRemove){
                 //Checks if the current player have any valid tokens to remove(tokens not in a mill)
@@ -202,9 +208,6 @@ public abstract class Token extends JLabel {
                 }
 
             }
-            System.out.println("cannot remove");
-            System.out.println(iniBoard.isSelected);
-            System.out.println(selected);
             if (times%2 == 0 && !iniBoard.isSelected && iniBoard.getGame().getCurrentPlayer().getTokenColour() == ownerTokenColour) {
                 selected = true; // click the white token to select it
                 iniBoard.isSelected = true;

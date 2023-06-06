@@ -39,6 +39,9 @@ public class Layout{
      */
     private InitialBoard iniBoard;
 
+    /**
+     * The tutorial of the game
+     */
     private Tutorial tutorial;
 
     /**
@@ -118,18 +121,23 @@ public class Layout{
     }
 
     protected ActionListener startTutorial = new ActionListener() {
+        /**
+         * This method is used to bring the user to the tutorial (Tutorial)
+         *
+         * @param e the event to be processed
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
-            panelCont.remove(tutorial);
+            panelCont.remove(tutorial); // remove the old tutorial
             tutorial = new Tutorial();
-            panelCont.add(tutorial, "3");
+            panelCont.add(tutorial, "3"); // add the new tutorial to panel container
 
-            tutorial.btnClose.addActionListener(close);
+            tutorial.btnClose.addActionListener(close); // make CLOSE button in tutorial function properly
 
-            setGame(new Backend.Tutorial());
+            setGame(new Backend.Tutorial()); // create new tutorial
             tutorial.getInitialBoard().setGame(getGame());
 
-            cLayout.show(panelCont, "3");
+            cLayout.show(panelCont, "3"); // show tutorial
         }
     };
 

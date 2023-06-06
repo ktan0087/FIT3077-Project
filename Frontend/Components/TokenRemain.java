@@ -1,8 +1,7 @@
 package Frontend.Components;
 
 import Backend.Player;
-import Backend.Token.TokenColour;
-import Frontend.IconProcessor;
+import Frontend.Utils.IconProcessor;
 
 import javax.swing.*;
 import java.awt.*;

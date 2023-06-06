@@ -9,6 +9,7 @@ import Backend.Token.TokenColour;
 import Frontend.Components.*;
 import Frontend.HintCircle;
 import Frontend.IconProcessor;
+import Frontend.Components.HintCircle;
 import Frontend.Layer.PlaceToken;
 import Frontend.Line.Mill;
 
@@ -154,6 +155,11 @@ public class InitialBoard extends JPanel {
         return game;
     }
 
+    /**
+     * This method is used to get the token list of tokens in the game
+     *
+     * @return the list of tokens in the game
+     */
     public ArrayList<Token> getTokenList() {
         return tokenList;
     }
@@ -190,7 +196,6 @@ public class InitialBoard extends JPanel {
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5); // add gaps between the components
-
         // add buttons to top right of the panel
         gbc.gridx = 3; // set the x position of the component
         gbc.gridy = 0; // set the y position of the component
@@ -463,7 +468,6 @@ public class InitialBoard extends JPanel {
             isSelected=false;
             selectedToken.selected = false; // set the selected token to false
         }
-        System.out.println( "Hint pressed:"+ hintPressed);
     }
 
     /**
@@ -686,7 +690,6 @@ public class InitialBoard extends JPanel {
     protected ActionListener hintAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Hint button action performed");
             //check if the player is allowed to place token
             if (!checkSelected() && !game.getCurrentPlayer().isActionAllowed(AllActions.REMOVE_TOKEN) && !game.getCurrentPlayer().isActionAllowed(AllActions.PLACE_TOKEN)){
                 //if no token is selected, prompt error message asking user to select a token
@@ -737,7 +740,6 @@ public class InitialBoard extends JPanel {
             }
             else {
                 hintPressed = false;
-                System.out.println("hint pressed else");
                 //remove any hint layer that is shown, and add a new layer
                 for (Intersection intersection : hintList) {
                     hintLayer.remove(Integer.parseInt(String.valueOf(board.getIndexLookUpTable(intersection.getCoordinateX(), intersection.getCoordinateY()))));

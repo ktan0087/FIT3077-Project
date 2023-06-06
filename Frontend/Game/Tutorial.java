@@ -4,8 +4,8 @@ import Frontend.Button.BtnClose;
 import Frontend.Button.BtnNext;
 import Frontend.Click;
 import Frontend.Components.Instruction;
-import Frontend.Components.TokenRemain;
-import Frontend.IconProcessor;
+import Frontend.Layer.DimLayer;
+import Frontend.Utils.IconProcessor;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -17,37 +17,100 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * This class is used to create the tutorial to guide the user to play the Nine Men's Morris game.
+ *
+ * @see BtnNext
+ * @see BtnClose
+ * @see InitialBoard
+ * @see WhiteToken
+ * @see BlackToken
+ * @see Click
+ */
 public class Tutorial extends JPanel{
+    /**
+     * nextCount is used to keep track of the number of times the next button is clicked
+     */
     private int nextCount;
-    private BtnNext btnNext;
-    protected BtnClose btnClose;
-    protected InitialBoard initialBoard;
-    private JPanel dimLayer;
-    private JPanel labelLayer;
-    private JPanel background;
-    private WhiteToken whiteToken_37;
-    private BlackToken blackToken_38;
-    private WhiteToken whiteToken_18;
-    private JLabel click;
-    private JLabel leftArrow;
-    private JLabel rightArrow;
-    public Tutorial(){
-        this.nextCount = 0;
-        this.btnClose = new BtnClose();
-        this.btnNext = new BtnNext();
-        this.initialBoard = new InitialBoard();
-        this.initialBoard.remove(this.initialBoard.buttons.btnClose);
-        this.labelLayer = createLabelLayer();
-        this.dimLayer = createDimLayer();
-        this.click = createClickHint();
-        this.leftArrow = createArrowLeft();
-        this.rightArrow = createArrowRight();
 
-        this.setLayout(new GridBagLayout());
+    /**
+     * btnNext is the next button to continue the tutorial
+     */
+    private BtnNext btnNext;
+
+    /**
+     * btnClose is the close button to close the tutorial and go back to the main menu
+     */
+    protected BtnClose btnClose;
+
+    /**
+     * initialBoard is the initial board that will be presented in the tutorial
+     */
+    protected InitialBoard initialBoard;
+
+    /**
+     * dimLayer is the dim layer that will be used to dim the background
+     */
+    private JPanel dimLayer;
+
+    /**
+     * labelLayer is the label layer that will be used to display the instructions and supportive images
+     */
+    private JPanel labelLayer;
+
+    /**
+     * The background of the tutorial
+     */
+    private JPanel background;
+
+    /**
+     * The white token that layer is 3, and position is 7
+     */
+    private WhiteToken whiteToken_37;
+
+    /**
+     * The black token that layer is 3, and position is 8
+     */
+    private BlackToken blackToken_38;
+
+    /**
+     * The white token that layer is 1, and position is 8
+     */
+    private WhiteToken whiteToken_18;
+
+    /**
+     * Create a click icon to assist the user to click the token/intersection/buttons.
+     */
+    private JLabel click;
+
+    /**
+     * Create a left arrow icon to hint the user
+     */
+    private JLabel leftArrow;
+
+    /**
+     * Create a right arrow icon to hint the user
+     */
+    private JLabel rightArrow;
+    public Tutorial() {
+        // Create the components of the tutorial
+        this.nextCount = 0; // count how many times the next button is clicked
+        this.btnClose = new BtnClose(); // create the close button
+        this.btnNext = new BtnNext(); // create the next button
+        this.initialBoard = new InitialBoard(); // create the initial board
+        this.initialBoard.remove(this.initialBoard.buttons.btnClose); // remove the close button from the initial board
+        this.labelLayer = createLabelLayer(); // create the label layer
+        this.dimLayer = new DimLayer(); // create the dim layer
+        this.click = new Click(); // create the click image
+        this.leftArrow = createArrowLeft(); // create the left arrow image
+        this.rightArrow = createArrowRight(); // create the right arrow image
+
+        this.setLayout(new GridBagLayout()); // set the layout of the tutorial
         GridBagConstraints gbc = new GridBagConstraints();
 
         gbc.insets = new Insets(17, 10, 17, 10); // add gaps between the components
 
+        // add the close button to the top right of the tutorial
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 0;
@@ -56,6 +119,7 @@ public class Tutorial extends JPanel{
         gbc.fill = GridBagConstraints.NONE;
         this.add(this.btnClose, gbc);
 
+        // add the next button to the bottom right of the tutorial
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 0;
@@ -63,6 +127,7 @@ public class Tutorial extends JPanel{
         gbc.anchor = GridBagConstraints.SOUTHEAST;
         this.add(this.btnNext, gbc);
 
+        // add the welcome message to the center of the tutorial
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 0;
@@ -70,6 +135,7 @@ public class Tutorial extends JPanel{
         gbc.anchor = GridBagConstraints.CENTER;
         this.add(createWelcomeMessage(), gbc);
 
+        // add the initial board to the center of the tutorial
         gbc.insets = new Insets(0, 0, 0, 0);
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -80,26 +146,45 @@ public class Tutorial extends JPanel{
         this.add(this.background, gbc);
 
         this.btnNext.addActionListener(new ActionListener() {
+            /**
+             * Navigate users to the next tutorial page
+             *
+             * @param e the event to be processed
+             */
             @Override
             public void actionPerformed(ActionEvent e) {
                 nextCount++;
-                checkNext(gbc);
+                checkNext(gbc); // check which page to go to
                 repaint();
                 revalidate();
             }
         });
     }
 
+    /**
+     * Get initial board.
+     *
+     * @return initial board
+     */
     public InitialBoard getInitialBoard() {
         return initialBoard;
     }
 
+    /**
+     * Check which page to navigate to.
+     *
+     * @param gbc the grid bag constraints
+     */
     private void checkNext(GridBagConstraints gbc){
         if (this.nextCount == 1){
+            //Page 1: Place token introduction
+
             this.remove(2); // remove welcome message
             createIntro("Place Token");
         }
         else if (this.nextCount == 2){
+            // Page 2: Instruct user to place a white token
+
             this.labelLayer.removeAll(); // remove intro
             this.background.remove(this.dimLayer);
 
@@ -108,19 +193,26 @@ public class Tutorial extends JPanel{
             instruction.setLocation(720, 180);
             this.labelLayer.add(instruction);
 
-            this.click.setBounds(685, 250, 48, 48);
+            this.click.setBounds(685, 250, 48, 48); // set the position of the click image
             this.labelLayer.add(this.click);
 
             this.remove(this.btnNext); // remove next button
 
+            // Enable the intersection at layer 3, position 3, that is index 8 in the intersection list
+            // The intersection is inserted to the intersection list from left to right, top to bottom
+            // For example, the top left intersection is at layer 1, position 1, thus the index in the intersection list is 0
             this.initialBoard.board.getIntersectionList().get(8).inter.setEnabled(true);
             this.initialBoard.board.getIntersectionList().get(8).inter.addActionListener(new ActionListener() {
+                /**
+                 * Page 3: Instruct user to the next page after place token tutorial
+                 *
+                 * @param e the event to be processed
+                 */
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    labelLayer.remove(instruction);
-                    labelLayer.remove(click);
+                    labelLayer.removeAll();
 
-                    addNextButton(gbc);
+                    addNextButton(gbc); // add next button
 
                     repaint();
                     revalidate();
@@ -128,6 +220,8 @@ public class Tutorial extends JPanel{
             });
         }
         else if (this.nextCount == 3){
+            // Page 4: Show the condition of moving a token
+
             this.initialBoard.getGame().getGameMode().displayBoardMove();
             this.initialBoard.playerTurn.changeIcon();
             this.initialBoard.instruction.changeText(Instruction.InstructionType.MOVE);
@@ -140,46 +234,34 @@ public class Tutorial extends JPanel{
             this.leftArrow.setBounds(82, 380, 100, 100);
             this.labelLayer.add(this.leftArrow);
 
+            // Set up the board for move token tutorial, by adding tokens to the board
             this.addToken(new BlackToken(1, 3, this.initialBoard));
-
             this.addToken(new BlackToken(2, 2, this.initialBoard));
-
             this.addToken(new BlackToken(3, 1, this.initialBoard));
-
             this.addToken(new WhiteToken(2, 3, this.initialBoard));
-
             this.addToken(new WhiteToken(1, 8, this.initialBoard));
-
             this.addToken(new BlackToken(2, 8, this.initialBoard));
-
             this.blackToken_38 = new BlackToken(3, 8, this.initialBoard);
             this.addToken(this.blackToken_38);
-
             this.addToken(new WhiteToken(3, 4, this.initialBoard));
-
             this.addToken(new BlackToken(2, 4, this.initialBoard));
-
             this.addToken(new WhiteToken(1, 4, this.initialBoard));
-
             this.whiteToken_37 = new WhiteToken(3, 7, this.initialBoard);
             this.addToken(this.whiteToken_37);
-
             this.addToken(new WhiteToken(2, 6, this.initialBoard));
-
             this.addToken(new BlackToken(3, 5, this.initialBoard));
-
             this.addToken(new BlackToken(2, 5, this.initialBoard));
-
             this.addToken(new BlackToken(1, 7, this.initialBoard));
-
             this.addToken(new WhiteToken(1, 6, this.initialBoard));
-
             this.addToken(new WhiteToken(1, 5, this.initialBoard));
 
+            // Set up the token remainders
             initialBoard.blackTokenRemain.decreaseAmountToken(initialBoard.getGame().getPlayer2());
             initialBoard.whiteTokenRemain.decreaseAmountToken(initialBoard.getGame().getPlayer1());
         }
         else if (this.nextCount == 4){
+            // Page 5: Move token introduction
+
             // remove instruction and left arrow
             this.labelLayer.removeAll();
 
@@ -189,6 +271,8 @@ public class Tutorial extends JPanel{
             this.background.setComponentZOrder(this.dimLayer, 1);
         }
         else if (this.nextCount == 5){
+            // Page 6: Instruct user to select a white token to move
+
             this.labelLayer.removeAll(); // remove intro label
             this.background.remove(this.dimLayer);
             this.remove(this.btnNext); // remove next button
@@ -203,6 +287,11 @@ public class Tutorial extends JPanel{
             this.labelLayer.add(this.click);
 
             ActionListener whiteTokenTutAction = (new ActionListener() {
+                /**
+                 * When a white token is selected, the next button will be added
+                 *
+                 * @param e the event to be processed
+                 */
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     labelLayer.removeAll();
@@ -214,8 +303,13 @@ public class Tutorial extends JPanel{
                 }
             });
 
-            this.whiteToken_37.addMouseListener(this.whiteToken_37.tokenSelected);
+            this.whiteToken_37.addMouseListener(this.whiteToken_37.tokenSelected); // add tokenSelected mouse listener to the token
             this.whiteToken_37.addMouseListener(new MouseAdapter() {
+                /**
+                 * Page 7: Instruct user to move the selected token
+                 *
+                 * @param e the event to be processed
+                 */
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
@@ -241,14 +335,18 @@ public class Tutorial extends JPanel{
             });
         }
         else if (this.nextCount == 6){
+            // Page 8: Remove token introduction
+
             this.background.add(this.dimLayer);
             this.background.setComponentZOrder(this.dimLayer, 1);
 
             createIntro("Remove Token");
         }
         else if (this.nextCount == 7) {
+            // Page 9: Instruct user to form a mill
+
             this.background.remove(this.dimLayer);
-            this.labelLayer.remove(0); // remove intro label
+            this.labelLayer.removeAll(); // remove intro label
 
             JLabel instruction = createInstruction(280, 80);
             instruction.setText("A Mill Formed");
@@ -259,6 +357,8 @@ public class Tutorial extends JPanel{
             this.labelLayer.add(this.leftArrow);
         }
         else if (this.nextCount == 8){
+            // Page 10: Instruct user to remove opponent's token
+
             this.labelLayer.removeAll();
             this.remove(this.btnNext); // remove next button
 
@@ -270,15 +370,21 @@ public class Tutorial extends JPanel{
             this.click.setBounds(540, 323, 48, 48);
             this.labelLayer.add(this.click);
 
-            this.blackToken_38.addMouseListener(this.blackToken_38.tokenSelected);
+            this.blackToken_38.addMouseListener(this.blackToken_38.tokenSelected); // add tokenSelected mouse listener to the token
             this.blackToken_38.addMouseListener(new MouseAdapter() {
+                /**
+                 * Page 11: Show the board after removing the opponent's token
+                 *
+                 * @param e the event to be processed
+                 */
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
-                    labelLayer.remove(instruction);
-                    labelLayer.remove(click);
+                    labelLayer.removeAll();
 
                     addNextButton(gbc);
+
+                    blackToken_38.removeMouseListener(this);
 
                     repaint();
                     revalidate();
@@ -286,8 +392,10 @@ public class Tutorial extends JPanel{
             });
         }
         else if (this.nextCount == 9) {
-            initialBoard.playerTurn.changeIcon();
-            this.initialBoard.instruction.changeText(Instruction.InstructionType.FLY);
+            // Page 12: Show the condition of flying token
+
+            initialBoard.playerTurn.changeIcon(); // change the player turn icon
+            this.initialBoard.instruction.changeText(Instruction.InstructionType.FLY); // change the instruction text
 
             JLabel instruction = createInstruction(380, 165);
             instruction.setText("<html><center>When you only have<br/><b>3</b> tokens left ...<center></html>");
@@ -297,8 +405,10 @@ public class Tutorial extends JPanel{
             this.rightArrow.setBounds(435, 400, 100, 100);
             this.labelLayer.add(this.rightArrow);
 
+            // Remove the mill
             this.initialBoard.removeMill(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 6))), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(2, 6))), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 6))), this.initialBoard.millLayer);
 
+            // Set up the board for flying token
             this.restartBoard();
             this.addToken(new BlackToken(1, 3, this.initialBoard));
             this.addToken(new BlackToken(1, 5, this.initialBoard));
@@ -314,6 +424,8 @@ public class Tutorial extends JPanel{
             this.initialBoard.addMill(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 8))), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(2, 8))), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 8))), this.initialBoard.millLayer);
         }
         else if (nextCount == 10) {
+            // Page 13: Fly token introduction
+
             this.background.add(this.dimLayer);
             this.background.setComponentZOrder(this.dimLayer, 1);
             this.labelLayer.removeAll();
@@ -321,6 +433,8 @@ public class Tutorial extends JPanel{
             createIntro("Fly Token");
         }
         else if (nextCount == 11) {
+            // Page 14: Instruct user to select a white token to fly
+
             initialBoard.getGame().getGameMode().displayBoardFly();
 
             this.background.remove(this.dimLayer);
@@ -337,6 +451,11 @@ public class Tutorial extends JPanel{
             this.labelLayer.add(this.click);
 
             ActionListener whiteTokenTutAction = new ActionListener() {
+                /**
+                 * Page 16: Show the board after flying the token
+                 *
+                 * @param e the event to be processed
+                 */
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     initialBoard.instruction.changeText(Instruction.InstructionType.MOVE);
@@ -346,6 +465,8 @@ public class Tutorial extends JPanel{
 
                     addNextButton(gbc);
 
+                    initialBoard.board.getIntersectionList().get(14).inter.removeActionListener(this);
+
                     repaint();
                     revalidate();
                 }
@@ -353,6 +474,11 @@ public class Tutorial extends JPanel{
 
             this.whiteToken_37.addMouseListener(this.whiteToken_37.tokenSelected);
             this.whiteToken_37.addMouseListener(new MouseAdapter() {
+                /**
+                 * Page 15: Instruct user to fly the selected token to an empty intersection
+                 *
+                 * @param e the event to be processed
+                 */
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
@@ -379,12 +505,15 @@ public class Tutorial extends JPanel{
             });
         }
         else if (nextCount == 12) {
+            // Page 17: Win condition introduction
+
             this.initialBoard.playerTurn.changeIcon();
             this.initialBoard.instruction.changeText(Instruction.InstructionType.MOVE);
 
             this.background.add(this.dimLayer);
             this.background.setComponentZOrder(this.dimLayer, 1);
 
+            // Set up the board for win condition
             this.restartBoard();
             this.whiteToken_18 = new WhiteToken(1, 8, this.initialBoard);
             this.addToken(this.whiteToken_18);
@@ -398,6 +527,8 @@ public class Tutorial extends JPanel{
             createIntro("Win Condition");
         }
         else if (nextCount == 13) {
+            // Page 18: Show the condition of win the Nine Men's Morris game
+
             this.background.remove(this.dimLayer);
             this.labelLayer.removeAll(); // remove the intro label
 
@@ -412,6 +543,8 @@ public class Tutorial extends JPanel{
             this.labelLayer.add(this.leftArrow);
         }
         else if (nextCount == 14) {
+            // Page 19: Show the win result page
+
             this.background.add(this.dimLayer);
             this.background.setComponentZOrder(this.dimLayer, 1);
 
@@ -423,12 +556,14 @@ public class Tutorial extends JPanel{
             whiteWin.setIconTextGap(45); // set the distance between text and icon
         }
         else if (nextCount == 15) {
+            // Page 20: Hint button introduction
+
             initialBoard.getGame().getGameMode().displayBoardButton();
 
             this.labelLayer.removeAll(); // remove the intro label
             createIntro("Button: Hint");
 
-
+            // Set up the board for hint button
             this.addToken(new BlackToken(1, 3, this.initialBoard));
             this.addToken(new WhiteToken(1, 4, this.initialBoard));
             this.addToken(new BlackToken(2, 2, this.initialBoard));
@@ -442,6 +577,8 @@ public class Tutorial extends JPanel{
             this.addToken(new WhiteToken(1, 5, this.initialBoard));
         }
         else if (nextCount == 16){
+            // Page 21: Explain all hint situation in the game
+
             this.labelLayer.removeAll(); // remove the intro label
             createIntro("<html><h1>Place Phase:</h1>" +
                     "<h2>During the Place Phase, you can quickly find possible placements by" +
@@ -459,10 +596,14 @@ public class Tutorial extends JPanel{
                     "<br/>tokens can be removed.</h2></html>", 700, 550);
         }
         else if (nextCount == 17) {
+            // Page 22: Show the hint button example at move/fly phase in the game
+
             this.labelLayer.removeAll(); // remove the intro label
-            createIntro("Example: Hint in Move/Fly Phase", 700, 110);
+            createIntro("Example: Hint in Move Phase", 700, 110);
         }
         else if (nextCount == 18) {
+            // Page 23: Instruct user to select the token that he/she wants to move
+
             this.background.remove(this.dimLayer);
             this.labelLayer.removeAll();
             this.remove(this.btnNext);
@@ -476,6 +617,11 @@ public class Tutorial extends JPanel{
             this.labelLayer.add(this.click);
 
             ActionListener intersectionTutAction = new ActionListener() {
+                /**
+                 * Show the board after moving the token according to the hint given
+                 *
+                 * @param e the event to be processed
+                 */
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     initialBoard.instruction.changeText(Instruction.InstructionType.REMOVE);
@@ -490,6 +636,11 @@ public class Tutorial extends JPanel{
             };
 
             ActionListener hintTutAction = (new ActionListener() {
+                /**
+                 * Page 25: Instruct user to click the hint button to show all legal moves and move to the intersection
+                 *
+                 * @param e the event to be processed
+                 */
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     labelLayer.remove(0); // remove the instruction label
@@ -524,6 +675,11 @@ public class Tutorial extends JPanel{
 
             this.whiteToken_18.addMouseListener(this.whiteToken_18.tokenSelected);
             this.whiteToken_18.addMouseListener(new MouseAdapter() {
+                /**
+                 * Page 24: Instruct user to click on the hint button
+                 *
+                 * @param e the event to be processed
+                 */
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
@@ -551,12 +707,16 @@ public class Tutorial extends JPanel{
 
         }
         else if (nextCount == 19) {
+            // Page 26: Restart button introduction
+
             this.background.add(this.dimLayer);
             this.background.setComponentZOrder(this.dimLayer, 1);
 
             createIntro("Button: Restart");
         }
         else if (nextCount == 20) {
+            // Page 27: Instruct user to click the restart button
+
             this.background.remove(this.dimLayer);
             this.labelLayer.removeAll();
             this.remove(this.btnNext);
@@ -572,8 +732,14 @@ public class Tutorial extends JPanel{
             labelLayer.add(click);
 
             this.initialBoard.buttons.btnRestart.addActionListener(new ActionListener() {
+                /**
+                 * Page 28: Show the board after restarting the game
+                 *
+                 * @param e the event to be processed
+                 */
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    // A prompt to ensure users want to restart the game
                     String message = "Do you want to restart the game?";
                     String title = "NINE MEN'S MORRIS";
                     int result = JOptionPane.showConfirmDialog(initialBoard.buttons.btnRestart, message, title, JOptionPane.YES_NO_OPTION);
@@ -589,6 +755,8 @@ public class Tutorial extends JPanel{
                         initialBoard.whiteTokenRemain.setText("9");
                         initialBoard.instruction.changeText(Instruction.InstructionType.PLACE);
 
+                        initialBoard.board.getIntersectionList().get(21).inter.setEnabled(false);
+
                         repaint();
                         revalidate();
                     }
@@ -596,12 +764,16 @@ public class Tutorial extends JPanel{
             });
         }
         else if (nextCount == 21) {
+            // Page 28: Inform user that the tutorial is almost finished
+
             this.background.add(this.dimLayer);
             this.background.setComponentZOrder(this.dimLayer, 1);
 
             createIntro("You are ready to play!");
         }
         else if (nextCount == 22) {
+            // Page 29: Instruct user to click the exit button and bring user back to the main menu
+
             this.background.remove(this.dimLayer);
             this.labelLayer.removeAll();
             this.remove(this.btnNext);
@@ -616,6 +788,9 @@ public class Tutorial extends JPanel{
         }
     }
 
+    /**
+     * A method to restart the board.
+     */
     private void restartBoard(){
         for (int i = 0; i < this.initialBoard.getTokenList().size(); i++){
             int layer = this.initialBoard.getTokenList().get(i).getCoordinateX();
@@ -626,6 +801,11 @@ public class Tutorial extends JPanel{
         this.initialBoard.getTokenList().clear();
     }
 
+    /**
+     * A method to add a token to the board.
+     *
+     * @param token the token to be added
+     */
     private void addToken(Token token){
         this.initialBoard.placeToken.remove(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(token.getCoordinateX(), token.getCoordinateY()))));
         this.initialBoard.placeToken.add(token, Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(token.getCoordinateX(), token.getCoordinateY()))));
@@ -633,6 +813,14 @@ public class Tutorial extends JPanel{
         token.setIndex(Integer.parseInt(String.valueOf(this.initialBoard.board.getIndexLookUpTable(token.getCoordinateX(), token.getCoordinateY())))); // set the index of the white token
     }
 
+    /**
+     * A method to create a background for the tutorial,
+     * including a label layer to place instruction and support image,
+     * a dim layer to show the information clearer
+     * an initial board to guide user how to play the game.
+     *
+     * @return the background
+     */
     private JPanel createBackground(){
         JPanel background = new JPanel(){
             @Override
@@ -657,6 +845,11 @@ public class Tutorial extends JPanel{
         return background;
     }
 
+    /**
+     * A method to create a dim layer to show the information clearer.
+     *
+     * @return a dim layer
+     */
     private JPanel createDimLayer(){
         JPanel dimLayer = new JPanel(){
             @Override
@@ -670,6 +863,11 @@ public class Tutorial extends JPanel{
         return dimLayer;
     }
 
+    /**
+     * A method to create a label layer to place instruction and support image.
+     *
+     * @return a label layer
+     */
     private JPanel createLabelLayer(){
         JPanel labelLayer = new JPanel();
         labelLayer.setLayout(null);
@@ -679,6 +877,11 @@ public class Tutorial extends JPanel{
         return labelLayer;
     }
 
+    /**
+     * A method to place the label in the center of the frame.
+     *
+     * @param label the instruction
+     */
     public void setComponentCenter(JLabel label) {
         // Set the size of the label
         label.setSize(label.getPreferredSize());
@@ -695,6 +898,11 @@ public class Tutorial extends JPanel{
         label.setLocation(labelX, labelY);
     }
 
+    /**
+     * A method to create a JPanel consists of welcome message.
+     *
+     * @return a welcome message
+     */
     private JPanel createWelcomeMessage(){
         JLabel welcome = new JLabel();
         welcome.setText("Welcome to the tutorial");
@@ -746,6 +954,12 @@ public class Tutorial extends JPanel{
         return welcomeMessage;
     }
 
+    /**
+     * A method to create a JLabel consists of the introduction of the game.
+     *
+     * @param text the introduction information
+     * @return the introduction JLabel
+     */
     private JLabel createIntro(String text){
         JLabel intro = new JLabel();
         intro.setFont(new Font("Inter", Font.PLAIN, 42));
@@ -764,6 +978,15 @@ public class Tutorial extends JPanel{
         return intro;
     }
 
+    /**
+     * A method to create a JLabel consists of the introduction of the game,
+     * which can its size can be adjusted through parameters.
+     *
+     * @param text the introduction information
+     * @param width the width of the JLabel
+     * @param height the height of the JLabel
+     * @return the introduction JLabel with the information and size given
+     */
     private JLabel createIntro(String text, int width, int height){
         JLabel intro = new JLabel();
         intro.setFont(new Font("Inter", Font.PLAIN, 42));
@@ -782,6 +1005,13 @@ public class Tutorial extends JPanel{
         return intro;
     }
 
+    /**
+     * A method to create a JLabel consists of the instruction of the game.
+     *
+     * @param width the width of the JLabel
+     * @param height the height of the JLabel
+     * @return the instruction JLabel with the size given
+     */
     private JLabel createInstruction(int width, int height){
         JLabel instruction = new JLabel();
         instruction.setFont(new Font("Inter", Font.PLAIN, 36));
@@ -800,6 +1030,11 @@ public class Tutorial extends JPanel{
         return instruction;
     }
 
+    /**
+     * A method to create the click image on the tutorial to hint the user to click.
+     *
+     * @return a JLabel consists of a click image
+     */
     private JLabel createClickHint(){
         JLabel clickHint = new JLabel();
         clickHint.setOpaque(false);
@@ -813,6 +1048,11 @@ public class Tutorial extends JPanel{
         return clickHint;
     }
 
+    /**
+     * A method to create the left arrow image on the tutorial to hint the user with the provided instruction.
+     *
+     * @return a JLabel consists of a left arrow image
+     */
     private JLabel createArrowLeft(){
         JLabel arrowLeft = new JLabel();
         arrowLeft.setOpaque(false);
@@ -826,6 +1066,11 @@ public class Tutorial extends JPanel{
         return arrowLeft;
     }
 
+    /**
+     * A method to create the right arrow image on the tutorial to hint the user with the provided instruction.
+     *
+     * @return a JLabel consists of a right arrow image
+     */
     private JLabel createArrowRight(){
         JLabel arrowRight = new JLabel();
         arrowRight.setOpaque(false);
@@ -839,6 +1084,11 @@ public class Tutorial extends JPanel{
         return arrowRight;
     }
 
+    /**
+     * A method to create the next button to navigate user to the next page.
+     *
+     * @param gbc the GridBagConstraints to set the position of the button
+     */
     private void addNextButton(GridBagConstraints gbc){
         gbc.insets = new Insets(25, 10, 25, 10); // add gaps between the components
 

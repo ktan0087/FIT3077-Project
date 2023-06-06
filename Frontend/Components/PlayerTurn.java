@@ -1,6 +1,6 @@
 package Frontend.Components;
 
-import Frontend.IconProcessor;
+import Frontend.Utils.IconProcessor;
 
 import javax.swing.*;
 import java.awt.*;

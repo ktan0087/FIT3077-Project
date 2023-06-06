@@ -2,7 +2,7 @@ package Frontend.Game;
 
 import Frontend.Button.BtnPlay;
 import Frontend.Button.BtnTutorial;
-import Frontend.BackgroundProcessor;
+import Frontend.Utils.BackgroundProcessor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,6 +36,9 @@ public class MainPage extends JLayeredPane{
      */
     private JLabel background;
 
+    /**
+     * The image of the background
+     */
     private Image backgroundImg;
 
     /**

@@ -58,4 +58,19 @@ public class BtnHint extends JButton {
         });
     }
 
+    /**
+     * Getter for the enabledHint.
+     * @return a boolean value whether the hint button is enabled or not.
+     */
+    public boolean getEnabledHint() {
+        return enabledHint;
+    }
+
+    /**
+     * Setter for the enabledHint.
+     * @param enabledHint
+     */
+    public void setEnabledHint(boolean enabledHint) {
+        this.enabledHint = enabledHint;
+    }
 }

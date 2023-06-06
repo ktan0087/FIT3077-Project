@@ -31,8 +31,6 @@ public class Tutorial extends JPanel{
     private JLabel click;
     private JLabel leftArrow;
     private JLabel rightArrow;
-    private JPanel btnCloseLayer;
-    private JLabel btnCloseClick = createClickHint();;
     public Tutorial(){
         this.nextCount = 0;
         this.btnClose = new BtnClose();
@@ -102,7 +100,7 @@ public class Tutorial extends JPanel{
             createIntro("Place Token");
         }
         else if (this.nextCount == 2){
-            this.labelLayer.remove(0); // remove intro
+            this.labelLayer.removeAll(); // remove intro
             this.background.remove(this.dimLayer);
 
             JLabel instruction = createInstruction(420, 80);
@@ -183,8 +181,7 @@ public class Tutorial extends JPanel{
         }
         else if (this.nextCount == 4){
             // remove instruction and left arrow
-            this.labelLayer.remove(0);
-            this.labelLayer.remove(this.leftArrow);
+            this.labelLayer.removeAll();
 
             createIntro("Move Token");
 
@@ -192,7 +189,7 @@ public class Tutorial extends JPanel{
             this.background.setComponentZOrder(this.dimLayer, 1);
         }
         else if (this.nextCount == 5){
-            this.labelLayer.remove(0); // remove intro label
+            this.labelLayer.removeAll(); // remove intro label
             this.background.remove(this.dimLayer);
             this.remove(this.btnNext); // remove next button
 
@@ -208,8 +205,7 @@ public class Tutorial extends JPanel{
             ActionListener whiteTokenTutAction = (new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    labelLayer.remove(1); // remove instruction
-                    labelLayer.remove(click);
+                    labelLayer.removeAll();
 
                     addNextButton(gbc);
 
@@ -263,8 +259,7 @@ public class Tutorial extends JPanel{
             this.labelLayer.add(this.leftArrow);
         }
         else if (this.nextCount == 8){
-            this.labelLayer.remove(0); // remove intro label
-            this.labelLayer.remove(this.leftArrow);
+            this.labelLayer.removeAll();
             this.remove(this.btnNext); // remove next button
 
             JLabel instruction = createInstruction(300, 165);
@@ -321,8 +316,7 @@ public class Tutorial extends JPanel{
         else if (nextCount == 10) {
             this.background.add(this.dimLayer);
             this.background.setComponentZOrder(this.dimLayer, 1);
-            this.labelLayer.remove(0); // remove the intro label
-            this.labelLayer.remove(this.rightArrow);
+            this.labelLayer.removeAll();
 
             createIntro("Fly Token");
         }
@@ -330,7 +324,7 @@ public class Tutorial extends JPanel{
             initialBoard.getGame().getGameMode().displayBoardFly();
 
             this.background.remove(this.dimLayer);
-            this.labelLayer.remove(0); // remove the intro label
+            this.labelLayer.removeAll(); // remove the intro label
             this.remove(this.btnNext);
 
             JLabel instruction = createInstruction(380, 165);
@@ -405,7 +399,7 @@ public class Tutorial extends JPanel{
         }
         else if (nextCount == 13) {
             this.background.remove(this.dimLayer);
-            this.labelLayer.remove(0); // remove the intro label
+            this.labelLayer.removeAll(); // remove the intro label
 
             this.initialBoard.removeMill(Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(1, 8))), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(2, 8))), Integer.parseInt(String.valueOf(initialBoard.board.getIndexLookUpTable(3, 8))), this.initialBoard.millLayer);
 
@@ -421,8 +415,7 @@ public class Tutorial extends JPanel{
             this.background.add(this.dimLayer);
             this.background.setComponentZOrder(this.dimLayer, 1);
 
-            this.labelLayer.remove(0); // remove the instruction label
-            this.labelLayer.remove(this.leftArrow);
+            this.labelLayer.removeAll();
 
             JLabel whiteWin = createIntro("WIN");
             whiteWin.setIcon(new ImageIcon(getClass().getResource("/Icons/white-token.png")));
@@ -432,7 +425,7 @@ public class Tutorial extends JPanel{
         else if (nextCount == 15) {
             initialBoard.getGame().getGameMode().displayBoardButton();
 
-            this.labelLayer.remove(0); // remove the intro label
+            this.labelLayer.removeAll(); // remove the intro label
             createIntro("Button: Hint");
 
 
@@ -449,7 +442,7 @@ public class Tutorial extends JPanel{
             this.addToken(new WhiteToken(1, 5, this.initialBoard));
         }
         else if (nextCount == 16){
-            this.labelLayer.remove(0); // remove the intro label
+            this.labelLayer.removeAll(); // remove the intro label
             createIntro("<html><h1>Place Phase:</h1>" +
                     "<h2>During the Place Phase, you can quickly find possible placements by" +
                     "<br/>selecting the hint button. This will highlight empty intersections with a red" +
@@ -466,13 +459,12 @@ public class Tutorial extends JPanel{
                     "<br/>tokens can be removed.</h2></html>", 700, 550);
         }
         else if (nextCount == 17) {
-            this.labelLayer.remove(0); // remove the intro label
+            this.labelLayer.removeAll(); // remove the intro label
             createIntro("Example: Hint in Move/Fly Phase", 700, 110);
         }
         else if (nextCount == 18) {
             this.background.remove(this.dimLayer);
-            this.labelLayer.remove(0); // remove the instruction label
-            this.labelLayer.remove(this.click);
+            this.labelLayer.removeAll();
             this.remove(this.btnNext);
 
             JLabel instruction = createInstruction(300, 165);
@@ -480,7 +472,7 @@ public class Tutorial extends JPanel{
             instruction.setLocation(450, 380);
             this.labelLayer.add(instruction);
 
-            this.click.setBounds(405, 328, 48, 48);
+            this.click.setBounds(398, 324, 48, 48);
             this.labelLayer.add(this.click);
 
             ActionListener intersectionTutAction = new ActionListener() {

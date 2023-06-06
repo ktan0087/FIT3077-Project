@@ -3,6 +3,7 @@ package Backend.Action;
 import Backend.*;
 import Backend.Board.Intersection;
 import Backend.Board.Mill;
+import Backend.Game.Game;
 import Backend.Interfaces.CanRemoveMill;
 
 import java.util.ArrayList;

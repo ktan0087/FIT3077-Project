@@ -1,4 +1,4 @@
-package Backend;
+package Backend.Game;
 
 /**
  * This class is used to differentiate between different game modes.

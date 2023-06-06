@@ -1,7 +1,6 @@
 package Backend.Action;
 
-import Backend.Action.Action;
-import Backend.Game;
+import Backend.Game.Game;
 import Backend.Player;
 
 /**

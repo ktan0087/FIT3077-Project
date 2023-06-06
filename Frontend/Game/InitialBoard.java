@@ -1,14 +1,13 @@
 package Frontend.Game;
-import Backend.*;
 import Backend.Action.AllActions;
 import Backend.Action.FlyTokenAction;
 import Backend.Action.MoveTokenAction;
 import Backend.Action.PlaceTokenAction;
+import Backend.Game.Game;
 import Backend.Interfaces.CanRemoveMill;
 import Backend.Token.TokenColour;
 import Frontend.Components.*;
-import Frontend.HintCircle;
-import Frontend.IconProcessor;
+import Frontend.Utils.IconProcessor;
 import Frontend.Components.HintCircle;
 import Frontend.Layer.PlaceToken;
 import Frontend.Line.Mill;
@@ -129,6 +128,7 @@ public class InitialBoard extends JPanel {
      * The number of mills that the player can remove
      */
     private int millCount;
+
     /**
      * Image Icon for the hint button
      */
@@ -196,6 +196,7 @@ public class InitialBoard extends JPanel {
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5); // add gaps between the components
+
         // add buttons to top right of the panel
         gbc.gridx = 3; // set the x position of the component
         gbc.gridy = 0; // set the y position of the component

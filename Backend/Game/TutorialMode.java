@@ -1,8 +1,9 @@
-package Backend;
+package Backend.Game;
 
-import Backend.Action.AllActions;
+import Backend.Game.Game;
+import Backend.Game.GameMode;
 
-public class TutorialMode extends GameMode{
+public class TutorialMode extends GameMode {
 
     public TutorialMode(Game game) {
         super(game);

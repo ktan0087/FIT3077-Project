@@ -1,6 +1,6 @@
 package Backend.Action;
 
-import Backend.Game;
+import Backend.Game.Game;
 import Backend.Board.Intersection;
 import Backend.Player;
 
@@ -12,7 +12,7 @@ import Backend.Player;
  * @see Backend.Action.AllActions
  * @see Backend.Board.Board
  * @see Backend.Board.Intersection
- * @see Backend.Game
+ * @see Game
  * @see Backend.Player
  */
 public class PlaceTokenAction extends Action {

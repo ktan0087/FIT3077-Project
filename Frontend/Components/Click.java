@@ -1,4 +1,4 @@
-package Frontend;
+package Frontend.Components;
 
 import Frontend.Game.Tutorial;
 import Frontend.Utils.IconProcessor;

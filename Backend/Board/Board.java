@@ -1,11 +1,8 @@
 package Backend.Board;
 
 import Backend.Action.AllActions;
-import Backend.Action.PlaceTokenAction;
-import Backend.Game;
 import Backend.Player;
 import Backend.Token.Token;
-import Backend.Token.TokenColour;
 
 import java.util.ArrayList;
 
@@ -450,7 +447,6 @@ public class Board {
                     //add the REMOVE_TOKEN ability to the player
                     player.addAllowableAction(AllActions.REMOVE_TOKEN);
                     flag = true;
-                    System.out.println("----------------------------"+ player.getName() + " Mill formed");
                 }
             }
             //check if the current intersection's can form a mill in the vertical direction
@@ -463,10 +459,9 @@ public class Board {
                     //add the REMOVE_TOKEN ability to the player
                     player.addAllowableAction(AllActions.REMOVE_TOKEN);
                     flag = true;
-                    System.out.println("----------------------------"+ player.getName() + " Mill formed");
                 }
             }
-        }        System.out.println("Mills: "+ mills.toString());
+        }
         return flag;
     }
 }

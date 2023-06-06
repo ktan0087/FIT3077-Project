@@ -3,6 +3,7 @@ package Backend;
 import Backend.Action.ActionList;
 import Backend.Action.AllActions;
 import Backend.Board.Intersection;
+import Backend.Game.Game;
 import Backend.Token.TokenColour;
 
 import java.util.ArrayList;

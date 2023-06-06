@@ -1,9 +1,10 @@
-package Backend;
+package Backend.Game;
 
 import Backend.Action.AllActions;
 import Backend.Board.Board;
 import Backend.Board.Intersection;
 import Backend.Board.Mill;
+import Backend.Player;
 import Backend.Token.Token;
 import Backend.Token.TokenColour;
 

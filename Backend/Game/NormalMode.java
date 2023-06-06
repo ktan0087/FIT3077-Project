@@ -1,6 +1,9 @@
-package Backend;
+package Backend.Game;
 
-public class NormalMode extends GameMode{
+import Backend.Game.Game;
+import Backend.Game.GameMode;
+
+public class NormalMode extends GameMode {
 
     public NormalMode(Game game) {
         super(game);

@@ -3,7 +3,7 @@
 
 package Frontend.Game;
 
-import Backend.Game;
+import Backend.Game.Game;
 import Frontend.Frame.MainFrame;
 
 import javax.swing.*;
@@ -134,7 +134,7 @@ public class Layout{
 
             tutorial.btnClose.addActionListener(close); // make CLOSE button in tutorial function properly
 
-            setGame(new Backend.Tutorial()); // create new tutorial
+            setGame(new Backend.Game.Tutorial()); // create new tutorial
             tutorial.getInitialBoard().setGame(getGame());
 
             cLayout.show(panelCont, "3"); // show tutorial

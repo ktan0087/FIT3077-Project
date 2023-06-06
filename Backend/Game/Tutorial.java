@@ -1,4 +1,4 @@
-package Backend;
+package Backend.Game;
 
 /**
  * This class is used to run the tutorial, which is a child of game.
@@ -6,7 +6,7 @@ package Backend;
  * In this case, tutorial mode has extra methods to setup the board for predetermined scenarios
  * that are used to teach the player how to play the game.
  */
-public class Tutorial extends Game{
+public class Tutorial extends Game {
 
     /**
      * Constructor.

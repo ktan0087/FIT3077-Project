@@ -2,7 +2,7 @@ package Frontend.Game;
 
 import Frontend.Button.BtnClose;
 import Frontend.Button.BtnNext;
-import Frontend.Click;
+import Frontend.Components.Click;
 import Frontend.Components.Instruction;
 import Frontend.Layer.DimLayer;
 import Frontend.Utils.IconProcessor;
@@ -326,6 +326,7 @@ public class Tutorial extends JPanel{
                     labelLayer.add(instruction);
 
                     whiteToken_37.removeMouseListener(this);
+                    whiteToken_37.removeMouseListener(whiteToken_37.tokenSelected);
                     initialBoard.board.getIntersectionList().get(16).inter.setEnabled(true);
                     initialBoard.board.getIntersectionList().get(16).inter.addActionListener(whiteTokenTutAction);
 

@@ -78,7 +78,7 @@ public class Game {
         currentPlayer = player1;
         board = new Board();
         isGameOver = false;
-        gameMode = new TutorialMode(this);
+        gameMode = new NormalMode(this);
     }
 
     public void setGameMode(GameMode gameMode) {

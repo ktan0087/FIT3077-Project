@@ -58,22 +58,11 @@ public class Game {
      */
     private boolean isGameOver;
 
-    /**
-     * A list of all the adjacent intersections of a selected intersection
-     */
     private ArrayList<Intersection> adjacentIntersectionList;
-    /**
-     * A list of all the possible intersections that a token can be moved to
-     */
     private ArrayList<Intersection> possibleIntersectionList;
-    /**
-     * A list of all the possible tokens that can be selected
-     */
-    private ArrayList<Token> possibleTokenList;
+    private ArrayList<Intersection> possibleTokenListIntersection;
 
-    /**
-     * The game mode of the game, used to add different methods to game based on game mode
-     */
+    // not yet implemented in this sprint
     private GameMode gameMode;
 
     /**
@@ -150,6 +139,14 @@ public class Game {
         } else {
             return player1;
         }
+    }
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
     }
 
     /**
@@ -302,6 +299,11 @@ public class Game {
 
     /**
      * A function to get the possible intersections for the player to place a token.
+     * This function is used to show hints for the player to place, move or fly tokens in the InitialBoard.
+     * It calls the getEmptyIntersection() function from the board class to get all the empty intersections on the board
+     * and getAdjacentIntersectionSmall() function to get all the adjacent intersections of the current intersection.
+     * Then, it returns an array list of possible intersections for frontend to draw the hints.
+     *
      * @param currentIntersection the current intersection of the token
      * @param player current player
      * @return an array list of possible intersections for the player select
@@ -311,10 +313,12 @@ public class Game {
         if (this.checkPossibleMove(player)) {
             // check if the player can fly or place a token
             if (player.isActionAllowed(AllActions.FLY_TOKEN) || player.isActionAllowed(AllActions.PLACE_TOKEN)) {
+                //get all the empty intersections on the board
                 possibleIntersectionList =  board.getEmptyIntersection();
             }
             // check if the player can move a token
             else if (player.isActionAllowed(AllActions.MOVE_TOKEN)) {
+                //get all the adjacent intersections of the current intersection
                 possibleIntersectionList = board.getAdjacentIntersectionSmall(currentIntersection);
             }
         }
@@ -322,18 +326,23 @@ public class Game {
     }
 
     /**
-     * A function to get the possible tokens for the player to remove.
+     * A function to get the possible tokens' intersection for the player to remove. It checks the current player and
+     * calls the getPlayerTokensOnBoardIntersection() function from the board class to get all the tokens' intersection
+     * of the opponent. Then, it returns an array list of possible tokens' intersection for frontend to draw the hints.
+     *
      * @param player current player
      * @return an array list of possible tokens of the opponent for the player to remove
      */
-    public ArrayList<Token> getPossibleTokenList(Player player) {
+    public ArrayList<Intersection> getPossibleTokenList(Player player) {
         // check if player can remove a token
         if (player == player1 && player.isActionAllowed(AllActions.REMOVE_TOKEN)) {
-            possibleTokenList = board.getPlayerTokensOnBoard(player2);
+            //call the getPlayerTokensOnBoardIntersection() function from the board class to get
+            //all the tokens' intersection of the opponent
+            possibleTokenListIntersection = board.getPlayerTokensOnBoardIntersection(player2);
         }
         else{
-            possibleTokenList = board.getPlayerTokensOnBoard(player1);
+            possibleTokenListIntersection = board.getPlayerTokensOnBoardIntersection(player1);
         }
-        return possibleTokenList;
+        return possibleTokenListIntersection;
     }
 }

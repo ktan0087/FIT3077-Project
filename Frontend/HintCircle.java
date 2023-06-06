@@ -1,6 +1,6 @@
 package Frontend;
 
-import Frontend.Frame.Size;
+import Frontend.Components.Board;
 import Frontend.Game.Intersection;
 import Frontend.Layer.PlaceToken;
 
@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 public class HintCircle extends JLabel {
     private boolean circleVisible;
@@ -36,14 +37,14 @@ public class HintCircle extends JLabel {
         int radius = 0;
 
         if (this.type == Type.INTERSECTION) {
-            radius = new Size(8, 8).getHeight();
+            radius = 8;
         }
         else if (this.type == Type.TOKEN) {
-            radius = new Size(16, 16).getHeight();
+            radius = 16;
         }
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(new Color(0xFF5F1F));
+        g2d.setColor(new Color(0xFF0000));
         g2d.setStroke(new BasicStroke(5));
 
         if (circleVisible) {
@@ -57,8 +58,8 @@ public class HintCircle extends JLabel {
         }
     }
 
-    public void showHint(PlaceToken hintLayer, Intersection intersection){
-        hintLayer.remove(intersection.getAccessibleContext().getAccessibleIndexInParent());
-        hintLayer.add(this, intersection.getAccessibleContext().getAccessibleIndexInParent());
+    public void showHint(PlaceToken hintLayer, Intersection intersection, Board b){
+        hintLayer.remove(Integer.parseInt(String.valueOf(b.getIndexLookUpTable(intersection.getCoordinateX(), intersection.getCoordinateY()))));
+        hintLayer.add(this, Integer.parseInt(String.valueOf(b.getIndexLookUpTable(intersection.getCoordinateX(), intersection.getCoordinateY()))));
     }
 }

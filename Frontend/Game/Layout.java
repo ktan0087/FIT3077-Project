@@ -120,9 +120,16 @@ public class Layout{
     protected ActionListener startTutorial = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            cLayout.show(panelCont, "3");
+            panelCont.remove(tutorial);
+            tutorial = new Tutorial();
+            panelCont.add(tutorial, "3");
+
+            tutorial.btnClose.addActionListener(close);
+
             setGame(new Backend.Tutorial());
             tutorial.getInitialBoard().setGame(getGame());
+
+            cLayout.show(panelCont, "3");
         }
     };
 

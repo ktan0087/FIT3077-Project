@@ -1,7 +1,8 @@
 package Frontend.Components;
 
+import Backend.Player;
+import Backend.Token.TokenColour;
 import Frontend.IconProcessor;
-import Frontend.Frame.Size;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,15 +49,14 @@ public class TokenRemain extends JLabel {
         this.amountToken = 9; // set the amount of token as a default of 9
         this.setText(String.valueOf(amountToken)); // set the text of label to the amount of token
         this.setBackground(new Color(0xE6B380));
-        this.setFont(new Font("Inter", Font.PLAIN, new Size(42, 42).getHeight()));
+        this.setFont(new Font("Inter", Font.PLAIN, 42));
         this.setForeground(new Color(0x000000));
         this.setHorizontalTextPosition(JLabel.CENTER);
         this.setVerticalTextPosition(JLabel.BOTTOM);
         this.setHorizontalAlignment(JLabel.CENTER);
         this.setVerticalAlignment(JLabel.CENTER);
         this.setIconTextGap(45); // set the distance between text and icon
-        Size size = new Size(125, 314);
-        this.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
+        this.setPreferredSize(new Dimension(125, 314));
         this.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
     }
 
@@ -74,11 +74,10 @@ public class TokenRemain extends JLabel {
      *
      * @return the amount of token remainder after decreasing
      */
-    public int decreaseAmountToken() {
-        if (this.amountToken > 0){ // if the amount of token is more than 0, which means there are still token left
-            this.amountToken--; // decrease the amount of token by 1
-            this.setText(Integer.valueOf(amountToken).toString()); // set the text of label to the amount of token
-        }
+    public int decreaseAmountToken(Player player) {
+        this.amountToken = player.getTokensInHand();
+        this.setText(Integer.valueOf(amountToken).toString());
+
         return this.amountToken; // return the amount of token
     }
 

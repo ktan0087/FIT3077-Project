@@ -11,13 +11,11 @@ public class BackgroundProcessor extends JLabel{
     private Image image;
     private int imageWidth;
     private int imageHeight;
-    private Size size;
 
     public BackgroundProcessor(Image image, int imageWidth, int imageHeight) {
         this.image = image;
-        this.size = new Size(imageWidth, imageHeight);
-        this.imageWidth = this.size.getWidth();
-        this.imageHeight = this.size.getHeight();
+        this.imageWidth = imageWidth;
+        this.imageHeight = imageHeight;
 
         this.addComponentListener(new ComponentAdapter() {
             @Override

@@ -1,7 +1,5 @@
 package Frontend.Button;
 
-import Frontend.Frame.Size;
-
 import javax.swing.JButton;
 import javax.swing.BorderFactory;
 import java.awt.Font;
@@ -19,7 +17,7 @@ public class BtnPlay extends JButton {
     public BtnPlay(){
         this.setText("PLAY"); // set the text of button
         this.setFocusable(false); // get rid of the annoying box in button
-        this.setFont(new Font("Inter",Font.BOLD, new Size(80, 80).getHeight()));
+        this.setFont(new Font("Inter",Font.BOLD, 80));
         this.setForeground(new Color(0x000000));
         this.setBackground(new Color(0xE59C54));
         this.setBorder(BorderFactory.createMatteBorder(10, 10, 10, 10, Color.BLACK));

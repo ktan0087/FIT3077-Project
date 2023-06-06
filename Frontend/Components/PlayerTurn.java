@@ -1,7 +1,6 @@
 package Frontend.Components;
 
 import Frontend.IconProcessor;
-import Frontend.Frame.Size;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,14 +35,13 @@ public class PlayerTurn extends JLabel {
         this.isWhite = false;
 
         this.setText("TURN"); // set the text of label
-        this.setFont(new Font("Inter", Font.PLAIN, new Size(42, 42).getHeight())); // set the font of label
+        this.setFont(new Font("Inter", Font.PLAIN, 42)); // set the font of label
         this.setForeground(new Color(0x000000)); // set the color of label
         this.changeIcon();
         this.setHorizontalTextPosition(JLabel.LEFT);
         this.setHorizontalAlignment(JLabel.CENTER);
         this.setIconTextGap(45); // set the distance between text and icon
-        Size size = new Size(300, 80);
-        this.setPreferredSize(new Dimension(size.getWidth(), size.getHeight()));
+        this.setPreferredSize(new Dimension(300, 80));
         this.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
     }
 

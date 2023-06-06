@@ -78,6 +78,18 @@ public class Intersection extends JLabel {
     }
 
     /**
+     * toString method to print out the coordinate of intersection
+     * @return Intersection with its coordinate
+     */
+    @Override
+    public String toString() {
+        return "Intersection{" +
+                "coordinateX=" + coordinateX +
+                ", coordinateY=" + coordinateY +
+                '}';
+    }
+
+    /**
      * This method is used to choose the type of intersection by selecting the position of it.
      *
      * @param position the position of intersection, e.g. the top leftmost intersection (1, 1) has the position of TOP_LEFT

@@ -189,6 +189,9 @@ public class Player {
         return allowableActions.actionList();       // Return the list of allowable actions
     }
 
+    /**
+     * This function is used to print the attributes of Player class in a string format.
+     */
     @Override
     public String toString() {
         return "Player{" +

@@ -7,7 +7,6 @@ import Backend.Game.Game;
 import Backend.Interfaces.CanRemoveMill;
 import Backend.Token.TokenColour;
 import Frontend.Components.*;
-import Frontend.Utils.IconProcessor;
 import Frontend.Components.HintCircle;
 import Frontend.Layer.PlaceToken;
 import Frontend.Line.Mill;
@@ -138,6 +137,7 @@ public class InitialBoard extends JPanel {
     public void setGame(Game game) {
         this.game = game;
     }
+
     /**
      * This method is used to get the game that is played
      *
@@ -176,10 +176,14 @@ public class InitialBoard extends JPanel {
         this.canRemove = false;
         this.hintPressed = false;
         this.hintList = new ArrayList<>(); // a list of all intersections on the board
-//        this.hintList = (ArrayList<Intersection>) board.getIntersectionList();
+
+        // Create a new list that includes all the intersections,
+        // ensuring that the pointers to the original intersections are not affected
         for (Intersection frontIntersection: board.getIntersectionList()){
             hintList.add(frontIntersection);
         }
+
+        // Make the hint button works properly -> show the hint when the button is pressed
         this.buttons.btnHint.addActionListener(hintAction);
 
         // set the background color of the board
@@ -323,7 +327,7 @@ public class InitialBoard extends JPanel {
 
                             checkAndRemoveMills(newMoveAction);
 
-                            // Check if a mill is formed and then do approriate actions and draw them
+                            // Check if a mill is formed and then do appropriate actions and draw them
                             checkAndDrawMills();
 
                             getGame().endTurn(); // end the turn
@@ -456,7 +460,7 @@ public class InitialBoard extends JPanel {
             isSelected=false;
             selectedToken.selected = false; // set the selected token to false
         }
-        swapInstruction(); // swap the instruction
+        swapInstruction(); // swap the instruction that display at the top part of the board
     }
 
     /**
@@ -754,15 +758,17 @@ public class InitialBoard extends JPanel {
      * This method is used to swap the instruction displayed during various phases of the game
      */
     public void swapInstruction(){
+        // This is to prevent the remove instruction from changing
+        // The instruction should only be changed to remove state when the player forms a mill
         if(instruction.getInstructionType() == Instruction.InstructionType.REMOVE){
             return;
         }
 
-        if (blackTokenRemain.getAmountToken() > 0){
+        if (blackTokenRemain.getAmountToken() > 0){ // if all tokens are not placed onto the board
             instruction.changeText(Instruction.InstructionType.PLACE);
         }
-        else if (blackTokenRemain.getAmountToken() == 0){
-            if (getGame().getCurrentPlayer().getTokensOnBoard() == 3){
+        else if (blackTokenRemain.getAmountToken() == 0){ // if all tokens are placed
+            if (getGame().getCurrentPlayer().getTokensOnBoard() == 3){ // if there are only 3 tokens left for the current player
                 instruction.changeText(Instruction.InstructionType.FLY);
             }
             else {

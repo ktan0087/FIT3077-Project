@@ -220,6 +220,7 @@ public class Tutorial extends JPanel{
         else if (this.nextCount == 3){
             // Page 4: Show the condition of moving a token
 
+            // Set up the board for move token tutorial
             this.initialBoard.getGame().getGameMode().displayBoardMove();
             this.initialBoard.playerTurn.changeIcon();
             this.initialBoard.instruction.changeText(Instruction.InstructionType.MOVE);
@@ -1036,24 +1037,6 @@ public class Tutorial extends JPanel{
         instruction.setSize(new Dimension(width, height));
 
         return instruction;
-    }
-
-    /**
-     * A method to create the click image on the tutorial to hint the user to click.
-     *
-     * @return a JLabel consists of a click image
-     */
-    private JLabel createClickHint(){
-        JLabel clickHint = new JLabel();
-        clickHint.setOpaque(false);
-
-        ImageIcon click = new ImageIcon(Tutorial.class.getResource("/Icons/click.png"));
-        IconProcessor clickIcon = new IconProcessor(click, 48, 48);
-        ImageIcon resizedIcon = clickIcon.resizeIcon();
-
-        clickHint.setIcon(resizedIcon);
-
-        return clickHint;
     }
 
     /**

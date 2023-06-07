@@ -223,12 +223,15 @@ public abstract class Token extends JLabel {
         }
     };
 
+    /**
+     * This method is used to change the instruction text on the top section of the game board
+     */
     public void changeRemoveInstruction(){
-        if (iniBoard.blackTokenRemain.getAmountToken() > 0){
+        if (iniBoard.blackTokenRemain.getAmountToken() > 0){ // if all tokens are not placed onto the board
             iniBoard.instruction.changeText(Instruction.InstructionType.PLACE);
         }
-        else if (iniBoard.blackTokenRemain.getAmountToken() == 0){
-            if (iniBoard.getGame().getCurrentPlayer().getTokensOnBoard() == 3){
+        else if (iniBoard.blackTokenRemain.getAmountToken() == 0){ // if all tokens are placed onto the board
+            if (iniBoard.getGame().getCurrentPlayer().getTokensOnBoard() == 3){ // if the current player has only 3 tokens on the board
                 iniBoard.instruction.changeText(Instruction.InstructionType.FLY);
             }
             else {

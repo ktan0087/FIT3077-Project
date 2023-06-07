@@ -77,7 +77,8 @@ public class FlyTokenAction extends Action implements CanRemoveMill {
 
 
     /**
-     * A function to add the mill to the removeMillList
+     * Function to add the mill to the removeMillList, so that when the fly action is executed,
+     * then the token is part of a mill, we need to remove the mill from the board.
      */
     @Override
     public void addRemoveMill() {

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * An enum class to represent the actions that can be performed by the player
+ * This class represents a list of allowable actions for a player.
  *
  * @see Player
  * @see AllActions

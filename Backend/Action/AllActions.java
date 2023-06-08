@@ -8,9 +8,10 @@ package Backend.Action;
  */
 public enum AllActions {
     DO_NOTHING, // Do nothing action
-    CAN_FLY,    // Fly action
+    FLY_TOKEN,    // Fly action
     PLACE_TOKEN, // Place token action
     MOVE_TOKEN,  // Move token action
     REMOVE_TOKEN // Remove token action
 
 }
+

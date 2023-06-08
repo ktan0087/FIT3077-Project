@@ -1,5 +1,8 @@
 package Frontend.Components;
 
+import Backend.Player;
+import Frontend.Utils.IconProcessor;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -47,7 +50,6 @@ public class TokenRemain extends JLabel {
         this.setBackground(new Color(0xE6B380));
         this.setFont(new Font("Inter", Font.PLAIN, 42));
         this.setForeground(new Color(0x000000));
-        this.setIcon(tokenIcon);
         this.setHorizontalTextPosition(JLabel.CENTER);
         this.setVerticalTextPosition(JLabel.BOTTOM);
         this.setHorizontalAlignment(JLabel.CENTER);
@@ -71,11 +73,10 @@ public class TokenRemain extends JLabel {
      *
      * @return the amount of token remainder after decreasing
      */
-    public int decreaseAmountToken() {
-        if (this.amountToken > 0){ // if the amount of token is more than 0, which means there are still token left
-            this.amountToken--; // decrease the amount of token by 1
-            this.setText(Integer.valueOf(amountToken).toString()); // set the text of label to the amount of token
-        }
+    public int decreaseAmountToken(Player player) {
+        this.amountToken = player.getTokensInHand();
+        this.setText(Integer.valueOf(amountToken).toString());
+
         return this.amountToken; // return the amount of token
     }
 
@@ -85,14 +86,27 @@ public class TokenRemain extends JLabel {
      * @param tokenColour is the colour of the token remainder label, which includes: White and Black
      */
     public void changeTokenColour(TokenColour tokenColour){
+        IconProcessor icon;
+        ImageIcon resizedIcon;
+
         switch (tokenColour){
             case BLACK:
                 this.tokenIcon = new ImageIcon(getClass().getResource(("/Icons/black-token.png"))); // import the image of black token
-                this.setIcon(tokenIcon);
+
+                // Resize the icon
+                icon = new IconProcessor(this.tokenIcon, 68, 68);
+                resizedIcon = icon.resizeIcon();
+
+                this.setIcon(resizedIcon);
                 break;
             case WHITE:
                 this.tokenIcon = new ImageIcon(getClass().getResource("/Icons/white-token.png"));
-                this.setIcon(tokenIcon);
+
+                // Resize the icon
+                icon = new IconProcessor(this.tokenIcon, 68, 68);
+                resizedIcon = icon.resizeIcon();
+
+                this.setIcon(resizedIcon);
                 break;
         }
     }

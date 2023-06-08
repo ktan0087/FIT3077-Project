@@ -2,8 +2,11 @@ package Backend;
 
 import Backend.Action.ActionList;
 import Backend.Action.AllActions;
+import Backend.Board.Intersection;
+import Backend.Game.Game;
 import Backend.Token.TokenColour;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +44,11 @@ public class Player {
     private ActionList allowableActions = new ActionList();
 
     /**
+     * The list of Intersections that are allowed to be selected by this player
+     */
+    private ArrayList<Intersection> allowableIntersections = new ArrayList<>();
+
+    /**
      * Constructor.
      *
      * @param name the name of the player
@@ -71,7 +79,7 @@ public class Player {
             this.addAllowableAction(AllActions.MOVE_TOKEN);     // add the ability for move token action
         }
         if (tokensOnBoard == 3 && getTokensInHand()==0){        // If player has 3 tokens left, he can fly
-            this.addAllowableAction(AllActions.CAN_FLY);    // add the ability for fly action
+            this.addAllowableAction(AllActions.FLY_TOKEN);    // add the ability for fly action
         }
     }
 
@@ -109,15 +117,6 @@ public class Player {
      */
     public int getTokensInHand() {
         return tokensInHand;
-    }
-
-    /**
-     * Getter to retrieve the status of the player whether it can fly or not.
-     *
-     * @return a boolean value whether the player can fly or not
-     */
-    public boolean canPlayerFly() {
-        return canFly;
     }
 
     /**

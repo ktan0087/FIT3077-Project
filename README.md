@@ -5,6 +5,8 @@ Team Members: <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kennedy Tan ktan0087@student.monash.edu<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Soh Meng Jienq msoh0007@student.monash.edu 
 
+Executable file download link -- https://drive.google.com/file/d/1Ih6mX9_rziz-FcU0q6vBCx-LqJLy-Trs/view?usp=sharing
+
 User Guide -- https://docs.google.com/document/d/10D8Ozkun1hCL-BWR6P3Xk5ahZAqj2d9bRK1zf96le-g/edit?usp=sharing
 
 Work Breakdown Structure (Sprint 1) -- https://docs.google.com/spreadsheets/d/10B28lCSSwzXOpijzydfFUe32XY_a1BlKvHQG8Hlq6rk/edit?usp=sharing

@@ -1,9 +1,10 @@
-package Backend;
+package Backend.Game;
 
 import Backend.Action.AllActions;
 import Backend.Board.Board;
 import Backend.Board.Intersection;
 import Backend.Board.Mill;
+import Backend.Player;
 import Backend.Token.Token;
 import Backend.Token.TokenColour;
 
@@ -59,9 +60,11 @@ public class Game {
     private boolean isGameOver;
 
     private ArrayList<Intersection> adjacentIntersectionList;
+    private ArrayList<Intersection> possibleIntersectionList;
+    private ArrayList<Intersection> possibleTokenListIntersection;
 
-//    // not yet implemented in this sprint
-//    private GameMode gameMode;
+    // not yet implemented in this sprint
+    private GameMode gameMode;
 
     /**
      * Constructor.
@@ -76,6 +79,15 @@ public class Game {
         currentPlayer = player1;
         board = new Board();
         isGameOver = false;
+        gameMode = new NormalMode(this);
+    }
+
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
+    }
+
+    public GameMode getGameMode() {
+        return gameMode;
     }
 
     /**
@@ -128,6 +140,14 @@ public class Game {
         } else {
             return player1;
         }
+    }
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
     }
 
     /**
@@ -205,7 +225,7 @@ public class Game {
         boolean flag = false;
         // If a player still has tokens in hand or the player can fly, the player has possible moves.
         // Thus, function returns true.
-        if (player.getTokensInHand()>0 || player.isActionAllowed(AllActions.CAN_FLY)) {
+        if (player.getTokensInHand()>0 || player.isActionAllowed(AllActions.FLY_TOKEN)) {
             return true;
         }
         //Loop through all the layers of the board
@@ -276,5 +296,54 @@ public class Game {
             flag = false;
         }
         return flag;
+    }
+
+    /**
+     * A function to get the possible intersections for the player to place a token.
+     * This function is used to show hints for the player to place, move or fly tokens in the InitialBoard.
+     * It calls the getEmptyIntersection() function from the board class to get all the empty intersections on the board
+     * and getAdjacentIntersectionSmall() function to get all the adjacent intersections of the current intersection.
+     * Then, it returns an array list of possible intersections for frontend to draw the hints.
+     *
+     * @param currentIntersection the current intersection of the token
+     * @param player current player
+     * @return an array list of possible intersections for the player select
+     */
+    public ArrayList<Intersection> getPossibleIntersectionList(Intersection currentIntersection, Player player) {
+        // check if player has any possible moves
+        if (this.checkPossibleMove(player)) {
+            // check if the player can fly or place a token
+            if (player.isActionAllowed(AllActions.FLY_TOKEN) || player.isActionAllowed(AllActions.PLACE_TOKEN)) {
+                //get all the empty intersections on the board
+                possibleIntersectionList =  board.getEmptyIntersection();
+            }
+            // check if the player can move a token
+            else if (player.isActionAllowed(AllActions.MOVE_TOKEN)) {
+                //get all the adjacent intersections of the current intersection
+                possibleIntersectionList = board.getAdjacentIntersectionSmall(currentIntersection);
+            }
+        }
+        return possibleIntersectionList;
+    }
+
+    /**
+     * A function to get the possible tokens' intersection for the player to remove. It checks the current player and
+     * calls the getPlayerTokensOnBoardIntersection() function from the board class to get all the tokens' intersection
+     * of the opponent. Then, it returns an array list of possible tokens' intersection for frontend to draw the hints.
+     *
+     * @param player current player
+     * @return an array list of possible tokens of the opponent for the player to remove
+     */
+    public ArrayList<Intersection> getPossibleTokenList(Player player) {
+        // check if player can remove a token
+        if (player == player1 && player.isActionAllowed(AllActions.REMOVE_TOKEN)) {
+            //call the getPlayerTokensOnBoardIntersection() function from the board class to get
+            //all the tokens' intersection of the opponent
+            possibleTokenListIntersection = board.getPlayerTokensOnBoardIntersection(player2);
+        }
+        else{
+            possibleTokenListIntersection = board.getPlayerTokensOnBoardIntersection(player1);
+        }
+        return possibleTokenListIntersection;
     }
 }

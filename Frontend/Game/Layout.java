@@ -3,7 +3,7 @@
 
 package Frontend.Game;
 
-import Backend.Game;
+import Backend.Game.Game;
 import Frontend.Frame.MainFrame;
 
 import javax.swing.*;
@@ -38,6 +38,11 @@ public class Layout{
      * The initial board of the game
      */
     private InitialBoard iniBoard;
+
+    /**
+     * The tutorial of the game
+     */
+    private Tutorial tutorial;
 
     /**
      * The card layout of the game
@@ -94,22 +99,47 @@ public class Layout{
         this.panelCont = new JPanel(); // create Panel Container to add all panels inside
         this.mainPage = new MainPage();
         this.iniBoard = new InitialBoard();
+        this.tutorial = new Tutorial();
         this.cLayout = new CardLayout(); // create card layout
 
         panelCont.setLayout(cLayout); // set card layout for panel container
 
         panelCont.add(mainPage, "1"); // add main page to panel container
         panelCont.add(iniBoard, "2"); // add initial board to panel container
+        panelCont.add(tutorial, "3");
         cLayout.show(panelCont, "1"); // show main page first
 
         mainPage.btnPlay.addActionListener(play); // make PLAY button work
+        mainPage.btnTut.addActionListener(startTutorial);
         iniBoard.buttons.btnRestart.addActionListener(restart); // make RESTART button work
         iniBoard.buttons.btnClose.addActionListener(close); // make CLOSE button work
         iniBoard.resultButton.btnRestart.addActionListener(getRestart);
         iniBoard.resultButton.btnClose.addActionListener(getClose);
+        tutorial.btnClose.addActionListener(close);
 
         mainFrame.add(panelCont); // add panel container to main frame
     }
+
+    protected ActionListener startTutorial = new ActionListener() {
+        /**
+         * This method is used to bring the user to the tutorial (Tutorial)
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            panelCont.remove(tutorial); // remove the old tutorial
+            tutorial = new Tutorial();
+            panelCont.add(tutorial, "3"); // add the new tutorial to panel container
+
+            tutorial.btnClose.addActionListener(close); // make CLOSE button in tutorial function properly
+
+            setGame(new Backend.Game.Tutorial()); // create new tutorial
+            tutorial.getInitialBoard().setGame(getGame());
+
+            cLayout.show(panelCont, "3"); // show tutorial
+        }
+    };
 
     protected ActionListener play = new ActionListener() {
         /**
@@ -122,6 +152,7 @@ public class Layout{
             cLayout.show(panelCont, "2"); // show initial board
             setGame(new Game()); // create new game
             iniBoard.setGame(getGame());
+
         }
     };
 

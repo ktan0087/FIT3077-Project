@@ -63,7 +63,7 @@ public class Board extends JPanel {
      */
     public Board() {
         this.setBackground(new Color(0xE6B380)); // set the background color of the board
-        this.setPreferredSize(new Dimension(500, 500)); // set the size of the board
+        this.setPreferredSize(new Dimension(480,480)); // set the size of the board
 
         // set the layout of the board, 13 rows and 13 columns
         this.setLayout(new GridLayout(13, 13, -1, -1)); // -1 is to remove the space between intersections and lines

@@ -1,11 +1,8 @@
 package Backend.Board;
 
 import Backend.Action.AllActions;
-import Backend.Action.PlaceTokenAction;
-import Backend.Game;
 import Backend.Player;
 import Backend.Token.Token;
-import Backend.Token.TokenColour;
 
 import java.util.ArrayList;
 
@@ -23,21 +20,39 @@ import java.util.ArrayList;
  */
 public class Board {
     /**
-     * Private attributes of Board
+     * The maximum number of layers on the board
      */
     public static final int MAX_LAYERS = 4;
+    /**
+     * The maximum number of positions on the board
+     */
     public static final int MAX_POSITIONS = 9;
+    /**
+     * The 2D array of intersections
+     */
     private Intersection[][] intersection = new Intersection[MAX_LAYERS][MAX_POSITIONS];
+    /**
+     * The list of mills on the board
+     */
     private ArrayList<Mill> mills = new ArrayList<>();
+    /**
+     * The list of adjacent intersections
+     */
     private ArrayList<Intersection> adjacentIntersection = new ArrayList<>();
-    private ArrayList<Intersection> adjacentIntersectionList = new ArrayList<>();
-    private ArrayList<Intersection> adjacentIntersectionSmall = new ArrayList<>();
-    private ArrayList<Intersection> adjacentIntersectionListSmall = new ArrayList<>();
-
 
     /**
      * Constructor
-     * Function to initialise Board
+     * Function to initialise Board by looping through the layers and positions to create the intersections.
+     * The board is made up of 3 layers and 8 positions.
+     *
+     *            It looks like this:  1--------2--------3
+     *                                 |  1     2     3  |
+     *                                 |     1  2  3     |
+     *                                 8  8  8     4  4  4
+     *                                 |     7  6  5     |
+     *                                 |   7    6     5  |
+     *                                 7--------6--------5
+     *
      */
     public Board (){
         //Loop through the layers and positions to create the intersections
@@ -51,6 +66,7 @@ public class Board {
 
     /**
      * Getter function to get the intersection at the input layer and position
+     *
      * @param layer = x-coordinate of Intersection
      * @param position = y-coordinate of Intersection
      * @return the intersection at the input layer and position
@@ -60,7 +76,8 @@ public class Board {
     }
 
     /**
-     * Function to create a new intersection
+     * Function to create a new intersection at the input layer and position
+     *
      * @param layer = x-coordinate of Intersection
      * @param position = y-coordinate of Intersection
      * @return the new intersection
@@ -71,14 +88,57 @@ public class Board {
 
     /**
      * Function to get all the Mills on board
-     * @return
+     *
+     * @return the mill list
      */
     public ArrayList<Mill> getMills() {
         return mills;
     }
 
     /**
-     * Function to place token on the intersection given by the player
+     * Function to get all the empty intersections on board
+     *
+     * @return list of all empty intersections
+     */
+    public ArrayList<Intersection> getEmptyIntersection(){
+        ArrayList<Intersection> emptyIntersection = new ArrayList<>();
+        // Loop through the layers and positions to get the empty intersections
+        for(int i = 1; i < MAX_LAYERS; i++){
+            for(int j = 1; j < MAX_POSITIONS; j++){
+                //check if intersection is empty
+                if(intersection[i][j].isEmpty()){
+                    //add empty intersection to the emptyIntersection list
+                    emptyIntersection.add(intersection[i][j]);
+                }
+            }
+        }
+        return emptyIntersection;
+    }
+
+    /**
+     * Function to get all the tokens' intersection by player on board
+     *
+     * @param player
+     * @return list of all tokens by player on board
+     */
+    public ArrayList<Intersection> getPlayerTokensOnBoardIntersection(Player player){
+        ArrayList<Intersection> tokensOnBoardIntersection = new ArrayList<>();
+        // Loop through the layers and positions to get the tokens by player
+        for(int i = 1; i < MAX_LAYERS; i++){
+            for(int j = 1; j < MAX_POSITIONS; j++){
+                //check if intersection is not empty and the token color is input player's token color
+                if(!intersection[i][j].isEmpty() && intersection[i][j].getToken().getTokenColour() == player.getTokenColour()){
+                    //add intersection to the tokensOnBoardIntersection list
+                    tokensOnBoardIntersection.add(intersection[i][j]);
+                }
+            }
+        }
+        return tokensOnBoardIntersection;
+    }
+
+    /**
+     * Function to place token on the empty intersection on board, add the token to the intersection
+     *
      * @return true if token is placed successfully,
      *         false if the intersection is occupied
      */
@@ -96,7 +156,9 @@ public class Board {
     }
 
     /**
-     * Function to move token from one intersection to another
+     * Function to move token from one intersection to another, by removing the token from the origin intersection
+     * and adding the token to the new intersection
+     *
      * @param player = player who is moving the token
      * @param intersection = origin intersection of the token
      * @param otherIntersection = intersection where the token is moving to
@@ -116,7 +178,9 @@ public class Board {
     }
 
     /**
-     * Function to fly token from one intersection to another
+     * Function to fly token from one intersection to another, by removing the token from the origin intersection
+     * and adding the token to the new intersection
+     *
      * @param player = player who is moving the token
      * @param intersection = origin intersection of the token
      * @param otherIntersection = intersection where the token is moving to
@@ -136,7 +200,8 @@ public class Board {
     }
 
     /**
-     * Function to remove token from the intersection
+     * Function to remove token from the intersection, when there is mill formed
+     *
      * @param player = player who is removing the token
      * @param intersection = intersection where the token is removed from
      * @return true if token is removed successfully,
@@ -145,6 +210,7 @@ public class Board {
     public boolean removeToken(Player player, Intersection intersection){
         //loop through the mills to check if the intersection is part of a mill
         for (Mill mill : mills){
+            //check if the intersection is part of a mill
             if (mill.getIntersection().contains(intersection)){
                 return false;
             }
@@ -162,7 +228,38 @@ public class Board {
     }
 
     /**
-     * Function to get Adjacent Intersection to create mills
+     * Function to get adjacent intersection to create mills
+     * The board is made up of 3 layers and 8 positions.
+     *
+     *            It looks like this:  1--------2--------3
+     *                                 |  1     2     3  |
+     *                                 |     1  2  3     |
+     *                                 8  8  8     4  4  4
+     *                                 |     7  6  5     |
+     *                                 |   7    6     5  |
+     *                                 7--------6--------5
+     *
+     * Considering few scenarios, where the positions of intersections are out of bound
+     *      1. If the current intersection is 1, then currentIntersection-1 is <= 0, so we add 7 to
+     *         get the adjacent intersection which is 8.
+     *      2. If the current intersection is 8, then currentIntersection+1 is 9, so we subtract 7 to
+     *         get the adjacent intersection which is 1.
+     *      3. If the current intersection is 2, then currentIntersection-2 is <= 0, so we add 6 to get
+     *         the adjacent intersection which is 8.
+     *      4. If the current intersection is 7, then currentIntersection+2 is 9, so we subtract 6 to
+     *         get the adjacent intersection which is 1.
+     *
+     * Consider the scenario for layer now,
+     *      1. If the current intersection's position is odd, just add the adjacent intersection to the list
+     *      2. If the current intersection's position is even, then check if the layer is 1, 2 or 3
+     *         * mill can be formed vertically, with the same position on different layers
+     *           -> if layer is 1 (outermost layer)
+     *              - adding 1 and 2 to the current intersection's layer to take the adjacent intersection
+     *           -> if layer is 2 (middle layer)
+     *              - adding 1 and minus 1 to the current intersection's layer to take the adjacent intersection
+     *           -> if layer is 3 (innermost layer)
+     *              - minus 1 and 2 to the current intersection's layer to take the adjacent intersection
+     *
      * @param currentIntersection = current intersection
      * @return ArrayList of adjacent intersections
      */
@@ -257,9 +354,13 @@ public class Board {
     }
 
     /**
-     * Function to get adjacent intersection for checking possible moves
+     * Function to get adjacent intersection for checking possible moves, such as move and fly token.
+     * This function is used for drawing hints on the adjacent intersections based on the current intersection
+     * for the player to move or fly token. Similar to function above, consider different cases for different
+     * layers and positions.
+     *
      * @param currentIntersection
-     * @return
+     * @return ArrayList of adjacent intersections
      */
     public ArrayList<Intersection> getAdjacentIntersectionSmall(Intersection currentIntersection){
         //variables to store adjacent intersections for further operations
@@ -311,7 +412,7 @@ public class Board {
                 //add 1 to the layer to get the adjacent intersection
                 adjacentIntersection.add(intersection[currentIntersection.getLayer() + 1][currentIntersection.getPosition()]);
             }
-            ////add 7 to the position to get the adjacent intersection
+            //add 7 to the position to get the adjacent intersection
             else if (currentIntersection.getLayer() == 3) {
                 adjacentIntersection.add(adjacent2);
                 adjacentIntersection.add(adjacent1);
@@ -324,7 +425,10 @@ public class Board {
     }
 
     /**
-     * Function to check if the mill is formed
+     * Function to check if the mill is formed after player has performed an action.
+     * If the mill is formed, after the player has performed an action, add the Mill object to the mill arraylist.
+     * then the player will be able to remove the opponent's token.
+     *
      * @param player = current player
      * @param currentIntersection = current intersection
      * @return true if mill is formed, false if mill is not formed
@@ -343,7 +447,6 @@ public class Board {
                     //add the REMOVE_TOKEN ability to the player
                     player.addAllowableAction(AllActions.REMOVE_TOKEN);
                     flag = true;
-                    System.out.println("----------------------------"+ player.getName() + " Mill formed");
                 }
             }
             //check if the current intersection's can form a mill in the vertical direction
@@ -356,10 +459,22 @@ public class Board {
                     //add the REMOVE_TOKEN ability to the player
                     player.addAllowableAction(AllActions.REMOVE_TOKEN);
                     flag = true;
-                    System.out.println("----------------------------"+ player.getName() + " Mill formed");
                 }
             }
-        }        System.out.println("Mills: "+ mills.toString());
+        }
         return flag;
+    }
+
+    public boolean checkMill (Intersection intersection){
+        boolean ret = false;
+        //loop through the mills to check if the intersection is part of a mill
+        for (Mill mill : mills){
+            //check if the intersection is part of a mill
+            if (mill.getIntersection().contains(intersection)){
+                ret = true;
+                return ret;
+            }
+        }
+        return ret;
     }
 }

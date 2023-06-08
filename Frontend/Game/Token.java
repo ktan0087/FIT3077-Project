@@ -51,7 +51,14 @@ public abstract class Token extends JLabel {
      */
     private InitialBoard iniBoard;
 
-    // Constructor
+    /**
+     * Constructor.
+     * Creates a new token with the given x and y coordinates.
+     *
+     * @param coordinateX the layer of the token
+     * @param coordinateY the position of the token
+     * @param iniBoard the initial board
+     */
     public Token(int coordinateX, int coordinateY, InitialBoard iniBoard){
         this.selected = false;
 
@@ -107,18 +114,24 @@ public abstract class Token extends JLabel {
      * @param g  is the graphics object
      */
     protected void paintBorder(Graphics g) {
+        super.paintBorder(g);
         if (this.selected) {
             // to cover the intersection point
             repaint();
             revalidate();
 
-            int x = 500/(13*2); // 500 is the width of the panel, 13 is the number of columns/rows, 2 is to get the middle point
-            int y = 500/(13*2); // this is to get the middle point of each grid
+            int x = getWidth()/2; // to get the middle point
+            int y = getHeight()/2; // to get the middle point
 
-            // draw the outer circle
-            g.setColor(new Color(0xFF0000));
-            int diameterOuter = 500/13;
-            g.fillOval(0, 0, diameterOuter, diameterOuter);
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.setColor(new Color(0xFF0000));
+            g2d.setStroke(new BasicStroke(5));
+
+            int radius = 16;
+            int diameter = radius * 2;
+
+            //shift x and y by the radius of the circle in order to correctly center it
+            g.drawOval(x - radius, y - radius, diameter, diameter);
 
             // draw the inner circle
             g.setColor(this.tokenColor);
@@ -133,6 +146,7 @@ public abstract class Token extends JLabel {
      * @param g is the graphics object
      */
     protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
         if (!this.selected) {
             // to cover the intersection point
             repaint();
@@ -141,8 +155,8 @@ public abstract class Token extends JLabel {
             // paint the white token
             g.setColor(this.tokenColor);
 
-            int x = 500 / (13 * 2); // 500 is the width of the panel, 13 is the number of columns/rows, 2 is to get the middle point
-            int y = 500 / (13 * 2); // this is to get the middle point of each grid
+            int x = getWidth()/2; // to get the middle point
+            int y = getHeight()/2; // to get the middle point
             int radius = 15;
             int diameter = radius * 2;
 
@@ -189,7 +203,7 @@ public abstract class Token extends JLabel {
                         }
                     }
                     iniBoard.checkEndGame();
-                    swapInstruction();
+                    changeRemoveInstruction();
                     return;
                 }
 
@@ -210,14 +224,14 @@ public abstract class Token extends JLabel {
     };
 
     /**
-     * This method is used to swap the instruction displayed during various phases of the game
+     * This method is used to change the instruction text on the top section of the game board
      */
-    public void swapInstruction(){
-        if (iniBoard.blackTokenRemain.getAmountToken() > 0){
+    public void changeRemoveInstruction(){
+        if (iniBoard.blackTokenRemain.getAmountToken() > 0){ // if all tokens are not placed onto the board
             iniBoard.instruction.changeText(Instruction.InstructionType.PLACE);
         }
-        else if (iniBoard.blackTokenRemain.getAmountToken() == 0){
-            if (iniBoard.getGame().getCurrentPlayer().getTokensOnBoard() == 3){
+        else if (iniBoard.blackTokenRemain.getAmountToken() == 0){ // if all tokens are placed onto the board
+            if (iniBoard.getGame().getCurrentPlayer().getTokensOnBoard() == 3){ // if the current player has only 3 tokens on the board
                 iniBoard.instruction.changeText(Instruction.InstructionType.FLY);
             }
             else {

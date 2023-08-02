@@ -465,6 +465,14 @@ public class Board {
         return flag;
     }
 
+    /**
+     * Function to check if the mill is formed after player has performed an action.
+     * If the mill is formed, after the player has performed an action, add the Mill object to the mill arraylist.
+     * then the player will be able to remove the opponent's token.
+     *
+     * @param intersection = current intersection
+     * @return true if mill is formed, false if mill is not formed
+     */
     public boolean checkMill (Intersection intersection){
         boolean ret = false;
         //loop through the mills to check if the intersection is part of a mill

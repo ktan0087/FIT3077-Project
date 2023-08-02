@@ -73,6 +73,10 @@ public class MoveTokenAction extends Action implements CanRemoveMill {
         return player + "moved a token to " + "(" + newIntersection.getLayer() + "," + newIntersection.getPosition() + ")";
     }
 
+    /**
+     * Function to add the mill to the removeMillList, so that when the move action is executed,
+     * then the token is part of a mill, we need to remove the mill from the board.
+     */
     @Override
     public void addRemoveMill() {
         //loop through all mills and check if the current intersection is in the mill
